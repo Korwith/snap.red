@@ -743,6 +743,7 @@ article.photo_holder .frame {
     margin: 4px;
     height: fit-content;
     width: fit-content;
+    max-width: 80%;
     background-color: rgba(0, 0, 0, 0.5);
     border-top-left-radius: 8px;
     border-bottom-right-radius: 8px;
