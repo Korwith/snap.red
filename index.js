@@ -36,6 +36,7 @@ const photo_header_close = photo_header.querySelector('.close');
 let selected_user = Object.keys(data)[0];
 
 function openPhoto(event) {
+    if (event.which != 1) { return; }
     let date = event.target.getAttribute('date');
     if (!date) { return; }
     let directory = data[selected_user].images[date];
