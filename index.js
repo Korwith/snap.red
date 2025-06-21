@@ -13,6 +13,11 @@ const card_name = card.querySelector('.card_name');
 const card_bio = card.querySelector('.card_bio');
 const social = profile.querySelector('.social');
 
+const site_link = profile.querySelector('a.site');
+const site_image = site_link.querySelector('img.icon');
+const site_name = site_link.querySelector('span.name');
+const site_blurb = site_link.querySelector('span.blurb');
+
 const videos = content.querySelector('.videos');
 const video_scroll = videos.querySelector('.video_scroll');
 const grid = content.querySelector('section.grid');
@@ -56,7 +61,7 @@ function openPhoto(event) {
     findMatchingMonth(date);
 
     photo_date.textContent = date;
-    !directory.people 
+    !directory.people
         ? photo_featured.classList.add('hide')
         : photo_featured.textContent = directory.people.join(', ');
     photo_caption.textContent = directory.name;
@@ -203,6 +208,16 @@ function loadProfile() {
         social_link.appendChild(social_button);
         social.appendChild(social_link);
     }
+
+    let site = directory.card.site;
+    if (site) {
+        site_link.style.background = `linear-gradient(to bottom right, ${site.gradient[0]}, ${site.gradient[1]})`;
+        site_link.setAttribute('href', site.url);
+        site_image.setAttribute('src', site.icon);
+        site_name.textContent = site.name;
+        site_blurb.textContent = site.blurb;
+    }
+    site_link.classList.toggle('hide', !site);
 
     loadDropdown();
     loadSidebar();
@@ -479,7 +494,7 @@ function checkURL() {
     if (!window.location.href.includes('#')) { return; }
     let name = window.location.href.split('#').pop();
     let users = Object.keys(data);
-    
+
     for (var i = 0; i < users.length; i++) {
         let this_user = users[i];
         if (this_user.toLowerCase() == name.toLowerCase()) {

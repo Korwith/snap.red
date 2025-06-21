@@ -469,6 +469,69 @@ body.shift article.content {
     background: linear-gradient(to bottom right, #00504d, black, #470017);
 }
 
+.profile .site {
+    position: relative;
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(240px - 18px);
+    height: 50px;
+    padding: 5px;
+    padding-right: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.profile .site.hide {
+    display: none;
+}
+
+.profile .site::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+    transition: border 0.2s;
+}
+
+.profile .site:hover::after {
+    border: 4px solid white;
+}
+
+.profile .site .icon {
+    aspect-ratio: 1/1;
+    height: calc(100% - 10px);
+    margin: 5px;
+}
+
+.profile .site .site_info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile .site .site_info span {
+    width: 100%;
+    height: 40%;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.profile .site .site_info span.name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
 article.content hr {
     padding: 0;
     border: 0;

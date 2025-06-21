@@ -3,6 +3,13 @@ const data = {
         card: {
             bio: 'Web Developer',
             icon: 'kircic.png',
+            site: {
+                url: 'https://www.kircic.org',
+                icon: 'https://www.kircic.org/icon/favicon.png',
+                name: 'kircic.org',
+                blurb: 'Development Portfolio',
+                gradient: ['#0d8000', '#003785'],
+            }
         },
 
         social: {
@@ -48,7 +55,7 @@ const data = {
                 name: 'North Crossing',
                 id: ['1040814', '1040833', '1040829', '1040859'],
                 people: ['Paris', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aiden', 'Max']
-            },  
+            },
             '05/15/25': {
                 name: 'Gambrill',
                 id: ['1040436', '1040519', '1040492', '1040495', '1040479', '1040490'],
@@ -92,7 +99,7 @@ const data = {
                 id: [8077, 8078, 8080],
                 people: ['Paris']
             },
-            '03/28/25' :{
+            '03/28/25': {
                 name: 'Thurmont',
                 id: [8024, 8022, 8039, 8027],
                 people: ['Riley', 'Paris']
@@ -110,7 +117,7 @@ const data = {
                 id: [7883, 7877, 7885, 7900, 7906],
                 people: ['Paris']
             },
-            '03/10/25' :{
+            '03/10/25': {
                 name: 'Railroad Tracks',
                 id: [7838, 7844, 7854, 7839, 7841],
                 people: ['Paris']
@@ -234,7 +241,7 @@ const data = {
                 name: 'Amber Meadows',
                 people: ['Paris'],
                 id: [4768, 4771, 4764, 4766]
-           },
+            },
             '09/21/24': {
                 name: 'Frederick Fair',
                 people: ['Paris', 'Jeremy'],
