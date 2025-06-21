@@ -475,6 +475,20 @@ function massRemove(array) {
     }
 }
 
+function checkURL() {
+    if (!window.location.href.includes('#')) { return; }
+    let name = window.location.href.split('#').pop();
+    let users = Object.keys(data);
+    
+    for (var i = 0; i < users.length; i++) {
+        let this_user = users[i];
+        if (this_user.toLowerCase() == name.toLowerCase()) {
+            selected_user = this_user;
+        }
+    }
+}
+
+checkURL();
 loadProfile();
 logo.addEventListener('mouseup', handleContentShift);
 dropdown.addEventListener('mouseup', handleDropdownToggle);
