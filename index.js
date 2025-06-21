@@ -219,6 +219,11 @@ function loadProfile() {
     }
     site_link.classList.toggle('hide', !site);
 
+    window.history.pushState(null, null, 
+        selected_user != Object.keys(data)[0] 
+        ? `#${selected_user.toLowerCase()}` 
+        : `${window.location.pathname + window.location.search}`
+    );
     loadDropdown();
     loadSidebar();
     loadVideos();
