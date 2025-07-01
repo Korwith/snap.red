@@ -29,7 +29,7 @@ const data = {
             '06/29/25': {
                 name: 'Washington D.C.',
                 id: ['1090', '1016', '1083', '1106', '1019', '1082', '1080', '1026', '1108', '0919', '0971', '0942', '1079', '1028', '1089', '0956', '0954'],
-                people: ['Paris', 'Aidan', 'Jordyn']
+                people: ['Paris', 'Aidan', 'Jordan']
             },
             '06/28/25': {
                 name: 'Downtown Frederick',
