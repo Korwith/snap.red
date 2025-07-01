@@ -21,6 +21,11 @@ const data = {
         },
 
         images: {
+            '06/23/25': {
+                name: 'Monocacy River',
+                id: ['0673', '0676', '0623', '0660', '0683', '0596', '0708'],
+                people: ['Paris', 'Riley', 'Liam', 'Ed', 'Aidan', 'Matt'],
+            },
             '06/21/25': {
                 name: 'Downtown Frederick',
                 id: ['0482', '0498', '0367', '0417', '0383', '0517', '0547', '0466', '0436', '0393', '0512', '0438', '0502', '0441', '0459', '0540', '0352', '0514'],
@@ -64,7 +69,7 @@ const data = {
             '05/20/25': {
                 name: 'North Crossing',
                 id: ['1040814', '1040833', '1040829', '1040859'],
-                people: ['Paris', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aiden', 'Max']
+                people: ['Paris', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max']
             },
             '05/15/25': {
                 name: 'Gambrill',
