@@ -45,7 +45,7 @@ function openPhoto(event) {
     let date = event.target.getAttribute('date');
     if (!date) { return; }
     let directory = data[selected_user].images[date];
-    photoHolderClean(event.target.parentElement.parentElement.classList.contains('location'));
+    photoHolderClean();
 
     for (var i = 0; i < directory.id.length; i++) {
         let id = directory.id[i];
@@ -90,12 +90,6 @@ function createRelatedFrame(name) {
 }
 
 function findMatchingLocations(this_date) {
-    let related_frame = photo_aside.querySelector('.related.location');
-    if (related_frame) {
-        related_frame.querySelector('.hide')?.classList.remove('hide');
-        related_frame.querySelector(`figure[date="${this_date}"]`)?.classList.add('hide');
-        return;
-    }
     let directory = data[selected_user].images;
     let this_photo = directory[this_date];
     let frame = createRelatedFrame(this_photo.name);
@@ -106,10 +100,8 @@ function findMatchingLocations(this_date) {
     for (var date in directory) {
         let entry = directory[date];
         if (entry.name != this_photo.name) { continue; }
-        let fig = loadFigure(date, frame).parentElement;
-        if (date == this_date) {
-            fig.classList.add('hide');
-        }
+        if (date == this_date) { continue; }
+        loadFigure(date, frame);
     }
 
     if (!frame.querySelector('figure')) {
@@ -460,11 +452,10 @@ function handleMobileShift() {
     document.body.classList.remove('shift');
 }
 
-function photoHolderClean(location) {
-    let related_select = location ? '.related:not(.location)' : '.related';
+function photoHolderClean() {
     massRemove([
         ...photo_figure.querySelectorAll('img'),
-        ...photo_aside.querySelectorAll(related_select),
+        ...photo_aside.querySelectorAll('.related'),
     ]);
 
     photo_figure.setAttribute('index', 0);
