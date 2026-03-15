@@ -94,6 +94,11 @@ header {
     background-size: cover;
     background-image: url(icon/dropdown.svg);
     pointer-events: none;
+    transition: transform 0.15s;
+}
+
+.user_selector_holder.display::after {
+    transform: rotate(180deg) translateY(11px);
 }
 
 .user_button {
