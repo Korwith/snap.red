@@ -800,7 +800,7 @@ nav.sidebar button::before {
     .user_button:hover {
         background-color: rgba(0, 0, 0, 0);
     }
-    
+
     nav.sidebar {
         width: calc(100vw - 20px);
         border-right: 0;
@@ -824,6 +824,11 @@ nav.sidebar button::before {
     .content.shift {
         width: 100vw;
         left: 0;
+    }
+
+    .content_frame.content_video_holder .video_scroll {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .photo_holder {
