@@ -1,5 +1,55 @@
-"use strict";
-const data = {
+interface Database {
+    [name: string]: UserEntry;
+}
+
+interface UserEntry {
+    card: ProfileCardEntry;
+    social: ProfileSocialDatabase;
+    images: PhotoDatabase;
+    videos?: VideoDatabase;
+}
+
+interface ProfileCardEntry {
+    bio: string;
+    icon: string;
+    site?: ProfileWebsiteEntry;
+}
+
+interface ProfileSocialDatabase {
+    [service: string]: string;
+}
+
+interface ProfileWebsiteEntry {
+    url: string;
+    icon: string;
+    name: string;
+    blurb: string;
+    gradient: string[];
+}
+
+interface PhotoDatabase {
+    [date: string]: PhotoEntry;
+}
+
+interface PhotoEntry {
+    name: string;
+    id: Array<string | number>;
+    people?: string[];
+    featured?: number;
+    caption?: string;
+}
+
+interface VideoDatabase {
+    [date: string]: VideoEntry;
+}
+
+interface VideoEntry {
+    name: string;
+    thumbnail: string;
+    link: string;
+}
+
+const data: Database = {
     'Thaddeus': {
         card: {
             bio: 'Web Developer',
@@ -12,6 +62,7 @@ const data = {
                 gradient: ['#0d8000', '#003785'],
             }
         },
+
         social: {
             'cashapp': 'https://cash.app/$thadreal',
             'discord': 'https://discord.com/invite/p8ZZXZqnag',
@@ -19,6 +70,7 @@ const data = {
             'instagram': 'https://www.instagram.com/thadcoolfr/',
             'youtube': 'https://www.youtube.com/channel/UCLcCNfyLG_jQev4MdkHtCZw',
         },
+
         images: {
             '06/30/25': {
                 name: 'Gettysburg',
@@ -677,17 +729,20 @@ const data = {
             },
         }
     },
+
     'Riley': {
         card: {
             bio: 'Video Creator',
             icon: 'riley.webp',
         },
+
         social: {
             'instagram': 'https://www.instagram.com/yove.sierra/',
             'youtube': 'https://www.youtube.com/@homies_tape',
             'discord': 'https://discord.com/users/563816563292241940',
             'tiktok': 'https://www.tiktok.com/@yungbootstone7'
         },
+
         videos: {
             '01/01/22': {
                 name: 'Homies Tape 1',
@@ -730,6 +785,7 @@ const data = {
                 link: 'https://www.youtube.com/watch?v=KymvNC8jtIU',
             }
         },
+
         images: {
             '04/29/25': {
                 name: 'Monocacy River',
@@ -751,22 +807,26 @@ const data = {
             },
         },
     },
+
     'Paris': {
         card: {
             bio: 'Girlfriend',
             icon: 'paris.jpg'
         },
+
         social: {
             'instagram': 'https://www.instagram.com/pariiscoolfr/',
             'youtube': 'https://www.youtube.com/@pariiscoolfr697',
             'spotify': 'https://open.spotify.com/5vaysgic0hrnztyms8eln9uxc',
         },
+
         images: {
             '06/12/24': {
                 name: 'Railroad Tracks',
                 people: ['Thaddeus', 'Riley'],
                 id: [1263, 1274, 1256]
             },
+
             '06/07/24': {
                 name: 'North Crossing',
                 people: ['Thaddeus', 'Riley'],
@@ -774,15 +834,18 @@ const data = {
             }
         }
     },
+
     'Edin': {
         card: {
             bio: 'Beatmaker',
             icon: 'edin.jpg',
         },
+
         social: {
             'instagram': 'https://www.instagram.com/edin_a15/',
             'soundcloud': 'https://soundcloud.com/spiffy_beats',
         },
+
         images: {
             '06/21/24': {
                 name: 'Downtown Frederick',
@@ -790,4 +853,4 @@ const data = {
             }
         }
     }
-};
+}
