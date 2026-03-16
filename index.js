@@ -16,7 +16,6 @@ class PageManager {
         this.user = name;
         this.content.reload();
         this.sidebar.reload();
-        this.main_photo_holder.reload();
     }
     shiftLayout() {
         this.sidebar.shiftLayout();
@@ -236,27 +235,12 @@ class SidebarMonthButton extends SidebarButton {
         yearHolder.appendChild(this.element);
     }
     clicked() {
-        let query = `figure[year="${this.year.toString().padStart(2, '0')}"][month="${this.month.toString().padStart(2, '0')}"]`;
-        let found_frame = this.sidebar.manager.content.element.querySelector(`${query}:not(.featured)`);
-        if (!found_frame && !this.sidebar.manager.content.content_loaded) {
-            this.sidebar.manager.content.loadImageBatch();
-            this.clicked();
-            return;
-        }
-        if (!found_frame) {
-            found_frame = document.querySelector(query); // check featured after
-        }
+        let found_figure = this.sidebar.manager.content.photo_holder.getFigureByMonth(this.year, this.month);
         if (window.innerWidth < 767) {
             this.element.focus();
             this.sidebar.manager.shiftLayout();
         }
-        if (found_frame) {
-            found_frame.classList.add('highlight');
-            setTimeout(function () {
-                found_frame.classList.remove('highlight');
-            }, 1000);
-            found_frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        found_figure?.findInFrame();
     }
     setMonthCount(count) {
         this.element.textContent = `${this.sidebar.manager.getMonthName(this.month)} (${count})`;
@@ -265,75 +249,38 @@ class SidebarMonthButton extends SidebarButton {
 class PageContent {
     element;
     manager;
-    loadedImages;
-    content_loaded;
-    content_video_holder;
-    content_photo_holder;
+    video_holder;
+    photo_holder;
+    profile_card;
     constructor(manager) {
         this.element = document.createElement('div');
         this.element.classList.add('content');
         this.element.classList.toggle('shift', window.innerWidth < 767);
         this.manager = manager;
-        this.loadedImages = 0;
-        this.content_loaded = false;
-        this.content_video_holder = this.manager.getUserVideos() ? new ContentVideoHolder(this) : null;
-        this.content_photo_holder = new ContentPhotoHolder(this);
-        new ContentProfileCard(this);
-        this.loadVideos();
-        this.loadImageBatch();
+        this.video_holder = new ContentVideoHolder(this);
+        this.photo_holder = new ContentPhotoHolder(this);
+        this.profile_card = new ContentProfileCard(this);
         this.contentScrolled();
         this.element.onscroll = () => this.contentScrolled();
         document.body.appendChild(this.element);
     }
     reload() {
-        this.element.innerHTML = '';
-        this.loadedImages = 0;
-        this.content_loaded = false;
-        this.content_video_holder = this.manager.getUserVideos() ? new ContentVideoHolder(this) : null;
-        this.content_photo_holder = new ContentPhotoHolder(this);
-        new ContentProfileCard(this);
-        this.loadVideos();
-        this.loadImageBatch();
-        this.contentScrolled();
+        this.video_holder.reload();
+        this.photo_holder.reload();
+        this.profile_card.reload();
     }
     shiftLayout() {
         this.element.classList.toggle('shift');
     }
     contentScrolled() {
-        let imageList = this.content_photo_holder.element.querySelectorAll('figure');
+        let imageList = this.photo_holder.element.querySelectorAll('figure');
         let lastImage = imageList[imageList.length - 1];
         if (!lastImage)
             throw new Error('No images found!');
         let lastImageBottom = lastImage.getBoundingClientRect().bottom;
         let contentBottom = this.element.getBoundingClientRect().bottom;
         if (Math.abs(lastImageBottom - contentBottom) <= 150) {
-            this.loadImageBatch();
-        }
-    }
-    loadImageBatch() {
-        if (this.content_loaded)
-            return;
-        let userImages = this.manager.getUserImages();
-        if (!userImages)
-            throw new Error('No images found!');
-        let imageKeys = Object.keys(userImages);
-        for (var i = this.loadedImages; i < this.loadedImages + 9; i++) {
-            let date = imageKeys[i];
-            if (!date)
-                continue;
-            new PhotoSquare(this, date);
-        }
-        this.loadedImages += 9;
-        if (this.loadedImages >= Object.keys(userImages).length) {
-            this.content_loaded = true;
-        }
-    }
-    loadVideos() {
-        let videos = this.manager.getUserVideos();
-        if (!videos || !this.content_video_holder)
-            return;
-        for (var date in this.manager.getUserVideos()) {
-            new VideoRectangle(this, date, this.content_video_holder.scroll_frame);
+            this.photo_holder.loadImageBatch();
         }
     }
 }
@@ -357,52 +304,78 @@ class ContentProfileCard {
         this.element.appendChild(this.inner_element);
         content.element.appendChild(this.element);
     }
+    reload() {
+        this.card_name.reload();
+        this.card_social_row.reload();
+    }
 }
 class ProfileCardName {
     element;
+    icon;
+    text_holder;
+    text_name;
+    text_blurb;
     card;
     constructor(card) {
         this.element = document.createElement('div');
         this.element.classList.add('card_name');
         this.card = card;
+        this.icon = document.createElement('div');
+        this.text_holder = document.createElement('div');
+        this.text_name = document.createElement('span');
+        this.text_blurb = document.createElement('span');
+        this.text_name = document.createElement('span');
+        this.icon.classList.add('icon');
+        this.text_holder.classList.add('text_holder');
+        this.text_name.classList.add('username');
+        this.text_blurb.classList.add('bio');
         this.propogateName();
+        this.element.appendChild(this.icon);
+        this.element.appendChild(this.text_holder);
+        this.text_holder.appendChild(this.text_blurb);
+        this.text_holder.appendChild(this.text_name);
+        this.card.inner_element.appendChild(this.element);
     }
     propogateName() {
         let user_info = data[this.card.content.manager.user];
-        let icon = document.createElement('div');
-        let textHolder = document.createElement('div');
-        let textName = document.createElement('span');
-        let textBlurb = document.createElement('span');
-        icon.classList.add('icon');
-        textHolder.classList.add('text_holder');
-        textName.classList.add('username');
-        textBlurb.classList.add('bio');
-        icon.style.backgroundImage = `url(icon/user/${user_info.card.icon})`;
-        textName.textContent = this.card.content.manager.user;
-        textBlurb.textContent = user_info.card.bio;
-        this.element.appendChild(icon);
-        this.element.appendChild(textHolder);
-        textHolder.appendChild(textName);
-        textHolder.appendChild(textBlurb);
-        this.card.inner_element.appendChild(this.element);
+        this.icon.style.backgroundImage = `url(icon/user/${user_info.card.icon})`;
+        this.text_name.textContent = this.card.content.manager.user;
+        this.text_blurb.textContent = user_info.card.bio;
+    }
+    reload() {
+        this.propogateName();
     }
 }
 class ProfileCardSocialRow {
     element;
+    social_icons;
     card;
     constructor(card) {
         this.element = document.createElement('div');
         this.element.classList.add('social_row');
+        this.social_icons = [];
         this.card = card;
-        card.inner_element.appendChild(this.element);
         this.propogateSocials();
+        card.inner_element.appendChild(this.element);
     }
     propogateSocials() {
         let user_data = data[this.card.content.manager.user];
         for (var service in user_data.social) {
             let link = user_data.social[service];
-            new SocialMediaIcon(this, service, link);
+            let media_icon = new SocialMediaIcon(this, service, link);
+            this.social_icons.push(media_icon);
         }
+    }
+    clearMemory() {
+        for (var i = 0; i < this.social_icons.length; i++) {
+            let this_button = this.social_icons[i];
+            this_button.element.remove();
+        }
+        this.social_icons = [];
+    }
+    reload() {
+        this.clearMemory();
+        this.propogateSocials();
     }
 }
 class SocialMediaIcon {
@@ -422,28 +395,102 @@ class SocialMediaIcon {
 class ContentFrame {
     element;
     content;
+    figures;
     constructor(content, name) {
         this.element = document.createElement('div');
         this.element.classList.add('content_frame');
         this.element.setAttribute('title', name);
         this.content = content;
+        this.figures = [];
         content.element.appendChild(this.element);
+    }
+    clearMemory() {
+        for (var i = 0; i < this.figures.length; i++) {
+            let this_figure = this.figures[i];
+            this_figure.element.remove();
+        }
+        this.figures = [];
     }
 }
 class ContentVideoHolder extends ContentFrame {
     scroll_frame;
     constructor(content) {
         super(content, 'Videos');
-        this.element.classList.add('content_video_holder');
+        this.element.classList.add('content_video_holder', 'hide');
         this.scroll_frame = document.createElement('div');
         this.scroll_frame.classList.add('video_scroll');
         this.element.appendChild(this.scroll_frame);
     }
+    reload() {
+        this.clearMemory();
+        this.loadVideos();
+    }
+    loadVideos() {
+        let videos = this.content.manager.getUserVideos();
+        this.element.classList.toggle('hide', !videos);
+        if (!videos)
+            return;
+        for (var date in this.content.manager.getUserVideos()) {
+            let video_figure = new VideoRectangle(this.content, date);
+            video_figure.setParent(this.scroll_frame);
+            this.figures.push(video_figure);
+        }
+    }
 }
 class ContentPhotoHolder extends ContentFrame {
+    loaded_images;
+    complete;
     constructor(content) {
         super(content, 'Photos');
         this.element.classList.add('content_photo_holder');
+        this.loaded_images = 0;
+        this.complete = false;
+        this.loadImageBatch();
+    }
+    reload() {
+        this.loaded_images = 0;
+        this.complete = false;
+        this.clearMemory();
+        this.loadImageBatch();
+    }
+    loadImageBatch() {
+        if (this.complete)
+            return;
+        let userImages = this.content.manager.getUserImages();
+        if (!userImages)
+            throw new Error('No images found!');
+        let imageKeys = Object.keys(userImages);
+        for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
+            let date = imageKeys[i];
+            if (!date)
+                continue;
+            let photo_figure = new PhotoSquare(this.content, date);
+            photo_figure.setParent(this.element);
+            this.figures.push(photo_figure);
+        }
+        this.loaded_images += 9;
+        if (this.loaded_images >= Object.keys(userImages).length) {
+            this.complete = true;
+        }
+    }
+    getFigureByMonth(year, month) {
+        let match;
+        for (var i = 0; i < this.figures.length; i++) {
+            let found_figure = this.figures[i];
+            let date_split = found_figure.date.split('/');
+            let found_month = Number(date_split[0]);
+            let found_year = Number(date_split[2]);
+            if (found_year == year && found_month == month) {
+                return found_figure;
+            }
+        }
+        if (!this.complete) {
+            this.loadImageBatch();
+            return this.getFigureByMonth(year, month);
+        }
+        else {
+            return null;
+        }
     }
 }
 class MediaFigure {
@@ -476,10 +523,13 @@ class MediaFigure {
     imageLoaded() {
         this.element.classList.remove('loading');
     }
+    setParent(parent) {
+        parent.appendChild(this.element);
+    }
 }
 class PhotoSquare extends MediaFigure {
     photo_data;
-    constructor(content, date, forceParent) {
+    constructor(content, date) {
         super(content, date);
         this.element.classList.add('photo_square');
         let photo_data = content.manager.getPhotoInfoFromDate(date);
@@ -491,10 +541,13 @@ class PhotoSquare extends MediaFigure {
         this.image.setAttribute('alt', `${this.date}: ${this.photo_data.name}`);
         this.element.setAttribute('title', `${this.date}: ${this.photo_data.name}`);
         this.element.onclick = () => this.photoSelected();
-        if (forceParent)
-            forceParent.appendChild(this.element);
-        else
-            content.content_photo_holder.element.appendChild(this.element);
+    }
+    findInFrame() {
+        this.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.element.classList.add('highlight');
+        setTimeout(() => {
+            this.element.classList.remove('highlight');
+        }, 1000);
     }
     photoSelected() {
         this.content.manager.main_photo_holder.showImage(this.date);
@@ -502,7 +555,7 @@ class PhotoSquare extends MediaFigure {
 }
 class VideoRectangle extends MediaFigure {
     video_data;
-    constructor(content, date, forceParent) {
+    constructor(content, date) {
         super(content, date);
         this.element.classList.add('video_rectangle');
         let video_data = this.content.manager.getVideoInfoFromDate(date);
@@ -513,10 +566,6 @@ class VideoRectangle extends MediaFigure {
         this.image.setAttribute('src', `/icon/thumbnail/${this.video_data.thumbnail}`);
         this.date_caption.textContent = date;
         this.lower_caption.textContent = this.video_data.name;
-        if (forceParent)
-            forceParent.appendChild(this.element);
-        else
-            content.content_video_holder?.element.appendChild(this.element);
     }
     videoSelected() {
         window.open(this.video_data.link, '_blank');
@@ -534,11 +583,6 @@ class MainPhotoHolder {
         this.photo_aside = new MainPhotoAside(this);
         this.manager = manager;
         document.body.appendChild(this.element);
-    }
-    reload() {
-        this.element.innerHTML = '';
-        this.photo_figure = new MainPhotoFigure(this);
-        this.photo_aside = new MainPhotoAside(this);
     }
     showImage(date) {
         this.clearPrevious();
@@ -718,7 +762,8 @@ class RelatedPhotosPane {
         delete found_images[this.origin_date];
         if (Object.keys(found_images).length > 0) {
             for (var date in found_images) {
-                new PhotoSquare(this.aside.photo_holder.manager.content, date, this.scroll_element);
+                let photo_figure = new PhotoSquare(this.aside.photo_holder.manager.content, date);
+                photo_figure.setParent(this.scroll_element);
             }
             this.aside.inner_element.appendChild(this.element);
         }

@@ -149,7 +149,7 @@ nav.sidebar {
     gap: 18px;
     left: 0;
     top: 50px;
-    height: calc(100dvh - 50px);
+    height: calc(100dvh - 70px);
     width: 280px;
     background-color: #090909;
     padding: 10px;
@@ -353,9 +353,10 @@ nav.sidebar button::before {
 
 .social_row {
     display: flex;
+    justify-content: center;
     gap: 10px;
     height: 40px;
-    width: fit-content;
+    width: 100%;
 }
 
 .social_icon {
@@ -407,6 +408,10 @@ nav.sidebar button::before {
     gap: 10px;
     padding-top: 36px;
     padding-bottom: 10px;
+}
+
+.content_frame.hide {
+    display: none;
 }
 
 .content_frame::before {
