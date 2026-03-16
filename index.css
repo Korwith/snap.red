@@ -918,13 +918,13 @@ nav.sidebar .statistics span {
     }
 
     nav.sidebar {
-        width: calc(100vw - 20px);
+        width: 100vw;
         border-right: 0;
         transition: left 0.5s;
     }
 
     nav.sidebar::before {
-        width: 100vw;
+        width: 100%;
     }
 
     nav.sidebar.shift, nav.sidebar.shift::before {
