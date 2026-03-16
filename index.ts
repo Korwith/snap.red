@@ -608,7 +608,6 @@ class ContentPhotoHolder extends ContentFrame {
 
         this.loaded_images = 0;
         this.complete = false;
-        this.skip_images = {};
 
         this.loadFeaturedImages();
         this.loadImageBatch();
@@ -634,7 +633,6 @@ class ContentPhotoHolder extends ContentFrame {
 
         for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
             let date: string = imageKeys[i];
-            if (!date || this.skip_images[date]) continue;
             let photo_figure: MediaFigure = new PhotoSquare(this.content, date);
             photo_figure.setParent(this.element);
             this.figures.push(photo_figure);
