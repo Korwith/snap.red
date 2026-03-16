@@ -23,8 +23,8 @@ class PageManager {
         this.sidebar.shiftLayout();
         this.content.shiftLayout();
     }
-    countImages(name) {
-        let profile = Data[name];
+    countImages() {
+        let profile = Data[this.user];
         if (!profile)
             throw new Error('No profile selected!');
         let count = {};
@@ -142,18 +142,20 @@ class UserSelector {
 }
 class PageSidebar {
     element;
+    button_holder;
+    stats;
     manager;
     constructor(manager) {
         this.element = document.createElement('nav');
         this.element.classList.add('sidebar');
         this.element.classList.toggle('shift', window.innerWidth < 767);
         this.manager = manager;
-        this.propogateSidebar();
+        this.button_holder = new SidebarButtonHolder(this);
+        this.stats = new SidebarStats(this);
         document.body.appendChild(this.element);
     }
     reload() {
-        this.element.innerHTML = '';
-        this.propogateSidebar();
+        this.button_holder.reload();
     }
     shiftLayout() {
         this.element.classList.toggle('shift');
@@ -169,38 +171,88 @@ class PageSidebar {
         let monthButton = yearLabel.querySelector(`[year="${month}"]`);
         return monthButton;
     }
-    propogateSidebar() {
-        new SidebarProfileButton(this);
-        let imageCount = this.manager.countImages(this.manager.user);
+}
+class SidebarButtonHolder {
+    element;
+    sidebar;
+    profile_button;
+    year_sections;
+    constructor(sidebar) {
+        this.element = document.createElement('div');
+        this.element.classList.add('button_holder');
+        this.sidebar = sidebar;
+        this.profile_button = new SidebarProfileButton(this);
+        this.year_sections = [];
+        this.propogateSidebarButtons();
+    }
+    propogateSidebarButtons() {
+        let imageCount = this.sidebar.manager.countImages();
         let yearKeys = Object.keys(imageCount).reverse();
-        for (let i = 0; i < yearKeys.length; i++) {
+        for (var i = 0; i < yearKeys.length; i++) {
             let year = yearKeys[i];
             let yearNum = Number(year);
-            for (let month in imageCount[year]) {
-                let monthNum = Number(month);
-                let monthCountNum = Number(imageCount[year][month]);
-                let monthButton = new SidebarMonthButton(this, yearNum, monthNum);
-                monthButton.setMonthCount(monthCountNum);
-            }
+            let yearSection = new SidebarYearSection(this, yearNum);
+            this.year_sections.push(yearSection);
+            this.sidebar.element.appendChild(this.element);
         }
-        new SidebarStats(this);
+    }
+    clearPrevious() {
+        this.profile_button.remove();
+        for (var i = 0; i < this.year_sections.length; i++) {
+            let this_section = this.year_sections[i];
+            this_section.remove();
+        }
+        this.year_sections = [];
+    }
+    reload() {
+        this.clearPrevious();
+        this.profile_button = new SidebarProfileButton(this);
+        this.propogateSidebarButtons();
     }
 }
 class SidebarYearSection {
     element;
-    constructor(sidebar, year) {
+    year_label;
+    year_hr;
+    year_text;
+    year;
+    sidebar_buttons;
+    section_holder;
+    constructor(section_holder, year) {
         this.element = document.createElement('div');
         this.element.classList.add('year_holder');
-        this.element.setAttribute('year', '20' + year);
-        let yearLabel = document.createElement('div');
-        yearLabel.classList.add('year_label');
-        let yearHr = document.createElement('hr');
-        let yearText = document.createElement('span');
-        yearText.textContent = '20' + year;
-        yearLabel.appendChild(yearHr);
-        yearLabel.appendChild(yearText);
-        this.element.appendChild(yearLabel);
-        sidebar.element.appendChild(this.element);
+        this.element.setAttribute('year', year.toString());
+        this.year_label = document.createElement('div');
+        this.year_label.classList.add('year_label');
+        this.year_hr = document.createElement('hr');
+        this.year_text = document.createElement('span');
+        this.year_text.textContent = '20' + year;
+        this.year = year;
+        this.sidebar_buttons = [];
+        this.section_holder = section_holder;
+        this.year_label.appendChild(this.year_hr);
+        this.year_label.appendChild(this.year_text);
+        this.element.appendChild(this.year_label);
+        section_holder.element.appendChild(this.element);
+        this.createButtons();
+    }
+    createButtons() {
+        let imageCount = this.section_holder.sidebar.manager.countImages();
+        let yearList = imageCount[this.year.toString()];
+        for (var month in yearList) {
+            let sidebarButton = new SidebarMonthButton(this, Number(month));
+            this.sidebar_buttons.push(sidebarButton);
+        }
+    }
+    remove() {
+        for (var i = 0; i < this.sidebar_buttons.length; i++) {
+            let this_button = this.sidebar_buttons[i];
+            this_button.remove();
+        }
+        this.element.remove();
+    }
+    getYear() {
+        return this.year;
     }
 }
 class SidebarButton {
@@ -212,12 +264,17 @@ class SidebarButton {
         this.element.onclick = () => this.clicked();
         this.sidebar = sidebar;
     }
+    remove() {
+        this.element.remove();
+    }
 }
 class SidebarProfileButton extends SidebarButton {
-    constructor(sidebar) {
-        super(sidebar);
+    button_holder;
+    constructor(button_holder) {
+        super(button_holder.sidebar);
+        this.button_holder = button_holder;
         this.element.textContent = 'Profile';
-        sidebar.element.appendChild(this.element);
+        this.button_holder.element.appendChild(this.element);
     }
     clicked() {
         let profile_card = this.sidebar.manager.content.element.querySelector('.profile_card');
@@ -229,17 +286,16 @@ class SidebarProfileButton extends SidebarButton {
 class SidebarMonthButton extends SidebarButton {
     year;
     month;
-    constructor(sidebar, year, month) {
-        super(sidebar);
-        this.year = year;
+    constructor(year_holder, month) {
+        super(year_holder.section_holder.sidebar);
+        this.year = year_holder.getYear();
         this.month = month;
         this.element.classList.add('month');
         this.element.textContent = this.sidebar.manager.getMonthName(month);
         this.element.setAttribute('year', this.year.toString());
         this.element.setAttribute('month', this.month.toString());
         this.element.style.order = (-this.month).toString();
-        let yearHolder = sidebar.fetchYearLabel(year) || new SidebarYearSection(sidebar, year).element;
-        yearHolder.appendChild(this.element);
+        year_holder.element.appendChild(this.element);
     }
     clicked() {
         let found_figure = this.sidebar.manager.content.photo_holder.getFigureByMonth(this.year, this.month);
