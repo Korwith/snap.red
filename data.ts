@@ -72,6 +72,11 @@ const Data: Database = {
         },
 
         images: {
+            '01/11/26': {
+                name: 'Washington D.C.',
+                id: ['DSCN2105', 'DSCN2103', 'DSCN2073', 'DSCN2155', 'DSCN2127', 'DSCN2126', 'DSCN2111'],
+                people: ['Paris', 'Edin', 'Aidan', 'Jordan', 'Liam']
+            },
             '12/25/25': {
                 name: 'Hagerstown',
                 id: ['0687', '0693','0702', '0703', '0677', '0661', '0658'],

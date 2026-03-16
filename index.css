@@ -688,6 +688,7 @@ nav.sidebar .statistics span {
     height: fit-content;
     min-height: 30px;
     width: fit-content;
+    max-width: 60%;
     padding-left: 6px;
     padding-right: 6px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -942,19 +943,19 @@ nav.sidebar .statistics span {
         border-radius: 0;
     }
 
-    .photo_holder figure.large_photo {
+    .photo_holder figure.large_figure {
         min-width: 100vw;
         min-height: 100vw;
         max-width: 100vw;
         max-height: 100vw;
     }
 
-    .photo_holder figure.large_photo::after {
+    .photo_holder figure.large_figure::after {
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
     }
 
-    .photo_holder figure.large_photo .photo_info {
+    .photo_holder figure.large_figure .photo_info {
         border-top-left-radius: 0;
     }
 

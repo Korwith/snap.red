@@ -716,7 +716,7 @@ class MainPhotoFigure {
         this.photo_people = document.createElement('span');
         this.photo_button_left = document.createElement('button');
         this.photo_button_right = document.createElement('button');
-        this.element.classList.add('large_photo');
+        this.element.classList.add('large_figure');
         this.photo_info.classList.add('photo_info');
         this.photo_date.classList.add('photo_date');
         this.photo_people.classList.add('photo_people');
@@ -737,7 +737,7 @@ class MainPhotoFigure {
         photo_holder.element.appendChild(this.element);
     }
     clearPrevious() {
-        this.element.classList = 'hide_left_button';
+        this.element.classList = 'large_figure hide_left_button';
         this.photo_index = 0;
         this.photo_date.textContent = '';
         this.photo_people.textContent = '';
