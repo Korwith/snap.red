@@ -266,9 +266,9 @@ class PageContent {
         document.body.appendChild(this.element);
     }
     reload() {
+        this.profile_card.reload();
         this.video_holder.reload();
         this.photo_holder.reload();
-        this.profile_card.reload();
     }
     shiftLayout() {
         this.element.classList.toggle('shift');
@@ -504,6 +504,8 @@ class ContentPhotoHolder extends ContentFrame {
     reload() {
         this.loaded_images = 0;
         this.complete = false;
+        this.user_images = this.content.manager.getUserImages();
+        this.skip_images = {};
         this.clearMemory();
         this.loadImageBatch();
     }
@@ -632,13 +634,13 @@ class MainPhotoFigure {
         this.photo_holder = photo_holder;
         this.element = document.createElement('figure');
         this.photo_info = document.createElement('div');
-        this.photo_info.classList.add('photo_info');
         this.photo_date = document.createElement('span');
-        this.photo_date.classList.add('photo_date');
         this.photo_people = document.createElement('span');
-        this.photo_people.classList.add('photo_people');
         this.photo_button_left = document.createElement('button');
         this.photo_button_right = document.createElement('button');
+        this.photo_info.classList.add('photo_info');
+        this.photo_date.classList.add('photo_date');
+        this.photo_people.classList.add('photo_people');
         this.photo_button_left.classList.add('shift', 'left');
         this.photo_button_right.classList.add('shift', 'right');
         this.photo_button_left.onclick = () => this.shiftImage(-1);
