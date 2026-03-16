@@ -20,6 +20,30 @@ const Data = {
             'youtube': 'https://www.youtube.com/channel/UCLcCNfyLG_jQev4MdkHtCZw',
         },
         images: {
+            '03/10/26': {
+                name: 'Weverton Cliffs',
+                id: ['DSCN2454', 'DSCN2452', 'DSCN2449', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
+                people: ['Paris'],
+            },
+            '03/09/26': {
+                name: 'Railroad Tracks',
+                id: ['DSCN2512', 'DSCN2530', 'DSCN2524', 'DSCN2512'],
+            },
+            '03/08/26': {
+                name: 'Downtown Frederick',
+                id: ['DSCN2362', 'DSCN2366'],
+                people: ['Paris'],
+            },
+            '02/07/26': {
+                name: 'Downtown Frederick',
+                id: [1142, 1148, 1144, 1140],
+                people: ['Paris']
+            },
+            '01/13/26': {
+                name: "Harper's Ferry",
+                id: ['DSCN2188', 'DSCN2232', 'DSCN2248', 'DSCN2266'],
+                people: ['Paris', 'Edin'],
+            },
             '01/11/26': {
                 name: 'Washington D.C.',
                 id: ['DSCN2105', 'DSCN2103', 'DSCN2073', 'DSCN2155', 'DSCN2127', 'DSCN2126', 'DSCN2111'],
@@ -52,7 +76,8 @@ const Data = {
             '06/29/25': {
                 name: 'Washington D.C.',
                 id: ['1090', '1016', '1083', '1106', '1019', '1082', '1080', '1026', '1108', '0919', '0971', '0942', '1079', '1028', '1089', '0956', '0954'],
-                people: ['Paris', 'Aidan', 'Jordan']
+                people: ['Paris', 'Aidan', 'Jordan'],
+                featured: 3,
             },
             '06/28/25': {
                 name: 'Downtown Frederick',
@@ -317,7 +342,6 @@ const Data = {
                 name: 'Washington D.C.',
                 people: ['Paris', 'Jeremy', 'Abiel'],
                 id: [4018, 3778, 3796, 3890, 3901, 4012, 4057, 3709, 3840],
-                featured: 3
             },
             '07/27/24': {
                 name: 'Weverton Cliffs',
