@@ -489,13 +489,12 @@ class ContentVideoHolder extends ContentFrame {
 }
 class ContentPhotoHolder extends ContentFrame {
     user_images;
-    skip_images;
     loaded_images;
     complete;
     constructor(content) {
         super(content, 'Photos');
         this.element.classList.add('content_photo_holder');
-        this.user_images = this.content.manager.getUserImages();
+        this.user_images = structuredClone(this.content.manager.getUserImages());
         this.loaded_images = 0;
         this.complete = false;
         this.skip_images = {};
@@ -511,8 +510,7 @@ class ContentPhotoHolder extends ContentFrame {
             photo_figure.setParent(this.element);
             photo_figure.setFeatured(entry.featured);
             this.figures.push(photo_figure);
-            this.loaded_images++;
-            this.skip_images[date] = entry;
+            delete this.user_images[date];
         }
     }
     loadImageBatch() {
@@ -553,9 +551,9 @@ class ContentPhotoHolder extends ContentFrame {
     reload() {
         this.loaded_images = 0;
         this.complete = false;
-        this.user_images = this.content.manager.getUserImages();
-        this.skip_images = {};
+        this.user_images = structuredClone(this.content.manager.getUserImages());
         this.clearMemory();
+        this.loadFeaturedImages();
         this.loadImageBatch();
     }
 }
