@@ -49,14 +49,14 @@ interface VideoEntry {
     link: string;
 }
 
-const data: Database = {
+const Data: Database = {
     'Thaddeus': {
         card: {
             bio: 'Web Developer',
             icon: 'kircic.png',
             site: {
                 url: 'https://www.kircic.org',
-                icon: 'https://www.kircic.org/icon/favicon.png',
+                icon: 'https://www.kircic.org/@main/icon/favicon.png',
                 name: 'kircic.org',
                 blurb: 'Development Portfolio',
                 gradient: ['#0d8000', '#003785'],

@@ -31,7 +31,7 @@ class PageManager {
     }
 
     countImages(name: string): DateCounter {
-        let profile: UserEntry = data[name];
+        let profile: UserEntry = Data[name];
         if (!profile) throw new Error('No profile selected!');
 
         let count: DateCounter = {};
@@ -50,23 +50,27 @@ class PageManager {
     }
 
     getUserImages(): PhotoDatabase {
-        return data[this.user].images;
+        return Data[this.user].images;
     }
 
     getUserVideos(): VideoDatabase | null {
-        return data[this.user].videos || null;
+        return Data[this.user].videos || null;
     }
 
     getUserSocials(): ProfileSocialDatabase {
-        return data[this.user].social;
+        return Data[this.user].social;
+    }
+
+    getUserSiteInfo(): ProfileWebsiteEntry | null {
+        return Data[this.user].card.site || null;
     }
 
     getPhotoInfoFromDate(date: string): PhotoEntry | null {
-        return data[this.user].images[date];
+        return Data[this.user].images[date];
     }
 
     getVideoInfoFromDate(date: string): VideoEntry | null {
-        let video_array: VideoDatabase | undefined = data[this.user].videos;
+        let video_array: VideoDatabase | undefined = Data[this.user].videos;
         if (!video_array) return null;
         return video_array[date] || null;
     }
@@ -123,8 +127,8 @@ class UserSelector {
         this.element.classList.add('user_selector_holder');
         this.element.onclick = (e: PointerEvent) => this.click(e);
 
-        for (var user in data) {
-            let userInfo: UserEntry = data[user];
+        for (var user in Data) {
+            let userInfo: UserEntry = Data[user];
             let userButton: HTMLElement = document.createElement('button');
             userButton.classList.add('user_button');
             userButton.setAttribute('name', user);
@@ -353,10 +357,11 @@ class ContentProfileCard {
     content: PageContent;
     card_name: ProfileCardName;
     card_social_row: ProfileCardSocialRow;
+    user_site: ProfileCardSite;
 
     constructor(content: PageContent) {
-        let profile_data = data[content.manager.user];
-        if (!profile_data) throw new Error('No profile found!');
+        let profile_Data = Data[content.manager.user];
+        if (!profile_Data) throw new Error('No profile found!');
 
         this.element = document.createElement('div');
         this.element.classList.add('profile_card');
@@ -367,6 +372,7 @@ class ContentProfileCard {
         this.content = content;
         this.card_name = new ProfileCardName(this);
         this.card_social_row = new ProfileCardSocialRow(this);
+        this.user_site = new ProfileCardSite(this);
 
         this.element.appendChild(this.inner_element);
         content.element.appendChild(this.element);
@@ -412,7 +418,7 @@ class ProfileCardName {
     }
 
     private propogateName(): void {
-        let user_info: UserEntry = data[this.card.content.manager.user];
+        let user_info: UserEntry = Data[this.card.content.manager.user];
         this.icon.style.backgroundImage = `url(icon/user/${user_info.card.icon})`;
         this.text_name.textContent = this.card.content.manager.user;
         this.text_blurb.textContent = user_info.card.bio;
@@ -440,10 +446,10 @@ class ProfileCardSocialRow {
     }
 
     private propogateSocials() {
-        let user_data = data[this.card.content.manager.user];
+        let user_Data = Data[this.card.content.manager.user];
 
-        for (var service in user_data.social) {
-            let link: string = user_data.social[service];
+        for (var service in user_Data.social) {
+            let link: string = user_Data.social[service];
             let media_icon: SocialMediaIcon = new SocialMediaIcon(this, service, link);
             this.social_icons.push(media_icon);
         }
@@ -471,7 +477,7 @@ class SocialMediaIcon {
 
         this.element = document.createElement('a');
         this.element.classList.add('social_icon', service);
-        this.element.setAttribute('href', row.card.content.manager.getUserSocials()[service]);
+        this.element.setAttribute('href', link);
 
         let icon_size: string = icon_info.image.size || '100%';
         this.element.style.setProperty('--gradient', `linear-gradient(${icon_info.gradient.direction}, ${icon_info.gradient.colors.join(', ')})`);
@@ -479,6 +485,57 @@ class SocialMediaIcon {
         this.element.style.setProperty('--icon-size', icon_size);
 
         row.element.appendChild(this.element);
+    }
+}
+
+class ProfileCardSite {
+    element: HTMLElement;
+    icon: HTMLElement;
+    text_holder: HTMLElement;
+    name: HTMLElement;
+    blurb: HTMLElement;
+    card: ContentProfileCard;
+
+    constructor(card: ContentProfileCard) {
+        this.element = document.createElement('a');
+        this.icon = document.createElement('div');
+        this.text_holder = document.createElement('div');
+        this.name = document.createElement('span');
+        this.blurb = document.createElement('span');
+        this.card = card;
+
+        this.element.classList.add('user_site');
+        this.icon.classList.add('icon');
+        this.text_holder.classList.add('text_holder');
+        this.name.classList.add('site_name');
+        this.blurb.classList.add('site_blurb');
+        this.populateSite();
+
+        this.text_holder.appendChild(this.name);
+        this.text_holder.appendChild(this.blurb);
+        this.element.appendChild(this.icon);
+        this.element.appendChild(this.text_holder);
+        this.card.inner_element.appendChild(this.element);
+    }
+
+    private populateSite(): void {
+        let website_info: ProfileWebsiteEntry | null = this.card.content.manager.getUserSiteInfo();
+        if (!website_info) {
+            this.element.classList.add('hide');
+            this.element.style.removeProperty('--gradient');
+            return;
+        }
+
+        this.element.setAttribute('href', website_info.url);
+        this.element.setAttribute('title', website_info.name);
+        this.element.style.setProperty('--gradient', `linear-gradient(to bottom right, ${website_info.gradient.join(', ')})`);
+        this.icon.style.setProperty('--icon-url', `url(${website_info.icon})`);
+        this.name.textContent = website_info.name;
+        this.blurb.textContent = website_info.blurb;
+    }
+
+    reload(): void {
+        this.populateSite();
     }
 }
 
@@ -672,20 +729,20 @@ abstract class MediaFigure {
 }
 
 class PhotoSquare extends MediaFigure {
-    photo_data: PhotoEntry;
+    photo_Data: PhotoEntry;
 
     constructor(content: PageContent, date: string) {
         super(content, date);
         this.element.classList.add('photo_square');
 
-        let photo_data: PhotoEntry | null = content.manager.getPhotoInfoFromDate(date);
-        if (!photo_data) throw new Error('No photo found at date!');
-        this.photo_data = photo_data;
+        let photo_Data: PhotoEntry | null = content.manager.getPhotoInfoFromDate(date);
+        if (!photo_Data) throw new Error('No photo found at date!');
+        this.photo_Data = photo_Data;
 
-        this.lower_caption.textContent = this.photo_data.name;
-        this.image.setAttribute('src', `media/${content.manager.user}/IMG_${photo_data.id[0].toString()}.jpg`);
-        this.image.setAttribute('alt', `${this.date}: ${this.photo_data.name}`);
-        this.element.setAttribute('title', `${this.date}: ${this.photo_data.name}`);
+        this.lower_caption.textContent = this.photo_Data.name;
+        this.image.setAttribute('src', `media/${content.manager.user}/IMG_${photo_Data.id[0].toString()}.jpg`);
+        this.image.setAttribute('alt', `${this.date}: ${this.photo_Data.name}`);
+        this.element.setAttribute('title', `${this.date}: ${this.photo_Data.name}`);
         this.element.onclick = () => this.photoSelected();
     }
 
@@ -704,24 +761,24 @@ class PhotoSquare extends MediaFigure {
 }
 
 class VideoRectangle extends MediaFigure {
-    video_data: VideoEntry;
+    video_Data: VideoEntry;
 
     constructor(content: PageContent, date: string) {
         super(content, date);
         this.element.classList.add('video_rectangle');
 
-        let video_data: VideoEntry | null = this.content.manager.getVideoInfoFromDate(date);
-        if (!video_data) throw new Error('No video found at date!');
-        this.video_data = video_data;
+        let video_Data: VideoEntry | null = this.content.manager.getVideoInfoFromDate(date);
+        if (!video_Data) throw new Error('No video found at date!');
+        this.video_Data = video_Data;
 
         this.element.onclick = () => this.videoSelected();
-        this.image.setAttribute('src', `/icon/thumbnail/${this.video_data.thumbnail}`);
+        this.image.setAttribute('src', `/icon/thumbnail/${this.video_Data.thumbnail}`);
         this.date_caption.textContent = date;
-        this.lower_caption.textContent = this.video_data.name;
+        this.lower_caption.textContent = this.video_Data.name;
     }
 
     videoSelected(): void {
-        window.open(this.video_data.link, '_blank');
+        window.open(this.video_Data.link, '_blank');
     }
 }
 
@@ -826,7 +883,7 @@ class MainPhotoFigure {
         this.clearPrevious();
         this.element.classList.remove('hide');
 
-        let date_info = data[this.photo_holder.manager.user].images[date];
+        let date_info = Data[this.photo_holder.manager.user].images[date];
         this.photo_date.textContent = date;
         this.photo_people.textContent = date_info.people?.join(', ') || '';
         this.photo_people.classList.toggle('hide', !(date_info.people instanceof Array))
@@ -944,7 +1001,7 @@ abstract class RelatedPhotosPane {
         this.origin_date = origin_date;
         let origin_photo_entry: PhotoEntry | null = this.manager.getPhotoInfoFromDate(origin_date);
         let all_images: PhotoDatabase | null = this.manager.getUserImages();
-        if (!origin_photo_entry) throw new Error('Error fetching origin data!');
+        if (!origin_photo_entry) throw new Error('Error fetching origin Data!');
         if (!all_images) throw new Error('Error fetching image list!');
 
         this.origin_photo_entry = origin_photo_entry;

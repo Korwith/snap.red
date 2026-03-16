@@ -406,6 +406,60 @@ nav.sidebar button::before {
     border: 2px solid white;
 }
 
+.user_site {
+    display: flex;
+    gap: 6px;
+    position: relative;
+    background: var(--gradient);
+    width: fit-content;
+    height: 40px;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.user_site::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+    transition: border 0.15s;
+}
+
+.user_site:hover::after {
+    border: 4px solid white;
+}
+
+.user_site .icon {
+    height: 40px;
+    width: 40px;
+    flex: 0 0 auto;
+    background-size: cover;
+    background-image: var(--icon-url);
+}
+
+.user_site .text_holder {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    flex: 1;
+}
+
+.user_site .text_holder span.site_name {
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.user_site .text_holder span.site_blurb {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .content_frame {
     position: relative;
     display: flex;
