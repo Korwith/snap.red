@@ -231,6 +231,7 @@ class SidebarMonthButton extends SidebarButton {
         this.element.textContent = this.sidebar.manager.getMonthName(month);
         this.element.setAttribute('year', this.year.toString());
         this.element.setAttribute('month', this.month.toString());
+        this.element.style.order = (-this.month).toString();
         let yearHolder = sidebar.fetchYearLabel(year) || new SidebarYearSection(sidebar, year).element;
         yearHolder.appendChild(this.element);
     }

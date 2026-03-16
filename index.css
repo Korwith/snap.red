@@ -189,6 +189,11 @@ nav.sidebar.shift::before {
     left: -300px;
 }
 
+nav.sidebar .year_holder {
+    display: flex;
+    flex-direction: column;
+}
+
 nav.sidebar button {
     display: flex;
     align-items: center;
@@ -224,6 +229,7 @@ nav.sidebar button::before {
 .year_label {
     position: relative;
     margin-bottom: 18px;
+    order: -13;
 }
 
 .year_label hr {

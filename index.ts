@@ -280,6 +280,7 @@ class SidebarMonthButton extends SidebarButton {
         this.element.textContent = this.sidebar.manager.getMonthName(month);
         this.element.setAttribute('year', this.year.toString());
         this.element.setAttribute('month', this.month.toString());
+        this.element.style.order = (-this.month).toString();
 
         let yearHolder = sidebar.fetchYearLabel(year) || new SidebarYearSection(sidebar, year).element;
         yearHolder.appendChild(this.element);
@@ -287,7 +288,7 @@ class SidebarMonthButton extends SidebarButton {
 
     clicked() {
         let found_figure: PhotoSquare | null = this.sidebar.manager.content.photo_holder.getFigureByMonth(this.year, this.month);
-        
+
         if (window.innerWidth < 767) {
             this.element.focus();
             this.sidebar.manager.shiftLayout();
