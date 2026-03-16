@@ -21,18 +21,18 @@ class PageManager {
         this.main_photo_holder = new MainPhotoHolder(this);
     }
 
-    loadUser(name: string) {
+    public loadUser(name: string) {
         this.user = name;
         this.content.reload();
         this.sidebar.reload();
     }
 
-    shiftLayout(): void {
+    public shiftLayout(): void {
         this.sidebar.shiftLayout();
         this.content.shiftLayout();
     }
 
-    countImages(name: string): DateCounter {
+    public countImages(name: string): DateCounter {
         let profile: UserEntry = Data[name];
         if (!profile) throw new Error('No profile selected!');
 
@@ -51,33 +51,33 @@ class PageManager {
         return count;
     }
 
-    getUserImages(): PhotoDatabase {
+    public getUserImages(): PhotoDatabase {
         return Data[this.user].images;
     }
 
-    getUserVideos(): VideoDatabase | null {
+    public getUserVideos(): VideoDatabase | null {
         return Data[this.user].videos || null;
     }
 
-    getUserSocials(): ProfileSocialDatabase {
+    public getUserSocials(): ProfileSocialDatabase {
         return Data[this.user].social;
     }
 
-    getUserSiteInfo(): ProfileWebsiteEntry | null {
+    public getUserSiteInfo(): ProfileWebsiteEntry | null {
         return Data[this.user].card.site || null;
     }
 
-    getPhotoInfoFromDate(date: string): PhotoEntry | null {
+    public getPhotoInfoFromDate(date: string): PhotoEntry | null {
         return Data[this.user].images[date];
     }
 
-    getVideoInfoFromDate(date: string): VideoEntry | null {
+    public getVideoInfoFromDate(date: string): VideoEntry | null {
         let video_array: VideoDatabase | undefined = Data[this.user].videos;
         if (!video_array) return null;
         return video_array[date] || null;
     }
 
-    getMonthName(month: string | number): string {
+    public getMonthName(month: string | number): string {
         month = Number(month);
         let date = new Date();
         date.setMonth(month - 1); // 0 indexed
@@ -183,21 +183,21 @@ class PageSidebar {
         document.body.appendChild(this.element);
     }
 
-    reload(): void {
+    public reload(): void {
         this.element.innerHTML = '';
         this.propogateSidebar();
     }
 
-    shiftLayout(): void {
+    public shiftLayout(): void {
         this.element.classList.toggle('shift');
     }
 
-    fetchYearLabel(year: number): HTMLElement | null {
+    public fetchYearLabel(year: number): HTMLElement | null {
         let yearLabel: HTMLElement | null = this.element.querySelector(`[year="20${year}"]`);
         return yearLabel;
     }
 
-    fetchMonthButton(year: number, month: number): HTMLElement | null {
+    public fetchMonthButton(year: number, month: number): HTMLElement | null {
         let yearLabel: HTMLElement | null = this.fetchYearLabel(year);
         if (!yearLabel) return null;
         let monthButton = yearLabel.querySelector(`[year="${month}"]`) as HTMLElement;
@@ -258,7 +258,7 @@ abstract class SidebarButton {
         this.sidebar = sidebar;
     }
 
-    abstract clicked(): void;
+    protected abstract clicked(): void;
 }
 
 class SidebarProfileButton extends SidebarButton {
@@ -268,7 +268,7 @@ class SidebarProfileButton extends SidebarButton {
         sidebar.element.appendChild(this.element);
     }
 
-    clicked() {
+    protected clicked() {
         let profile_card: HTMLElement | null = this.sidebar.manager.content.element.querySelector('.profile_card');
         if (!profile_card) throw new Error('No profile card found!');
         profile_card.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -294,7 +294,7 @@ class SidebarMonthButton extends SidebarButton {
         yearHolder.appendChild(this.element);
     }
 
-    clicked() {
+    protected clicked() {
         let found_figure: PhotoSquare | null = this.sidebar.manager.content.photo_holder.getFigureByMonth(this.year, this.month);
 
         if (window.innerWidth < 767) {
@@ -305,7 +305,7 @@ class SidebarMonthButton extends SidebarButton {
         found_figure?.findInFrame();
     }
 
-    setMonthCount(count: number): void {
+    public setMonthCount(count: number): void {
         this.element.textContent = `${this.sidebar.manager.getMonthName(this.month)} (${count})`
     }
 }
@@ -332,7 +332,7 @@ class SidebarStats {
         this.updateStats();
     }
 
-    async updateStats(): Promise<void> {
+    public async updateStats(): Promise<void> {
         this.sidebar.manager.stats_manager.fetchLastCommit()
             .then((data: CommitData) => {
                 this.commits.textContent = `${data.count} commits`;
@@ -367,13 +367,13 @@ class PageContent {
         document.body.appendChild(this.element);
     }
 
-    reload(): void {
+    public reload(): void {
         this.profile_card.reload();
         this.video_holder.reload();
         this.photo_holder.reload();
     }
 
-    shiftLayout(): void {
+    public shiftLayout(): void {
         this.element.classList.toggle('shift');
     }
 
@@ -417,9 +417,10 @@ class ContentProfileCard {
         content.element.appendChild(this.element);
     }
 
-    reload(): void {
+    public reload(): void {
         this.card_name.reload();
         this.card_social_row.reload();
+        this.user_site.reload();
     }
 }
 
@@ -463,7 +464,7 @@ class ProfileCardName {
         this.text_blurb.textContent = user_info.card.bio;
     }
 
-    reload(): void {
+    public reload(): void {
         this.propogateName();
     }
 }
@@ -502,7 +503,7 @@ class ProfileCardSocialRow {
         this.social_icons = [];
     }
 
-    reload(): void {
+    public reload(): void {
         this.clearMemory();
         this.propogateSocials();
     }
@@ -560,11 +561,11 @@ class ProfileCardSite {
     private populateSite(): void {
         let website_info: ProfileWebsiteEntry | null = this.card.content.manager.getUserSiteInfo();
         if (!website_info) {
-            this.element.classList.add('hide');
-            this.element.style.removeProperty('--gradient');
+            this.hideSite();
             return;
         }
 
+        this.element.classList.remove('hide');
         this.element.setAttribute('href', website_info.url);
         this.element.setAttribute('title', website_info.name);
         this.element.style.setProperty('--gradient', `linear-gradient(to bottom right, ${website_info.gradient.join(', ')})`);
@@ -573,8 +574,22 @@ class ProfileCardSite {
         this.blurb.textContent = website_info.blurb;
     }
 
-    reload(): void {
-        this.populateSite();
+    private hideSite(): void {
+        this.resetSite();
+        this.element.classList.add('hide');
+    }
+
+    private resetSite(): void {
+        this.element.style.removeProperty('--gradient');
+        this.icon.style.removeProperty('--icon-url');
+        this.name.textContent = '';
+        this.blurb.textContent = '';
+    }
+
+    public reload(): void {
+        let website_info: ProfileWebsiteEntry | null = this.card.content.manager.getUserSiteInfo();
+        if (!website_info) this.hideSite();
+        else this.populateSite();
     }
 }
 
@@ -594,7 +609,7 @@ abstract class ContentFrame {
         content.element.appendChild(this.element);
     }
 
-    clearMemory(): void {
+    protected clearMemory(): void {
         for (var i = 0; i < this.figures.length; i++) {
             let this_figure: MediaFigure = this.figures[i];
             this_figure.element.remove();
@@ -616,7 +631,7 @@ class ContentVideoHolder extends ContentFrame {
         this.element.appendChild(this.scroll_frame);
     }
 
-    reload(): void {
+    public reload(): void {
         this.clearMemory();
         this.loadVideos();
     }
@@ -684,7 +699,7 @@ class ContentPhotoHolder extends ContentFrame {
         }
     }
 
-    getFigureByMonth(year: number, month: number): PhotoSquare | null {
+    public getFigureByMonth(year: number, month: number): PhotoSquare | null {
         for (var i = 0; i < this.figures.length; i++) {
             let found_figure: MediaFigure = this.figures[i];
             let date_split = found_figure.date.split('/');
@@ -704,7 +719,7 @@ class ContentPhotoHolder extends ContentFrame {
         }
     }
 
-    reload(): void {
+    public reload(): void {
         this.loaded_images = 0;
         this.complete = false;
         this.user_images = structuredClone(this.content.manager.getUserImages());
@@ -754,11 +769,11 @@ abstract class MediaFigure {
         this.element.classList.remove('loading');
     }
 
-    setParent(parent: HTMLElement): void {
+    public setParent(parent: HTMLElement): void {
         parent.appendChild(this.element);
     }
 
-    setFeatured(order: number): void {
+    public setFeatured(order: number): void {
         this.element.classList.add('featured');
         this.element.style.order = (-order).toString();
     }
@@ -782,7 +797,7 @@ class PhotoSquare extends MediaFigure {
         this.element.onclick = () => this.photoSelected();
     }
 
-    findInFrame(): void {
+    public findInFrame(): void {
         this.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
         this.element.classList.add('highlight');
 
@@ -791,7 +806,7 @@ class PhotoSquare extends MediaFigure {
         }, 1000);
     }
 
-    photoSelected(): void {
+    private photoSelected(): void {
         this.content.manager.main_photo_holder.showImage(this.date);
     }
 }
@@ -813,7 +828,7 @@ class VideoRectangle extends MediaFigure {
         this.lower_caption.textContent = this.video_Data.name;
     }
 
-    videoSelected(): void {
+    private videoSelected(): void {
         window.open(this.video_Data.link, '_blank');
     }
 }
@@ -834,19 +849,19 @@ class MainPhotoHolder {
 
     }
 
-    showImage(date: string): void {
+    public showImage(date: string): void {
         this.clearPrevious();
         this.element.classList.remove('hide');
         this.photo_figure.showImage(date);
         this.photo_aside.showInfo(date);
     }
 
-    clearPrevious(): void {
+    private clearPrevious(): void {
         this.photo_figure.clearPrevious();
         this.photo_aside.clearPrevious();
     }
 
-    closeMenu(): void {
+    public closeMenu(): void {
         this.clearPrevious();
         this.element.classList.add('hide');
     }
@@ -901,7 +916,7 @@ class MainPhotoFigure {
         photo_holder.element.appendChild(this.element);
     }
 
-    clearPrevious(): void {
+    public clearPrevious(): void {
         this.element.classList = 'large_figure hide_left_button';
 
         this.photo_index = 0;
@@ -916,7 +931,7 @@ class MainPhotoFigure {
         }
     }
 
-    showImage(date: string): void {
+    public showImage(date: string): void {
         this.clearPrevious();
         this.element.classList.remove('hide');
 
@@ -934,7 +949,7 @@ class MainPhotoFigure {
         }
     }
 
-    shiftImage(offset: number): void {
+    public shiftImage(offset: number): void {
         let all_images: NodeListOf<HTMLElement> = this.element.querySelectorAll('img');
         let new_offset: number = this.photo_index + offset;
         if (new_offset < 0 || new_offset >= all_images.length) return;
@@ -982,7 +997,7 @@ class MainPhotoAside {
         photo_holder.element.appendChild(this.element)
     }
 
-    showInfo(date: string): void {
+    public showInfo(date: string): void {
         let photo_info: PhotoEntry | null = this.photo_holder.manager.getPhotoInfoFromDate(date);
         if (!photo_info) throw new Error('Photo info not found at date!');
 
@@ -990,7 +1005,7 @@ class MainPhotoAside {
         this.createRelatedPanes(date);
     }
 
-    createRelatedPanes(date: string) {
+    private createRelatedPanes(date: string) {
         let photo_info: PhotoEntry | null = this.photo_holder.manager.getPhotoInfoFromDate(date);
         if (!photo_info) throw new Error('Photo info not found!');
         new RelatedLocationPane(this, date);
@@ -1005,7 +1020,7 @@ class MainPhotoAside {
         new RelatedMonthPane(this, date);
     }
 
-    clearPrevious(): void {
+    public clearPrevious(): void {
         this.location.textContent = '';
         this.inner_element.innerHTML = '';
     }
@@ -1045,9 +1060,9 @@ abstract class RelatedPhotosPane {
         this.all_images = all_images;
     }
 
-    abstract findImages(): PhotoDatabase;
+    protected abstract findImages(): PhotoDatabase;
 
-    renderMatches() {
+    protected renderMatches() {
         let found_images: PhotoDatabase = this.findImages();
         delete found_images[this.origin_date];
 
@@ -1068,7 +1083,7 @@ class RelatedLocationPane extends RelatedPhotosPane {
         this.renderMatches();
     }
 
-    findImages(): PhotoDatabase {
+    protected findImages(): PhotoDatabase {
         let matches: PhotoDatabase = {};
 
         for (var date in this.all_images) {
@@ -1091,7 +1106,7 @@ class RelatedPersonPane extends RelatedPhotosPane {
         this.renderMatches();
     }
 
-    findImages(): PhotoDatabase {
+    protected findImages(): PhotoDatabase {
         let matches: PhotoDatabase = {};
         for (var date in this.all_images) {
             let entry: PhotoEntry = this.all_images[date];
@@ -1114,7 +1129,7 @@ class RelatedMonthPane extends RelatedPhotosPane {
         this.renderMatches();
     }
 
-    findImages(): PhotoDatabase {
+    protected findImages(): PhotoDatabase {
         let matches: PhotoDatabase = {};
         let origin_split: string[] = this.origin_date.split('/');
 

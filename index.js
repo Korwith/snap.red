@@ -345,6 +345,7 @@ class ContentProfileCard {
     reload() {
         this.card_name.reload();
         this.card_social_row.reload();
+        this.user_site.reload();
     }
 }
 class ProfileCardName {
@@ -459,10 +460,10 @@ class ProfileCardSite {
     populateSite() {
         let website_info = this.card.content.manager.getUserSiteInfo();
         if (!website_info) {
-            this.element.classList.add('hide');
-            this.element.style.removeProperty('--gradient');
+            this.hideSite();
             return;
         }
+        this.element.classList.remove('hide');
         this.element.setAttribute('href', website_info.url);
         this.element.setAttribute('title', website_info.name);
         this.element.style.setProperty('--gradient', `linear-gradient(to bottom right, ${website_info.gradient.join(', ')})`);
@@ -470,8 +471,22 @@ class ProfileCardSite {
         this.name.textContent = website_info.name;
         this.blurb.textContent = website_info.blurb;
     }
+    hideSite() {
+        this.resetSite();
+        this.element.classList.add('hide');
+    }
+    resetSite() {
+        this.element.style.removeProperty('--gradient');
+        this.icon.style.removeProperty('--icon-url');
+        this.name.textContent = '';
+        this.blurb.textContent = '';
+    }
     reload() {
-        this.populateSite();
+        let website_info = this.card.content.manager.getUserSiteInfo();
+        if (!website_info)
+            this.hideSite();
+        else
+            this.populateSite();
     }
 }
 class ContentFrame {
