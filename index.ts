@@ -666,12 +666,13 @@ class ContentPhotoHolder extends ContentFrame {
         }
     }
 
-    loadImageBatch(): void {
+    public loadImageBatch(): void {
         if (this.complete) return;
         let imageKeys = Object.keys(this.user_images);
 
         for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
             let date: string = imageKeys[i];
+            if (!date) break;
             let photo_figure: MediaFigure = new PhotoSquare(this.content, date);
             photo_figure.setParent(this.element);
             this.figures.push(photo_figure);

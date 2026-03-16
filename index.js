@@ -550,6 +550,8 @@ class ContentPhotoHolder extends ContentFrame {
         let imageKeys = Object.keys(this.user_images);
         for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
             let date = imageKeys[i];
+            if (!date)
+                break;
             let photo_figure = new PhotoSquare(this.content, date);
             photo_figure.setParent(this.element);
             this.figures.push(photo_figure);
