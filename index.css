@@ -511,6 +511,10 @@ nav.sidebar button::before {
     background-image: url(icon/location.svg);
 }
 
+.media_figure.featured figcaption::before {
+    background-image: url(icon/star.svg);
+}
+
 .media_figure .date_caption {
     display: flex;
     align-items: center;

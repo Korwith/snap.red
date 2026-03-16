@@ -406,8 +406,8 @@ class ProfileCardName {
         this.propogateName();
         this.element.appendChild(this.icon);
         this.element.appendChild(this.text_holder);
-        this.text_holder.appendChild(this.text_blurb);
         this.text_holder.appendChild(this.text_name);
+        this.text_holder.appendChild(this.text_blurb);
         this.card.inner_element.appendChild(this.element);
     }
 
@@ -539,32 +539,39 @@ class ContentVideoHolder extends ContentFrame {
 }
 
 class ContentPhotoHolder extends ContentFrame {
+    user_images: PhotoDatabase;
     loaded_images: number;
     complete: boolean;
 
     constructor(content: PageContent) {
         super(content, 'Photos');
         this.element.classList.add('content_photo_holder');
+        this.user_images = this.content.manager.getUserImages();
 
         this.loaded_images = 0;
         this.complete = false;
+        this.loadFeaturedImages();
         this.loadImageBatch();
     }
 
-    reload(): void {
-        this.loaded_images = 0;
-        this.complete = false;
+    private loadFeaturedImages() {
+        for (var date in this.user_images) {
+            let entry: PhotoEntry = this.user_images[date];
+            if (!entry.featured) continue;
 
-        this.clearMemory();
-        this.loadImageBatch();
+            let photo_figure: MediaFigure = new PhotoSquare(this.content, date);
+            photo_figure.setParent(this.element);
+            photo_figure.setFeatured(entry.featured);
+            this.figures.push(photo_figure);
+
+            this.loaded_images++;
+            delete this.user_images[date];
+        }
     }
 
     loadImageBatch(): void {
         if (this.complete) return;
-
-        let userImages: PhotoDatabase | null = this.content.manager.getUserImages();
-        if (!userImages) throw new Error('No images found!');
-        let imageKeys = Object.keys(userImages);
+        let imageKeys = Object.keys(this.user_images);
 
         for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
             let date: string = imageKeys[i];
@@ -575,14 +582,12 @@ class ContentPhotoHolder extends ContentFrame {
         }
 
         this.loaded_images += 9;
-        if (this.loaded_images >= Object.keys(userImages).length) {
+        if (this.loaded_images >= Object.keys(this.user_images).length) {
             this.complete = true;
         }
     }
 
     getFigureByMonth(year: number, month: number): PhotoSquare | null {
-        let match: MediaFigure;
-
         for (var i = 0; i < this.figures.length; i++) {
             let found_figure: MediaFigure = this.figures[i];
             let date_split = found_figure.date.split('/');
@@ -600,7 +605,15 @@ class ContentPhotoHolder extends ContentFrame {
         } else {
             return null;
         }
-    }    
+    }
+
+    reload(): void {
+        this.loaded_images = 0;
+        this.complete = false;
+
+        this.clearMemory();
+        this.loadImageBatch();
+    }
 }
 
 abstract class MediaFigure {
@@ -638,12 +651,17 @@ abstract class MediaFigure {
         this.element.appendChild(this.lower_caption);
     }
 
-    protected imageLoaded() {
+    protected imageLoaded(): void {
         this.element.classList.remove('loading');
     }
 
-    setParent(parent: HTMLElement) {
+    setParent(parent: HTMLElement): void {
         parent.appendChild(this.element);
+    }
+
+    setFeatured(order: number): void {
+        this.element.classList.add('featured');
+        this.element.style.order = (-order).toString();
     }
 }
 
