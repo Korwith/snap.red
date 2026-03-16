@@ -656,7 +656,7 @@ class MainPhotoFigure {
         photo_holder.element.appendChild(this.element);
     }
     clearPrevious() {
-        this.element.classList.add('hide_left_button');
+        this.element.classList = 'hide_left_button';
         this.photo_index = 0;
         this.photo_date.textContent = '';
         this.photo_people.textContent = '';

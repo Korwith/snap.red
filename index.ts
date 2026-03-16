@@ -807,7 +807,7 @@ class MainPhotoFigure {
     }
 
     clearPrevious(): void {
-        this.element.classList.add('hide_left_button');
+        this.element.classList = 'hide_left_button';
 
         this.photo_index = 0;
         this.photo_date.textContent = '';
