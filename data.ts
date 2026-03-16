@@ -72,6 +72,25 @@ const data: Database = {
         },
 
         images: {
+            '12/25/25': {
+                name: 'Hagerstown',
+                id: ['0687', '0693','0702', '0703', '0677', '0661', '0658'],
+                people: ['Paris'],
+            },
+            '11/26/25': {
+                name: 'Downtown Frederick',
+                id: ['DSCN1594', 'DSCN1600', 'DSCN1610'],
+                people: ['Paris'],
+            },
+            '10/02/25': {
+                name: 'Rivermist Park',
+                id: ['0089', '0084', '0078', '0076'],
+                people: ['Paris', 'Edin'],
+            },
+            '08/29/25': {
+                name: 'Downtown Frederick',
+                id: [9699, 9722, 9720, 9709],
+            },
             '06/30/25': {
                 name: 'Gettysburg',
                 id: ['1181', '1197', '1219', '1204', '1216', '1189'],
