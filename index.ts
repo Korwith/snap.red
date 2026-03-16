@@ -10,9 +10,11 @@ class PageManager {
     sidebar: PageSidebar;
     content: PageContent;
     main_photo_holder: MainPhotoHolder;
+    stats_manager: WebsiteStats;
 
     constructor() {
         this.user = 'Thaddeus';
+        this.stats_manager = new WebsiteStats('Korwith', 'snap.red');
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.content = new PageContent(this);
@@ -159,7 +161,7 @@ class UserSelector {
             let user: string | null = this_button.getAttribute('name');
             if (!user) continue;
             if (user == targetUser) this_button.style.order = '-1'
-                else this_button.style.order = 'unset';
+            else this_button.style.order = 'unset';
         }
 
         this.element.classList.remove('display');
@@ -172,10 +174,10 @@ class PageSidebar {
     manager: PageManager;
 
     constructor(manager: PageManager) {
-        this.manager = manager;
         this.element = document.createElement('nav');
         this.element.classList.add('sidebar');
         this.element.classList.toggle('shift', window.innerWidth < 767);
+        this.manager = manager;
 
         this.propogateSidebar();
         document.body.appendChild(this.element);
@@ -218,6 +220,8 @@ class PageSidebar {
                 monthButton.setMonthCount(monthCountNum);
             }
         }
+
+        new SidebarStats(this);
     }
 }
 
@@ -303,6 +307,41 @@ class SidebarMonthButton extends SidebarButton {
 
     setMonthCount(count: number): void {
         this.element.textContent = `${this.sidebar.manager.getMonthName(this.month)} (${count})`
+    }
+}
+
+class SidebarStats {
+    element: HTMLElement;
+    commits: HTMLElement;
+    size: HTMLElement;
+    sidebar: PageSidebar;
+
+    constructor(sidebar: PageSidebar) {
+        this.element = document.createElement('div');
+        this.commits = document.createElement('span');
+        this.size = document.createElement('span');
+        this.sidebar = sidebar;
+
+        this.element.classList.add('statistics');
+        this.commits.classList.add('commits');
+        this.size.classList.add('size');
+
+        this.element.appendChild(this.commits);
+        this.element.appendChild(this.size);
+        this.sidebar.element.appendChild(this.element);
+        this.updateStats();
+    }
+
+    async updateStats(): Promise<void> {
+        this.sidebar.manager.stats_manager.fetchLastCommit()
+            .then((data: CommitData) => {
+                this.commits.textContent = `${data.count} commits`;
+            })
+
+        this.sidebar.manager.stats_manager.fetchRepoSize()
+            .then((e: string) => {
+                this.size.textContent = e;
+            })
     }
 }
 
@@ -622,7 +661,7 @@ class ContentPhotoHolder extends ContentFrame {
             photo_figure.setParent(this.element);
             photo_figure.setFeatured(entry.featured);
             this.figures.push(photo_figure);
-            
+
             delete this.user_images[date];
         }
     }
@@ -743,9 +782,9 @@ class PhotoSquare extends MediaFigure {
     }
 
     findInFrame(): void {
-        this.element.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
         this.element.classList.add('highlight');
-        
+
         setTimeout(() => {
             this.element.classList.remove('highlight');
         }, 1000);

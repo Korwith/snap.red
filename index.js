@@ -5,8 +5,10 @@ class PageManager {
     sidebar;
     content;
     main_photo_holder;
+    stats_manager;
     constructor() {
         this.user = 'Thaddeus';
+        this.stats_manager = new WebsiteStats('Korwith', 'snap.red');
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.content = new PageContent(this);
@@ -142,10 +144,10 @@ class PageSidebar {
     element;
     manager;
     constructor(manager) {
-        this.manager = manager;
         this.element = document.createElement('nav');
         this.element.classList.add('sidebar');
         this.element.classList.toggle('shift', window.innerWidth < 767);
+        this.manager = manager;
         this.propogateSidebar();
         document.body.appendChild(this.element);
     }
@@ -181,6 +183,7 @@ class PageSidebar {
                 monthButton.setMonthCount(monthCountNum);
             }
         }
+        new SidebarStats(this);
     }
 }
 class SidebarYearSection {
@@ -248,6 +251,35 @@ class SidebarMonthButton extends SidebarButton {
     }
     setMonthCount(count) {
         this.element.textContent = `${this.sidebar.manager.getMonthName(this.month)} (${count})`;
+    }
+}
+class SidebarStats {
+    element;
+    commits;
+    size;
+    sidebar;
+    constructor(sidebar) {
+        this.element = document.createElement('div');
+        this.commits = document.createElement('span');
+        this.size = document.createElement('span');
+        this.sidebar = sidebar;
+        this.element.classList.add('statistics');
+        this.commits.classList.add('commits');
+        this.size.classList.add('size');
+        this.element.appendChild(this.commits);
+        this.element.appendChild(this.size);
+        this.sidebar.element.appendChild(this.element);
+        this.updateStats();
+    }
+    async updateStats() {
+        this.sidebar.manager.stats_manager.fetchLastCommit()
+            .then((data) => {
+            this.commits.textContent = `${data.count} commits`;
+        });
+        this.sidebar.manager.stats_manager.fetchRepoSize()
+            .then((e) => {
+            this.size.textContent = e;
+        });
     }
 }
 class PageContent {
