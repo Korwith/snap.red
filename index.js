@@ -682,6 +682,7 @@ class MainPhotoFigure {
         this.photo_people = document.createElement('span');
         this.photo_button_left = document.createElement('button');
         this.photo_button_right = document.createElement('button');
+        this.element.classList.add('large_photo');
         this.photo_info.classList.add('photo_info');
         this.photo_date.classList.add('photo_date');
         this.photo_people.classList.add('photo_people');

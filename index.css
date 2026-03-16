@@ -917,19 +917,19 @@ nav.sidebar button::before {
         border-radius: 0;
     }
 
-    .photo_holder figure {
+    .photo_holder figure.large_photo {
         min-width: 100vw;
         min-height: 100vw;
         max-width: 100vw;
         max-height: 100vw;
     }
 
-    .photo_holder figure::after {
+    .photo_holder figure.large_photo::after {
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
     }
 
-    .photo_holder figure .photo_info {
+    .photo_holder figure.large_photo .photo_info {
         border-top-left-radius: 0;
     }
 
@@ -943,6 +943,7 @@ nav.sidebar button::before {
     .photo_holder aside .related_pane .scroll figure {
         height: 150px;
         width: 150px;
+        border-radius: 10px;
     }
 
     .photo_holder aside .photo_header button.aside_close {
