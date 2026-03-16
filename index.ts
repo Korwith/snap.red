@@ -540,6 +540,8 @@ class ContentVideoHolder extends ContentFrame {
 
 class ContentPhotoHolder extends ContentFrame {
     user_images: PhotoDatabase;
+    skip_images: PhotoDatabase;
+
     loaded_images: number;
     complete: boolean;
 
@@ -550,6 +552,8 @@ class ContentPhotoHolder extends ContentFrame {
 
         this.loaded_images = 0;
         this.complete = false;
+        this.skip_images = {};
+
         this.loadFeaturedImages();
         this.loadImageBatch();
     }
@@ -565,7 +569,7 @@ class ContentPhotoHolder extends ContentFrame {
             this.figures.push(photo_figure);
 
             this.loaded_images++;
-            delete this.user_images[date];
+            this.skip_images[date] = entry;
         }
     }
 
@@ -575,7 +579,7 @@ class ContentPhotoHolder extends ContentFrame {
 
         for (var i = this.loaded_images; i < this.loaded_images + 9; i++) {
             let date: string = imageKeys[i];
-            if (!date) continue;
+            if (!date || this.skip_images[date]) continue;
             let photo_figure: MediaFigure = new PhotoSquare(this.content, date);
             photo_figure.setParent(this.element);
             this.figures.push(photo_figure);
