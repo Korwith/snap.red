@@ -22,7 +22,7 @@ const Data = {
         images: {
             '03/10/26': {
                 name: 'Weverton Cliffs',
-                id: ['DSCN2454', 'DSCN2452', 'DSCN2449', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
+                id: ['DSCN2449', 'DSCN2454', 'DSCN2452', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
                 people: ['Paris'],
             },
             '03/09/26': {
@@ -653,13 +653,9 @@ const Data = {
                 id: [3690, 3678, 3675]
             },
             '04/09/23': {
-                name: 'Amber Meadows & Downtown',
+                name: 'Downtown Frederick',
                 caption: 'Easter 2023, I walked 20 miles on this day.',
-                id: ['0410', '0415', '0591', '0595', '0602']
-            },
-            '04/08/23': {
-                name: 'Amber Meadows & Downtown',
-                id: ['0539', '0359', '0323', '0353', '0389', '0378']
+                id: ['0595', '0410', '0415', '0591', '0602']
             },
             '04/02/23': {
                 name: 'North Crossing',

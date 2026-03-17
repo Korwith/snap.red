@@ -509,7 +509,7 @@ nav.sidebar .statistics span {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    padding-top: 36px;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
@@ -517,21 +517,149 @@ nav.sidebar .statistics span {
     display: none;
 }
 
-.content_frame::before {
-    content: attr(title);
-    position: absolute;
-    top: 0;
-    left: 0;
+.content_frame .title {
+    order: -100;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
     color: white;
     font-weight: 900;
     font-size: 20px;
+    user-select: none;
+}
+
+.photo_filter {
+    display: flex;
+    gap: 10px;
+    order: -99;
+    width: calc(75% + 20px);
+    height: 35px;
+    z-index: 50;
+}
+
+.photo_filter .filter_option {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: fit-content;
+    background-color: #202020;
+    border: 1px solid #303030;
+    box-sizing: border-box;
+    border-radius: 12px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    font-size: 0.9rem;
+    overflow: hidden;
+}
+
+.photo_filter .filter_option.dropdown.open {
+    height: fit-content;
+    min-height: 35px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.photo_filter .filter_option.dropdown:not(.open) button:not(.display) {
+    display: none;
+}
+
+.photo_filter .filter_option:hover::before {
+    opacity: 1;
+}
+
+.photo_filter .filter_option button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-right: 10px;
+    min-height: 35px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.photo_filter .filter_option button:hover {
+    background-color: #303030;
+    color: white;
+}
+
+.photo_filter .filter_option button.display {
+    order: -1;
+}
+
+.photo_filter .filter_option button.display .icon {
+    content: '';
+    display: flex;
+    order: -1;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+    pointer-events: none;
+}
+
+.photo_filter .filter_option.active button.display .icon {
+    pointer-events: all;
+}
+
+.photo_filter .filter_option button.display:hover .icon {
+    opacity: 1;
+}
+
+.photo_filter .filter_option.filter button.display {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.photo_filter .filter_option.filter button.display .icon {
+    background-image: url(icon/filter.svg);
+    background-size: 80%;
+}
+
+.photo_filter .filter_option.location button.display .icon {
+    background-image: url(icon/location.svg);
+    background-size: 78%;
+}
+
+.photo_filter .filter_option.user button.display .icon {
+    background-image: url(icon/people.svg);
+}
+
+.photo_filter .filter_option.time button.display .icon {
+    background-image: url(icon/day.svg);
+    background-size: 84%;
+}
+
+.photo_filter .filter_option.active button.display:hover .icon {
+    background-image: url(icon/exit.svg);
+    background-size: 84%;
+}
+
+.photo_filter:has(.filter_option.active) .filter_option.filter {
+    background-color: white;
+    border-color: white;
+    color: #202020;
+}
+
+.photo_filter:has(.filter_option.active) .filter_option.filter button.display .icon {
+    filter: invert(1);
+    opacity: 1;
+}
+
+.photo_filter:has(.filter_option.active) .filter_option.filter button:hover {
+    background-color: #f0f0f0;
+    color: black;
 }
 
 .content_frame.content_video_holder .video_scroll {
@@ -553,7 +681,12 @@ nav.sidebar .statistics span {
     cursor: pointer;
     margin: 0;
     user-select: none;
-    transition: width 0.15s, height 0.15s;
+    transition: width 0.15s, height 0.15s, transform 0.15s;
+}
+
+.media_figure:hover {
+    transform: scale(105%);
+    z-index: 10;
 }
 
 .media_figure::after {
@@ -1000,5 +1133,22 @@ nav.sidebar .statistics span {
 
     .photo_square {
         width: calc(50% - 20px);
+    }
+
+    .photo_filter {
+        width: 100vw;
+        height: fit-content;
+        padding-left: 10px;
+        padding-right: 10px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .photo_filter * {
+        min-width: fit-content;
+    }
+
+    .photo_filter .display .icon {
+        min-width: 25px;
     }
 }

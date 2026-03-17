@@ -52,6 +52,30 @@ class PageManager {
     getUserSiteInfo() {
         return Data[this.user].card.site || null;
     }
+    getUserFeaturedPeople() {
+        let found = [];
+        let images = this.getUserImages();
+        for (let date in images) {
+            let entry = images[date];
+            if (!entry.people)
+                continue;
+            for (let person of entry.people) {
+                if (!found.includes(person))
+                    found.push(person);
+            }
+        }
+        return found.sort();
+    }
+    getUserLocations() {
+        let found = [];
+        let images = this.getUserImages();
+        for (let date in images) {
+            let entry = images[date];
+            if (!found.includes(entry.name))
+                found.push(entry.name);
+        }
+        return found.sort();
+    }
     getPhotoInfoFromDate(date) {
         return Data[this.user].images[date];
     }
@@ -543,14 +567,18 @@ class ProfileCardSite {
 }
 class ContentFrame {
     element;
+    title;
     content;
     figures;
     constructor(content, name) {
         this.element = document.createElement('div');
         this.element.classList.add('content_frame');
-        this.element.setAttribute('title', name);
+        this.title = document.createElement('span');
+        this.title.classList.add('title');
+        this.title.textContent = name;
         this.content = content;
         this.figures = [];
+        this.element.appendChild(this.title);
         content.element.appendChild(this.element);
     }
     clearMemory() {
@@ -588,12 +616,14 @@ class ContentVideoHolder extends ContentFrame {
 }
 class ContentPhotoHolder extends ContentFrame {
     user_images;
+    filter;
     loaded_images;
     complete;
     constructor(content) {
         super(content, 'Photos');
         this.element.classList.add('content_photo_holder');
         this.user_images = structuredClone(this.content.manager.getUserImages());
+        this.filter = new ContentPhotoFilter(this);
         this.loaded_images = 0;
         this.complete = false;
         this.loadFeaturedImages();
@@ -649,10 +679,291 @@ class ContentPhotoHolder extends ContentFrame {
     reload() {
         this.loaded_images = 0;
         this.complete = false;
-        this.user_images = structuredClone(this.content.manager.getUserImages());
+        this.user_images = this.filter.applyFilter(this.content.manager.getUserImages());
         this.clearMemory();
         this.loadFeaturedImages();
         this.loadImageBatch();
+    }
+}
+class ContentPhotoFilter {
+    element;
+    photo_holder;
+    filters;
+    active_dropdown;
+    constructor(photo_holder) {
+        this.element = document.createElement('div');
+        this.element.classList.add('photo_filter');
+        this.photo_holder = photo_holder;
+        this.filters = {};
+        this.filters.enable = new FilterOptionEnable(this);
+        this.filters.location = new FilterOptionLocation(this);
+        this.filters.person = new FilterOptionPerson(this);
+        this.filters.month = new FilterOptionMonth(this);
+        this.filters.year = new FilterOptionYear(this);
+        this.active_dropdown = null;
+        photo_holder.element.appendChild(this.element);
+    }
+    handleActiveDropdown(dropdown) {
+        if (dropdown == this.active_dropdown) {
+            dropdown.toggle(false);
+            this.active_dropdown = null;
+        }
+        else {
+            if (this.active_dropdown) {
+                this.active_dropdown.toggle(false);
+                this.active_dropdown = null;
+            }
+            dropdown.toggle(true);
+            this.active_dropdown = dropdown;
+        }
+    }
+    applyFilter(list) {
+        let match = list;
+        for (let filter in this.filters) {
+            let entry = this.filters[filter];
+            if (!entry.active)
+                continue;
+            match = entry.filterList(match);
+        }
+        return match;
+    }
+    disableAllFilters() {
+        for (let name in this.filters) {
+            if (name == 'enable')
+                continue;
+            let filter = this.filters[name];
+            filter.unSelectOption();
+        }
+    }
+}
+class FilterOption {
+    element;
+    filter_holder;
+    display;
+    active;
+    constructor(filter_holder) {
+        this.element = document.createElement('div');
+        this.element.classList.add('filter_option');
+        this.filter_holder = filter_holder;
+        this.active = false;
+        this.display = new FilterButtonDisplay(this);
+        filter_holder.element.appendChild(this.element);
+    }
+    setDisplayEntry(text) {
+        this.display.setText(text);
+    }
+}
+class FilterOptionDropdown extends FilterOption {
+    selected;
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.selected = null;
+        this.element.classList.add('dropdown');
+        this.element.onclick = (e) => this.toggleDropdown(e);
+    }
+    toggleDropdown(e) {
+        let event_target = e.target;
+        if (event_target.classList.contains('icon'))
+            return;
+        this.filter_holder.handleActiveDropdown(this);
+    }
+    toggle(force) {
+        this.element.classList.toggle('open', force);
+    }
+    propogateDropdown(list) {
+        for (let index in list) {
+            let name = list[index];
+            let button = new FilterButton(this);
+            button.setText(name);
+            button.setIndex(Number(index) + 1);
+        }
+    }
+    selectOption(button, e) {
+        if (button instanceof FilterButtonDisplay)
+            return;
+        this.element.classList.add('active');
+        this.active = true;
+        this.selected = button;
+        this.setDisplayEntry(this.selected.getText());
+        this.filter_holder.photo_holder.reload();
+    }
+    unSelectOption() {
+        this.element.classList.remove('active');
+        this.setDisplayEntry(this.getLabel() || 'Error');
+        this.active = false;
+        this.selected = null;
+        this.filter_holder.photo_holder.reload();
+    }
+    getLabel() {
+        return this.element.getAttribute('label');
+    }
+}
+class FilterButton {
+    element;
+    text_label;
+    option;
+    constructor(dropdown) {
+        this.element = document.createElement('button');
+        this.element.classList.add('dropdown_button');
+        this.element.onclick = (e) => this.click(e);
+        this.text_label = document.createElement('span');
+        this.text_label.classList.add('text_label');
+        this.element.appendChild(this.text_label);
+        this.option = dropdown;
+        this.option.element.appendChild(this.element);
+    }
+    click(e) {
+        this.option.selectOption(this, e);
+    }
+    setIndex(index) {
+        this.element.setAttribute('index', index.toString());
+    }
+    setText(text) {
+        this.text_label.textContent = text || '';
+    }
+    getText() {
+        return this.text_label.textContent;
+    }
+}
+class FilterButtonDisplay extends FilterButton {
+    icon_button;
+    constructor(dropdown) {
+        super(dropdown); // fix l8r
+        this.element.classList.add('display');
+        this.icon_button = document.createElement('div');
+        this.icon_button.classList.add('icon');
+        this.element.appendChild(this.icon_button);
+    }
+    click(e) {
+        let target_element = e.target;
+        if (this.option.selected && target_element == this.icon_button) {
+            this.option.unSelectOption();
+        }
+    }
+}
+class FilterOptionTime extends FilterOptionDropdown {
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.classList.add('time');
+    }
+}
+class FilterOptionEnable extends FilterOption {
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.onclick = () => this.filter_holder.disableAllFilters();
+        this.element.classList.add('filter');
+    }
+    filterList(photos) {
+        return photos;
+    }
+}
+class FilterOptionLocation extends FilterOptionDropdown {
+    locations;
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.classList.add('location');
+        this.element.setAttribute('label', 'Location');
+        this.locations = this.filter_holder.photo_holder.content.manager.getUserLocations();
+        this.setDisplayEntry('Location');
+        this.propogateDropdown(this.locations);
+    }
+    filterList(photos) {
+        let match = {};
+        if (!this.selected)
+            return photos;
+        for (let date in photos) {
+            let entry = photos[date];
+            if (entry.name != this.selected.getText())
+                continue;
+            match[date] = entry;
+        }
+        return match;
+    }
+}
+class FilterOptionPerson extends FilterOptionDropdown {
+    people;
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.classList.add('user');
+        this.element.setAttribute('label', 'Person');
+        this.people = this.filter_holder.photo_holder.content.manager.getUserFeaturedPeople();
+        this.setDisplayEntry('Person');
+        this.propogateDropdown(this.people);
+    }
+    filterList(photos) {
+        let match = {};
+        if (!this.selected)
+            return photos;
+        for (let date in photos) {
+            let entry = photos[date];
+            if (!entry.people)
+                continue;
+            if (entry.people.includes(this.selected.getText())) {
+                match[date] = entry;
+            }
+        }
+        return match;
+    }
+}
+class FilterOptionMonth extends FilterOptionTime {
+    months;
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.classList.add('month');
+        this.element.setAttribute('label', 'Month');
+        this.months = this.createMonthList();
+        this.setDisplayEntry('Month');
+        this.propogateDropdown(this.months);
+    }
+    createMonthList() {
+        let months = [];
+        for (var i = 0; i < 12; i++) {
+            let date = new Date(0, i, 1);
+            months.push(date.toLocaleDateString(undefined, { month: 'long' }));
+        }
+        return months;
+    }
+    filterList(photos) {
+        let match = {};
+        for (let date in photos) {
+            let entry = photos[date];
+            let split = date.split('/');
+            let check_index = this.selected?.element.getAttribute('index');
+            if (!check_index)
+                continue;
+            if (split[0] == check_index.padStart(2, '0'))
+                match[date] = entry;
+        }
+        return match;
+    }
+}
+class FilterOptionYear extends FilterOptionTime {
+    years;
+    constructor(filter_holder) {
+        super(filter_holder);
+        this.element.classList.add('year');
+        this.element.setAttribute('label', 'Year');
+        this.years = this.createYearList();
+        this.setDisplayEntry('Year');
+        this.propogateDropdown(this.years);
+    }
+    createYearList() {
+        let years = [];
+        let count = this.filter_holder.photo_holder.content.manager.countImages();
+        for (let year in count) {
+            years.push('20' + year);
+        }
+        return years;
+    }
+    filterList(photos) {
+        let match = {};
+        for (let date in photos) {
+            let entry = photos[date];
+            let split = date.split('/');
+            if (this.selected?.getText() == '20' + split[2])
+                match[date] = entry;
+        }
+        return match;
     }
 }
 class MediaFigure {
@@ -780,6 +1091,7 @@ class MainPhotoFigure {
     photo_button_right;
     photo_close;
     photo_index;
+    images;
     constructor(photo_holder) {
         this.photo_holder = photo_holder;
         this.element = document.createElement('figure');
@@ -800,6 +1112,7 @@ class MainPhotoFigure {
         this.photo_close.classList.add('photo_close');
         this.photo_close.onclick = () => this.photo_holder.closeMenu();
         this.photo_index = 0;
+        this.images = [];
         this.photo_info.appendChild(this.photo_date);
         this.photo_info.appendChild(this.photo_people);
         this.element.appendChild(this.photo_info);
@@ -814,11 +1127,11 @@ class MainPhotoFigure {
         this.photo_date.textContent = '';
         this.photo_people.textContent = '';
         this.photo_people.classList.add('hide');
-        let previous_images = this.element.querySelectorAll('img');
-        for (let image of previous_images) {
+        for (let image of this.images) {
             image.onload = null;
             image.remove();
         }
+        this.images = [];
     }
     showImage(date) {
         this.refresh();
@@ -834,6 +1147,7 @@ class MainPhotoFigure {
             image.onload = (e) => this.imageLoaded(e);
             image.setAttribute('src', `media/${this.photo_holder.manager.user}/IMG_${id}.jpg`);
             image.style.left = `${i * 100}%`;
+            this.images.push(image);
             this.element.appendChild(image);
         }
     }
@@ -950,6 +1264,7 @@ class RelatedPhotosPane {
             for (var date in found_images) {
                 let photo_figure = new PhotoSquare(this.aside.photo_holder.manager.content, date);
                 photo_figure.setParent(this.scroll_element);
+                this.all_figures.push(photo_figure);
             }
             this.aside.inner_element.appendChild(this.element);
         }

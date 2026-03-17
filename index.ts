@@ -67,6 +67,34 @@ class PageManager {
         return Data[this.user].card.site || null;
     }
 
+    public getUserFeaturedPeople(): string[] {
+        let found: string[] = [];
+        let images: PhotoDatabase = this.getUserImages();
+
+        for (let date in images) {
+            let entry: PhotoEntry = images[date];
+            if (!entry.people) continue;
+
+            for (let person of entry.people) {
+                if (!found.includes(person)) found.push(person);
+            }
+        }
+
+        return found.sort();
+    }
+
+    public getUserLocations(): string[] {
+        let found: string[] = [];
+        let images: PhotoDatabase = this.getUserImages();
+
+        for (let date in images) {
+            let entry: PhotoEntry = images[date];
+            if (!found.includes(entry.name)) found.push(entry.name);
+        }
+
+        return found.sort();
+    }
+
     public getPhotoInfoFromDate(date: string): PhotoEntry | null {
         return Data[this.user].images[date];
     }
@@ -659,17 +687,21 @@ class ProfileCardSite {
 
 abstract class ContentFrame {
     element: HTMLElement;
+    title: HTMLElement;
     content: PageContent;
     figures: MediaFigure[];
 
     constructor(content: PageContent, name: string) {
         this.element = document.createElement('div');
         this.element.classList.add('content_frame')
-        this.element.setAttribute('title', name);
+        this.title = document.createElement('span');
+        this.title.classList.add('title');
+        this.title.textContent = name;
 
         this.content = content;
         this.figures = [];
 
+        this.element.appendChild(this.title);
         content.element.appendChild(this.element);
     }
 
@@ -715,6 +747,7 @@ class ContentVideoHolder extends ContentFrame {
 
 class ContentPhotoHolder extends ContentFrame {
     user_images: PhotoDatabase;
+    filter: ContentPhotoFilter;
 
     loaded_images: number;
     complete: boolean;
@@ -723,6 +756,7 @@ class ContentPhotoHolder extends ContentFrame {
         super(content, 'Photos');
         this.element.classList.add('content_photo_holder');
         this.user_images = structuredClone(this.content.manager.getUserImages());
+        this.filter = new ContentPhotoFilter(this);
 
         this.loaded_images = 0;
         this.complete = false;
@@ -786,11 +820,355 @@ class ContentPhotoHolder extends ContentFrame {
     public reload(): void {
         this.loaded_images = 0;
         this.complete = false;
-        this.user_images = structuredClone(this.content.manager.getUserImages());
+        this.user_images = this.filter.applyFilter(this.content.manager.getUserImages());
 
         this.clearMemory();
         this.loadFeaturedImages();
         this.loadImageBatch();
+    }
+}
+
+interface FilterDictionary {
+    [name: string]: FilterOption;
+}
+
+class ContentPhotoFilter {
+    element: HTMLElement;
+    photo_holder: ContentPhotoHolder;
+    filters: FilterDictionary;
+
+    active_dropdown: FilterOptionDropdown | null;
+
+    constructor(photo_holder: ContentPhotoHolder) {
+        this.element = document.createElement('div');
+        this.element.classList.add('photo_filter');
+        this.photo_holder = photo_holder;
+
+        this.filters = {};
+        this.filters.enable = new FilterOptionEnable(this);
+        this.filters.location = new FilterOptionLocation(this);
+        this.filters.person = new FilterOptionPerson(this);
+        this.filters.month = new FilterOptionMonth(this);
+        this.filters.year = new FilterOptionYear(this);
+
+        this.active_dropdown = null;
+        photo_holder.element.appendChild(this.element);
+    }
+
+    public handleActiveDropdown(dropdown: FilterOptionDropdown): void {
+        if (dropdown == this.active_dropdown) {
+            dropdown.toggle(false);
+            this.active_dropdown = null;
+        } else {
+            if (this.active_dropdown) {
+                this.active_dropdown.toggle(false);
+                this.active_dropdown = null;
+            }
+            dropdown.toggle(true);
+            this.active_dropdown = dropdown;
+        }
+    }
+
+    public applyFilter(list: PhotoDatabase): PhotoDatabase {
+        let match: PhotoDatabase = list;
+
+        for (let filter in this.filters) {
+            let entry: FilterOption = this.filters[filter];
+            if (!entry.active) continue;
+            match = entry.filterList(match);
+        }
+
+        return match;
+    }
+
+    public disableAllFilters(): void {
+        for (let name in this.filters) {
+            if (name == 'enable') continue;
+            let filter = this.filters[name] as FilterOptionDropdown;
+            filter.unSelectOption();
+        }
+    }
+}
+
+abstract class FilterOption {
+    element: HTMLElement;
+    filter_holder: ContentPhotoFilter;
+
+    display: FilterButtonDisplay;
+    active: boolean;
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        this.element = document.createElement('div');
+        this.element.classList.add('filter_option');
+        this.filter_holder = filter_holder;
+        this.active = false;
+
+        this.display = new FilterButtonDisplay(this);
+        filter_holder.element.appendChild(this.element);
+    }
+
+    protected setDisplayEntry(text: string): void {
+        this.display.setText(text);
+    }
+
+    public abstract filterList(photos: PhotoDatabase): PhotoDatabase;
+}
+
+abstract class FilterOptionDropdown extends FilterOption {
+    selected: FilterButton | null;
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.selected = null;
+        this.element.classList.add('dropdown');
+        this.element.onclick = (e: PointerEvent) => this.toggleDropdown(e);
+    }
+
+    protected toggleDropdown(e: PointerEvent): void {
+        let event_target: HTMLElement = e.target as HTMLElement;
+        if (event_target.classList.contains('icon')) return;
+        this.filter_holder.handleActiveDropdown(this);
+    }
+
+    public toggle(force: boolean): void {
+        this.element.classList.toggle('open', force);
+    }
+
+    protected propogateDropdown(list: string[]) {
+        for (let index in list) {
+            let name = list[index];
+            let button = new FilterButton(this);
+            button.setText(name);
+            button.setIndex(Number(index) + 1);
+        }
+    }
+
+    public selectOption(button: FilterButton, e: PointerEvent) {
+        if (button instanceof FilterButtonDisplay) return;
+        this.element.classList.add('active');
+        this.active = true;
+        this.selected = button;
+        this.setDisplayEntry(this.selected.getText());
+        
+        this.filter_holder.photo_holder.reload();
+    }
+
+    public unSelectOption() {
+        this.element.classList.remove('active');
+        this.setDisplayEntry(this.getLabel() || 'Error');
+        this.active = false;
+        this.selected = null;
+
+        this.filter_holder.photo_holder.reload();
+    }
+
+    protected getLabel(): string | null {
+        return this.element.getAttribute('label');
+    }
+}
+
+class FilterButton {
+    element: HTMLElement;
+    text_label: HTMLElement;
+    option: FilterOptionDropdown;
+
+    constructor(dropdown: FilterOptionDropdown) {
+        this.element = document.createElement('button');
+        this.element.classList.add('dropdown_button');
+        this.element.onclick = (e: PointerEvent) => this.click(e);
+
+        this.text_label = document.createElement('span');
+        this.text_label.classList.add('text_label');
+        this.element.appendChild(this.text_label);
+
+        this.option = dropdown;
+        this.option.element.appendChild(this.element);
+    }
+
+    public click(e: PointerEvent): void {
+        this.option.selectOption(this, e);
+    }
+
+    public setIndex(index: number): void {
+        this.element.setAttribute('index', index.toString());
+    }
+
+    public setText(text: string | null): void {
+        this.text_label.textContent = text || '';
+    }
+
+    public getText(): string {
+        return this.text_label.textContent;
+    }
+}
+
+class FilterButtonDisplay extends FilterButton {
+    icon_button: HTMLElement;
+    
+    constructor(dropdown: FilterOption) {
+        super(dropdown as FilterOptionDropdown); // fix l8r
+        this.element.classList.add('display');
+
+        this.icon_button = document.createElement('div');
+        this.icon_button.classList.add('icon');
+        this.element.appendChild(this.icon_button);
+    }
+
+    public click(e: PointerEvent): void {
+        let target_element = e.target as HTMLElement;
+
+        if (this.option.selected && target_element == this.icon_button) {
+            this.option.unSelectOption();
+        }
+    }
+}
+
+abstract class FilterOptionTime extends FilterOptionDropdown {
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.classList.add('time');
+    }
+}
+
+class FilterOptionEnable extends FilterOption {
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.onclick = () => this.filter_holder.disableAllFilters();
+        this.element.classList.add('filter');
+    }
+
+    public filterList(photos: PhotoDatabase) {
+        return photos;
+    }
+}
+
+class FilterOptionLocation extends FilterOptionDropdown {
+    locations: string[];
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.classList.add('location');
+        this.element.setAttribute('label', 'Location');
+        this.locations = this.filter_holder.photo_holder.content.manager.getUserLocations();
+
+        this.setDisplayEntry('Location');
+        this.propogateDropdown(this.locations);
+    }
+
+    public filterList(photos: PhotoDatabase): PhotoDatabase {
+        let match: PhotoDatabase = {};
+        if (!this.selected) return photos;
+
+        for (let date in photos) {
+            let entry: PhotoEntry = photos[date];
+            if (entry.name != this.selected.getText()) continue;
+            match[date] = entry;
+        }
+
+        return match;
+    }
+}
+
+class FilterOptionPerson extends FilterOptionDropdown {
+    people: string[];
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.classList.add('user');
+        this.element.setAttribute('label', 'Person');
+        this.people = this.filter_holder.photo_holder.content.manager.getUserFeaturedPeople();
+
+        this.setDisplayEntry('Person');
+        this.propogateDropdown(this.people);
+    }
+
+    public filterList(photos: PhotoDatabase): PhotoDatabase {
+        let match: PhotoDatabase = {};
+        if (!this.selected) return photos;
+
+        for (let date in photos) {
+            let entry: PhotoEntry = photos[date];
+            if (!entry.people) continue;
+            if (entry.people.includes(this.selected.getText())) {
+                match[date] = entry;
+            }
+        }
+
+        return match;
+    }
+}
+
+class FilterOptionMonth extends FilterOptionTime {
+    months: string[];
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.classList.add('month');
+        this.element.setAttribute('label', 'Month');
+        this.months = this.createMonthList();
+
+        this.setDisplayEntry('Month');
+        this.propogateDropdown(this.months);
+    }
+
+    private createMonthList(): string[] {
+        let months = [];
+        for (var i = 0; i < 12; i++) {
+            let date = new Date(0, i, 1);
+            months.push(date.toLocaleDateString(undefined, { month: 'long' }));
+        }
+        return months;
+    }
+
+    public filterList(photos: PhotoDatabase): PhotoDatabase {
+        let match: PhotoDatabase = {};
+
+        for (let date in photos) {
+            let entry: PhotoEntry = photos[date];
+            let split: string[] = date.split('/');
+            let check_index: string | null | undefined = this.selected?.element.getAttribute('index');
+            if (!check_index) continue;
+
+            if (split[0] == check_index.padStart(2, '0')) match[date] = entry;
+        }
+
+        return match;
+    }
+}
+
+class FilterOptionYear extends FilterOptionTime {
+    years: string[];
+
+    constructor(filter_holder: ContentPhotoFilter) {
+        super(filter_holder);
+        this.element.classList.add('year');
+        this.element.setAttribute('label', 'Year');
+        this.years = this.createYearList();
+
+        this.setDisplayEntry('Year');
+        this.propogateDropdown(this.years)
+    }
+
+    private createYearList(): string[] {
+        let years: string[] = [];
+        let count: DateCounter = this.filter_holder.photo_holder.content.manager.countImages();
+        for (let year in count) {
+            years.push('20' + year);
+        }
+
+        return years;
+    }
+
+    public filterList(photos: PhotoDatabase): PhotoDatabase {
+        let match: PhotoDatabase = {};
+
+        for (let date in photos) {
+            let entry: PhotoEntry = photos[date];
+            let split: string[] = date.split('/');
+            if (this.selected?.getText() == '20' + split[2]) match[date] = entry;
+        }
+
+        return match;
     }
 }
 
@@ -1101,7 +1479,7 @@ class MainPhotoAside {
             }
         }
 
-       this.related_frames.push(new RelatedMonthPane(this, date));
+        this.related_frames.push(new RelatedMonthPane(this, date));
     }
 
     public refresh(): void {
