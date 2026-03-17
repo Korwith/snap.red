@@ -156,12 +156,11 @@ class UserSelector {
         }
 
         let all_buttons: NodeListOf<HTMLElement> = this.element.querySelectorAll('button');
-        for (var i = 0; i < all_buttons.length; i++) {
-            let this_button: HTMLElement = all_buttons[i];
-            let user: string | null = this_button.getAttribute('name');
+        for (let button of all_buttons) {
+            let user: string | null = button.getAttribute('name');
             if (!user) continue;
-            if (user == targetUser) this_button.style.order = '-1'
-            else this_button.style.order = 'unset';
+            if (user == targetUser) button.style.order = '-1'
+            else button.style.order = 'unset';
         }
 
         this.element.classList.remove('display');
@@ -226,8 +225,7 @@ class SidebarButtonHolder {
         let imageCount: DateCounter = this.sidebar.manager.countImages();
         let yearKeys = Object.keys(imageCount).reverse();
 
-        for (var i = 0; i < yearKeys.length; i++) {
-            let year: string = yearKeys[i];
+        for (let year of yearKeys) {
             let yearNum: number = Number(year);
             let yearSection: SidebarYearSection = new SidebarYearSection(this, yearNum);
             this.year_sections.push(yearSection);
@@ -237,9 +235,8 @@ class SidebarButtonHolder {
 
     private clearPrevious(): void {
         this.profile_button.remove();
-        for (var i = 0; i < this.year_sections.length; i++) {
-            let this_section: SidebarYearSection = this.year_sections[i];
-            this_section.remove();
+        for (let section of this.year_sections) {
+            section.remove();
         }
         this.year_sections = [];
     }
@@ -297,9 +294,8 @@ class SidebarYearSection {
     }
 
     public remove(): void {
-        for (var i = 0; i < this.sidebar_buttons.length; i++) {
-            let this_button: SidebarButton = this.sidebar_buttons[i];
-            this_button.remove();
+        for (let button of this.sidebar_buttons) {
+            button.remove();
         }
         this.element.remove();
     }
@@ -323,6 +319,7 @@ abstract class SidebarButton {
     protected abstract clicked(): void;
 
     public remove(): void {
+        this.element.onclick = null;
         this.element.remove();
     }
 }
@@ -511,7 +508,6 @@ class ProfileCardName {
         this.text_holder = document.createElement('div')
         this.text_name = document.createElement('span');
         this.text_blurb = document.createElement('span');
-        this.text_name = document.createElement('span');
 
         this.icon.classList.add('icon');
         this.text_holder.classList.add('text_holder');
@@ -565,9 +561,8 @@ class ProfileCardSocialRow {
     }
 
     private clearMemory() {
-        for (var i = 0; i < this.social_icons.length; i++) {
-            let this_button: SocialMediaIcon = this.social_icons[i];
-            this_button.element.remove();
+        for (let button of this.social_icons) {
+            button.element.remove();
         }
         this.social_icons = [];
     }
@@ -679,9 +674,9 @@ abstract class ContentFrame {
     }
 
     protected clearMemory(): void {
-        for (var i = 0; i < this.figures.length; i++) {
-            let this_figure: MediaFigure = this.figures[i];
-            this_figure.element.remove();
+        for (let figure of this.figures) {
+            figure.image.onload = null;
+            figure.element.remove();
         }
         this.figures = [];
     }
@@ -765,18 +760,18 @@ class ContentPhotoHolder extends ContentFrame {
         this.loaded_images += 9;
         if (this.loaded_images >= Object.keys(this.user_images).length) {
             this.complete = true;
+            this.loaded_images = Object.keys(this.user_images).length;
         }
     }
 
     public getFigureByMonth(year: number, month: number): PhotoSquare | null {
-        for (var i = 0; i < this.figures.length; i++) {
-            let found_figure: MediaFigure = this.figures[i];
-            let date_split = found_figure.date.split('/');
+        for (let figure of this.figures) {
+            let date_split = figure.date.split('/');
             let found_month = Number(date_split[0]);
             let found_year = Number(date_split[2]);
 
             if (found_year == year && found_month == month) {
-                return found_figure as PhotoSquare;
+                return figure as PhotoSquare;
             }
         }
 
@@ -835,6 +830,7 @@ abstract class MediaFigure {
     }
 
     protected imageLoaded(): void {
+        this.image.onload = null;
         this.element.classList.remove('loading');
     }
 
@@ -845,6 +841,11 @@ abstract class MediaFigure {
     public setFeatured(order: number): void {
         this.element.classList.add('featured');
         this.element.style.order = (-order).toString();
+    }
+
+    public remove(): void {
+        this.element.onload = null;
+        this.element.remove();
     }
 }
 
@@ -949,6 +950,7 @@ class MainPhotoFigure {
     photo_close: HTMLElement;
 
     photo_index: number;
+    images: HTMLElement[];
 
     constructor(photo_holder: MainPhotoHolder) {
         this.photo_holder = photo_holder;
@@ -975,6 +977,7 @@ class MainPhotoFigure {
         this.photo_close.onclick = () => this.photo_holder.closeMenu();
 
         this.photo_index = 0;
+        this.images = [];
 
         this.photo_info.appendChild(this.photo_date);
         this.photo_info.appendChild(this.photo_people);
@@ -994,17 +997,18 @@ class MainPhotoFigure {
         this.photo_people.textContent = '';
         this.photo_people.classList.add('hide');
 
-        let previous_images: NodeListOf<HTMLElement> = this.element.querySelectorAll('img');
-        for (var i = 0; i < previous_images.length; i++) {
-            previous_images[i].remove();
+        for (let image of this.images) {
+            image.onload = null;
+            image.remove();
         }
+        this.images = [];
     }
 
     public showImage(date: string): void {
         this.refresh();
         this.element.classList.remove('hide');
 
-        let date_info = Data[this.photo_holder.manager.user].images[date];
+        let date_info: PhotoEntry = Data[this.photo_holder.manager.user].images[date];
         this.photo_date.textContent = date;
         this.photo_people.textContent = date_info.people?.join(', ') || '';
         this.photo_people.classList.toggle('hide', !(date_info.people instanceof Array))
@@ -1012,8 +1016,11 @@ class MainPhotoFigure {
         for (var i = 0; i < date_info.id.length; i++) {
             let id = date_info.id[i];
             let image: HTMLElement = document.createElement('img');
+            image.classList.add('loading');
+            image.onload = (e: Event) => this.imageLoaded(e);
             image.setAttribute('src', `media/${this.photo_holder.manager.user}/IMG_${id}.jpg`);
             image.style.left = `${i * 100}%`;
+            this.images.push(image);
             this.element.appendChild(image);
         }
     }
@@ -1031,6 +1038,12 @@ class MainPhotoFigure {
             this_image.style.left = `${difference * 100}%`;
         }
         this.photo_index = new_offset;
+    }
+
+    private imageLoaded(e: Event): void {
+        let image: HTMLElement = e.target as HTMLElement;
+        image.onload = null;
+        image.classList.remove('loading');
     }
 }
 
@@ -1083,8 +1096,7 @@ class MainPhotoAside {
         this.related_frames.push(new RelatedLocationPane(this, date));
 
         if (photo_info.people) {
-            for (var i in photo_info.people) {
-                let person: string = photo_info.people[i];
+            for (let person of photo_info.people) {
                 this.related_frames.push(new RelatedPersonPane(this, date, person));
             }
         }
@@ -1094,9 +1106,8 @@ class MainPhotoAside {
 
     public refresh(): void {
         this.location.textContent = '';
-        for (var i = 0; i < this.related_frames.length; i++) {
-            let this_frame: RelatedPhotosPane = this.related_frames[i];
-            this_frame.remove();
+        for (let frame of this.related_frames) {
+            frame.remove();
         }
         this.related_frames = [];
     }
@@ -1112,6 +1123,7 @@ abstract class RelatedPhotosPane {
     origin_date: string;
     origin_photo_entry: PhotoEntry;
     all_images: PhotoDatabase;
+    all_figures: MediaFigure[];
 
     constructor(aside: MainPhotoAside, origin_date: string) {
         this.element = document.createElement('div');
@@ -1127,6 +1139,7 @@ abstract class RelatedPhotosPane {
         this.element.appendChild(this.scroll_element);
 
         this.origin_date = origin_date;
+        this.all_figures = [];
         let origin_photo_entry: PhotoEntry | null = this.manager.getPhotoInfoFromDate(origin_date);
         let all_images: PhotoDatabase | null = this.manager.getUserImages();
         if (!origin_photo_entry) throw new Error('Error fetching origin Data!');
@@ -1146,12 +1159,17 @@ abstract class RelatedPhotosPane {
             for (var date in found_images) {
                 let photo_figure: MediaFigure = new PhotoSquare(this.aside.photo_holder.manager.content, date);
                 photo_figure.setParent(this.scroll_element);
+                this.all_figures.push(photo_figure);
             }
             this.aside.inner_element.appendChild(this.element);
         }
     }
 
     public remove() {
+        for (var figure of this.all_figures) {
+            figure.remove();
+        }
+        this.all_figures = [];
         this.element.remove();
     }
 }
