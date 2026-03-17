@@ -290,7 +290,8 @@ class SidebarYearSection {
         let yearList = imageCount[this.year.toString()];
 
         for (var month in yearList) {
-            let sidebarButton: SidebarButton = new SidebarMonthButton(this, Number(month));
+            let sidebarButton: SidebarMonthButton = new SidebarMonthButton(this, Number(month));
+            sidebarButton.setMonthCount(yearList[month]);
             this.sidebar_buttons.push(sidebarButton);
         }
     }
@@ -918,19 +919,19 @@ class MainPhotoHolder {
     }
 
     public showImage(date: string): void {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.remove('hide');
         this.photo_figure.showImage(date);
         this.photo_aside.showInfo(date);
     }
 
-    private clearPrevious(): void {
-        this.photo_figure.clearPrevious();
-        this.photo_aside.clearPrevious();
+    private refresh(): void {
+        this.photo_figure.refresh();
+        this.photo_aside.refresh();
     }
 
     public closeMenu(): void {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.add('hide');
     }
 
@@ -984,7 +985,7 @@ class MainPhotoFigure {
         photo_holder.element.appendChild(this.element);
     }
 
-    public clearPrevious(): void {
+    public refresh(): void {
         this.element.classList = 'large_figure hide_left_button';
 
         this.photo_index = 0;
@@ -1000,7 +1001,7 @@ class MainPhotoFigure {
     }
 
     public showImage(date: string): void {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.remove('hide');
 
         let date_info = Data[this.photo_holder.manager.user].images[date];
@@ -1041,9 +1042,12 @@ class MainPhotoAside {
     header: HTMLElement;
     location: HTMLElement;
     aside_close: HTMLElement;
+    related_frames: RelatedPhotosPane[];
 
     constructor(photo_holder: MainPhotoHolder) {
         this.photo_holder = photo_holder;
+        this.related_frames = [];
+
         this.element = document.createElement('aside');
         this.inner_element = document.createElement('div');
         this.inner_element.classList.add('inner_aside')
@@ -1076,21 +1080,25 @@ class MainPhotoAside {
     private createRelatedPanes(date: string) {
         let photo_info: PhotoEntry | null = this.photo_holder.manager.getPhotoInfoFromDate(date);
         if (!photo_info) throw new Error('Photo info not found!');
-        new RelatedLocationPane(this, date);
+        this.related_frames.push(new RelatedLocationPane(this, date));
 
         if (photo_info.people) {
             for (var i in photo_info.people) {
                 let person: string = photo_info.people[i];
-                new RelatedPersonPane(this, date, person);
+                this.related_frames.push(new RelatedPersonPane(this, date, person));
             }
         }
 
-        new RelatedMonthPane(this, date);
+       this.related_frames.push(new RelatedMonthPane(this, date));
     }
 
-    public clearPrevious(): void {
+    public refresh(): void {
         this.location.textContent = '';
-        this.inner_element.innerHTML = '';
+        for (var i = 0; i < this.related_frames.length; i++) {
+            let this_frame: RelatedPhotosPane = this.related_frames[i];
+            this_frame.remove();
+        }
+        this.related_frames = [];
     }
 }
 
@@ -1141,6 +1149,10 @@ abstract class RelatedPhotosPane {
             }
             this.aside.inner_element.appendChild(this.element);
         }
+    }
+
+    public remove() {
+        this.element.remove();
     }
 }
 

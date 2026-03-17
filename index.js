@@ -241,6 +241,7 @@ class SidebarYearSection {
         let yearList = imageCount[this.year.toString()];
         for (var month in yearList) {
             let sidebarButton = new SidebarMonthButton(this, Number(month));
+            sidebarButton.setMonthCount(yearList[month]);
             this.sidebar_buttons.push(sidebarButton);
         }
     }
@@ -755,17 +756,17 @@ class MainPhotoHolder {
         document.body.appendChild(this.element);
     }
     showImage(date) {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.remove('hide');
         this.photo_figure.showImage(date);
         this.photo_aside.showInfo(date);
     }
-    clearPrevious() {
-        this.photo_figure.clearPrevious();
-        this.photo_aside.clearPrevious();
+    refresh() {
+        this.photo_figure.refresh();
+        this.photo_aside.refresh();
     }
     closeMenu() {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.add('hide');
     }
 }
@@ -807,7 +808,7 @@ class MainPhotoFigure {
         this.element.appendChild(this.photo_button_right);
         photo_holder.element.appendChild(this.element);
     }
-    clearPrevious() {
+    refresh() {
         this.element.classList = 'large_figure hide_left_button';
         this.photo_index = 0;
         this.photo_date.textContent = '';
@@ -819,7 +820,7 @@ class MainPhotoFigure {
         }
     }
     showImage(date) {
-        this.clearPrevious();
+        this.refresh();
         this.element.classList.remove('hide');
         let date_info = Data[this.photo_holder.manager.user].images[date];
         this.photo_date.textContent = date;
@@ -855,8 +856,10 @@ class MainPhotoAside {
     header;
     location;
     aside_close;
+    related_frames;
     constructor(photo_holder) {
         this.photo_holder = photo_holder;
+        this.related_frames = [];
         this.element = document.createElement('aside');
         this.inner_element = document.createElement('div');
         this.inner_element.classList.add('inner_aside');
@@ -884,18 +887,22 @@ class MainPhotoAside {
         let photo_info = this.photo_holder.manager.getPhotoInfoFromDate(date);
         if (!photo_info)
             throw new Error('Photo info not found!');
-        new RelatedLocationPane(this, date);
+        this.related_frames.push(new RelatedLocationPane(this, date));
         if (photo_info.people) {
             for (var i in photo_info.people) {
                 let person = photo_info.people[i];
-                new RelatedPersonPane(this, date, person);
+                this.related_frames.push(new RelatedPersonPane(this, date, person));
             }
         }
-        new RelatedMonthPane(this, date);
+        this.related_frames.push(new RelatedMonthPane(this, date));
     }
-    clearPrevious() {
+    refresh() {
         this.location.textContent = '';
-        this.inner_element.innerHTML = '';
+        for (var i = 0; i < this.related_frames.length; i++) {
+            let this_frame = this.related_frames[i];
+            this_frame.remove();
+        }
+        this.related_frames = [];
     }
 }
 class RelatedPhotosPane {
@@ -938,6 +945,9 @@ class RelatedPhotosPane {
             }
             this.aside.inner_element.appendChild(this.element);
         }
+    }
+    remove() {
+        this.element.remove();
     }
 }
 class RelatedLocationPane extends RelatedPhotosPane {
