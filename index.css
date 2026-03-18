@@ -315,7 +315,6 @@ nav.sidebar .statistics span {
     height: calc(100dvh - 50px);
     background-color: black;
     overflow-y: auto;
-    overflow-x: hidden;
     transition: left 0.2s, width 0.2s;
 }
 
@@ -531,25 +530,11 @@ nav.sidebar .statistics span {
     user-select: none;
 }
 
-.content_photo_holder .title {
-    position: absolute;
-    left: 0;
-    top: 10px;
-}
-
-.content_photo_holder {
-    padding-top: 90px;
-}
-
 .photo_filter {
-    position: absolute;
     display: flex;
     gap: 10px;
     order: -99;
     width: calc(75% + 20px);
-    left: 50%;
-    top: 40px;
-    transform: translateX(-50%);
     height: 35px;
     z-index: 50;
 }
@@ -1151,14 +1136,12 @@ nav.sidebar .statistics span {
     }
 
     .photo_filter {
-        width: calc(100vw - 20px);
+        width: 100vw;
         height: fit-content;
         padding-left: 10px;
         padding-right: 10px;
         overflow-x: auto;
         scrollbar-width: none;
-        transform: unset;
-        left: 0;
     }
 
     .photo_filter * {
