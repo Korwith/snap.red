@@ -646,6 +646,14 @@ nav.sidebar .statistics span {
     background-size: 84%;
 }
 
+.photo_filter .filter_option.filter {
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.photo_filter .filter_option.filter .icon {
+    transition: filter 0.15s;
+}
+
 .photo_filter:has(.filter_option.active) .filter_option.filter {
     background-color: white;
     border-color: white;
