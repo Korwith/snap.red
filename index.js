@@ -679,7 +679,7 @@ class ContentPhotoHolder extends ContentFrame {
     reload() {
         this.loaded_images = 0;
         this.complete = false;
-        this.user_images = this.filter.applyFilter(this.content.manager.getUserImages());
+        this.user_images = structuredClone(this.filter.applyFilter(this.content.manager.getUserImages()));
         this.clearMemory();
         this.loadFeaturedImages();
         this.loadImageBatch();
