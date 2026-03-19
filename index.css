@@ -590,10 +590,6 @@ nav.sidebar .statistics span {
     color: white;
 }
 
-.photo_filter .filter_option button.display {
-    order: -1;
-}
-
 .photo_filter .filter_option button.display .icon {
     content: '';
     display: flex;
@@ -618,8 +614,30 @@ nav.sidebar .statistics span {
 }
 
 .photo_filter .filter_option.filter button.display {
+    order: -1;
     padding-left: 0;
     padding-right: 0;
+}
+
+.photo_filter .filter_option:not(.filter) button.display::after {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin-left: 6px;
+    order: 2;
+    background-size: cover;
+    background-image: url(icon/dropdown.svg);
+    opacity: 0.8;
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.photo_filter .filter_option:not(.filter) button.display::after {
+    opacity: 1;
+}
+
+.photo_filter .filter_option.open button.display::after {
+    transform: rotate(180deg);
 }
 
 .photo_filter .filter_option.filter button.display .icon {
