@@ -852,33 +852,6 @@ const Data: Database = {
         },
     },
 
-    'Paris': {
-        card: {
-            bio: 'Girlfriend',
-            icon: 'paris.jpg'
-        },
-
-        social: {
-            'instagram': 'https://www.instagram.com/pariiscoolfr/',
-            'youtube': 'https://www.youtube.com/@pariiscoolfr697',
-            'spotify': 'https://open.spotify.com/5vaysgic0hrnztyms8eln9uxc',
-        },
-
-        images: {
-            '06/12/24': {
-                name: 'Railroad Tracks',
-                people: ['Thaddeus', 'Riley'],
-                id: [1263, 1274, 1256]
-            },
-
-            '06/07/24': {
-                name: 'North Crossing',
-                people: ['Thaddeus', 'Riley'],
-                id: ['0913', '0795', '0754']
-            }
-        }
-    },
-
     'Edin': {
         card: {
             bio: 'Beatmaker',
