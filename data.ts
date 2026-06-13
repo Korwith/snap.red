@@ -398,7 +398,7 @@ const Data: Database = {
             '07/27/24': {
                 name: 'Weverton Cliffs',
                 people: ['Paris', 'Jeremy'],
-                id: [3521, 3523, 3489, 3579, 3585, 3581, 3475],
+                id: [3521, 3523, 3489, 3579, 3475],
                 featured: 2
             },
             '07/26/24': {
