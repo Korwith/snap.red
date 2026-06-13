@@ -522,7 +522,7 @@ const Data: Database = {
             '05/25/24': {
                 name: 'Rose Hill',
                 people: ['Paris'],
-                id: ['0538', '0537', '0533', '0529']
+                id: ['0537', '0533', '0529']
             },
             '05/14/24': {
                 name: 'Downtown Frederick',
@@ -555,7 +555,7 @@ const Data: Database = {
             '01/18/24': {
                 name: 'Amber Meadows',
                 people: ['Paris'],
-                id: [73029, 72834, 65845, 65608, 65349, 64943, 64749],
+                id: [72834, 65845, 65608, 65349, 64943, 64749],
             },
             '01/07/24': {
                 name: 'North Crossing',
@@ -652,11 +652,6 @@ const Data: Database = {
                 people: ['Paris'],
                 id: [8348, 8354, 8357, 8359, 8378, 8386, 8389],
             },
-            '07/21/23': {
-                name: 'Amber Meadows',
-                people: ['Paris'],
-                id: [7991, 7993, 8015],
-            },
             '07/20/23': {
                 name: 'Rose Hill',
                 people: ['Cody', 'Paris'],
@@ -686,8 +681,7 @@ const Data: Database = {
             '06/18/23': {
                 name: 'Monocacy River',
                 people: ['Paris'],
-                id: [5168, 5046, 5091, 5107, 5152, 5156],
-                caption: 'Honestly one of the best days of my life.'
+                id: [5046, 5091, 5107, 5156],
             },
             '06/16/23': {
                 name: 'Downtown Frederick',
