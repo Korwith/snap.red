@@ -22,7 +22,7 @@ class WebsiteStats {
             if (!header) throw new Error('Failed to fetch commit data!');
             const commits: any = await response.json();
             const latest: any = commits[0];
-            const last_link: string = header.split(',').find((s: string) => s.includes('rel="last'));
+            const last_link = header.split(',').find((s: string) => s.includes('rel="last'));
             if (!last_link) throw new Error(`Last Page Not Found!`);
             const match: RegExpMatchArray | null = last_link.match(/<(.*?)>/);
             if (!match) throw new Error('Improper link');
