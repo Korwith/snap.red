@@ -66,11 +66,12 @@ abstract class Dropdown {
 
     // recalculates the collapsed and expanded height css variables
     protected updateHeight(): void {
-        const visibleCount: number = this.options.filter(o => !o.element.classList.contains('hidden')).length;
-        this.element.classList.toggle('empty', visibleCount <= 1);
-        const calculated_expanded: number = this.height * visibleCount;
+        const visible_count: number = this.options.filter(o => !o.element.classList.contains('hidden')).length;
+        this.element.classList.toggle('empty', visible_count <= 1);
+        const calculated_expanded: number = this.height * visible_count;
         this.element.style.setProperty('--height', `${this.height}px`);
-        this.element.style.setProperty('--expanded-height', `${calculated_expanded > 300 ? 300 : calculated_expanded}px`)
+        this.element.style.setProperty('--expanded-height', `${calculated_expanded > 300 ? 300 : calculated_expanded}px`);
+        this.element.style.setProperty('--total-height', `${calculated_expanded}px`);
     }
 
     abstract load(): void;
