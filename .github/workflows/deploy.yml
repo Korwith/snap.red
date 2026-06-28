@@ -27,7 +27,7 @@ jobs:
           node-version: '22'
 
       - name: Compile TypeScript
-        run: npx --yes tsc
+        run: npx --yes --package typescript tsc
 
       - uses: actions/configure-pages@v5
 
