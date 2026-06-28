@@ -49,6 +49,15 @@ interface VideoEntry {
     link: string;
 }
 
+interface SidebarStructure {
+    [year: string]: {
+        [month: string]: {
+            [date: string]: PhotoEntry;
+        }
+    }
+}
+
+const HideUsers: string[] = ['Paris', 'Abiel'];
 const Data: Database = {
     'Thaddeus': {
         card: {
@@ -64,11 +73,11 @@ const Data: Database = {
         },
 
         social: {
-            'cashapp': 'https://cash.app/$thadreal',
-            'discord': 'https://discord.com/invite/p8ZZXZqnag',
-            'github': 'https://github.com/Korwith',
-            'instagram': 'https://www.instagram.com/thadcoolfr/',
-            'youtube': 'https://www.youtube.com/channel/UCLcCNfyLG_jQev4MdkHtCZw',
+            'CashApp': 'https://cash.app/$thadreal',
+            'Discord': 'https://discord.com/invite/p8ZZXZqnag',
+            'GitHub': 'https://github.com/Korwith',
+            'Instagram': 'https://www.instagram.com/thadcoolfr/',
+            'YouTube': 'https://www.youtube.com/channel/UCLcCNfyLG_jQev4MdkHtCZw',
         },
 
         images: {
@@ -758,12 +767,12 @@ const Data: Database = {
             '07/21/22': {
                 name: 'Hershey Park',
                 people: ['Riley'],
-                id: [8086, 8090, 8093, 8120, 8153]
+                id: [8086, 8090, 8093, 8120]
             },
             '11/28/21': {
                 name: 'Downtown Frederick',
                 people: ['Paris'],
-                id: [1043, 1074, 1213, 1307, 1311, 1314]
+                id: [1307, 1043, 1311, 1314]
             },
         }
     },
@@ -775,10 +784,10 @@ const Data: Database = {
         },
 
         social: {
-            'instagram': 'https://www.instagram.com/yove.sierra/',
-            'youtube': 'https://www.youtube.com/@homies_tape',
-            'discord': 'https://discord.com/users/563816563292241940',
-            'tiktok': 'https://www.tiktok.com/@yungbootstone7'
+            'Instagram': 'https://www.instagram.com/yove.sierra/',
+            'YouTube': 'https://www.youtube.com/@homies_tape',
+            'Discord': 'https://discord.com/users/563816563292241940',
+            'TikTok': 'https://www.tiktok.com/@yungbootstone7'
         },
 
         videos: {
@@ -853,8 +862,8 @@ const Data: Database = {
         },
 
         social: {
-            'instagram': 'https://www.instagram.com/edin_a15/',
-            'soundcloud': 'https://soundcloud.com/spiffy_beats',
+            'Instagram': 'https://www.instagram.com/edin_a15/',
+            'SoundCloud': 'https://soundcloud.com/spiffy_beats',
         },
 
         images: {

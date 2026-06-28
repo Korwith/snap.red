@@ -1,0 +1,98 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 50px;
+    padding: 8px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #202020;
+    background: linear-gradient(to bottom, #202020, #050505);
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+}
+
+.header_button_holder {
+    display: flex;
+    height: 100%;
+    gap: 8px;
+    width: fit-content;
+}
+
+.header_button_holder button.square {
+    padding: 0;
+}
+
+.header_button_holder button, .header_button_holder .emblem {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding-right: 8px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.header_button_holder button:hover, .header_button_holder button:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header_button_holder button::before, .header_button_holder .emblem::before {
+    content: '';
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header_button_holder .emblem {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1.2rem;
+    gap: 6px;
+    cursor: unset;
+}
+
+.header_button_holder button.sidebar_toggle::before {
+    background-image: url(../icon/hamburger.svg);
+    background-size: 60%;
+}
+
+.header_button_holder .emblem::before {
+    background-image: url(../icon/logo.svg);
+    background-size: 100%;
+}
+
+.header_button_holder button.home::before {
+    background-size: 65%;
+    background-image: url(../icon/home.svg);
+}
+
+.header_button_holder button.map::before {
+    background-size: 85%;
+    background-image: url(../icon/map.svg);
+}
+
+.header_button_holder button.about::before {
+    background-size: 80%;
+    background-image: url(../icon/info.svg);
+}
+
+.dropdown.user_select {
+    height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .header_button_holder button {
+        display: none;
+    }
+}

@@ -1,0 +1,335 @@
+.main_photo_holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.main_photo_holder.show {
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.menu {
+    display: flex;
+    aspect-ratio: 8.5/5;
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    background: linear-gradient(to bottom, #151515, #050505);
+    border-radius: 12px;
+}
+
+.menu figure.main {
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.menu figure.main:hover {
+    cursor: unset;
+}
+
+.menu figure.main::after {
+    border-radius: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.menu figure.main:hover::after {
+    border: 4px solid rgba(0, 0, 0, 0.5);
+}
+
+.menu figure.main .info {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 4px;
+    padding: 4px;
+    padding-right: 8px;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.menu figure.main .info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu figure.main .info span.hide {
+    display: none;
+}
+
+.menu figure.main .info span::before {
+    content: '';
+    display: block;
+    height: 1.35rem;
+    width: 1.35rem;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu figure.main .info span.day::before {
+    background-image: url(../icon/day.svg);
+    background-size: 100%;
+}
+
+.menu figure.main .info span.people::before {
+    background-image: url(../icon/people.svg);
+    background-size: 100%;
+}
+
+.menu figure.main img {
+    border-radius: 0;
+    transition: left 0.5s;
+}
+
+.menu figure.main figcaption {
+    display: none;
+    border-bottom-left-radius: 8px;
+}
+
+.menu figure.main button.close {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    border-bottom-left-radius: 8px;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.menu figure.main button.close::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../icon/exit.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+
+figure.main button.nav:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+figure.main button.nav {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.15s, opacity 0.15s;
+}
+
+figure.main button.nav::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 85%;
+    height: 85%;
+    background-size: cover;
+    background-image: url(../icon/arrow.svg);
+}
+
+figure.main button.nav.left::after {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+figure.main button.nav.left {
+    left: 20px;
+}
+
+figure.main button.nav.right {
+    right: 20px;
+}
+
+figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu aside {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.menu aside .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-top-right-radius: 12px;
+    order: -1;
+    background: linear-gradient(to bottom, #151515, #050505);
+    border-bottom: 1px solid #202020;
+}
+
+.menu aside .header span {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 4px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    order: -1;
+}
+
+.menu aside .header span::before {
+    content: '';
+    display: block;
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-image: url(../icon/location.svg);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu aside .header button.close {
+    position: relative;
+    display: block;
+    aspect-ratio: 1/1;
+    height: 100%;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.menu aside .header button.close::before,
+.menu aside .header button.close::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.menu aside .header button.close::before {
+    background: linear-gradient(to bottom, #151515, #050505);
+    z-index: 0;
+}
+
+.menu aside .header button.close::after {
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    background-color: rgba(0, 0, 0, 0);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../icon/exit.svg);
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+
+.menu aside .header button.close:hover::after {
+    opacity: 1;
+}
+
+.menu aside .grid_holder {
+    width: 100%;
+    height: calc(100% - 60px);
+    min-width: 0;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .main_photo_holder {
+        width: 100vw;
+        height: 100dvh;
+        top: 50px;
+        z-index: 30;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .menu figure.main {
+        width: 100vw;
+        height: 100vw;
+        border-radius: 0;
+    }
+
+    .menu figure.main::after,
+    .menu figure.main img,
+    .menu aside .header {
+        border-radius: 0;
+    }
+
+    .menu figure.main .info {
+        border-top-left-radius: 0;
+    }
+
+    .menu aside .header button.close {
+        display: none;
+    }
+
+    .menu figure.main button.close {
+        display: block;
+    }
+
+    .menu aside {
+        display: block;
+        overflow-y: auto;
+        flex: unset;
+        height: calc(100dvh - 100vw);
+    }
+
+    .menu aside .header {
+        height: 50px;
+    }
+
+    .menu aside .grid_holder {
+        height: fit-content;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,75 @@
+div.footer {
+    display: none;
+    gap: 8px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 50px;
+    padding: 8px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #050505, #202020);
+    border-top: 1px solid #202020;
+    z-index: 10;
+}
+
+div.footer div.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    width: fit-content;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+div.footer div.button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+div.footer div.button.sidebar_toggle {
+    flex: 0 0 auto;
+    aspect-ratio: 1/1;
+}
+
+div.footer div.button::before {
+    content: '';
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+div.footer div.button.sidebar_toggle::before {
+    background-image: url(../icon/hamburger.svg);
+    background-size: 60%;
+}
+
+div.footer div.button.home::before {
+    background-image: url(../icon/home.svg);
+    background-size: 60%;
+}
+
+div.footer div.button.map::before {
+    background-image: url(../icon/map.svg);
+    background-size: 80%;
+}
+
+div.footer div.button.about::before {
+    background-image: url(../icon/info.svg);
+    background-size: 80%;
+}
+
+@media screen and (max-width: 767px) {
+    div.footer {
+        display: flex;
+        gap: 8px;
+    }
+}
