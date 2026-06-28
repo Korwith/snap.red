@@ -1,9 +1,11 @@
+// builds and holds the page header element
 class PageHeader {
     manager: PageManager;
     element: HTMLElement;
     entry_holder: HeaderEntryHolder;
     user_select: HeaderUserSelect;
 
+    // creates the header, its button group, and the user selector
     constructor(manager: PageManager) {
         this.manager = manager;
         this.element = document.createElement('header');
@@ -14,6 +16,7 @@ class PageHeader {
     }
 }
 
+// holds the emblem and all header navigation buttons
 class HeaderEntryHolder {
     header: PageHeader;
     element: HTMLElement;
@@ -23,6 +26,7 @@ class HeaderEntryHolder {
     map: HeaderButtonMap;
     about: HeaderButtonAbout;
 
+    // creates all header buttons and the emblem
     constructor(header: PageHeader) {
         this.header = header;
         this.element = document.createElement('div');
@@ -37,10 +41,12 @@ class HeaderEntryHolder {
     }
 }
 
+// abstract base for a clickable header button
 abstract class HeaderButton {
     holder: HeaderEntryHolder;
     element: HTMLElement;
 
+    // creates the button element and registers the click handler
     constructor(holder: HeaderEntryHolder) {
         this.holder = holder;
         this.element = document.createElement('button');
@@ -51,9 +57,11 @@ abstract class HeaderButton {
     abstract onclick(e: PointerEvent): void;
 }
 
+// displays the site name emblem in the header
 class HeaderEmblem {
     element: HTMLElement;
 
+    // creates and appends the emblem element
     constructor(holder: HeaderEntryHolder) {
         this.element = document.createElement('div');
         this.element.classList.add('emblem');
@@ -62,55 +70,69 @@ class HeaderEmblem {
     }
 }
 
+// header button that toggles the sidebar open and closed
 class HeaderButtonSidebar extends HeaderButton {
+    // creates the sidebar toggle button
     constructor(holder: HeaderEntryHolder) {
         super(holder);
         this.element.classList.add('sidebar_toggle', 'square');
     }
 
+    // toggles the sidebar visibility
     onclick(e: PointerEvent): void {
         this.holder.header.manager.toggleSidebar();
     }
 }
 
+// header button that navigates to the home view
 class HeaderButtonHome extends HeaderButton {
+    // creates the home button
     constructor(holder: HeaderEntryHolder) {
         super(holder);
         this.element.classList.add('home');
         this.element.textContent = 'Home';
     }
 
+    // handles home button click
     onclick(e: PointerEvent): void {
     }
 }
 
+// header button that opens the map view
 class HeaderButtonMap extends HeaderButton {
+    // creates the map button
     constructor(holder: HeaderEntryHolder) {
         super(holder);
         this.element.classList.add('map');
         this.element.textContent = 'Map';
     }
 
+    // notifies the user the map page is under construction
     onclick(e: PointerEvent): void {
         alert('Under Construction!');
-    } 
+    }
 }
 
+// header button that opens the about view
 class HeaderButtonAbout extends HeaderButton {
+    // creates the about button
     constructor(holder: HeaderEntryHolder) {
         super(holder);
         this.element.classList.add('about');
         this.element.textContent = 'About';
     }
 
+    // notifies the user the about page is under construction
     onclick(e: PointerEvent): void {
         alert('Under Construction!');
     }
 }
 
+// dropdown in the header for switching between users
 class HeaderUserSelect extends Dropdown {
     header: PageHeader;
 
+    // creates the user select dropdown and populates it with all users
     constructor(header: PageHeader) {
         super(35);
         this.header = header;
@@ -120,6 +142,7 @@ class HeaderUserSelect extends Dropdown {
         this.load();
     }
 
+    // populates the dropdown with an option for each user
     load(): void {
         const manager: PageManager = this.header.manager;
         const users: string[] = manager.fetchUserList();
@@ -132,6 +155,7 @@ class HeaderUserSelect extends Dropdown {
         }
     }
 
+    // switches the active user to the selected option's name
     selected(option: DropdownOption): void {
         console.log(option)
         this.header.manager.switchUser(option.getText())

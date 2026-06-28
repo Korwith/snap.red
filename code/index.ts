@@ -1,3 +1,4 @@
+// root controller that manages page state, user switching, and data access
 class PageManager {
     data: Database;
     user: string;
@@ -9,6 +10,7 @@ class PageManager {
     content: PageContent;
     main_photo: MainPhotoHolder;
 
+    // initializes all page components with the default user
     constructor() {
         // global from data.ts
         this.data = Data;
@@ -23,52 +25,60 @@ class PageManager {
         this.main_photo = new MainPhotoHolder(this);
     }
 
-    // page control actions
+    // resets the sidebar and content area for the current user
     reload(): void {
         this.sidebar.reset();
         this.content.reset();
     }
 
+    // changes the active user and reloads the page
     switchUser(user: string): void {
         if (!this.data[user]) throw new Error('Invalid user');
         this.user = user;
         this.reload();
     }
 
+    // opens or closes the sidebar and shifts the content accordingly
     toggleSidebar(force?: boolean): void {
         this.sidebar.toggle(force);
         this.content.toggle(force);
     }
 
+    // opens the full-size photo viewer for the given date
     openImageByDate(date: string, user?: string): void {
         user ??= this.user;
         this.main_photo.openImageByDate(date);
     }
 
-    // gather user data
+    // returns an array of all user names in the database
     fetchUserList(): string[] {
         return Object.keys(this.data);
     }
 
+    // returns the currently active user's name
     fetchUserName(): string {
         return this.user;
     }
 
+    // returns the full data entry for a user
     fetchUserData(user?: string): UserEntry {
         user ??= this.user;
         return this.data[user];
     }
 
+    // returns the profile card data for a user
     fetchUserCard(user?: string): ProfileCardEntry {
         user ??= this.user;
         return this.fetchUserData(user).card;
     }
 
+    // returns the social media link map for a user
     fetchUserSocialDatabase(user?: string): ProfileSocialDatabase {
         user ??= this.user;
         return this.fetchUserData(user).social;
     }
 
+    // returns photos filtered by featured status, or all photos if null
     fetchUserImages(featured: boolean | null, user?: string): PhotoDatabase {
         user ??= this.user;
         const images: PhotoDatabase = this.fetchUserData(user).images;
@@ -92,12 +102,13 @@ class PageManager {
         return matches;
     }
 
-    // fetch image data
+    // returns a single photo entry by its date key
     fetchImageByDate(date: string, user?: string): PhotoEntry | null {
         user ??= this.user;
         return this.fetchUserImages(null, user)[date];
     }
 
+    // returns all photos taken in the given year
     fetchUserImagesByYear(year: string, user?: string): PhotoDatabase {
         user ??= this.user;
         // this may be an issue in 75 years time
@@ -114,6 +125,7 @@ class PageManager {
         return matches;
     }
 
+    // returns all photos taken in the given month
     fetchUserImagesByMonth(month: string, user?: string): PhotoDatabase {
         user ??= this.user;
         const images: PhotoDatabase = this.fetchUserImages(null, user);
@@ -128,6 +140,7 @@ class PageManager {
         return matches;
     }
 
+    // returns all photos taken in the given month and year
     fetchUserImagesByMonthAndYear(month: string, year: string, user?: string): PhotoDatabase {
         user ??= this.user;
         const year_id: string = year.slice(-2);
@@ -145,6 +158,7 @@ class PageManager {
         return matches;
     }
 
+    // returns all photos taken at the given location name
     fetchUserImagesByLocation(location: string, user?: string): PhotoDatabase {
         user ??= this.user;
         const images: PhotoDatabase = this.fetchUserImages(null, user);
@@ -159,6 +173,7 @@ class PageManager {
         return matches;
     }
 
+    // returns all photos that feature the given person
     fetchUserImagesByPerson(person: string, user?: string): PhotoDatabase {
         user ??= this.user;
         const images: PhotoDatabase = this.fetchUserImages(null, user);
@@ -173,7 +188,7 @@ class PageManager {
         return matches;
     }
 
-    // people
+    // returns a deduplicated list of all people featured across all photos
     fetchFeaturedPeople(user?: string): string[] {
         user ??= this.user;
         const photos: PhotoDatabase = this.fetchUserImages(null);
@@ -191,6 +206,7 @@ class PageManager {
         return people;
     }
 
+    // returns true if the person is featured in photos and not in the hide list
     isFeaturedPersonValid(user: string): boolean {
         const users: string[] = this.fetchFeaturedPeople();
         if (HideUsers.includes(user)) return false;
@@ -198,6 +214,7 @@ class PageManager {
         return true;
     }
 
+    // filters a people list to only include valid featured people
     sanitizePeopleList(list: string[]): string[] {
         const allowed: string[] = [];
         for (const person of list) {
@@ -207,13 +224,13 @@ class PageManager {
         return allowed;
     }
 
-    // videos
+    // returns the video database for a user if it exists
     fetchUserVideos(user?: string): VideoDatabase | null {
         user ??= this.user;
         return this.fetchUserData(user).videos || null;
     }
 
-    // sidebar data
+    // returns photos structured by year then month for the sidebar timeline
     fetchSidebarContent(user?: string): SidebarStructure {
         user ??= this.user;
 

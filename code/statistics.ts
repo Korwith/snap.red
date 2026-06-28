@@ -3,17 +3,20 @@ interface CommitData {
     name: string,
 }
 
+// fetches and formats statistics from a github repository via the api
 class WebsiteStats {
     owner: string;
     repo: string;
     private api_base: string;
 
+    // sets up the api base url for the given owner and repo
     constructor(owner: string, repo: string) {
         this.owner = owner;
         this.repo = repo;
         this.api_base = `https://api.github.com/repos/${owner}/${repo}`;
     }
 
+    // fetches the total commit count and the latest commit message
     async fetchLastCommit(): Promise<CommitData> {
         try {
             const response: any = await fetch(`${this.api_base}/commits?per_page=1`);
@@ -33,6 +36,7 @@ class WebsiteStats {
         }
     }
 
+    // fetches the repository size and returns it as a formatted string
     async fetchRepoSize(): Promise<string> {
         try {
             const response: any = await fetch(this.api_base);
@@ -45,6 +49,7 @@ class WebsiteStats {
         }
     }
 
+    // converts a byte count to a human-readable size string
     formatSize(bytes: number): string {
         const sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes === 0) return '0 Bytes';

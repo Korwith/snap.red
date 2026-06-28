@@ -1,8 +1,10 @@
+// overlay container that shows a full-size photo and its detail panel
 class MainPhotoHolder {
     manager: PageManager;
     element: HTMLElement;
     menu: MainPhotoMenu;
 
+    // creates the holder element and its photo menu
     constructor(manager: PageManager) {
         this.manager = manager;
         this.element = document.createElement('div');
@@ -11,10 +13,12 @@ class MainPhotoHolder {
         manager.element.appendChild(this.element);
     }
 
+    // shows or hides the overlay
     toggle(force?: boolean): void {
         this.element.classList.toggle('show', force);
     }
 
+    // loads the photo and its details for the given date and shows the overlay
     openImageByDate(date: string): void {
         this.menu.figure.load(date);
         this.menu.details.load(date);
@@ -22,12 +26,14 @@ class MainPhotoHolder {
     }
 }
 
+// article element containing the main photo figure and its detail sidebar
 class MainPhotoMenu {
     holder: MainPhotoHolder;
     element: HTMLElement;
     figure: MainPhotoFigure;
     details: MainPhotoDetails;
 
+    // creates the menu article with figure and details panels
     constructor(holder: MainPhotoHolder) {
         this.holder = holder;
         this.element = document.createElement('article');
@@ -38,6 +44,7 @@ class MainPhotoMenu {
     }
 }
 
+// displays the full-size photo with navigation arrows, info, and a close button
 class MainPhotoFigure {
     menu: MainPhotoMenu;
     element: HTMLElement;
@@ -50,6 +57,7 @@ class MainPhotoFigure {
     images: Array<HTMLElement>
     selected: number;
 
+    // builds the figure with info overlay, navigation buttons, and close button
     constructor(menu: MainPhotoMenu) {
         this.menu = menu;
         this.element = document.createElement('figure');
@@ -67,6 +75,7 @@ class MainPhotoFigure {
         this.menu.element.appendChild(this.element);
     }
 
+    // loads the info overlay and caption for the photo at the given date
     protected loadPhotoDetails(date: string): void {
         const manager: PageManager = this.menu.holder.manager;
         const photo: PhotoEntry | null = manager.fetchImageByDate(date);
@@ -76,6 +85,7 @@ class MainPhotoFigure {
         this.caption.textContent = photo.name;
     }
 
+    // creates and positions img elements for each id in the photo's list
     protected loadPhotoList(list: (string | number)[]): void {
         const manager: PageManager = this.menu.holder.manager;
         const user: string = manager.fetchUserName();
@@ -92,13 +102,14 @@ class MainPhotoFigure {
         }
     }
 
+    // slides all images to display the one at the given offset from the current index
     shiftSelectedPhoto(shift: number): void {
         const index: number = this.selected + shift;
         if (index < 0 || index >= this.images.length ) return;
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', index + 1 >= this.images.length);
 
-        
+
         for (const key in this.images) {
             const image: HTMLElement = this.images[key];
             image.style.left = `${(parseInt(key) - index) * 100}%`;
@@ -107,6 +118,7 @@ class MainPhotoFigure {
         this.selected = index;
     }
 
+    // resets the figure and loads the photo and its image list for the given date
     load(date: string): void {
         const manager: PageManager = this.menu.holder.manager;
         const photo: PhotoEntry | null = manager.fetchImageByDate(date);
@@ -117,6 +129,7 @@ class MainPhotoFigure {
         this.loadPhotoList(photo.id);
     }
 
+    // clears the current photo images, caption, and info overlay
     reset(): void {
         this.info.reset();
         this.caption.textContent = '';
@@ -132,12 +145,14 @@ class MainPhotoFigure {
     }
 }
 
+// overlay panel showing the date and featured people for the current photo
 class FigureInfoList {
     figure: MainPhotoFigure;
     element: HTMLElement;
     date: HTMLElement;
     people: HTMLElement;
 
+    // creates the info overlay with date and people spans
     constructor(figure: MainPhotoFigure) {
         this.figure = figure;
         this.element = document.createElement('div');
@@ -153,6 +168,7 @@ class FigureInfoList {
         figure.element.appendChild(this.element);
     }
 
+    // populates the date and people text for the photo at the given date
     load(date: string): void {
         const manager: PageManager = this.figure.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
@@ -169,16 +185,19 @@ class FigureInfoList {
         }
     }
 
+    // clears the date and people text
     reset(): void {
         this.date.textContent = '';
         this.people.textContent = '';
     }
 }
 
+// abstract base for a left or right photo navigation button
 abstract class FigureNavigation {
     figure: MainPhotoFigure;
     element: HTMLElement;
 
+    // creates the navigation button and attaches it to the figure
     constructor(main_figure: MainPhotoFigure) {
         this.figure = main_figure;
         this.element = document.createElement('button');
@@ -190,34 +209,42 @@ abstract class FigureNavigation {
     abstract onclick(e: PointerEvent): void;
 }
 
+// navigation button that moves to the previous photo
 class FigureNavigationLeft extends FigureNavigation {
+    // creates the left navigation button
     constructor(main_figure: MainPhotoFigure) {
         super(main_figure);
         this.element.classList.add('left');
     }
 
+    // shifts the selected photo one step to the left
     onclick(e: PointerEvent) {
         this.figure.shiftSelectedPhoto(-1);
     }
 }
 
+// navigation button that moves to the next photo
 class FigureNavigationRight extends FigureNavigation {
+    // creates the right navigation button
     constructor(main_figure: MainPhotoFigure) {
         super(main_figure);
         this.element.classList.add('right');
     }
 
+    // shifts the selected photo one step to the right
     onclick(e: PointerEvent) {
         this.figure.shiftSelectedPhoto(1);
     }
 }
 
+// side panel showing related photo rows for the currently viewed photo
 class MainPhotoDetails {
     menu: MainPhotoMenu;
     element: HTMLElement;
     header: PhotoDetailsHeader;
     grid: PhotoDetailsGrid;
 
+    // creates the aside panel with a header and photo row grid
     constructor(menu: MainPhotoMenu) {
         this.menu = menu;
         this.element = document.createElement('aside');
@@ -227,6 +254,7 @@ class MainPhotoDetails {
         this.menu.element.appendChild(this.element);
     }
 
+    // loads the location name header and related photo rows for the given date
     protected loadPhotoDetails(date: string): void {
         const manager: PageManager = this.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
@@ -235,22 +263,26 @@ class MainPhotoDetails {
         this.grid.load(date);
     }
 
+    // delegates to loadPhotoDetails for the given date
     load(date: string): void {
         this.loadPhotoDetails(date);
     }
 
+    // clears the header text and resets the photo row grid
     reset(): void {
         this.header.element.textContent = '';
         this.grid.reset();
     }
 }
 
+// header bar at the top of the details panel showing the location name
 class PhotoDetailsHeader {
     details: MainPhotoDetails;
     element: HTMLElement;
     span: HTMLElement;
     close: DetailsCloseButton;
 
+    // creates the header with a text span and close button
     constructor(details: MainPhotoDetails) {
         this.details = details;
         this.element = document.createElement('div');
@@ -262,16 +294,19 @@ class PhotoDetailsHeader {
         this.details.element.appendChild(this.element);
     }
 
+    // sets the header text to the given string
     displayText(text: string): void {
         this.span.textContent = text;
     }
 }
 
+// grid of related photo rows shown in the details panel
 class PhotoDetailsGrid {
     details: MainPhotoDetails;
     photo_rows: PhotoRow[];
     element: HTMLElement;
 
+    // creates the grid container element
     constructor(details: MainPhotoDetails) {
         this.details = details;
         this.photo_rows = [];
@@ -280,6 +315,7 @@ class PhotoDetailsGrid {
         this.details.element.appendChild(this.element);
     }
 
+    // loads location, person, and month photo rows for the given date
     load(date: string): void {
         const manager: PageManager = this.details.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
@@ -303,6 +339,7 @@ class PhotoDetailsGrid {
         this.photo_rows.push(month_pane);
     }
 
+    // removes all photo rows from the grid
     reset(): void {
         for (const row of this.photo_rows) {
             row.remove();
@@ -310,10 +347,12 @@ class PhotoDetailsGrid {
     }
 }
 
+// abstract base for a button that closes the main photo overlay
 abstract class HolderCloseButton {
     holder: MainPhotoHolder;
     element: HTMLElement;
 
+    // creates the close button and appends it to the given parent element
     constructor(holder: MainPhotoHolder, parent: HTMLElement) {
         this.holder = holder;
         this.element = document.createElement('button');
@@ -322,18 +361,23 @@ abstract class HolderCloseButton {
         parent.appendChild(this.element);
     }
 
+    // hides the main photo overlay
     onclick(e: PointerEvent): void {
         this.holder.toggle(false);
     }
 }
 
+// close button placed inside the main photo figure
 class FigureCloseButton extends HolderCloseButton {
+    // creates the close button inside the figure element
     constructor(holder: MainPhotoHolder, figure: MainPhotoFigure) {
         super(holder, figure.element);
     }
 }
 
+// close button placed inside the details panel header
 class DetailsCloseButton extends HolderCloseButton {
+    // creates the close button inside the details header element
     constructor(holder: MainPhotoHolder, details_header: PhotoDetailsHeader) {
         super(holder, details_header.element);
     }

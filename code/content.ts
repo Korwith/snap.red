@@ -1,3 +1,4 @@
+// manages the main content area including the profile card, filters, and photo grid
 class PageContent {
     manager: PageManager;
     element: HTMLElement;
@@ -6,6 +7,7 @@ class PageContent {
     videos?: VideoHolder;
     photos: ContentPhotoGrid;
 
+    // builds the content area and attaches it to the page
     constructor(manager: PageManager) {
         this.manager = manager;
         this.element = document.createElement('div');
@@ -21,11 +23,13 @@ class PageContent {
         manager.element.appendChild(this.element);
     }
 
+    // loads the profile card and photo grid
     load(): void {
         this.card.load();
         this.photos.load();
     }
 
+    // clears and reloads all content for the current user
     reset(): void {
         this.photos.clear();
         this.filters.reset();
@@ -33,26 +37,31 @@ class PageContent {
         this.load();
     }
 
+    // shifts the content area to accommodate the sidebar
     toggle(force?: boolean): void {
         this.element.classList.toggle('shift', force);
     }
 
+    // loads the next photo batch when the user scrolls near the bottom
     private onscroll(e: Event): void {
         if (this.element.scrollHeight - this.element.scrollTop - this.element.clientHeight <= 100)
             this.photos.loadBatch();
     }
 }
 
+// extends photo grid to support filter-aware batched photo loading
 class ContentPhotoGrid extends PhotoGrid {
     filters: FilterHolder;
     filtered_list: PhotoDatabase;
 
+    // initializes the grid with a reference to the filter holder
     constructor(content: PageContent, filters: FilterHolder) {
         super(content.manager, content.element);
         this.filters = filters;
         this.filtered_list = {};
     }
 
+    // loads featured photos that pass the current active filters
     loadFeatured(): void {
         const featured: PhotoDatabase = this.manager.fetchUserImages(true);
         const featured_filtered: PhotoDatabase = this.filters.fetchFilteredPhotos(featured);
@@ -64,6 +73,7 @@ class ContentPhotoGrid extends PhotoGrid {
         }
     }
 
+    // loads the next batch of nine non-featured photos from the filtered list
     loadBatch(): void {
         if (this.complete) return;
         const keys: string[] = Object.keys(this.filtered_list);
@@ -82,12 +92,14 @@ class ContentPhotoGrid extends PhotoGrid {
         this.index = next;
     }
 
+    // rebuilds the filtered photo list from current filter state
     protected updateFilteredPhotos(): void {
         const photos: PhotoDatabase = this.manager.fetchUserImages(false);
         this.filtered_list = this.filters.fetchFilteredPhotos(photos);
         this.filters.handleResultsText();
     }
 
+    // clears and reloads all photos with current filters applied
     load(): void {
         this.clear();
         this.updateFilteredPhotos();
@@ -96,6 +108,7 @@ class ContentPhotoGrid extends PhotoGrid {
     }
 }
 
+// displays the user's profile card with header, socials, and website link
 class ProfileCard {
     content: PageContent;
     element: HTMLElement;
@@ -103,6 +116,7 @@ class ProfileCard {
     socials: ProfileCardSocialRow;
     site: ProfileCardWebsite;
 
+    // builds the card and its sub-components
     constructor(content: PageContent) {
         this.content = content;
         this.element = document.createElement('div');
@@ -114,17 +128,20 @@ class ProfileCard {
         content.element.appendChild(this.element);
     }
 
+    // loads data into all card sub-components
     load(): void {
         this.header.load();
         this.socials.load();
         this.site.load();
     }
 
+    // resets the website section of the profile card
     reset(): void {
         this.site.reset();;
     }
 }
 
+// displays the user's avatar, username, and bio at the top of the profile card
 class ProfileCardHeader {
     card: ProfileCard;
     element: HTMLElement;
@@ -134,6 +151,7 @@ class ProfileCardHeader {
     username: HTMLElement;
     bio: HTMLElement;
 
+    // builds the header layout with icon and name elements
     constructor(card: ProfileCard) {
         this.card = card;
         this.element = document.createElement('div');
@@ -158,6 +176,7 @@ class ProfileCardHeader {
         this.card.element.appendChild(this.element)
     }
 
+    // populates the header with the current user's icon, name, and bio
     load(): void {
         const manager: PageManager = this.card.content.manager;
         const card_info: ProfileCardEntry = manager.fetchUserCard();
@@ -167,10 +186,12 @@ class ProfileCardHeader {
     }
 }
 
+// renders a row of social media link buttons for the user
 class ProfileCardSocialRow {
     card: ProfileCard;
     element: HTMLElement;
 
+    // creates the social row container element
     constructor(card: ProfileCard) {
         this.card = card;
         this.element = document.createElement('div');
@@ -178,10 +199,12 @@ class ProfileCardSocialRow {
         this.card.element.appendChild(this.element);
     }
 
+    // removes all existing social buttons from the row
     clear(): void {
         this.element.innerHTML = '';
     }
 
+    // populates the row with buttons for each of the user's social links
     load(): void {
         this.clear();
         const manager: PageManager = this.card.content.manager;
@@ -193,10 +216,12 @@ class ProfileCardSocialRow {
     }
 }
 
+// a styled anchor button linking to a single social media profile
 class SocialButton {
     row: ProfileCardSocialRow;
     element: HTMLElement;
 
+    // creates the button with gradient and icon from the social icon registry
     constructor(row: ProfileCardSocialRow, name: string, link: string) {
         this.row = row;
 
@@ -214,6 +239,7 @@ class SocialButton {
     }
 }
 
+// displays a stylized link card to the user's personal website
 class ProfileCardWebsite {
     card: ProfileCard;
     element: HTMLElement;
@@ -222,6 +248,7 @@ class ProfileCardWebsite {
     site_name: HTMLElement;
     site_bio: HTMLElement;
 
+    // builds the website card element with icon and text slots
     constructor(card: ProfileCard) {
         this.card = card;
         this.element = document.createElement('a');
@@ -244,12 +271,14 @@ class ProfileCardWebsite {
         this.card.element.appendChild(this.element);
     }
 
+    // retrieves the current user's website entry or null if absent
     protected fetchSite(): ProfileWebsiteEntry | null {
         const manager: PageManager = this.card.content.manager;
         const info: ProfileCardEntry = manager.fetchUserCard();
         return info.site || null;
     }
 
+    // populates and shows the website card if the user has a site entry
     load(): void {
         const website: ProfileWebsiteEntry | null = this.fetchSite();
 
@@ -263,11 +292,13 @@ class ProfileCardWebsite {
         this.site_bio.textContent = website.blurb;
     }
 
+    // shows or hides the website card element
     toggle(force?: boolean): void {
         this.reset();
         this.element.classList.toggle('hide', force != null ? !force : true);
     }
 
+    // clears the icon and text content of the website card
     reset(): void {
         this.icon.style.removeProperty('--image');
         this.site_name.textContent = '';
@@ -279,12 +310,14 @@ interface FilterDropdownList {
     [key: string]: FilterDropdown;
 }
 
+// holds all filter dropdowns and coordinates their combined state
 class FilterHolder {
     content: PageContent;
     element: HTMLElement;
     list: FilterDropdownList;
     results: HTMLElement;
 
+    // builds the filter bar with location, person, month, and year dropdowns
     constructor(content: PageContent) {
         this.content = content;
         this.element = document.createElement('div');
@@ -303,6 +336,7 @@ class FilterHolder {
         this.content.element.appendChild(this.element);
     }
 
+    // reloads all filter dropdowns and clears the results count
     reset(): void {
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
@@ -312,6 +346,7 @@ class FilterHolder {
         this.element.classList.add('hide_results');
     }
 
+    // applies all active filters to a photo database and returns the matches
     fetchFilteredPhotos(photos: PhotoDatabase): PhotoDatabase {
         let filtered_photos: PhotoDatabase = photos;
         for (const key in this.list) {
@@ -321,6 +356,7 @@ class FilterHolder {
         return filtered_photos;
     }
 
+    // applies all filters except one to support per-dropdown visibility updates
     private fetchFilteredPhotosExcept(photos: PhotoDatabase, exclude: FilterDropdown): PhotoDatabase {
         let filtered: PhotoDatabase = photos;
         for (const key in this.list) {
@@ -331,6 +367,7 @@ class FilterHolder {
         return filtered;
     }
 
+    // refreshes each dropdown's option visibility based on cross-filter context
     updateAllVisibility(): void {
         const allPhotos: PhotoDatabase = this.content.manager.fetchUserImages(null);
         for (const key in this.list) {
@@ -340,6 +377,7 @@ class FilterHolder {
         }
     }
 
+    // updates the results count text and shows or hides it based on filter activity
     handleResultsText(): void {
         const photos: PhotoDatabase = this.content.manager.fetchUserImages(null);
         const results: PhotoDatabase = this.fetchFilteredPhotos(photos);
@@ -348,6 +386,7 @@ class FilterHolder {
         this.results.textContent = `${total} Result${total == 1 ? '' : 's'}`;
     }
 
+    // returns true if any filter dropdown has a non-placeholder selection
     isActive(): boolean {
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
@@ -357,9 +396,11 @@ class FilterHolder {
     }
 }
 
+// abstract base for a filter dropdown that narrows the photo set
 abstract class FilterDropdown extends Dropdown {
     holder: FilterHolder;
 
+    // registers the dropdown with the filter holder and sets up click handling
     constructor(holder: FilterHolder) {
         super(35);
         this.holder = holder;
@@ -367,11 +408,13 @@ abstract class FilterDropdown extends Dropdown {
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
     }
 
+    // adds a non-selectable placeholder option as the first entry
     protected addPlaceholder(text: string): void {
         const placeholder: DropdownOption = new DropdownOption(this);
         placeholder.setText(text);
     }
 
+    // closes all other open dropdowns in the filter bar when this one is clicked
     protected onclick(e: PointerEvent): void {
         const opened: Array<HTMLElement> = Array.from(this.holder.element.querySelectorAll('.dropdown.open'));
         for (const dropdown of opened) {
@@ -380,17 +423,20 @@ abstract class FilterDropdown extends Dropdown {
         }
     }
 
+    // clears options and removes the active styling from this dropdown
     clear(): void {
         super.clear();
         this.element.classList.remove('used');
     }
 
+    // marks the dropdown active and triggers a photo grid reload
     selected(): void {
         this.element.classList.toggle('used', this.isActive());
         this.holder.content.photos.load();
         this.holder.updateAllVisibility();
     }
 
+    // returns true when a non-placeholder option is currently selected
     isActive(): boolean {
         return !!this.primary && this.options[0] !== this.primary;
     }
@@ -399,13 +445,16 @@ abstract class FilterDropdown extends Dropdown {
     abstract updateVisibility(availablePhotos: PhotoDatabase): void;
 }
 
+// filter dropdown for narrowing photos by location name
 class FilterDropdownLocation extends FilterDropdown {
+    // builds and populates the location filter dropdown
     constructor(holder: FilterHolder) {
         super(holder);
         this.element.classList.add('location');
         this.load();
     }
 
+    // populates the dropdown with unique location names from the user's photos
     load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
@@ -422,6 +471,7 @@ class FilterDropdownLocation extends FilterDropdown {
         }
     }
 
+    // returns only photos whose location matches the selected option
     filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const match: PhotoDatabase = {};
@@ -435,6 +485,7 @@ class FilterDropdownLocation extends FilterDropdown {
         return match;
     }
 
+    // hides location options not present in the available photo set
     updateVisibility(availablePhotos: PhotoDatabase): void {
         const validNames: Set<string> = new Set<string>();
         for (const date in availablePhotos) validNames.add(availablePhotos[date].name);
@@ -445,13 +496,16 @@ class FilterDropdownLocation extends FilterDropdown {
     }
 }
 
+// filter dropdown for narrowing photos by a featured person
 class FilterDropdownPerson extends FilterDropdown {
+    // builds and populates the person filter dropdown
     constructor(holder: FilterHolder) {
         super(holder);
         this.element.classList.add('person');
         this.load();
     }
 
+    // populates the dropdown with valid people from the user's photos
     load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
@@ -472,6 +526,7 @@ class FilterDropdownPerson extends FilterDropdown {
         }
     }
 
+    // returns only photos that feature the selected person
     filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const match: PhotoDatabase = {};
@@ -485,6 +540,7 @@ class FilterDropdownPerson extends FilterDropdown {
         return match;
     }
 
+    // hides person options not present in the available photo set
     updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_people: Set<string> = new Set<string>();
         for (const date in availablePhotos) {
@@ -497,9 +553,11 @@ class FilterDropdownPerson extends FilterDropdown {
     }
 }
 
+// abstract base for time-based filter dropdowns
 abstract class FilterDropdownTime extends FilterDropdown {
     date_handler: DateManager;
 
+    // initializes the time filter with a date manager instance
     constructor(holder: FilterHolder) {
         super(holder);
         this.date_handler = new DateManager();
@@ -507,13 +565,16 @@ abstract class FilterDropdownTime extends FilterDropdown {
     }
 }
 
+// filter dropdown for narrowing photos by month
 class FilterDropdownMonth extends FilterDropdownTime {
+    // builds and populates the month filter dropdown
     constructor(holder: FilterHolder) {
         super(holder);
         this.element.classList.add('month');
         this.load();
     }
 
+    // populates the dropdown with all twelve months
     load(): void {
         this.clear();
         this.addPlaceholder('Month');
@@ -525,6 +586,7 @@ class FilterDropdownMonth extends FilterDropdownTime {
         }
     }
 
+    // returns only photos taken in the selected month
     filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const month: string | null = this.primary.element.getAttribute('month');
@@ -541,6 +603,7 @@ class FilterDropdownMonth extends FilterDropdownTime {
         return match;
     }
 
+    // hides month options not represented in the available photo set
     updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_months: Set<string> = new Set<string>();
         for (const date in availablePhotos) valid_months.add(date.slice(0, 2));
@@ -552,13 +615,16 @@ class FilterDropdownMonth extends FilterDropdownTime {
     }
 }
 
+// filter dropdown for narrowing photos by year
 class FilterDropdownYear extends FilterDropdownTime {
+    // builds and populates the year filter dropdown
     constructor(holder: FilterHolder) {
         super(holder);
         this.element.classList.add('year');
         this.load();
     }
 
+    // populates the dropdown with unique years from the user's photos
     load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
@@ -577,6 +643,7 @@ class FilterDropdownYear extends FilterDropdownTime {
         }
     }
 
+    // returns only photos taken in the selected year
     filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.isActive() || !this.primary) return photos;
         const year: string | null = this.primary.element.getAttribute('year');
@@ -593,6 +660,7 @@ class FilterDropdownYear extends FilterDropdownTime {
         return match;
     }
 
+    // hides year options not represented in the available photo set
     updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_years: Set<string> = new Set<string>();
         for (const date in availablePhotos) valid_years.add(date.slice(-2));
