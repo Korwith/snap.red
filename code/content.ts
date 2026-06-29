@@ -383,7 +383,8 @@ class FilterHolder {
         const results: PhotoDatabase = this.fetchFilteredPhotos(photos);
         const total: number = Object.keys(results).length;
         this.element.classList.toggle('hide_results', !this.isActive());
-        this.results.textContent = `${total} Result${total == 1 ? '' : 's'}`;
+        if (this.isActive())
+            this.results.textContent = `${total} Result${total == 1 ? '' : 's'}`;
     }
 
     // returns true if any filter dropdown has a non-placeholder selection

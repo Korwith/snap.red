@@ -265,7 +265,7 @@
     color: white;
     font-weight: 700;
     opacity: 1;
-    transition: opacity 0.15s;
+    transition: opacity 0.3s;
     
     background: linear-gradient(to bottom, #151515, #040404);
     border-radius: 8px;
