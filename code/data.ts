@@ -122,8 +122,18 @@ const Data: Database = {
             },
             '04/25/26': {
                 name: 'Acadia National Park',
-                id: ["DSCN2911", "DSCN2948", "DSCN2812","DSCN2813","DSCN2838","DSCN2882","DSCN2886","DSCN2953"],
+                id: ['DSCN2911', 'DSCN2948', 'DSCN2812', 'DSCN2813', 'DSCN2838', 'DSCN2882', 'DSCN2886', 'DSCN2953'],
                 featured: 5
+            },
+            '04/04/26': {
+                name: 'Washington D.C.',
+                id: ["DSCN2633", "DSCN2631", "DSCN2638", "DSCN2647", "DSCN2652", "DSCN2655", "DSCN2656", "DSCN2609"],
+                people: ['Paris', 'Ely', 'Nolan']
+            },
+            '04/19/26': {
+                name: 'Downtown Frederick',
+                id: [1804, 1801, 1800, 1791],
+                people: ['Paris'],
             },
             '03/10/26': {
                 name: 'Weverton Cliffs',
@@ -156,7 +166,7 @@ const Data: Database = {
             },
             '12/25/25': {
                 name: 'Hagerstown',
-                id: ['0687', '0693','0702', '0703', '0677', '0661', '0658'],
+                id: ['0687', '0693', '0702', '0703', '0677', '0661', '0658'],
                 people: ['Paris'],
             },
             '11/26/25': {
@@ -633,7 +643,7 @@ const Data: Database = {
             },
             '10/21/23': {
                 name: 'Downtown Frederick',
-                people: ["Paris"],
+                people: ['Paris'],
                 id: [4541, 4548, 4542, 4552, 4556],
             },
             '10/10/23': {

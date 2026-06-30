@@ -129,6 +129,7 @@ class PhotoRowLocation extends PhotoRow {
     // populates the row with all photos from this location
     load(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByLocation(this.location);
+        if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
@@ -151,6 +152,7 @@ class PhotoRowPerson extends PhotoRow {
     // populates the row with all photos featuring this person
     load(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByPerson(this.person);
+        if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
@@ -179,7 +181,8 @@ class PhotoRowMonth extends PhotoRow {
     load(): void {
         const manager: PageManager = this.manager;
         const matches: PhotoDatabase = manager.fetchUserImagesByMonthAndYear(this.month, this.year);
-
+        if (Object.keys(matches).length <= 1) return this.remove();
+        
         for (const date in matches) {
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
