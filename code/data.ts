@@ -101,7 +101,7 @@ const Data: Database = {
                 people: ['Paris'],
             },
             '05/15/26': {
-                name: 'Boonsboro',
+                name: 'Boonsboro, MD',
                 id: ['DSCN3270', 'DSCN3265', 'DSCN3256', 'DSCN3255', 'DSCN3253', 'DSCN3264'],
                 people: ['Paris'],
             },
