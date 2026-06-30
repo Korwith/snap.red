@@ -115,6 +115,11 @@ const Data: Database = {
                 id: ['DSCN3024', 'DSCN3043', 'DSCN3036', 'DSCN3032', 'DSCN3028'],
                 people: ['Riley'],
             },
+            '04/26/26': {
+                name: 'Bangor, ME',
+                id: ['2009', '2087', '2074', '2019', '2014', 'DSCN2966', 'DSCN2973', 'DSCN2991'],
+                people: ['Riley', 'Ed'],
+            },
             '03/10/26': {
                 name: 'Weverton Cliffs',
                 id: ['DSCN2449', 'DSCN2454', 'DSCN2452', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
