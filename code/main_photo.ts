@@ -280,6 +280,7 @@ class PhotoDetailsHeader {
     details: MainPhotoDetails;
     element: HTMLElement;
     span: HTMLElement;
+    share: PhotoShareButton;
     close: DetailsCloseButton;
 
     // creates the header with a text span and close button
@@ -288,6 +289,7 @@ class PhotoDetailsHeader {
         this.element = document.createElement('div');
         this.element.classList.add('header');
         this.span = document.createElement('span');
+        this.share = new PhotoShareButton(this);
         this.close = new DetailsCloseButton(this.details.menu.holder, this);
 
         this.element.appendChild(this.span);
@@ -380,5 +382,30 @@ class DetailsCloseButton extends HolderCloseButton {
     // creates the close button inside the details header element
     constructor(holder: MainPhotoHolder, details_header: PhotoDetailsHeader) {
         super(holder, details_header.element);
+    }
+}
+
+// button which copies a sharable link
+class PhotoShareButton {
+    element: HTMLElement;
+
+    constructor(details_header: PhotoDetailsHeader) {
+        this.element = document.createElement('button');
+        this.element.classList.add('share');
+        this.element.textContent = 'Share';
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        details_header.element.appendChild(this.element);
+    }
+
+    async onclick(e: PointerEvent): Promise<void> {
+        try {
+            await navigator.share({
+                title: document.title,
+                text: 'website (test)',
+                url: 'https://snap.red',
+            })
+        } catch(error) {
+            console.warn('Device does not have share');
+        }
     }
 }

@@ -196,7 +196,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 
 .menu aside .header {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
     width: 100%;
     height: 60px;
     padding: 10px;
@@ -210,6 +210,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 .menu aside .header span {
     display: flex;
     align-items: center;
+    flex: 1;
     white-space: nowrap;
     gap: 4px;
     color: white;
@@ -229,18 +230,25 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     background-repeat: no-repeat;
 }
 
-.menu aside .header button.close {
+.menu aside .header button {
     position: relative;
-    display: block;
-    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     border: 0;
+    padding-left: 12px;
+    padding-right: 12px;
     background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 0.8);;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
+    transition: color 0.15s;
 }
 
-.menu aside .header button.close::before,
-.menu aside .header button.close::after {
+.menu aside .header button::before,
+.menu aside .header button::after {
     content: '';
     position: absolute;
     top: 0;
@@ -251,23 +259,39 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     border-radius: 8px;
 }
 
-.menu aside .header button.close::before {
+.menu aside .header button::before {
     background: linear-gradient(to bottom, #151515, #050505);
-    z-index: 0;
+    z-index: -1;
+}
+
+.menu aside .header button::after {
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.menu aside .header button.close {
+    aspect-ratio: 1/1;
+    padding: 0;
 }
 
 .menu aside .header button.close::after {
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    background-color: rgba(0, 0, 0, 0);
-    background-size: 80%;
+    background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../icon/exit.svg);
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 0.15s;
 }
 
-.menu aside .header button.close:hover::after {
+.menu aside .header button.share {
+    width: fit-content;
+}
+
+.menu aside .header button:hover {
+    color: white;
+}
+
+.menu aside .header button:hover::after {
     opacity: 1;
 }
 
