@@ -81,6 +81,40 @@ const Data: Database = {
         },
 
         images: {
+            '06/15/26': {
+                name: 'Rivermist Park',
+                id: [2815, 2817, 2818],
+                people: ['Riley']
+            },
+            '05/31/26': {
+                name: 'Railroad Tracks',
+                id: [2665, 2668, 2673],
+            },
+            '05/18/26': {
+                name: 'Cascade Falls',
+                id: ['DSCN3405', 'DSCN3367', 'DSCN3383', 'DSCN3387', 'DSCN3365'],
+                people: ['Paris'],
+            },
+            '05/17/26': {
+                name: 'Downtown Frederick',
+                id: ['DSCN3346', 'DSCN3339', 'DSCN3348', 'DSCN3358'],
+                people: ['Paris'],
+            },
+            '05/15/26': {
+                name: 'Boonsboro',
+                id: ['DSCN3270', 'DSCN3265', 'DSCN3256', 'DSCN3255', 'DSCN3253', 'DSCN3264'],
+                people: ['Paris'],
+            },
+            '05/11/26': {
+                name: 'New York City',
+                id: ['DSCN3200', 'DSCN3185', 'DSCN3180', 'DSCN3174', 'DSCN3172', 'DSCN2455'],
+                people: ['Paris'],
+            },
+            '04/27/26': {
+                name: 'Portsmouth, NH',
+                id: ['DSCN3024', 'DSCN3043', 'DSCN3036', 'DSCN3032', 'DSCN3028'],
+                people: ['Riley'],
+            },
             '03/10/26': {
                 name: 'Weverton Cliffs',
                 id: ['DSCN2449', 'DSCN2454', 'DSCN2452', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
