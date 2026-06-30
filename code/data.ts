@@ -123,6 +123,7 @@ const Data: Database = {
             '04/25/26': {
                 name: 'Acadia National Park',
                 id: ['DSCN2911', 'DSCN2948', 'DSCN2812', 'DSCN2813', 'DSCN2838', 'DSCN2882', 'DSCN2886', 'DSCN2953'],
+                people: ['Riley', 'Ed'],
                 featured: 5
             },
             '04/04/26': {
