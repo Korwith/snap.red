@@ -120,6 +120,11 @@ const Data: Database = {
                 id: ['2009', '2087', '2074', '2019', '2014', 'DSCN2966', 'DSCN2973', 'DSCN2991'],
                 people: ['Riley', 'Ed'],
             },
+            '04/25/26': {
+                name: 'Acadia National Park',
+                id: ["DSCN2911", "DSCN2948", "DSCN2812","DSCN2813","DSCN2838","DSCN2882","DSCN2886","DSCN2953"],
+                featured: 5
+            },
             '03/10/26': {
                 name: 'Weverton Cliffs',
                 id: ['DSCN2449', 'DSCN2454', 'DSCN2452', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
@@ -377,7 +382,6 @@ const Data: Database = {
                 name: 'Whiterock',
                 id: [5629, 5653, 5635, 5636, 5644, 5648, 5657, 5673, 5682],
                 people: ['Riley', 'Matt'],
-                featured: 1
             },
             '11/12/24': {
                 name: 'Amber Meadows',
