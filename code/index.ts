@@ -9,6 +9,7 @@ class PageManager {
     footer: PageFooter;
     content: PageContent;
     main_photo: MainPhotoHolder;
+    url_handler?: URLHandler;
 
     // initializes all page components with the default user
     constructor() {
@@ -23,6 +24,7 @@ class PageManager {
         this.footer = new PageFooter(this)
         this.content = new PageContent(this);
         this.main_photo = new MainPhotoHolder(this);
+        this.url_handler = new URLHandler(this);
     }
 
     // resets the sidebar and content area for the current user
@@ -35,7 +37,9 @@ class PageManager {
     switchUser(user: string): void {
         if (!this.data[user]) throw new Error('Invalid user');
         this.user = user;
+        this.header.user_select.syncToUser(user);
         this.reload();
+        this.url_handler?.setState(user);
     }
 
     // opens or closes the sidebar and shifts the content accordingly
@@ -48,6 +52,7 @@ class PageManager {
     openImageByDate(date: string, user?: string): void {
         user ??= this.user;
         this.main_photo.openImageByDate(date);
+        this.url_handler?.setState(this.user, date);
     }
 
     // returns an array of all user names in the database
@@ -247,6 +252,60 @@ class PageManager {
         }
 
         return batch;
+    }
+}
+
+// decides what to do with the given URL
+// possibly executing various page functions
+class URLHandler {
+    manager: PageManager;
+
+    // creates handler then checks url
+    constructor(manager: PageManager) {
+        this.manager = manager;
+        this.checkURL(window.location.href);
+    }
+
+    // sets given url state
+    setState(user: string, date?: string): void {
+        let hash = `user=${user}`;
+        if (date) hash += `&date=${date.replace(/\//g, '')}`;
+        window.history.replaceState(null, document.title, `#${hash}`);
+    }
+
+    // clears current url state
+    clearURLData(): void {
+        window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
+
+    // checks if url is valid on load, then run functions
+    checkURL(href: string) {
+        const hash: string = href.split('#')[1] ?? '';
+        if (!hash) return;
+
+        const params: URLSearchParams = new URLSearchParams(hash);
+        const user: string | null = params.get('user');
+        const date_raw: string | null = params.get('date');
+
+        if (user) {
+            try {
+                this.manager.switchUser(user);
+            } catch {
+                return;
+            }
+        }
+
+        if (date_raw) {
+            const date: string | null = this.constructDate(date_raw);
+            if (!date) return;
+            this.manager.openImageByDate(date);
+        }
+    }
+
+    // turns 062823 into 06/28/23 for example (because slashes wouldnt work in our url)
+    constructDate(numbers: string): string | null {
+        if (numbers.length != 6) return null;
+        return `${numbers.slice(0, 2)}/${numbers.slice(2, 4)}/${numbers.slice(4, 6)}`;
     }
 }
 

@@ -3,6 +3,7 @@ class MainPhotoHolder {
     manager: PageManager;
     element: HTMLElement;
     menu: MainPhotoMenu;
+    selected: PhotoEntry | null;
 
     // creates the holder element and its photo menu
     constructor(manager: PageManager) {
@@ -10,6 +11,7 @@ class MainPhotoHolder {
         this.element = document.createElement('div');
         this.element.classList.add('main_photo_holder');
         this.menu = new MainPhotoMenu(this);
+        this.selected = null;
         manager.element.appendChild(this.element);
     }
 
@@ -20,6 +22,9 @@ class MainPhotoHolder {
 
     // loads the photo and its details for the given date and shows the overlay
     openImageByDate(date: string): void {
+        const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
+        this.selected = entry;
+
         this.menu.figure.load(date);
         this.menu.details.load(date);
         this.toggle(true);
@@ -363,9 +368,10 @@ abstract class HolderCloseButton {
         parent.appendChild(this.element);
     }
 
-    // hides the main photo overlay
+    // hides the main photo overlay and removes the date from the URL
     onclick(e: PointerEvent): void {
         this.holder.toggle(false);
+        this.holder.manager.url_handler?.setState(this.holder.manager.user);
     }
 }
 
@@ -387,9 +393,11 @@ class DetailsCloseButton extends HolderCloseButton {
 
 // button which copies a sharable link
 class PhotoShareButton {
+    header: PhotoDetailsHeader;
     element: HTMLElement;
 
     constructor(details_header: PhotoDetailsHeader) {
+        this.header = details_header;
         this.element = document.createElement('button');
         this.element.classList.add('share');
         this.element.textContent = 'Share';
@@ -398,11 +406,14 @@ class PhotoShareButton {
     }
 
     async onclick(e: PointerEvent): Promise<void> {
+        const selected: PhotoEntry | null = this.header.details.menu.holder.selected;
+        if (!selected) return;
+
         try {
             await navigator.share({
-                title: document.title,
-                text: 'website (test)',
-                url: 'https://snap.red',
+                title: selected.name,
+                text: `Check out ${selected.name} on Snapshot!`,
+                url: window.location.href,
             })
         } catch(error) {
             console.warn('Device does not have share');

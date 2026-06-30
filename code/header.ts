@@ -155,9 +155,14 @@ class HeaderUserSelect extends Dropdown {
         }
     }
 
+    // visually syncs the dropdown to show the given user as selected
+    syncToUser(user: string): void {
+        const option = this.options.find(o => o.getText() === user);
+        if (option) this.setPrimaryOption(option, true);
+    }
+
     // switches the active user to the selected option's name
     selected(option: DropdownOption): void {
-        console.log(option)
-        this.header.manager.switchUser(option.getText())
+        this.header.manager.switchUser(option.getText());
     }
 }
