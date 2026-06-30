@@ -24,15 +24,32 @@ abstract class MediaHolder {
 
 // placeholder holder for video media entries
 class VideoHolder extends MediaHolder {
+    videos: MediaFrameVideo[];
+
     // creates the video holder element
     constructor(manager: PageManager, parent: HTMLElement) {
         super(manager, parent);
+        this.videos = [];
         this.element.classList.add('video_holder');
+        this.load();
     }
 
     // loads video entries into the holder
     load(): void {
+        const videos: VideoDatabase | null = this.manager.fetchUserVideos();
+        if (!videos) throw new Error('No videos found');
 
+        for (const date in videos) {
+            const video_frame: MediaFrameVideo = new MediaFrameVideo(this, date);
+            this.videos.push(video_frame);
+        }
+    }
+
+    remove(): void {
+        for (const video of this.videos) {
+            video.remove();
+        }
+        this.element.remove();
     }
 }
 
@@ -182,7 +199,7 @@ class PhotoRowMonth extends PhotoRow {
         const manager: PageManager = this.manager;
         const matches: PhotoDatabase = manager.fetchUserImagesByMonthAndYear(this.month, this.year);
         if (Object.keys(matches).length <= 1) return this.remove();
-        
+
         for (const date in matches) {
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
@@ -260,18 +277,34 @@ class MediaFramePhoto extends MediaFrame {
 
 // a media frame placeholder for video entries
 class MediaFrameVideo extends MediaFrame {
+    link?: string;
+    
     // creates the video frame
     constructor(holder: MediaHolder, date: string) {
         super(holder, date);
+        this.load();
     }
 
     // loads video data into the frame
     load(): void {
+        const manager: PageManager = this.holder.manager;
+        const user_videos: VideoDatabase | null = manager.fetchUserVideos();
+        if (!user_videos) throw new Error('No videos found for user');
+        const entry: VideoEntry | null = user_videos[this.date];
+        if (!entry) throw new Error('Video does not exist at date');
+        this.link = entry.link;
 
+        this.element.setAttribute('title', entry.name);
+        this.image.setAttribute('loading', 'lazy');
+        this.image.setAttribute('src', `/icon/thumbnail/${entry.thumbnail}`);
+        this.caption.textContent = entry.name;
+
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
     }
 
     // handles click on the video frame
     onclick(e: PointerEvent): void {
-
+        if (!this.link) return;
+        window.open(this.link, '_blank');
     }
 }

@@ -1,3 +1,4 @@
+/* content layout */
 .content {
     display: flex;
     flex-direction: column;
@@ -16,6 +17,7 @@
     left: 0;
 }
 
+/* profile card */
 .card {
     position: relative;
     display: flex;
@@ -82,6 +84,7 @@
     font-size: 1.4rem;
 }
 
+/* social row */
 .social_row {
     display: flex;
     justify-content: center;
@@ -128,6 +131,7 @@
     border: 2px solid white;
 }
 
+/* web links in card */
 .website {
     position: relative;
     display: flex;
@@ -206,6 +210,7 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* photo filters */
 .filter_holder {
     position: relative;
     display: flex;
@@ -215,6 +220,7 @@
     margin-right: auto;
     height: 35px;
     overflow-y: visible;
+    order: 1;
     transition: padding-bottom 0.15s;
 }
 
@@ -222,7 +228,8 @@
     min-width: fit-content;
 }
 
-.filter_holder .dropdown.empty, .filter_holder .dropdown.empty .option:hover {
+.filter_holder .dropdown.empty,
+.filter_holder .dropdown.empty .option:hover {
     background: linear-gradient(to bottom, #151515, #040404);
 }
 
@@ -266,7 +273,7 @@
     font-weight: 700;
     opacity: 1;
     transition: opacity 0.3s;
-    
+
     background: linear-gradient(to bottom, #151515, #040404);
     border-radius: 8px;
     box-sizing: border-box;
@@ -291,6 +298,7 @@
     pointer-events: none;
 }
 
+/* mobile */
 @media screen and (max-width: 1228px) {
     .filter_holder {
         padding-bottom: 40px;
@@ -349,10 +357,6 @@
 }
 
 @media screen and (max-width: 767px) {
-    .filter_holder {
-        width: calc(100% - 10px);
-    }
-
     .content {
         left: 0;
         width: 100vw;
@@ -367,7 +371,7 @@
         font-size: 1.1rem;
     }
 
-    .photo_grid figure {
-        width: calc(50% - 10px);
+    .filter_holder {
+        width: calc(100% - 10px);
     }
 }

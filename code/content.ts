@@ -14,7 +14,6 @@ class PageContent {
         this.element.classList.add('content');
         this.card = new ProfileCard(this);
         this.filters = new FilterHolder(this);
-        //this.videos = new VideoHolder(this);
         this.photos = new ContentPhotoGrid(this, this.filters);
 
         this.load();
@@ -26,6 +25,12 @@ class PageContent {
     // loads the profile card and photo grid
     load(): void {
         this.card.load();
+
+        const videos: VideoDatabase | null = this.manager.fetchUserVideos();
+        if (videos && Object.keys(videos).length > 0) {
+            this.videos = new VideoHolder(this.manager, this.element);
+        }
+
         this.photos.load();
     }
 
@@ -34,6 +39,7 @@ class PageContent {
         this.photos.clear();
         this.filters.reset();
         this.card.reset();
+        this.videos?.remove();
         this.load();
     }
 

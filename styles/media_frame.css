@@ -1,3 +1,4 @@
+/* media holder containers */
 .media_holder {
     display: flex;
     gap: 10px;
@@ -5,8 +6,18 @@
 
 .media_holder.video_holder {
     flex-wrap: nowrap;
-    height: 180px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 180px;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    order: 0;
+    scrollbar-width: none;
+}
+
+.media_holder.video_holder::-webkit-scrollbar {
+    display: none;
 }
 
 .media_holder.photo_grid {
@@ -15,6 +26,7 @@
     flex-wrap: wrap;
     width: 100%;
     height: fit-content;
+    order: 2;
 }
 
 .media_holder.photo_row {
@@ -22,6 +34,46 @@
     overflow-x: auto;
 }
 
+/* photo row component */
+.photo_row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.photo_row .row_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: white;
+    font-weight: 700;
+    order: -1;
+}
+
+.photo_row .internal_scroll {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex: 1;
+    overflow-x: auto;
+}
+
+.photo_row .internal_scroll figure {
+    width: 150px;
+    height: 150px;
+}
+
+/* figure base */
 figure {
     position: relative;
     cursor: pointer;
@@ -58,9 +110,10 @@ figure:hover::after {
     border: 4px solid white;
 }
 
+/* figure sizing */
 .video_holder figure {
-    aspect-ratio: 16/9;
-    height: 100%;
+    height: 180px;
+    min-width: 320px;
 }
 
 .photo_grid figure {
@@ -74,6 +127,7 @@ figure:hover::after {
     flex: 0 0 auto;
 }
 
+/* figure overlays and subchildren */
 figure .date,
 figure figcaption {
     display: flex;
@@ -126,40 +180,21 @@ figure.featured figcaption::before {
     background-image: url(../icon/star.svg);
 }
 
-.photo_row {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    height: fit-content;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
+/* mobile */
+@media screen and (max-width: 767px) {
+    .photo_grid figure {
+        width: calc(50% - 10px);
+    }
 
-.photo_row .row_header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    width: 100%;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: white;
-    font-weight: 700;
-    order: -1;
-}
+    .media_holder.video_holder {
+        width: calc(100vw - 20px);
+        min-height: 140px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
-.photo_row .internal_scroll {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    flex: 1;
-    overflow-x: auto;
-}
-
-.photo_row .internal_scroll figure {
-    width: 150px;
-    height: 150px;
+    .media_holder.video_holder figure {
+        height: 140px;
+        min-width: 249px;
+    }
 }
