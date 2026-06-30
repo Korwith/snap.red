@@ -845,46 +845,51 @@ const Data: Database = {
         },
 
         videos: {
-            '01/01/22': {
-                name: 'Homies Tape 1',
-                thumbnail: 'homiestape1.jpg',
-                link: 'https://www.youtube.com/watch?v=j1FrkuC4lPk',
+            '06/11/26': {
+                name: 'gopro road trip full footage',
+                thumbnail: 'goproroadtrip.webp',
+                link: 'https://drive.google.com/file/d/1ja_McV21CT0cMLkDragyrEXe6czC7joD',
             },
-            '02/14/22': {
-                name: 'Homies Tape 2',
-                thumbnail: 'homiestape2.jpg',
-                link: 'https://www.youtube.com/watch?v=MPtJjS6f-4s',
-            },
-            '03/31/22': {
-                name: 'Homies Tape 3',
-                thumbnail: 'homiestape3.jpg',
-                link: 'https://www.youtube.com/watch?v=sNjinZgbw98',
-            },
-            '06/07/22': {
-                name: 'Homies Tape 4',
-                thumbnail: 'homiestape4.jpg',
-                link: 'https://www.youtube.com/watch?v=0zBHh7WyCrI',
-            },
-            '08/16/22': {
-                name: 'Homies Tape 5',
-                thumbnail: 'homiestape5.jpg',
-                link: 'https://www.youtube.com/watch?v=t8-SiBabwAo',
-            },
-            '01/01/23': {
-                name: 'Homies Tape 6',
-                thumbnail: 'homiestape6.jpg',
-                link: 'https://www.youtube.com/watch?v=92msqUVUNAA',
+            '05/31/25': {
+                name: 'Homies Tape 8',
+                thumbnail: 'homiestape8.jpg',
+                link: 'https://www.youtube.com/watch?v=KymvNC8jtIU',
             },
             '06/03/23': {
                 name: 'Homies Tape 7',
                 thumbnail: 'homiestape7.jpg',
                 link: 'https://www.youtube.com/watch?v=jfX9XHAZXBQ',
             },
-            '05/31/25': {
-                name: 'Homies Tape 8',
-                thumbnail: 'homiestape8.jpg',
-                link: 'https://www.youtube.com/watch?v=KymvNC8jtIU',
-            }
+            '01/01/23': {
+                name: 'Homies Tape 6',
+                thumbnail: 'homiestape6.jpg',
+                link: 'https://www.youtube.com/watch?v=92msqUVUNAA',
+            },
+            '08/16/22': {
+                name: 'Homies Tape 5',
+                thumbnail: 'homiestape5.jpg',
+                link: 'https://www.youtube.com/watch?v=t8-SiBabwAo',
+            },
+            '06/07/22': {
+                name: 'Homies Tape 4',
+                thumbnail: 'homiestape4.jpg',
+                link: 'https://www.youtube.com/watch?v=0zBHh7WyCrI',
+            },
+            '03/31/22': {
+                name: 'Homies Tape 3',
+                thumbnail: 'homiestape3.jpg',
+                link: 'https://www.youtube.com/watch?v=sNjinZgbw98',
+            },
+            '02/14/22': {
+                name: 'Homies Tape 2',
+                thumbnail: 'homiestape2.jpg',
+                link: 'https://www.youtube.com/watch?v=MPtJjS6f-4s',
+            },
+            '01/01/22': {
+                name: 'Homies Tape 1',
+                thumbnail: 'homiestape1.jpg',
+                link: 'https://www.youtube.com/watch?v=j1FrkuC4lPk',
+            },
         },
 
         images: {
