@@ -406,7 +406,9 @@ class PhotoShareButton {
     }
 
     async onclick(e: PointerEvent): Promise<void> {
+        const manager: PageManager = this.header.details.menu.holder.manager;
         const selected: PhotoEntry | null = this.header.details.menu.holder.selected;
+
         if (!selected) return;
 
         try {
@@ -416,7 +418,12 @@ class PhotoShareButton {
                 url: window.location.href,
             })
         } catch(error) {
-            console.warn('Device does not have share');
+            try {
+                navigator.clipboard.writeText(window.location.href)
+                manager.pushNotification('Info', 'Copied to clipboard!');
+            } catch(error) {
+                manager.pushNotification('Warn', 'Your device does not support sharing.');
+            }
         }
     }
 }

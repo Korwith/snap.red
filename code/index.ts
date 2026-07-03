@@ -9,6 +9,7 @@ class PageManager {
     footer: PageFooter;
     content: PageContent;
     main_photo: MainPhotoHolder;
+    notifications: NotificationManager;
     url_handler?: URLHandler;
 
     // initializes all page components with the default user
@@ -24,6 +25,7 @@ class PageManager {
         this.footer = new PageFooter(this)
         this.content = new PageContent(this);
         this.main_photo = new MainPhotoHolder(this);
+        this.notifications = new NotificationManager(this);
         this.url_handler = new URLHandler(this);
     }
 
@@ -46,6 +48,11 @@ class PageManager {
     toggleSidebar(force?: boolean): void {
         this.sidebar.toggle(force);
         this.content.toggle(force);
+    }
+
+    // sends a notification (handled by notification manager)
+    pushNotification(type: NotificationType, text: string): void {
+        this.notifications.pushNotification(type, text);
     }
 
     // opens the full-size photo viewer for the given date

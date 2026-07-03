@@ -81,6 +81,16 @@ const Data: Database = {
         },
 
         images: {
+            '07/03/26': {
+                name: 'Monocacy River',
+                id: ['DSCN3576', 'DSCN3559','DSCN3560','DSCN3562'],
+                people: ['Riley', 'Maya', 'Xavier']
+            },
+            '07/02/26': {
+                name: 'Falling Waters, WV',
+                id: ["DSCN3496","DSCN3506","DSCN3515","DSCN3523","DSCN3524","DSCN3525","DSCN3544","DSCN3548"],
+                people: ['Paris'],
+            },
             '06/15/26': {
                 name: 'Rivermist Park',
                 id: [2815, 2817, 2818],

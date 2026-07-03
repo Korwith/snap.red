@@ -1,0 +1,64 @@
+.notification_holder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+    height: fit-content;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.notification {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    box-sizing: border-box;
+    transition: opacity 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.notification::after, .notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.notification::before {
+    background: linear-gradient(to bottom, #050505, #151515);
+    z-index: -1;
+}
+
+.notification::after {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notification .icon {
+    height: 40px;
+    width: 40px;    
+    background-image: url(/icon/check.svg);
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .notification_holder {
+        bottom: 50px;   
+    }
+}
