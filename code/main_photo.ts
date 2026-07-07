@@ -98,7 +98,7 @@ class MainPhotoFigure {
         for (const index in list) {
             const id: string | number = list[index];
             const img: HTMLElement = document.createElement('img');
-            img.setAttribute('loading', 'lazy');
+            img.setAttribute('loading', 'eager');
             img.setAttribute('id', id.toString());
             img.setAttribute('src', `../media/${user}/IMG_${id}.jpg`);
             img.style.left = `${parseInt(index) * 100}%`;
