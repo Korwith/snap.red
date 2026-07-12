@@ -84,10 +84,12 @@ abstract class PhotoGrid extends MediaHolder {
 abstract class PhotoRow extends MediaHolder {
     span: HTMLElement;
     internal: PhotoRowInternal;
+    exclude_date: string;
 
     // creates the row element with a header label and internal scroll grid
-    constructor(manager: PageManager, parent: HTMLElement) {
+    constructor(manager: PageManager, parent: HTMLElement, exclude_date: string) {
         super(manager, parent);
+        this.exclude_date = exclude_date;
         this.element.classList.add('photo_row');
         this.span = document.createElement('span');
         this.internal = new PhotoRowInternal(manager, this.element)
@@ -136,8 +138,8 @@ class PhotoRowLocation extends PhotoRow {
     location: string;
 
     // creates the row and loads photos matching the given location
-    constructor(manager: PageManager, parent: HTMLElement, location: string) {
-        super(manager, parent);
+    constructor(manager: PageManager, parent: HTMLElement, location: string, exclude_date: string) {
+        super(manager, parent, exclude_date);
         this.location = location;
         this.setHeaderText('This Location');
         this.load();
@@ -149,6 +151,7 @@ class PhotoRowLocation extends PhotoRow {
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
+            if (date == this.exclude_date) continue;
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
     }
@@ -159,8 +162,8 @@ class PhotoRowPerson extends PhotoRow {
     person: string;
 
     // creates the row and loads photos featuring the given person
-    constructor(manager: PageManager, parent: HTMLElement, person: string) {
-        super(manager, parent);
+    constructor(manager: PageManager, parent: HTMLElement, person: string, exclude_date: string) {
+        super(manager, parent, exclude_date);
         this.person = person;
         this.setHeaderText('With ' + this.person);
         this.load();
@@ -172,6 +175,7 @@ class PhotoRowPerson extends PhotoRow {
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
+            if (date == this.exclude_date) continue;
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
     }
@@ -184,8 +188,8 @@ class PhotoRowMonth extends PhotoRow {
     date_handler: DateManager;
 
     // creates the row and loads photos from the given month and year
-    constructor(manager: PageManager, parent: HTMLElement, month: string, year: string) {
-        super(manager, parent);
+    constructor(manager: PageManager, parent: HTMLElement, month: string, year: string, exclude_date: string) {
+        super(manager, parent, exclude_date);
         this.month = month;
         this.year = year;
         this.date_handler = new DateManager();
@@ -201,6 +205,7 @@ class PhotoRowMonth extends PhotoRow {
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
+            if (date == this.exclude_date) continue;
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
     }

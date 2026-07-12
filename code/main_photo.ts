@@ -331,18 +331,18 @@ class PhotoDetailsGrid {
         if (!entry) throw new Error('No entry found at date');
         this.reset();
 
-        const location_pane: PhotoRowLocation = new PhotoRowLocation(manager, this.element, entry.name);
+        const location_pane: PhotoRowLocation = new PhotoRowLocation(manager, this.element, entry.name, date);
         this.photo_rows.push(location_pane);
 
         if (entry.people) {
             for (const person of entry.people) {
                 if (!manager.isFeaturedPersonValid(person)) continue;
-                const person_pane: PhotoRowPerson = new PhotoRowPerson(manager, this.element, person);
+                const person_pane: PhotoRowPerson = new PhotoRowPerson(manager, this.element, person, date);
                 this.photo_rows.push(person_pane);
             }
         }
 
-        const month_pane: PhotoRowMonth = new PhotoRowMonth(manager, this.element, month, year);
+        const month_pane: PhotoRowMonth = new PhotoRowMonth(manager, this.element, month, year, date);
         this.photo_rows.push(month_pane);
     }
 
