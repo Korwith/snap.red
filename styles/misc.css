@@ -121,12 +121,20 @@
     display: none;
 }
 
-.option.highlighted {
+.option.highlighted.pink {
     color: #FFC0CB;
 }
 
 /* fun solution to this problem */
 /* turns a white image pink, so i dont have to serve another svg */
-.option.highlighted::before, .option.highlighted::after {
+.option.highlighted.pink::before, .option.highlighted.pink::after {
     filter: brightness(0) saturate(100%) invert(71%) sepia(18%) saturate(799%) hue-rotate(305deg) brightness(114%) contrast(108%);
+}
+
+.option.highlighted.purple {
+    color: #DA70D6;
+}
+
+.option.highlighted.purple::before, .option.highlighted.purple::after {
+    filter: brightness(0) saturate(100%) invert(79%) sepia(29%) saturate(5413%) hue-rotate(248deg) brightness(89%) contrast(92%);
 }

@@ -517,7 +517,7 @@ class FilterDropdownPerson extends FilterDropdown {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
         const images: PhotoDatabase = manager.fetchUserImages(null);
-        this.addPlaceholder('Person');
+        this.addPlaceholder('Friend');
 
         let found: string[] = [];
         for (const date in images) {
@@ -529,7 +529,10 @@ class FilterDropdownPerson extends FilterDropdown {
                 found.push(person);
                 const person_option: DropdownOption = new DropdownOption(this);
                 person_option.setText(person);
-                if (HighlightUsers.includes(person)) person_option.setHighlight();
+
+                const highlight_color: string | null = HighlightUsers[person];
+                if (!highlight_color) continue;
+                person_option.setHighlight(highlight_color);
             }
         }
     }

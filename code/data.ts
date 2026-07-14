@@ -57,8 +57,16 @@ interface SidebarStructure {
     }
 }
 
+type HighlightedUserColor = 'pink' | 'purple'
+
+interface HighlightedUserList {
+    [key: string]: HighlightedUserColor;
+} 
+
 const HideUsers: string[] = ['Unknown', 'Abiel'];
-const HighlightUsers: string[] = ['Brittany'];
+const HighlightUsers: HighlightedUserList = {
+    'Brittany': 'purple'
+}
 
 const Data: Database = {
     'Thaddeus': {

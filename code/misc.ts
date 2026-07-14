@@ -113,8 +113,8 @@ class DropdownOption {
     }
 
     // marks this option as highlighted
-    setHighlight(): void {
-        this.element.classList.add('highlighted')
+    setHighlight(color: string): void {
+        this.element.classList.add('highlighted', color)
     } 
 
     // applies a background image to this option
