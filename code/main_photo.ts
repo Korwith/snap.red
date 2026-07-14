@@ -112,7 +112,7 @@ class MainPhotoFigure {
         const index: number = this.selected + shift;
         if (index < 0 || index >= this.images.length ) return;
         this.element.classList.toggle('hide_left', index - 1 < 0);
-        this.element.classList.toggle('hide_right', index + 1 >= this.images.length);
+        this.element.classList.toggle('hide_right', this.images.length == 1 || index + 1 >= this.images.length);
 
 
         for (const key in this.images) {
@@ -132,6 +132,7 @@ class MainPhotoFigure {
         this.reset();
         this.loadPhotoDetails(date);
         this.loadPhotoList(photo.id);
+        this.shiftSelectedPhoto(0);
     }
 
     // clears the current photo images, caption, and info overlay
