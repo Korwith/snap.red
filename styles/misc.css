@@ -127,6 +127,6 @@
 
 /* fun solution to this problem */
 /* turns a white image pink, so i dont have to serve another svg */
-.option.highlighted::before {
+.option.highlighted::before, .option.highlighted::after {
     filter: brightness(0) saturate(100%) invert(71%) sepia(18%) saturate(799%) hue-rotate(305deg) brightness(114%) contrast(108%);
 }
