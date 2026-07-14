@@ -112,6 +112,11 @@ class DropdownOption {
         return this.element.classList.contains('primary');
     }
 
+    // marks this option as highlighted
+    setHighlight(): void {
+        this.element.classList.add('highlighted')
+    } 
+
     // applies a background image to this option
     setImage(url: string): void {
         this.element.classList.add('image');

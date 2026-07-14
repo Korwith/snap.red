@@ -58,6 +58,8 @@ interface SidebarStructure {
 }
 
 const HideUsers: string[] = ['Unknown', 'Abiel'];
+const HighlightUsers: string[] = ['Brittany'];
+
 const Data: Database = {
     'Thaddeus': {
         card: {

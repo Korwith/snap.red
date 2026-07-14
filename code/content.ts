@@ -529,6 +529,7 @@ class FilterDropdownPerson extends FilterDropdown {
                 found.push(person);
                 const person_option: DropdownOption = new DropdownOption(this);
                 person_option.setText(person);
+                if (HighlightUsers.includes(person)) person_option.setHighlight();
             }
         }
     }
