@@ -61,7 +61,7 @@ type HighlightedUserColor = 'pink' | 'purple'
 
 interface HighlightedUserList {
     [key: string]: HighlightedUserColor;
-} 
+}
 
 const HideUsers: string[] = ['Unknown', 'Abiel'];
 const HighlightUsers: HighlightedUserList = {
@@ -91,6 +91,15 @@ const Data: Database = {
         },
 
         images: {
+            '07/16/26': {
+                name: 'Washington D.C.',
+                id: ["DSCN3634", "DSCN3612", "DSCN3614", "DSCN3647", "DSCN3667"],
+                people: ['Edin', 'Kevin']
+            },
+            '07/13/26': {
+                name: 'Railroad Tracks',
+                id: ["3298", "3283", "3289", "3290", "3297", "3310"],
+            },
             '07/11/26': {
                 name: 'Downtown Frederick',
                 id: ['3239'],
@@ -103,12 +112,12 @@ const Data: Database = {
             },
             '07/03/26': {
                 name: 'Monocacy River',
-                id: ['DSCN3576', 'DSCN3559','DSCN3560','DSCN3562'],
+                id: ['DSCN3576', 'DSCN3559', 'DSCN3560', 'DSCN3562'],
                 people: ['Riley', 'Maya', 'Xavier']
             },
             '07/02/26': {
                 name: 'Falling Waters, WV',
-                id: ["DSCN3496","DSCN3506","DSCN3515","DSCN3523","DSCN3524","DSCN3525","DSCN3544","DSCN3548"],
+                id: ["DSCN3496", "DSCN3506", "DSCN3515", "DSCN3523", "DSCN3524", "DSCN3525", "DSCN3544", "DSCN3548"],
                 people: ['Unknown'],
             },
             '06/15/26': {
