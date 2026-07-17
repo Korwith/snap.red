@@ -27,7 +27,7 @@ nav.sidebar.shift {
 }
 
 .timeline::before {
-    content: 'Timeline';
+    content: 'Timeline (' attr(data-count) ' entries)';
     display: flex;
     align-items: center;
     justify-content: center;
