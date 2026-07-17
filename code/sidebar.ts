@@ -44,8 +44,11 @@ class SidebarTimeline {
 
     // populates the timeline with year and month entries from the user's photos
     fill(): void {
-        const sidebar_data: SidebarStructure = this.sidebar.manager.fetchSidebarContent();
+        const manager: PageManager = this.sidebar.manager;
+        const count: number = Object.keys(manager.fetchUserImages(null)).length;
+        const sidebar_data: SidebarStructure = manager.fetchSidebarContent();
         const years: string[] = Object.keys(sidebar_data).reverse();
+        this.element.setAttribute('data-count', count.toString());
 
         for (const year of years) {
             const year_holder: TimelineYearHolder = new TimelineYearHolder(this, year);
