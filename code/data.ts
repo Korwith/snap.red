@@ -91,6 +91,11 @@ const Data: Database = {
         },
 
         images: {
+            '07/19/26': {
+                name: 'Weverton Cliifs',
+                id: ["DSCN3687","DSCN3690", "DSCN3676", "DSCN3685", "DSCN3679"],
+                people: ['Brittany']
+            },
             '07/16/26': {
                 name: 'Washington D.C.',
                 id: ["DSCN3634", "DSCN3612", "DSCN3614", "DSCN3647", "DSCN3667"],
