@@ -98,7 +98,7 @@ const Data: Database = {
             },
             '07/19/26': {
                 name: 'Weverton Cliifs',
-                id: ["DSCN3687","DSCN3690", "DSCN3676", "DSCN3685", "DSCN3679"],
+                id: ["DSCN3699", "DSCN3696","DSCN3682","DSCN3687","DSCN3676", "DSCN3690","DSCN3691", "DSCN3685"],
                 people: ['Brittany'],
                 featured: 4,
             },
