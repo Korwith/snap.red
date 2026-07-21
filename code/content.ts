@@ -73,8 +73,9 @@ class ContentPhotoGrid extends PhotoGrid {
         const featured_filtered: PhotoDatabase = this.filters.fetchFilteredPhotos(featured);
 
         for (const date in featured_filtered) {
+            const photo_data: PhotoEntry = featured_filtered[date];
             const photo: MediaFramePhoto = new MediaFramePhoto(this, date);
-            photo.setFeatured(true);
+            photo.setFeatured(photo_data.featured || null);
             this.photos.push(photo);
         }
     }

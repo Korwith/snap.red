@@ -242,8 +242,10 @@ abstract class MediaFrame {
     }
 
     // toggles the featured visual style on this frame
-    setFeatured(status: boolean): void {
-        this.element.classList.toggle('featured', status);
+    setFeatured(index: number | null ): void {
+        if (!index) return;
+        this.element.style.setProperty('--importance', index.toString());
+        this.element.classList.toggle('featured', true);
     }
 
     // removes this frame from the dom

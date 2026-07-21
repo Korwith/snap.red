@@ -82,6 +82,10 @@ figure {
     overflow: hidden;
 }
 
+figure.featured {
+    order: calc(var(--importance) * -1);
+}
+
 figure img,
 figure::after {
     position: absolute;

@@ -91,10 +91,16 @@ const Data: Database = {
         },
 
         images: {
+            '07/20/26': {
+                name: 'Railroad Tracks',
+                id: ["DSCN3812", "DSCN3806", "DSCN3796","DSCN3887"],
+                people: ['Ed'],
+            },
             '07/19/26': {
                 name: 'Weverton Cliifs',
                 id: ["DSCN3687","DSCN3690", "DSCN3676", "DSCN3685", "DSCN3679"],
-                people: ['Brittany']
+                people: ['Brittany'],
+                featured: 4,
             },
             '07/16/26': {
                 name: 'Washington D.C.',
