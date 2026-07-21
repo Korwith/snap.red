@@ -195,7 +195,7 @@ class PhotoRowMonth extends PhotoRow {
         this.date_handler = new DateManager();
 
         this.load();
-        this.setHeaderText('This ' + this.date_handler.dateIDtoName(month));
+        this.setHeaderText(`${this.date_handler.dateIDtoName(month)} 20${this.year}`);
     }
 
     // populates the row with photos from this month and year
@@ -241,7 +241,7 @@ abstract class MediaFrame {
         this.holder.element.appendChild(this.element);
     }
 
-    // toggles the featured visual style on this frame
+    // appends this frame to the top of the page
     setFeatured(index: number | null ): void {
         if (!index) return;
         this.element.style.setProperty('--importance', index.toString());

@@ -305,13 +305,15 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 @media screen and (max-width: 767px) {
     .main_photo_holder {
         width: 100vw;
-        height: 100dvh;
+        height: calc(100dvh - 50px);
         top: 50px;
         z-index: 30;
     }
 
     .menu {
-        flex-direction: column;
+        display: block;
+        overflow-y: auto;
+        scrollbar-width: none;
         width: 100%;
         height: 100%;
         border-radius: 0;
@@ -348,9 +350,9 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 
     .menu aside {
         display: block;
-        overflow-y: auto;
         flex: unset;
-        height: calc(100dvh - 100vw);
+        height: fit-content;
+        padding-bottom: 10px;
     }
 
     .menu aside .header {
