@@ -91,14 +91,18 @@ const Data: Database = {
         },
 
         images: {
+            '07/22/26': {
+                name: 'Downtown Frederick',
+                id: ["DSCN3946", "DSCN3921", "DSCN3935"],
+            },
             '07/20/26': {
                 name: 'Railroad Tracks',
-                id: ["DSCN3812", "DSCN3806", "DSCN3796","DSCN3887"],
+                id: ["DSCN3812", "DSCN3806", "DSCN3796", "DSCN3887"],
                 people: ['Ed'],
             },
             '07/19/26': {
                 name: 'Weverton Cliifs',
-                id: ["DSCN3699", "DSCN3696","DSCN3682","DSCN3687","DSCN3676", "DSCN3690","DSCN3691", "DSCN3685"],
+                id: ["DSCN3699", "DSCN3696", "DSCN3682", "DSCN3687", "DSCN3676", "DSCN3690", "DSCN3691", "DSCN3685"],
                 people: ['Brittany'],
                 featured: 4,
             },
