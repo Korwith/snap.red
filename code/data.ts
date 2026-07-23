@@ -91,6 +91,10 @@ const Data: Database = {
         },
 
         images: {
+            '07/23/26': {
+                name: 'Downtown Frederick',
+                id: ["DSCN4023", "DSCN4017", "DSCN3983", "DSCN4028", "DSCN3970"]
+            },
             '07/22/26': {
                 name: 'Downtown Frederick',
                 id: ["DSCN3946", "DSCN3921", "DSCN3935"],
