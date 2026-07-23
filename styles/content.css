@@ -374,4 +374,8 @@
     .filter_holder {
         width: calc(100% - 10px);
     }
+    
+    .filter_holder .dropdown {
+        max-width: calc(50% - 5px);
+    }
 }
