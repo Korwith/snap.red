@@ -780,7 +780,7 @@ const Data: Database = {
             '07/05/23': {
                 name: 'Downtown Frederick',
                 people: ['Riley', 'Cody'],
-                id: [6593, 6588, 6582, 6603, 6649],
+                id: [6593, 6582, 6603, 6649],
                 caption: 'I walked 18 miles on this day.'
             },
             '07/04/23': {
