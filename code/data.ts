@@ -86,7 +86,7 @@ const Data: Database = {
             'CashApp': 'https://cash.app/$thadreal',
             'Discord': 'https://discord.com/invite/p8ZZXZqnag',
             'GitHub': 'https://github.com/Korwith',
-            'Instagram': 'https://www.instagram.com/thadcoolfr/',
+            'Instagram': 'https://www.instagram.com/thad1.0/',
             'YouTube': 'https://www.youtube.com/channel/UCLcCNfyLG_jQev4MdkHtCZw',
         },
 
