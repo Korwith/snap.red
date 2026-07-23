@@ -969,7 +969,7 @@ const Data: Database = {
 
     'Edin': {
         card: {
-            bio: 'Beatmaker',
+            bio: 'Music Producer',
             icon: 'edin.jpg',
         },
 
