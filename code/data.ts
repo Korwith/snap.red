@@ -91,6 +91,10 @@ const Data: Database = {
         },
 
         images: {
+            '07/24/26': {
+                name: 'Gambrill State Park',
+                id: ["DSCN4067", "DSCN4107", "DSCN4116", "DSCN4118", "DSCN4138", "DSCN4142", "DSCN4050"],
+            },
             '07/23/26': {
                 name: 'Downtown Frederick',
                 id: ["DSCN4023", "DSCN4017", "DSCN3983", "DSCN4028", "DSCN3970"]
@@ -299,7 +303,7 @@ const Data: Database = {
                 people: ['Unknown', 'Edin']
             },
             '05/23/25': {
-                name: 'Gambrill',
+                name: 'Gambrill State Park',
                 id: ['1050025', '1040978', '1050030', '1050022', '1050020', '1050027'].reverse(),
                 people: ['Unknown', 'Edin', 'Liam', 'Kevin']
             },
@@ -309,7 +313,7 @@ const Data: Database = {
                 people: ['Unknown', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max']
             },
             '05/15/25': {
-                name: 'Gambrill',
+                name: 'Gambrill State Park',
                 id: ['1040436', '1040519', '1040492', '1040495', '1040479', '1040490'],
                 people: ['Unknown', 'Edin']
             },
@@ -338,7 +342,7 @@ const Data: Database = {
                 people: ['Unknown']
             },
             '04/08/25': {
-                name: 'Gambrill',
+                name: 'Gambrill State Park',
                 id: [8299, 8297, 8296],
                 people: ['Unknown', 'Edin']
             },
@@ -385,7 +389,7 @@ const Data: Database = {
                 people: ['Unknown']
             },
             '02/26/25': {
-                name: 'Gambrill',
+                name: 'Gambrill State Park',
                 id: [7639, 7643, 7613, 7625, 7617, 7618, 7619],
                 people: ['Unknown', 'Edin']
             },
