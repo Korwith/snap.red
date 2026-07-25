@@ -3,11 +3,14 @@ class PageManager {
     data: Database;
     user: string;
 
+    pages: Record<string, Page>;
+
     element: HTMLElement;
     header: PageHeader;
     sidebar: PageSidebar;
     footer: PageFooter;
     content: PageContent;
+    maps: PageMaps;
     main_photo: MainPhotoHolder;
     notifications: NotificationManager;
     url_handler?: URLHandler;
@@ -19,11 +22,15 @@ class PageManager {
         // default value
         this.user = 'Thaddeus';
 
+        // page dictionary
+        this.pages = {};
+
         this.element = document.body;
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.footer = new PageFooter(this)
         this.content = new PageContent(this);
+        this.maps = new PageMaps(this);
         this.main_photo = new MainPhotoHolder(this);
         this.notifications = new NotificationManager(this);
         this.url_handler = new URLHandler(this);
@@ -46,8 +53,7 @@ class PageManager {
 
     // opens or closes the sidebar and shifts the content accordingly
     toggleSidebar(force?: boolean): void {
-        this.sidebar.toggle(force);
-        this.content.toggle(force);
+        this.element.classList.toggle('shift', force);
     }
 
     // sends a notification (handled by notification manager)
@@ -259,6 +265,20 @@ class PageManager {
         }
 
         return batch;
+    }
+
+    // pages registering themselves to hide/show systek
+    public registerPage(name: string, page: Page): void {
+       this.pages[name] = page;
+       this.element.appendChild(page.element);
+    }
+
+    // user specified page will show, others will hide
+    public showPage(name: string): void {
+        for (const key in this.pages) {
+            const page: Page = this.pages[key];
+            page.toggle(name == key);
+        }
     }
 }
 

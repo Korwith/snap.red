@@ -3,11 +3,13 @@
 class PageManager {
     data;
     user;
+    pages;
     element;
     header;
     sidebar;
     footer;
     content;
+    maps;
     main_photo;
     notifications;
     url_handler;
@@ -17,11 +19,14 @@ class PageManager {
         this.data = Data;
         // default value
         this.user = 'Thaddeus';
+        // page dictionary
+        this.pages = {};
         this.element = document.body;
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.footer = new PageFooter(this);
         this.content = new PageContent(this);
+        this.maps = new PageMaps(this);
         this.main_photo = new MainPhotoHolder(this);
         this.notifications = new NotificationManager(this);
         this.url_handler = new URLHandler(this);
@@ -42,8 +47,7 @@ class PageManager {
     }
     // opens or closes the sidebar and shifts the content accordingly
     toggleSidebar(force) {
-        this.sidebar.toggle(force);
-        this.content.toggle(force);
+        this.element.classList.toggle('shift', force);
     }
     // sends a notification (handled by notification manager)
     pushNotification(type, text) {
@@ -234,6 +238,18 @@ class PageManager {
             batch[year_id][month_id][date] = images[date];
         }
         return batch;
+    }
+    // pages registering themselves to hide/show systek
+    registerPage(name, page) {
+        this.pages[name] = page;
+        this.element.appendChild(page.element);
+    }
+    // user specified page will show, others will hide
+    showPage(name) {
+        for (const key in this.pages) {
+            const page = this.pages[key];
+            page.toggle(name == key);
+        }
     }
 }
 // decides what to do with the given URL

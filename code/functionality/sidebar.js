@@ -14,10 +14,6 @@ class PageSidebar {
         this.timeline.fill();
         manager.element.appendChild(this.element);
     }
-    // slides the sidebar in or out
-    toggle(force) {
-        this.element.classList.toggle('shift', force);
-    }
     // clears and refills the timeline for the current user
     reset() {
         this.timeline.reset();

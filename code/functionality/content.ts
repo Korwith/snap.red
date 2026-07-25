@@ -1,7 +1,5 @@
 // manages the main content area including the profile card, filters, and photo grid
-class PageContent {
-    manager: PageManager;
-    element: HTMLElement;
+class PageContent extends Page {
     card: ProfileCard;
     filters: FilterHolder;
     videos?: VideoHolder;
@@ -9,8 +7,7 @@ class PageContent {
 
     // builds the content area and attaches it to the page
     constructor(manager: PageManager) {
-        this.manager = manager;
-        this.element = document.createElement('div');
+        super(manager, 'content');
         this.element.classList.add('content');
         this.card = new ProfileCard(this);
         this.filters = new FilterHolder(this);
@@ -19,6 +16,7 @@ class PageContent {
         this.load();
         this.element.onscroll = (e: Event) => this.onscroll(e);
 
+        this.manager.showPage('content');
         manager.element.appendChild(this.element);
     }
 
@@ -41,11 +39,6 @@ class PageContent {
         this.card.reset();
         this.videos?.remove();
         this.load();
-    }
-
-    // shifts the content area to accommodate the sidebar
-    toggle(force?: boolean): void {
-        this.element.classList.toggle('shift', force);
     }
 
     // loads the next photo batch when the user scrolls near the bottom

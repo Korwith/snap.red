@@ -1,0 +1,18 @@
+.leaflet-bar a {
+    background: linear-gradient(to bottom, #303030, #151515);
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: rgba(255, 255, 255, 0.7);
+    transition: color 0.15s;
+}
+
+.leaflet-bar a:hover {
+    color: white;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    background: linear-gradient(to bottom, #303030, #151515);
+}
+
+.leaflet-container .leaflet-control-attribution a {
+    color: white;
+}

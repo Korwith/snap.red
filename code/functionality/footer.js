@@ -56,6 +56,7 @@ class FooterHome extends FooterButton {
     }
     // handles home button click
     onclick(e) {
+        this.footer.manager.showPage('content');
     }
 }
 // footer button that opens the map view
@@ -66,8 +67,9 @@ class FooterMap extends FooterButton {
         this.element.classList.add('map');
         this.element.textContent = 'Map';
     }
-    // notifies the user the map page is under construction
+    // opens the given page for the map
     onclick(e) {
+        this.footer.manager.showPage('maps');
         alert('Under Construction!');
     }
 }

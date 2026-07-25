@@ -13,7 +13,7 @@ nav.sidebar {
     transition: transform 0.3s;
 }
 
-nav.sidebar.shift {
+body.shift nav.sidebar {
     transform: translateX(-100%);
 }
 
@@ -141,13 +141,10 @@ nav.sidebar.shift {
     nav.sidebar {
         width: 100vw;
         height: calc(100dvh - 100px);
-    }
-
-    nav.sidebar {
         transform: translateX(-100%);
     }
 
-    nav.sidebar.shift {
+    body.shift nav.sidebar {
         transform: translateX(0);
     }
 }

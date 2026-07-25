@@ -3,18 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: fixed;
-    left: 300px;
-    top: 50px;
-    width: calc(100vw - 300px);
-    height: calc(100vh - 50px);
     overflow-y: auto;
-    transition: transform 0.3s, width 0.3s, left 0.3s;
-}
-
-.content.shift {
-    width: 100vw;
-    left: 0;
 }
 
 /* profile card */
@@ -357,16 +346,6 @@
 }
 
 @media screen and (max-width: 767px) {
-    .content {
-        left: 0;
-        width: 100vw;
-        height: calc(100dvh - 100px);
-    }
-
-    .content.shift {
-        transform: translateX(100%);
-    }
-
     .card_header .name_holder span.bio {
         font-size: 1.1rem;
     }

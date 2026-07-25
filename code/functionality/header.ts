@@ -95,6 +95,7 @@ class HeaderButtonHome extends HeaderButton {
 
     // handles home button click
     onclick(e: PointerEvent): void {
+        this.holder.header.manager.showPage('home');
     }
 }
 
@@ -107,9 +108,10 @@ class HeaderButtonMap extends HeaderButton {
         this.element.textContent = 'Map';
     }
 
-    // notifies the user the map page is under construction
+    // toggles the maps page
     onclick(e: PointerEvent): void {
-        alert('Under Construction!');
+        this.holder.header.manager.showPage('maps');
+        alert('Under Construction');
     }
 }
 

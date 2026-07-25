@@ -81,6 +81,7 @@ class HeaderButtonHome extends HeaderButton {
     }
     // handles home button click
     onclick(e) {
+        this.holder.header.manager.showPage('home');
     }
 }
 // header button that opens the map view
@@ -91,9 +92,10 @@ class HeaderButtonMap extends HeaderButton {
         this.element.classList.add('map');
         this.element.textContent = 'Map';
     }
-    // notifies the user the map page is under construction
+    // toggles the maps page
     onclick(e) {
-        alert('Under Construction!');
+        this.holder.header.manager.showPage('maps');
+        alert('Under Construction');
     }
 }
 // header button that opens the about view
