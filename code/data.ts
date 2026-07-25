@@ -26,6 +26,10 @@ const Data: Database = {
         },
 
         images: {
+            '07/25/26': {
+                name: 'Thurmont, MD',
+                id: ["DSCN4201", "DSCN4174", "DSCN4225", "DSCN4228", "DSCN4233", "DSCN4209"],
+            },
             '07/24/26': {
                 name: 'Gambrill State Park',
                 id: ["DSCN4067", "DSCN4107", "DSCN4116", "DSCN4118", "DSCN4138", "DSCN4142", "DSCN4050"],
@@ -291,7 +295,7 @@ const Data: Database = {
                 people: ['Unknown']
             },
             '03/28/25': {
-                name: 'Thurmont',
+                name: 'Thurmont, MD',
                 id: [8024, 8022, 8039],
                 people: ['Riley', 'Unknown']
             },
