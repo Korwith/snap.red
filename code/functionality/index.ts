@@ -29,6 +29,9 @@ class PageManager {
         this.pages = {};
 
         this.element = document.body;
+
+        this.notifications = new NotificationManager(this);
+        
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.footer = new PageFooter(this)
@@ -38,7 +41,6 @@ class PageManager {
         this.about = new PageAbout(this);
 
         this.main_photo = new MainPhotoHolder(this);
-        this.notifications = new NotificationManager(this);
         this.url_handler = new URLHandler(this);
     }
 

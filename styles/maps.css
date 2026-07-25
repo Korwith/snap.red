@@ -1,3 +1,4 @@
+/* alters leaflet given css */
 .leaflet-container {
     background-color: black;
 }
@@ -19,4 +20,14 @@
 
 .leaflet-container .leaflet-control-attribution a {
     color: white;
+}
+
+/* alters image markers */
+.marker {
+    position: relative;
+}
+
+.marker img {
+    width: 100%;
+    height: 100%;
 }

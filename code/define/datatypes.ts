@@ -39,6 +39,7 @@ interface PhotoEntry {
     people?: string[];
     featured?: number;
     caption?: string;
+    gps?: Record<string | number, [number, number]>
 }
 
 interface VideoDatabase {

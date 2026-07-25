@@ -11,6 +11,7 @@
     padding: 10px;
     z-index: 50;
     pointer-events: none;
+    z-index: 9999;
 }
 
 .notification {

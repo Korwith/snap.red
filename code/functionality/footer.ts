@@ -84,6 +84,7 @@ class FooterMap extends FooterButton {
     // opens the given page for the map
     onclick(e: PointerEvent) {
         this.footer.manager.showPage('maps');
+        this.footer.manager.pushNotification('Info', 'The maps page is still under construction.');
     }
 }
 
