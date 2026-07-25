@@ -1,6 +1,8 @@
 .page.about {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .page.about h1 {
@@ -10,10 +12,17 @@
 .page.about span {
     display: flex;
     justify-content: center;
-    width: 100%;
+    text-align: center;
+    width: 50%;
     height: fit-content;
 }
 
 .page.about * {
     color: white;
+}
+
+@media screen and (max-width: 767px) {
+    .page.about span {
+        width: calc(100vw - 20px);
+    }
 }
