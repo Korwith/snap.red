@@ -1,68 +1,3 @@
-interface Database {
-    [name: string]: UserEntry;
-}
-
-interface UserEntry {
-    card: ProfileCardEntry;
-    social: ProfileSocialDatabase;
-    images: PhotoDatabase;
-    videos?: VideoDatabase;
-}
-
-interface ProfileCardEntry {
-    bio: string;
-    icon: string;
-    site?: ProfileWebsiteEntry;
-}
-
-interface ProfileSocialDatabase {
-    [service: string]: string;
-}
-
-interface ProfileWebsiteEntry {
-    url: string;
-    icon: string;
-    name: string;
-    blurb: string;
-    gradient: string[];
-}
-
-interface PhotoDatabase {
-    [date: string]: PhotoEntry;
-}
-
-interface PhotoEntry {
-    name: string;
-    id: Array<string | number>;
-    people?: string[];
-    featured?: number;
-    caption?: string;
-}
-
-interface VideoDatabase {
-    [date: string]: VideoEntry;
-}
-
-interface VideoEntry {
-    name: string;
-    thumbnail: string;
-    link: string;
-}
-
-interface SidebarStructure {
-    [year: string]: {
-        [month: string]: {
-            [date: string]: PhotoEntry;
-        }
-    }
-}
-
-type HighlightedUserColor = 'pink' | 'purple'
-
-interface HighlightedUserList {
-    [key: string]: HighlightedUserColor;
-}
-
 const HideUsers: string[] = ['Unknown', 'Abiel'];
 const HighlightUsers: HighlightedUserList = {
     'Brittany': 'purple'
@@ -109,7 +44,7 @@ const Data: Database = {
                 people: ['Ed'],
             },
             '07/19/26': {
-                name: 'Weverton Cliifs',
+                name: 'Weverton Cliffs',
                 id: ["DSCN3699", "DSCN3696", "DSCN3682", "DSCN3687", "DSCN3676", "DSCN3690", "DSCN3691", "DSCN3685"],
                 people: ['Brittany'],
                 featured: 4,
