@@ -3,8 +3,17 @@ class PageAbout extends Page {
         super(manager, 'about');
         this.manager = manager;
         this.element.classList.add('about');
-        console.log(this.element);
+        this.propogateAboutPage();
+    }
 
-        console.log('awesome');
+    private propogateAboutPage(): void {
+        const title: HTMLElement = document.createElement('h1');
+        const description: HTMLElement = document.createElement('span');
+        
+        title.textContent = 'About';
+        description.textContent = 'Under Construction';
+
+        this.element.appendChild(title);
+        this.element.appendChild(description);
     }
 }

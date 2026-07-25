@@ -1,0 +1,19 @@
+.page.about {
+    display: flex;
+    flex-direction: column;
+}
+
+.page.about h1 {
+    text-align: center;
+}
+
+.page.about span {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.page.about * {
+    color: white;
+}
