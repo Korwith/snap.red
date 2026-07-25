@@ -95,7 +95,7 @@ class HeaderButtonHome extends HeaderButton {
 
     // handles home button click
     onclick(e: PointerEvent): void {
-        this.holder.header.manager.showPage('home');
+        this.holder.header.manager.showPage('content');
     }
 }
 
