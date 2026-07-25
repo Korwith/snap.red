@@ -25,7 +25,8 @@ abstract class GenericMap {
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '<a href="https://snap.red/">snap.red</a>',
-            maxZoom: 19
+            maxZoom: 18,
+            minZoom: 4,
         }).addTo(this.map);
     }
 }
