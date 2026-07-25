@@ -111,7 +111,6 @@ class HeaderButtonMap extends HeaderButton {
     // toggles the maps page
     onclick(e: PointerEvent): void {
         this.holder.header.manager.showPage('maps');
-        alert('Under Construction');
     }
 }
 
@@ -126,7 +125,7 @@ class HeaderButtonAbout extends HeaderButton {
 
     // notifies the user the about page is under construction
     onclick(e: PointerEvent): void {
-        alert('Under Construction!');
+        this.holder.header.manager.showPage('about');
     }
 }
 

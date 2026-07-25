@@ -7,7 +7,6 @@ class PageMaps extends Page {
         this.manager = manager;
         this.element.classList.add('maps');
         this.map = new MainMap(this);
-        this.manager.element.appendChild(this.element);
     }
 }
 

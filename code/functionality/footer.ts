@@ -84,7 +84,6 @@ class FooterMap extends FooterButton {
     // opens the given page for the map
     onclick(e: PointerEvent) {
         this.footer.manager.showPage('maps');
-        alert('Under Construction!');
     }
 }
 
@@ -99,6 +98,6 @@ class FooterAbout extends FooterButton {
 
     // notifies the user the about page is under construction
     onclick(e: PointerEvent) {
-        alert('Under Construction!')
+        this.footer.manager.showPage('about');
     }
 }

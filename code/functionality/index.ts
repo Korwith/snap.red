@@ -9,8 +9,11 @@ class PageManager {
     header: PageHeader;
     sidebar: PageSidebar;
     footer: PageFooter;
+
     content: PageContent;
     maps: PageMaps;
+    about: PageAbout;
+
     main_photo: MainPhotoHolder;
     notifications: NotificationManager;
     url_handler?: URLHandler;
@@ -29,8 +32,11 @@ class PageManager {
         this.header = new PageHeader(this);
         this.sidebar = new PageSidebar(this);
         this.footer = new PageFooter(this)
+
         this.content = new PageContent(this);
         this.maps = new PageMaps(this);
+        this.about = new PageAbout(this);
+
         this.main_photo = new MainPhotoHolder(this);
         this.notifications = new NotificationManager(this);
         this.url_handler = new URLHandler(this);
