@@ -5,11 +5,13 @@
     width: calc(100vw - 300px);
     height: calc(100vh - 50px);
     opacity: 0;
+    pointer-events: none;
     transition: transform 0.3s, width 0.3s, left 0.3s, opacity 0.3s;
 }
 
 .page.show {
     opacity: 1;
+    pointer-events: unset;
 }
 
 body.shift .page {
