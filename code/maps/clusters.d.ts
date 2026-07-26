@@ -1,4 +1,5 @@
 // imported from the following: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/refs/heads/master/types/leaflet.markercluster/index.d.ts
+/// <reference path="./leaflet.d.ts" />
 
 declare namespace L {
     class MarkerCluster extends Marker {
