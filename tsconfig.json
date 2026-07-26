@@ -3,5 +3,8 @@
     "target": "es2024",
     "strict": true
   },
-  "include": ["code/**/*.ts"]
+  "include": [
+    "code/**/*.ts",
+    "code/**/*.d.ts"
+  ]
 }
