@@ -174,7 +174,13 @@ const Data: Database = {
             '07/03/26': {
                 name: 'Monocacy River',
                 id: ['DSCN3576', 'DSCN3559', 'DSCN3560', 'DSCN3562'],
-                people: ['Riley', 'Maya', 'Xavier']
+                people: ['Riley', 'Maya', 'Xavier'],
+                gps: {
+                    "DSCN3576": [39.436374, -77.389465],
+                    "DSCN3559": [39.436374, -77.389465],
+                    "DSCN3560": [39.436374, -77.389465],
+                    "DSCN3562": [39.436374, -77.389465],
+                }
             },
             '07/02/26': {
                 name: 'Falling Waters, WV',
