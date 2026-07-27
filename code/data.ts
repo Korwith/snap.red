@@ -163,7 +163,13 @@ const Data: Database = {
             '07/05/26': {
                 name: 'Downtown Frederick',
                 id: ["DSCN3596", "DSCN3605", "DSCN3595", "DSCN3594"],
-                people: ['Brittany']
+                people: ['Brittany'],
+                gps: {
+                    'DSCN3596': [39.4150616, -77.4146664],
+                    "DSCN3605": [39.4139573, -77.4105908],
+                    "DSCN3595": [39.4134368, -77.4138769],
+                    'DSCN3594': [39.4130089, -77.409569]
+                }
             },
             '07/03/26': {
                 name: 'Monocacy River',
