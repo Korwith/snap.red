@@ -200,7 +200,12 @@ const Data: Database = {
             '06/15/26': {
                 name: 'Rivermist Park',
                 id: [2815, 2817, 2818],
-                people: ['Riley']
+                people: ['Riley'],
+                gps: {
+                    2815: [39.4437983, -77.3823075],
+                    2817: [39.4437983, -77.3823075],
+                    2818: [39.4437983, -77.3823075]
+                }
             },
             '05/31/26': {
                 name: 'Railroad Tracks',
