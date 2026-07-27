@@ -154,7 +154,11 @@ const Data: Database = {
             '07/11/26': {
                 name: 'Downtown Frederick',
                 id: ['DSCN3922', '3239'],
-                people: ['Brittany']
+                people: ['Brittany'],
+                gps: {
+                    'DSCN3922': [39.414972, -77.4156475],
+                    '3239': [39.4145355, -77.4107732],
+                }
             },
             '07/05/26': {
                 name: 'Downtown Frederick',
