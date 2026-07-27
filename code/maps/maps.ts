@@ -74,9 +74,8 @@ class MainMap extends GenericMap {
     // scans current selected user and plots tagged points on the large map
     // create seperate methods for generic map type later so i can incorporate maps elsewhere
     addMarkers(): void {
-        const manager: PageManager = this.page.manager;
-        const user: string = manager.fetchUserName();
-        const photo_data: PhotoDatabase = manager.fetchUserImages(null);
+        const user: string = this.manager.fetchUserName();
+        const photo_data: PhotoDatabase = this.manager.fetchUserImages(null);
 
         const add_markers: L.Marker[] = [];
 
@@ -86,6 +85,10 @@ class MainMap extends GenericMap {
 
             for (const id in entry.gps) {
                 const image_marker: L.Marker = this.createImageMarker(date, id);
+                image_marker.on('click', (event: L.LeafletMouseEvent) => {
+                    this.manager.openImageByDate(date, user);
+                })
+
                 add_markers.push(image_marker);
             }
         }

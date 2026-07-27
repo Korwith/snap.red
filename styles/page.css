@@ -19,10 +19,6 @@ body.shift .page {
     left: 0;
 }
 
-.page.maps {
-    z-index: 999; /* temporary */
-}
-
 @media screen and (max-width: 767px) {
     .page {
         left: 0;
