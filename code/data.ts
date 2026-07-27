@@ -186,6 +186,16 @@ const Data: Database = {
                 name: 'Falling Waters, WV',
                 id: ["DSCN3496", "DSCN3506", "DSCN3515", "DSCN3523", "DSCN3524", "DSCN3525", "DSCN3544", "DSCN3548"],
                 people: ['Unknown'],
+                gps: {
+                    "DSCN3496": [39.558981, -77.888994],
+                    "DSCN3506": [39.5593655, -77.8878869],
+                    "DSCN3515": [39.5593655, -77.8878869],
+                    "DSCN3523": [39.558981, -77.888994],
+                    "DSCN3524": [39.558981, -77.888994],
+                    "DSCN3525": [39.558981, -77.888994],
+                    // UNKNOWN: DSCN3544
+                    // UNKNOWN: 3548
+                }
             },
             '06/15/26': {
                 name: 'Rivermist Park',
