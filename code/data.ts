@@ -53,16 +53,34 @@ const Data: Database = {
             },
             '07/23/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN4023", "DSCN4017", "DSCN3983", "DSCN4028", "DSCN3970"]
+                id: ["DSCN4023", "DSCN4017", "DSCN3983", "DSCN4028", "DSCN3970"],
+                gps: {
+                    'DSCN4023': [39.4134368, -77.4138769],
+                    'DSCN4017': [39.4143538, -77.4123393],
+                    'DSCN3983': [39.4134368, -77.4138769],
+                    'DSCN4028': [39.415025, -77.414684],
+                    'DSCN3970': [39.4162864, -77.4152686],
+                }
             },
             '07/22/26': {
                 name: 'Downtown Frederick',
                 id: ["DSCN3946", "DSCN3921", "DSCN3935"],
+                gps: {
+                    'DSCN3946': [39.4162864, -77.4152686],
+                    'DSCN3921': [39.4157441, -77.4161518],
+                    'DSCN3935': [39.4162864, -77.4152686],
+                }
             },
             '07/20/26': {
                 name: 'Railroad Tracks',
                 id: ["DSCN3812", "DSCN3806", "DSCN3796", "DSCN3887"],
                 people: ['Ed'],
+                gps: {
+                    'DSCN3812': [39.4643012, -77.3924276],
+                    'DSCN3806': [39.4643017, -77.392515],
+                    'DSCN3796': [39.4643017, -77.392515],
+                    // UNKNOWN: DSCN3887
+                }
             },
             '07/19/26': {
                 name: 'Weverton Cliffs',
@@ -83,7 +101,14 @@ const Data: Database = {
             '07/16/26': {
                 name: 'Washington D.C.',
                 id: ["DSCN3634", "DSCN3612", "DSCN3614", "DSCN3647", "DSCN3667"],
-                people: ['Edin', 'Kevin']
+                people: ['Edin', 'Kevin'],
+                gps: {
+                    'DSCN3634': [38.8995664, -77.0241556],
+                    // UNKNOWN: DSCN3612
+                    'DSCN3614': [38.9057326, -77.0435474],
+                    // UNKNOWN: DSCN3647
+                    // UNKNOWN: DSCN3667
+                }
             },
             '07/13/26': {
                 name: 'Railroad Tracks',
