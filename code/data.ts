@@ -1,4 +1,4 @@
-const HideUsers: string[] = ['Unknown', 'Abiel'];
+const HideUsers: string[] = ['Redacted', 'Abiel'];
 const HighlightUsers: HighlightedUserList = {
     'Brittany': 'purple'
 }
@@ -28,7 +28,7 @@ const Data: Database = {
         images: {
             '07/27/26': {
                 name: 'Cunningham Falls',
-                id: ["DSCN4347", "DSCN4327", "DSCN4346", "DSCN4352", "DSCN4384", "DSCN4386", "DSCN4387", "DSCN4390", "DSCN4405", "DSCN4364"],
+                id: ['DSCN4347', 'DSCN4327', 'DSCN4346', 'DSCN4352', 'DSCN4384', 'DSCN4386', 'DSCN4387', 'DSCN4390', 'DSCN4405', 'DSCN4364'],
                 gps: {
                     'DSCN4347': [39.6274713, -77.4616612],
                     'DSCN4327': [39.6242634, -77.4613541],
@@ -44,7 +44,7 @@ const Data: Database = {
             },
             '07/26/26': {
                 name: 'Gambrill State Park',
-                id: ["DSCN4268", "DSCN4241", "DSCN4267", "DSCN4295", "DSCN4244", "DSCN4259"],
+                id: ['DSCN4268', 'DSCN4241', 'DSCN4267', 'DSCN4295', 'DSCN4244', 'DSCN4259'],
                 people: ['Brittany'],
                 gps: {
                     'DSCN4268': [39.4613433, -77.4951715],
@@ -57,7 +57,7 @@ const Data: Database = {
             },
             '07/25/26': {
                 name: 'Thurmont, MD',
-                id: ["DSCN4201", "DSCN4174", "DSCN4225", "DSCN4228", "DSCN4233", "DSCN4209"],
+                id: ['DSCN4201', 'DSCN4174', 'DSCN4225', 'DSCN4228', 'DSCN4233', 'DSCN4209'],
                 gps: {
                     'DSCN4201': [39.6457322, -77.4388211],
                     'DSCN4174': [39.5821547, -77.4342764],
@@ -69,7 +69,7 @@ const Data: Database = {
             },
             '07/24/26': {
                 name: 'Gambrill State Park',
-                id: ["DSCN4067", "DSCN4107", "DSCN4116", "DSCN4118", "DSCN4138", "DSCN4142", "DSCN4050"],
+                id: ['DSCN4067', 'DSCN4107', 'DSCN4116', 'DSCN4118', 'DSCN4138', 'DSCN4142', 'DSCN4050'],
                 gps: {
                     'DSCN4067': [39.4698003, -77.4942981],
                     'DSCN4107': [39.4613433, -77.4951715],
@@ -82,7 +82,7 @@ const Data: Database = {
             },
             '07/23/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN4023", "DSCN4017", "DSCN3983", "DSCN4028", "DSCN3970"],
+                id: ['DSCN4023', 'DSCN4017', 'DSCN3983', 'DSCN4028', 'DSCN3970'],
                 gps: {
                     'DSCN4023': [39.4134368, -77.4138769],
                     'DSCN4017': [39.4143538, -77.4123393],
@@ -93,7 +93,7 @@ const Data: Database = {
             },
             '07/22/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN3946", "DSCN3921", "DSCN3935"],
+                id: ['DSCN3946', 'DSCN3921', 'DSCN3935'],
                 gps: {
                     'DSCN3946': [39.4162864, -77.4152686],
                     'DSCN3921': [39.4157441, -77.4161518],
@@ -102,7 +102,7 @@ const Data: Database = {
             },
             '07/20/26': {
                 name: 'Railroad Tracks',
-                id: ["DSCN3812", "DSCN3806", "DSCN3796", "DSCN3887"],
+                id: ['DSCN3812', 'DSCN3806', 'DSCN3796', 'DSCN3887'],
                 people: ['Ed'],
                 gps: {
                     'DSCN3812': [39.4643012, -77.3924276],
@@ -113,7 +113,7 @@ const Data: Database = {
             },
             '07/19/26': {
                 name: 'Weverton Cliffs',
-                id: ["DSCN3699", "DSCN3696", "DSCN3682", "DSCN3687", "DSCN3676", "DSCN3690", "DSCN3691", "DSCN3685"],
+                id: ['DSCN3699', 'DSCN3696', 'DSCN3682', 'DSCN3687', 'DSCN3676', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
                 people: ['Brittany'],
                 featured: 4,
                 gps: {
@@ -129,7 +129,7 @@ const Data: Database = {
             },
             '07/16/26': {
                 name: 'Washington D.C.',
-                id: ["DSCN3634", "DSCN3612", "DSCN3614", "DSCN3647", "DSCN3667"],
+                id: ['DSCN3634', 'DSCN3612', 'DSCN3614', 'DSCN3647', 'DSCN3667'],
                 people: ['Edin', 'Kevin'],
                 gps: {
                     'DSCN3634': [38.8995664, -77.0241556],
@@ -141,14 +141,14 @@ const Data: Database = {
             },
             '07/13/26': {
                 name: 'Railroad Tracks',
-                id: ["3298", "3283", "3289", "3290", "3297", "3310"],
+                id: ['3298', '3283', '3289', '3290', '3297', '3310'],
                 gps: {
-                    "3298": [39.4643053, -77.392462],
-                    "3283": [39.4637795, -77.3933457],
-                    "3289": [39.4637795, -77.3933457],
-                    "3290": [39.464363, -77.392412],
-                    "3297": [39.4643053, -77.392462],
-                    "3310": [39.4637795, -77.3933457],
+                    '3298': [39.4643053, -77.392462],
+                    '3283': [39.4637795, -77.3933457],
+                    '3289': [39.4637795, -77.3933457],
+                    '3290': [39.464363, -77.392412],
+                    '3297': [39.4643053, -77.392462],
+                    '3310': [39.4637795, -77.3933457],
                 }
             },
             '07/11/26': {
@@ -162,12 +162,12 @@ const Data: Database = {
             },
             '07/05/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN3596", "DSCN3605", "DSCN3595", "DSCN3594"],
+                id: ['DSCN3596', 'DSCN3605', 'DSCN3595', 'DSCN3594'],
                 people: ['Brittany'],
                 gps: {
                     'DSCN3596': [39.4150616, -77.4146664],
-                    "DSCN3605": [39.4139573, -77.4105908],
-                    "DSCN3595": [39.4134368, -77.4138769],
+                    'DSCN3605': [39.4139573, -77.4105908],
+                    'DSCN3595': [39.4134368, -77.4138769],
                     'DSCN3594': [39.4130089, -77.409569]
                 }
             },
@@ -176,23 +176,23 @@ const Data: Database = {
                 id: ['DSCN3576', 'DSCN3559', 'DSCN3560', 'DSCN3562'],
                 people: ['Riley', 'Maya', 'Xavier'],
                 gps: {
-                    "DSCN3576": [39.436374, -77.389465],
-                    "DSCN3559": [39.436374, -77.389465],
-                    "DSCN3560": [39.436374, -77.389465],
-                    "DSCN3562": [39.436374, -77.389465],
+                    'DSCN3576': [39.436374, -77.389465],
+                    'DSCN3559': [39.436374, -77.389465],
+                    'DSCN3560': [39.436374, -77.389465],
+                    'DSCN3562': [39.436374, -77.389465],
                 }
             },
             '07/02/26': {
                 name: 'Falling Waters, WV',
-                id: ["DSCN3496", "DSCN3506", "DSCN3515", "DSCN3523", "DSCN3524", "DSCN3525", "DSCN3544", "DSCN3548"],
-                people: ['Unknown'],
+                id: ['DSCN3496', 'DSCN3506', 'DSCN3515', 'DSCN3523', 'DSCN3524', 'DSCN3525', 'DSCN3544', 'DSCN3548'],
+                people: ['Redacted'],
                 gps: {
-                    "DSCN3496": [39.558981, -77.888994],
-                    "DSCN3506": [39.5593655, -77.8878869],
-                    "DSCN3515": [39.5593655, -77.8878869],
-                    "DSCN3523": [39.558981, -77.888994],
-                    "DSCN3524": [39.558981, -77.888994],
-                    "DSCN3525": [39.558981, -77.888994],
+                    'DSCN3496': [39.558981, -77.888994],
+                    'DSCN3506': [39.5593655, -77.8878869],
+                    'DSCN3515': [39.5593655, -77.8878869],
+                    'DSCN3523': [39.558981, -77.888994],
+                    'DSCN3524': [39.558981, -77.888994],
+                    'DSCN3525': [39.558981, -77.888994],
                     // UNKNOWN: DSCN3544
                     // UNKNOWN: DSCN3548
                 }
@@ -219,7 +219,7 @@ const Data: Database = {
             '05/18/26': {
                 name: 'Cascade Falls',
                 id: ['DSCN3405', 'DSCN3367', 'DSCN3383', 'DSCN3387', 'DSCN3365'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN3405': [39.2395743, -76.7516632],
                     'DSCN3367': [39.2486992, -76.7646748],
@@ -231,7 +231,7 @@ const Data: Database = {
             '05/17/26': {
                 name: 'Downtown Frederick',
                 id: ['DSCN3346', 'DSCN3339', 'DSCN3348', 'DSCN3358'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN3346': [39.4127331, -77.411164],
                     'DSCN3339': [39.4128836, -77.4101305],
@@ -242,7 +242,7 @@ const Data: Database = {
             '05/15/26': {
                 name: 'Boonsboro, MD',
                 id: ['DSCN3270', 'DSCN3265', 'DSCN3256', 'DSCN3255', 'DSCN3253', 'DSCN3264'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN3270': [39.5385084, -77.7098213],
                     'DSCN3265': [39.5385084, -77.7098213],
@@ -255,7 +255,7 @@ const Data: Database = {
             '05/11/26': {
                 name: 'New York City',
                 id: ['DSCN3200', 'DSCN3185', 'DSCN3180', 'DSCN3174', 'DSCN3172', 'DSCN2455'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN3200': [40.7066988, -74.0108212],
                     'DSCN3185': [40.7195, -74.0125],
@@ -308,8 +308,8 @@ const Data: Database = {
             },
             '04/04/26': {
                 name: 'Washington D.C.',
-                id: ["DSCN2633", "DSCN2631", "DSCN2638", "DSCN2647", "DSCN2652", "DSCN2655", "DSCN2656", "DSCN2609"],
-                people: ['Unknown', 'Ely', 'Nolan'],
+                id: ['DSCN2633', 'DSCN2631', 'DSCN2638', 'DSCN2647', 'DSCN2652', 'DSCN2655', 'DSCN2656', 'DSCN2609'],
+                people: ['Redacted', 'Ely', 'Nolan'],
                 gps: {
                     'DSCN2633': [38.8907078, -77.0311197],
                     'DSCN2631': [38.8907078, -77.0311197],
@@ -324,7 +324,7 @@ const Data: Database = {
             '04/19/26': {
                 name: 'Downtown Frederick',
                 id: [1804, 1801, 1800, 1791],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     1804: [39.4156511, -77.4149637],
                     1801: [39.4155096, -77.4094098],
@@ -335,7 +335,7 @@ const Data: Database = {
             '03/10/26': {
                 name: 'Weverton Cliffs',
                 id: ['DSCN2449', 'DSCN2454', 'DSCN2452', 'DSCN2444', 'DSCN2441', 'DSCN2428', 'DSCN2427', 'DSCN2410', 'DSCN2456'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN2449': [39.3320587, -77.6766005],
                     'DSCN2454': [39.3320587, -77.6766005],
@@ -360,7 +360,7 @@ const Data: Database = {
             '03/08/26': {
                 name: 'Downtown Frederick',
                 id: ['DSCN2362', 'DSCN2366'],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     'DSCN2362': [39.4147008, -77.4110162],
                     'DSCN2366': [39.4147008, -77.4110162]
@@ -369,7 +369,7 @@ const Data: Database = {
             '02/07/26': {
                 name: 'Downtown Frederick',
                 id: [1142, 1148, 1144, 1140],
-                people: ['Unknown'],
+                people: ['Redacted'],
                 gps: {
                     1142: [39.4128349, -77.4093302],
                     1148: [39.4128349, -77.4093302],
@@ -380,7 +380,7 @@ const Data: Database = {
             '01/13/26': {
                 name: "Harper's Ferry",
                 id: ['DSCN2188', 'DSCN2232', 'DSCN2248', 'DSCN2266'],
-                people: ['Unknown', 'Edin'],
+                people: ['Redacted', 'Edin'],
                 gps: {
                     'DSCN2188': [39.3229412, -77.7286289],
                     'DSCN2232': [39.3239032, -77.7274717],
@@ -391,22 +391,22 @@ const Data: Database = {
             '01/11/26': {
                 name: 'Washington D.C.',
                 id: ['DSCN2105', 'DSCN2103', 'DSCN2073', 'DSCN2155', 'DSCN2127', 'DSCN2126', 'DSCN2111'],
-                people: ['Unknown', 'Edin', 'Aidan', 'Jordan', 'Liam'],
+                people: ['Redacted', 'Edin', 'Aidan', 'Jordan', 'Liam'],
             },
             '12/25/25': {
                 name: 'Hagerstown',
                 id: ['0687', '0693', '0702', '0703', '0677', '0661', '0658'],
-                people: ['Unknown'],
+                people: ['Redacted'],
             },
             '11/26/25': {
                 name: 'Downtown Frederick',
                 id: ['DSCN1594', 'DSCN1600', 'DSCN1610'],
-                people: ['Unknown'],
+                people: ['Redacted'],
             },
             '10/02/25': {
                 name: 'Rivermist Park',
                 id: ['0089', '0084', '0078', '0076'],
-                people: ['Unknown', 'Edin'],
+                people: ['Redacted', 'Edin'],
             },
             '08/29/25': {
                 name: 'Downtown Frederick',
@@ -415,12 +415,12 @@ const Data: Database = {
             '06/30/25': {
                 name: 'Gettysburg',
                 id: ['1181', '1197', '1219', '1216', '1189'],
-                people: ['Unknown', 'Riley', 'Ed', 'Maya']
+                people: ['Redacted', 'Riley', 'Ed', 'Maya']
             },
             '06/29/25': {
                 name: 'Washington D.C.',
                 id: ['1090', '1016', '1083', '1106', '1019', '1082', '1080', '1026', '1108', '0919', '0971', '0942', '1079', '1028', '1089', '0956', '0954'],
-                people: ['Unknown', 'Aidan', 'Jordan'],
+                people: ['Redacted', 'Aidan', 'Jordan'],
                 featured: 2,
                 gps: {
                     '1090': [38.8938, -77.0251],
@@ -445,67 +445,67 @@ const Data: Database = {
             '06/28/25': {
                 name: 'Downtown Frederick',
                 id: ['0762', '0857', '0753', '0826', '0794', '0858'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '06/23/25': {
                 name: 'Monocacy River',
                 id: ['0673', '0676', '0623', '0660', '0683', '0596', '0708'],
-                people: ['Unknown', 'Riley', 'Liam', 'Ed', 'Aidan', 'Matt'],
+                people: ['Redacted', 'Riley', 'Liam', 'Ed', 'Aidan', 'Matt'],
             },
             '06/21/25': {
                 name: 'Downtown Frederick',
                 id: ['0482', '0498', '0367', '0417', '0383', '0517', '0547', '0466', '0436', '0393', '0512', '0438', '0502', '0441', '0459', '0540', '0352', '0514'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '06/20/25': {
                 name: 'Downtown Frederick',
                 id: ['0313', '0312', '0322', '0269', '0297', '0321', '0279', '0284', '0241', '0290', '0252', '0257', '0211', '0203'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '06/14/25': {
                 name: 'Downtown Frederick',
                 id: ['0051', '0061', '0043', '0077', '0108'],
-                people: ['Unknown'],
+                people: ['Redacted'],
             },
             '06/11/25': {
                 name: 'Whiterock',
                 id: ['1050858', '1050930', '1050870', '1050939', '1050829', '1050812', '1050908', '1050817', '1050828', '1050791', '1050949', '1050881', '1050910'],
-                people: ['Unknown', 'Riley', 'Matt', 'Liam'],
+                people: ['Redacted', 'Riley', 'Matt', 'Liam'],
             },
             '06/09/25': {
                 name: 'Downtown Frederick',
                 id: ['1050623', '1050704', '1050625', '1050662', '1050716', '1050630', '1050708', '1050627'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '06/07/25': {
                 name: 'Downtown Frederick',
                 id: ['1050578', '1050479', '1050478', '1050566', '1050559', '1050545', '1050596', '1050586'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '05/30/25': {
                 name: 'Gaithersburg, MD',
                 id: ['1050362', '1050325', '1050341', '1050301', '1050374', '1050346', '1050354', '1050355'],
-                people: ['Unknown', 'Edin']
+                people: ['Redacted', 'Edin']
             },
             '05/23/25': {
                 name: 'Gambrill State Park',
                 id: ['1050025', '1040978', '1050030', '1050022', '1050020', '1050027'].reverse(),
-                people: ['Unknown', 'Edin', 'Liam', 'Kevin']
+                people: ['Redacted', 'Edin', 'Liam', 'Kevin']
             },
             '05/20/25': {
                 name: 'North Crossing',
                 id: ['1040814', '1040833', '1040829', '1040859'],
-                people: ['Unknown', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max']
+                people: ['Redacted', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max']
             },
             '05/15/25': {
                 name: 'Gambrill State Park',
                 id: ['1040436', '1040519', '1040492', '1040495', '1040479', '1040490'],
-                people: ['Unknown', 'Edin']
+                people: ['Redacted', 'Edin']
             },
             '05/12/25': {
                 name: 'Rose Hill',
                 id: ['1030878', '1030885', '1030883', '1030889', '1030873', '1030881'],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '05/07/25': {
                 name: 'FCC',
@@ -514,22 +514,22 @@ const Data: Database = {
             '05/01/25': {
                 name: 'Downtown Frederick',
                 id: [8619, 8615, 'DSCN1430'],
-                people: ['Unknown', 'Edin', 'Kevin']
+                people: ['Redacted', 'Edin', 'Kevin']
             },
             '04/23/25': {
                 name: 'Monocacy River',
                 id: [2347, 3457, 8541],
-                people: ['Unknown', 'Edin']
+                people: ['Redacted', 'Edin']
             },
             '04/18/25': {
                 name: 'Monocacy River',
                 id: [8363, 8364],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '04/08/25': {
                 name: 'Gambrill State Park',
                 id: [8299, 8297, 8296],
-                people: ['Unknown', 'Edin']
+                people: ['Redacted', 'Edin']
             },
             '04/07/25': {
                 name: 'Rose Hill',
@@ -538,7 +538,7 @@ const Data: Database = {
             '03/29/25': {
                 name: 'Downtown Frederick',
                 id: [8077, 8078],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '03/28/25': {
                 name: 'Thurmont, MD',
@@ -556,37 +556,37 @@ const Data: Database = {
             '03/12/25': {
                 name: 'Monocacy River',
                 id: [7883, 7877, 7885, 7906],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '03/10/25': {
                 name: 'Railroad Tracks',
                 id: [7838, 7844, 7854, 7839, 7841],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '03/08/25': {
                 name: 'Railroad Tracks',
                 id: [7819, 7784, 7800, 7816, 7795, 7813],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '03/07/25': {
                 name: 'Westview',
                 id: [7760, 7759, 7757],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '02/26/25': {
                 name: 'Gambrill State Park',
                 id: [7639, 7643, 7613, 7625, 7617, 7618, 7619],
-                people: ['Unknown', 'Edin']
+                people: ['Redacted', 'Edin']
             },
             '02/10/25': {
                 name: 'Rose Hill',
                 id: [7444, 7438, 7436],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '01/19/25': {
                 name: 'Amber Meadows',
                 id: [7053, 7084, 7061, 7091, 7050],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '01/17/25': {
                 name: 'Railroad Tracks',
@@ -596,12 +596,12 @@ const Data: Database = {
             '12/30/24': {
                 name: 'Amber Meadows',
                 id: [6714, 6718, 6711],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '12/28/24': {
                 name: 'Downtown Frederick',
                 id: [6578, 6573, 6594, 6632, 6608],
-                people: ['Unknown'],
+                people: ['Redacted'],
             },
             '12/23/24': {
                 name: 'Heather Ridge',
@@ -615,7 +615,7 @@ const Data: Database = {
             '12/13/24': {
                 name: 'Downtown Frederick',
                 id: [6194, 6171, 6197],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '12/02/24': {
                 name: 'Amber Meadows',
@@ -624,7 +624,7 @@ const Data: Database = {
             '11/30/24': {
                 name: 'Downtown Frederick',
                 id: [5980, 5979, 5961, 5972],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '11/26/24': {
                 name: 'Rosemont',
@@ -634,7 +634,7 @@ const Data: Database = {
             '11/23/24': {
                 name: 'Downtown Frederick',
                 id: [5798, 5779, 5769, 5780],
-                people: ['Unknown']
+                people: ['Redacted']
             },
             '11/19/24': {
                 name: 'Whiterock',
@@ -655,7 +655,7 @@ const Data: Database = {
             },
             '10/23/24': {
                 name: 'Patomac Commons',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: ['5128a', 5126, 5129]
             },
             '10/20/24': {
@@ -664,7 +664,7 @@ const Data: Database = {
             },
             '10/18/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [5025, 5042, 5044, 5023]
             },
             '10/16/24': {
@@ -674,22 +674,22 @@ const Data: Database = {
             },
             '10/12/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [4864, 4861, 4885, 4875, 4874, 4868]
             },
             '10/05/24': {
                 name: 'Amber Meadows',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [4771]
             },
             '09/21/24': {
                 name: 'Frederick Fair',
-                people: ['Unknown', 'Jeremy'],
+                people: ['Redacted', 'Jeremy'],
                 id: [4654, 4661]
             },
             '09/15/24': {
                 name: 'Frederick Fair',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: ['4591a', '4597a', '4598a']
             },
             '09/13/24': {
@@ -702,12 +702,12 @@ const Data: Database = {
             },
             '08/03/24': {
                 name: 'Washington D.C.',
-                people: ['Unknown', 'Jeremy', 'Abiel'],
+                people: ['Redacted', 'Jeremy', 'Abiel'],
                 id: [4018, 3778, 3796, 3890, 3901, 4012, 4057, 3709],
             },
             '07/27/24': {
                 name: 'Weverton Cliffs',
-                people: ['Unknown', 'Jeremy'],
+                people: ['Redacted', 'Jeremy'],
                 id: [3521, 3523, 3489, 3579, 3475],
                 featured: 3,
                 gps: {
@@ -719,12 +719,12 @@ const Data: Database = {
             },
             '07/26/24': {
                 name: 'Rock Creek',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3414, 3433, 3434, 3435, 3397]
             },
             '07/25/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3246, 3245, 3356]
             },
             '07/19/24': {
@@ -733,7 +733,7 @@ const Data: Database = {
             },
             '07/15/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3093, 3092, 3065, 3082, 3075, 3078]
             },
             '07/14/24': {
@@ -742,17 +742,17 @@ const Data: Database = {
             },
             '07/10/24': {
                 name: 'Cunningham Falls',
-                people: ['Unknown', 'Jeremy'],
+                people: ['Redacted', 'Jeremy'],
                 id: [2902, 2900, 2898, 2891, 2865, 2842, 2921, 2889, 2881, 2864, 2915, 2912, 2875, 2851]
             },
             '07/09/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2783, 2787, 2801, 2798, 2793, 2784, 2808]
             },
             '07/08/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2735, 2693, 2692, 2703, 2714, 2719, 2727, 2731]
             },
             '07/05/24': {
@@ -762,37 +762,37 @@ const Data: Database = {
             },
             '07/04/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown', 'Jeremy'],
+                people: ['Redacted', 'Jeremy'],
                 id: [9996, 9997, 9998, 2526, 2508, 2506, 2505, 2477, 2472, 2467]
             },
             '07/03/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2420, 2430, 2429, 2425, 2416]
             },
             '07/02/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2293, 2309, 2312, 2317, 2364],
             },
             '07/01/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2245, 2283, 2257, 2253, 2250, 2248, 2247, 2245, 2237, 2233]
             },
             '06/28/24': {
                 name: 'Rock Creek',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2151, 2146, 2134],
             },
             '06/26/24': {
                 name: 'Rock Creek',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2024, 2021, 2017, 2015]
             },
             '06/22/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1814, 1783, 1813, 1795]
             },
             '06/23/24': {
@@ -801,7 +801,7 @@ const Data: Database = {
             },
             '06/20/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1730, 1759, 1756, 1699, 1677, 1676, 1666, 1764]
             },
             '06/13/24': {
@@ -811,7 +811,7 @@ const Data: Database = {
             },
             '06/12/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1472, 1460, 1458, 1448, 1447, 1442]
             },
             '06/10/24': {
@@ -821,22 +821,22 @@ const Data: Database = {
             },
             '06/09/24': {
                 name: 'Railroad Tracks',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1175, 1186, 1193, 1198, 1199, 1203, 1209],
             },
             '06/08/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1020, 1102, 1025, 1039, 1052, 1091]
             },
             '06/01/24': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: ['0728', '0723', '0716', '0694']
             },
             '05/25/24': {
                 name: 'Rose Hill',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: ['0537', '0533', '0529']
             },
             '05/14/24': {
@@ -849,17 +849,17 @@ const Data: Database = {
             },
             '04/22/24': {
                 name: 'Rose Hill',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3026, 3028, 3018, 3016, 3029]
             },
             '03/29/24': {
                 name: 'Rock Creek',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2244, 2205, 2201, 2035, 2029, 2023, 2013],
             },
             '03/24/24': {
                 name: 'North Crossing',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1686, 1696, 1697]
             },
             '01/21/24': {
@@ -869,7 +869,7 @@ const Data: Database = {
             },
             '01/18/24': {
                 name: 'Amber Meadows',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [72834, 65845, 65608, 65349, 64943, 64749],
             },
             '01/07/24': {
@@ -886,22 +886,22 @@ const Data: Database = {
             },
             '10/24/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [4789, 4788, 4793, 4787, 4795],
             },
             '10/22/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [4589, 4591, 4592, 4628, 4598]
             },
             '10/21/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [4541, 4548, 4542, 4552, 4556],
             },
             '10/10/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3518, 3519, 3514, 3520, 3527]
             },
             '09/21/23': {
@@ -910,7 +910,7 @@ const Data: Database = {
             },
             '09/16/23': {
                 name: 'Frederick Fair',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [2006, 2086, 2020]
             },
             '09/12/23': {
@@ -919,17 +919,17 @@ const Data: Database = {
             },
             '09/05/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: ['0786', '0787', '0778']
             },
             '08/13/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [9656, 9662, 9659, 9670]
             },
             '08/11/23': {
                 name: 'Amber Meadows',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [9480, 9495, 9490, 9497],
             },
             '08/08/23': {
@@ -944,27 +944,27 @@ const Data: Database = {
             },
             '08/06/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [9125, 9128, 9138, 9141, 9180]
             },
             '08/05/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown', 'Riley'],
+                people: ['Redacted', 'Riley'],
                 id: [9054, 9061, 8879, 9096, 9074],
             },
             '08/04/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [8847, 8842, 8841, 8833]
             },
             '08/03/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [8812, 8794, 8811, 8753, 8752],
             },
             '07/29/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [8348, 8354, 8357, 8359, 8378, 8386, 8389],
             },
             '07/20/23': {
@@ -980,22 +980,22 @@ const Data: Database = {
             },
             '07/04/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown', 'Edin', 'Jeremy', 'Riley'],
+                people: ['Redacted', 'Edin', 'Jeremy', 'Riley'],
                 id: [6505, 6549, 6535, 6504, 6541],
             },
             '06/26/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [5935, 5947, 5949, 5976],
             },
             '06/19/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [5336, 5385, 5350, 5331, 5321, 5314, 5411],
             },
             '06/18/23': {
                 name: 'Monocacy River',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [5046, 5091, 5107, 5156],
             },
             '06/16/23': {
@@ -1005,7 +1005,7 @@ const Data: Database = {
             },
             '06/05/23': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [3895, 3900, 3902, 3906, 3913, 3915, 3950],
             },
             '06/02/23': {
@@ -1077,7 +1077,7 @@ const Data: Database = {
             },
             '11/28/21': {
                 name: 'Downtown Frederick',
-                people: ['Unknown'],
+                people: ['Redacted'],
                 id: [1307, 1043, 1311, 1314]
             },
         }
