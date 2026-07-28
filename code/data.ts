@@ -381,11 +381,17 @@ const Data: Database = {
                 name: "Harper's Ferry",
                 id: ['DSCN2188', 'DSCN2232', 'DSCN2248', 'DSCN2266'],
                 people: ['Unknown', 'Edin'],
+                gps: {
+                    'DSCN2188': [39.3229412, -77.7286289],
+                    'DSCN2232': [39.3239032, -77.7274717],
+                    'DSCN2248': [39.3239032, -77.7274717],
+                    // UNKNOWN: DSCN2266
+                }
             },
             '01/11/26': {
                 name: 'Washington D.C.',
                 id: ['DSCN2105', 'DSCN2103', 'DSCN2073', 'DSCN2155', 'DSCN2127', 'DSCN2126', 'DSCN2111'],
-                people: ['Unknown', 'Edin', 'Aidan', 'Jordan', 'Liam']
+                people: ['Unknown', 'Edin', 'Aidan', 'Jordan', 'Liam'],
             },
             '12/25/25': {
                 name: 'Hagerstown',
