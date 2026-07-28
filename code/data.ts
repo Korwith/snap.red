@@ -350,7 +350,12 @@ const Data: Database = {
             },
             '03/09/26': {
                 name: 'Railroad Tracks',
-                id: ['DSCN2512', 'DSCN2530', 'DSCN2524', 'DSCN2512'],
+                id: ['DSCN2512', 'DSCN2530', 'DSCN2524'],
+                gps: {
+                    'DSCN2512': [39.4637795, -77.3933457],
+                    'DSCN2530': [39.4637795, -77.3933457],
+                    'DSCN2524': [39.4637795, -77.3933457]
+                }
             },
             '03/08/26': {
                 name: 'Downtown Frederick',
