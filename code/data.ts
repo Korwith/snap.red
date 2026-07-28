@@ -243,6 +243,14 @@ const Data: Database = {
                 name: 'Boonsboro, MD',
                 id: ['DSCN3270', 'DSCN3265', 'DSCN3256', 'DSCN3255', 'DSCN3253', 'DSCN3264'],
                 people: ['Unknown'],
+                gps: {
+                    'DSCN3270': [39.5385084, -77.7098213],
+                    'DSCN3265': [39.5385084, -77.7098213],
+                    'DSCN3256': [39.5385084, -77.7098213],
+                    'DSCN3255': [39.5385084, -77.7098213],
+                    'DSCN3253': [39.5385084, -77.7098213],
+                    // UNKNOWN: DSCN3264
+                }
             },
             '05/11/26': {
                 name: 'New York City',
