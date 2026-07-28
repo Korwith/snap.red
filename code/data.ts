@@ -232,6 +232,12 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['DSCN3346', 'DSCN3339', 'DSCN3348', 'DSCN3358'],
                 people: ['Unknown'],
+                gps: {
+                    'DSCN3346': [39.4127331, -77.411164],
+                    'DSCN3339': [39.4128836, -77.4101305],
+                    'DSCN3348': [39.4142865, -77.4112705],
+                    'DSCN3358': [39.4150754, -77.4146599],
+                }
             },
             '05/15/26': {
                 name: 'Boonsboro, MD',
