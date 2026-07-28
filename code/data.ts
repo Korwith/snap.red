@@ -361,11 +361,21 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['DSCN2362', 'DSCN2366'],
                 people: ['Unknown'],
+                gps: {
+                    'DSCN2362': [39.4147008, -77.4110162],
+                    'DSCN2366': [39.4147008, -77.4110162]
+                }
             },
             '02/07/26': {
                 name: 'Downtown Frederick',
                 id: [1142, 1148, 1144, 1140],
-                people: ['Unknown']
+                people: ['Unknown'],
+                gps: {
+                    1142: [39.4128349, -77.4093302],
+                    1148: [39.4128349, -77.4093302],
+                    1144: [39.4128349, -77.4093302],
+                    1140: [39.4128349, -77.4093302],
+                }
             },
             '01/13/26': {
                 name: "Harper's Ferry",
