@@ -235,7 +235,7 @@ class PageManager {
     // returns true if the person is featured in photos and not in the hide list
     isFeaturedPersonValid(user: string): boolean {
         const users: string[] = this.fetchFeaturedPeople();
-        if (HideUsers.includes(user)) return false;
+        if (user.includes('Redacted')) return false;
         if (!users.includes(user)) return false;
         return true;
     }
