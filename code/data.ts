@@ -25,6 +25,19 @@ const Data: Database = {
         },
 
         images: {
+            '07/29/26': {
+                name: "Mount St. Mary's",
+                id: ['DSCN4463', 'DSCN4469', 'DSCN4486', 'DSCN4492', 'DSCN4518', 'DSCN4524'],
+                people: ['Edin', 'Kevin'],
+                gps: {
+                    'DSCN4463': [39.6819084, -77.3561786],
+                    'DSCN4469': [39.6819084, -77.3561786],
+                    'DSCN4486': [39.6819084, -77.3561786],
+                    'DSCN4492': [39.6823526, -77.3564523],
+                    'DSCN4518': [39.6823526, -77.3564523],
+                    'DSCN4524': [39.6823526, -77.3564523]
+                },
+            },
             '07/28/26': {
                 name: 'Ballenger Creek',
                 id: ['DSCN4425', 'DSCN4426', 'DSCN4430'],
@@ -34,7 +47,7 @@ const Data: Database = {
                     'DSCN4426': [39.3636676, -77.4205292],
                     'DSCN4430': [39.3636676, -77.4205292],
                 }
-            }
+            },
             '07/27/26': {
                 name: 'Cunningham Falls',
                 id: ['DSCN4347', 'DSCN4327', 'DSCN4346', 'DSCN4352', 'DSCN4384', 'DSCN4386', 'DSCN4387', 'DSCN4390', 'DSCN4405', 'DSCN4364'],
