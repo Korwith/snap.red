@@ -25,6 +25,16 @@ const Data: Database = {
         },
 
         images: {
+            '07/28/26': {
+                name: 'Ballenger Creek',
+                id: ['DSCN4425', 'DSCN4426', 'DSCN4430'],
+                people: ['Brittany', 'Leah', 'Ashely', 'Gio', 'Dwayne'],
+                gps: {
+                    'DSCN4425': [39.3636676, -77.4205292],
+                    'DSCN4426': [39.3636676, -77.4205292],
+                    'DSCN4430': [39.3636676, -77.4205292],
+                }
+            }
             '07/27/26': {
                 name: 'Cunningham Falls',
                 id: ['DSCN4347', 'DSCN4327', 'DSCN4346', 'DSCN4352', 'DSCN4384', 'DSCN4386', 'DSCN4387', 'DSCN4390', 'DSCN4405', 'DSCN4364'],
