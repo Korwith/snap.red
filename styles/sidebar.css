@@ -82,6 +82,7 @@ body.shift nav.sidebar {
     font-size: 1.1rem;
     cursor: pointer;
     outline: none;
+    order: calc(var(--order) * -1);
     transition: background-color 0.15s, color 0.15s;
 }
 

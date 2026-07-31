@@ -116,7 +116,7 @@ class TimelineMonthButton {
         this.month_id = month_id;
 
         this.element = document.createElement('button');
-        this.element.setAttribute('month', month_id);
+        this.element.style.setProperty('--order', month_id);
         this.element.onclick = () => this.navigate();
 
         holder.element.appendChild(this.element);

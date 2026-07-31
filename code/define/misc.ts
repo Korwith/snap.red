@@ -3,8 +3,7 @@ class DateManager {
     // converts a numeric month id string to its full localized name
     dateIDtoName(id: string): string {
         const int: number = parseInt(id);
-        const date: Date = new Date();
-        date.setMonth(int - 1);
+        const date: Date = new Date(2000, int - 1);
         return date.toLocaleString('en-US', { month: 'long' })
     }
 }
