@@ -455,6 +455,11 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['DSCN1594', 'DSCN1600', 'DSCN1610'],
                 people: ['Redacted A'],
+                gps: {
+                    'DSCN1594': [39.4157672, -77.4075459],
+                    'DSCN1600': [39.413988, -77.409557],
+                    'DSCN1610': [39.4128946, -77.4098427],
+                }
             },
             '10/02/25': {
                 name: 'Rivermist Park',
