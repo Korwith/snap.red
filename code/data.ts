@@ -650,7 +650,7 @@ const Data: Database = {
             '03/28/25': {
                 name: 'Thurmont, MD',
                 id: [8024, 8022, 8039],
-                people: ['Riley', 'Unknown']
+                people: ['Riley', 'Redacted A']
             },
             '03/27/25': {
                 name: 'Rose Hill',
@@ -913,7 +913,7 @@ const Data: Database = {
             },
             '06/13/24': {
                 name: 'Railroad Tracks',
-                people: ['Riley', 'Unknown'],
+                people: ['Riley', 'Redacted A'],
                 id: [1404, 1400],
             },
             '06/12/24': {
@@ -1076,7 +1076,7 @@ const Data: Database = {
             },
             '07/20/23': {
                 name: 'Rose Hill',
-                people: ['Cody', 'Unknown'],
+                people: ['Cody', 'Redacted A'],
                 id: [7933, 7936, 7927, 7918],
             },
             '07/05/23': {
@@ -1117,7 +1117,7 @@ const Data: Database = {
             },
             '06/02/23': {
                 name: 'North Crossing',
-                people: ['Riley', 'Liam', 'Unknown'],
+                people: ['Riley', 'Liam', 'Redacted A'],
                 id: [3690, 3678, 3675]
             },
             '04/09/23': {
