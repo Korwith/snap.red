@@ -25,6 +25,18 @@ const Data: Database = {
         },
 
         images: {
+            '08/03/26': {
+                name: 'Gaithersburg, MD',
+                id: ["DSCN4858", "DSCN4881", "DSCN4893", "DSCN4847", "DSCN4864"],
+                people: ['Edin'],
+                gps: {
+                    'DSCN4858': [39.1451311, -77.2568587],
+                    'DSCN4881': [39.1451311, -77.2568587],
+                    'DSCN4893': [39.1451311, -77.2568587],
+                    'DSCN4847': [39.1451311, -77.2568587],
+                    'DSCN4864': [39.1451311, -77.2568587]
+                }
+            },
             '07/31/26': {
                 name: 'Middletown, MD',
                 id: ['DSCN4784', 'DSCN4772', 'DSCN4759', 'DSCN4785', 'DSCN4787', 'DSCN4800', 'DSCN4762'],
