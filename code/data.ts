@@ -763,7 +763,11 @@ const Data: Database = {
             '04/18/25': {
                 name: 'Monocacy River',
                 id: [8363, 8364],
-                people: ['Redacted A']
+                people: ['Redacted A'],
+                gps: {
+                    8363: [39.435211, -77.38739],
+                    8364: [39.435211, -77.38739],
+                }
             },
             '04/08/25': {
                 name: 'Gambrill State Park',
