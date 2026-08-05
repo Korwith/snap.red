@@ -25,9 +25,21 @@ const Data: Database = {
         },
 
         images: {
+            '08/05/26': {
+                name: 'Downtown Frederick',
+                id: ['DSCN4925', 'DSCN4939', 'DSCN4923', 'DSCN4932', 'DSCN4924'],
+                people: ['Riley'],
+                gps: {
+                    'DSCN4925': [39.4150735, -77.4126407],
+                    // still need to find DSCN4939
+                    'DSCN4923': [39.4150735, -77.4126407],
+                    'DSCN4932': [39.4143538, -77.4123393],
+                    'DSCN4924': [39.4150735, -77.4126407],
+                }
+            },
             '08/03/26': {
                 name: 'Gaithersburg, MD',
-                id: ["DSCN4858", "DSCN4881", "DSCN4893", "DSCN4847", "DSCN4864"],
+                id: ['DSCN4858', 'DSCN4881', 'DSCN4893', 'DSCN4847', 'DSCN4864'],
                 people: ['Edin'],
                 gps: {
                     'DSCN4858': [39.1451311, -77.2568587],
