@@ -743,7 +743,12 @@ const Data: Database = {
             '05/01/25': {
                 name: 'Downtown Frederick',
                 id: [8619, 8615, 'DSCN1430'],
-                people: ['Redacted A', 'Edin', 'Kevin']
+                people: ['Redacted A', 'Edin', 'Kevin'],
+                gps: {
+                    8619: [39.4138835, -77.4089961],
+                    8615: [39.4138612, -77.4083493],
+                    // UNKNOWN: DSCN1430
+                }
             },
             '04/23/25': {
                 name: 'Monocacy River',
