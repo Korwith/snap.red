@@ -753,7 +753,12 @@ const Data: Database = {
             '04/23/25': {
                 name: 'Monocacy River',
                 id: [2347, 3457, 8541],
-                people: ['Redacted A', 'Edin']
+                people: ['Redacted A', 'Edin'],
+                gps: {
+                    2347: [39.436374, -77.389465],
+                    3457: [39.436374, -77.389465],
+                    8541: [39.436374, -77.389465]
+                }
             },
             '04/18/25': {
                 name: 'Monocacy River',
