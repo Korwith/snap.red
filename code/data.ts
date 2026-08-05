@@ -686,12 +686,19 @@ const Data: Database = {
             '05/23/25': {
                 name: 'Gambrill State Park',
                 id: ['1050025', '1040978', '1050030', '1050022', '1050020', '1050027'].reverse(),
-                people: ['Redacted A', 'Edin', 'Liam', 'Kevin']
+                people: ['Redacted A', 'Edin', 'Liam', 'Kevin'],
+                // most of these photos i could not relocate for gps
             },
             '05/20/25': {
                 name: 'North Crossing',
                 id: ['1040814', '1040833', '1040829', '1040859'],
-                people: ['Redacted A', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max']
+                people: ['Redacted A', 'Riley', 'Edin', 'Liam', 'Kenyan', 'Ed', 'Aidan', 'Max'],
+                gps: {
+                    '1040814': [39.4659494, -77.4053799],
+                    '1040833': [39.4659494, -77.4053799],
+                    '1040829': [39.4659494, -77.4053799],
+                    '1040859': [39.4659494, -77.4053799]
+                }
             },
             '05/15/25': {
                 name: 'Gambrill State Park',
