@@ -772,11 +772,16 @@ const Data: Database = {
             '04/08/25': {
                 name: 'Gambrill State Park',
                 id: [8299, 8297, 8296],
-                people: ['Redacted A', 'Edin']
+                people: ['Redacted A', 'Edin'],
+                // couldn't relocate these photos
             },
             '04/07/25': {
                 name: 'Rose Hill',
-                id: [8288, 8284]
+                id: [8288, 8284],
+                gps: {
+                    8288: [39.4392158, -77.4057172],
+                    8284: [39.4341991, -77.4070782]
+                }
             },
             '03/29/25': {
                 name: 'Downtown Frederick',
