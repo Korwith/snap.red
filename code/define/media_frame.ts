@@ -272,8 +272,13 @@ class MediaFramePhoto extends MediaFrame {
     load(): void {
         const info: PhotoEntry | null = this.holder.manager.fetchImageByDate(this.date);
         if (!info) throw new Error(`Error: No photo found at ${this.date}`);
+
         this.caption.textContent = info.name;
         this.image.setAttribute('src', `../media/${this.holder.manager.fetchUserName()}/IMG_${info.id[0]}.jpg`);
+
+        if (info.hover_color) {
+            this.element.style.setProperty('--hover-color', info.hover_color);
+        }
     }
 
     // opens the full-size photo viewer for this photo

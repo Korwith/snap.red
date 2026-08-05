@@ -112,7 +112,7 @@ figure::after {
 }
 
 figure:hover::after {
-    border: 4px solid white;
+    border: 4px solid var(--hover-color, white);
 }
 
 /* figure sizing */

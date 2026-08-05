@@ -1,5 +1,7 @@
 // used by data.ts
 
+type HexColor = `#${string}`;
+
 interface Database {
     [name: string]: UserEntry;
 }
@@ -40,6 +42,7 @@ interface PhotoEntry {
     featured?: number;
     caption?: string;
     gps?: Record<string | number, [number, number]>
+    hover_color?: HexColor;
 }
 
 interface VideoDatabase {

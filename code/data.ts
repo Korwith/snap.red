@@ -96,7 +96,9 @@ const Data: Database = {
                     'DSCN4425': [39.3636676, -77.4205292],
                     'DSCN4426': [39.3636676, -77.4205292],
                     'DSCN4430': [39.3636676, -77.4205292],
-                }
+                },
+                featured: 1,
+                hover_color: '#da70d6',
             },
             '07/27/26': {
                 name: 'Cunningham Falls',
@@ -125,7 +127,8 @@ const Data: Database = {
                     'DSCN4295': [39.4618127, -77.49539],
                     'DSCN4244': [39.5156167, -77.4884283],
                     'DSCN4259': [39.4698003, -77.4942981]
-                }
+                },
+                hover_color: '#da70d6'
             },
             '07/25/26': {
                 name: 'Thurmont, MD',
@@ -187,7 +190,7 @@ const Data: Database = {
                 name: 'Weverton Cliffs',
                 id: ['DSCN3699', 'DSCN3696', 'DSCN3682', 'DSCN3687', 'DSCN3676', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
                 people: ['Brittany'],
-                featured: 4,
+                featured: 5,
                 gps: {
                     'DSCN3699': [39.3320587, -77.6766005],
                     'DSCN3696': [39.3320587, -77.6766005],
@@ -197,7 +200,8 @@ const Data: Database = {
                     'DSCN3690': [39.3320587, -77.6766005],
                     'DSCN3691': [39.3320587, -77.6766005],
                     'DSCN3685': [39.3320587, -77.6766005],
-                }
+                },
+                hover_color: '#da70d6'
             },
             '07/16/26': {
                 name: 'Washington D.C.',
@@ -230,7 +234,8 @@ const Data: Database = {
                 gps: {
                     'DSCN3922': [39.414972, -77.4156475],
                     '3239': [39.4145355, -77.4107732],
-                }
+                },
+                hover_color: '#da70d6'
             },
             '07/05/26': {
                 name: 'Downtown Frederick',
@@ -241,7 +246,8 @@ const Data: Database = {
                     'DSCN3605': [39.4139573, -77.4105908],
                     'DSCN3595': [39.4134368, -77.4138769],
                     'DSCN3594': [39.4130089, -77.409569]
-                }
+                },
+                hover_color: '#da70d6'
             },
             '07/03/26': {
                 name: 'Monocacy River',
@@ -368,7 +374,7 @@ const Data: Database = {
                 name: 'Acadia National Park',
                 id: ['DSCN2911', 'DSCN2948', 'DSCN2812', 'DSCN2813', 'DSCN2838', 'DSCN2882', 'DSCN2886', 'DSCN2953'],
                 people: ['Riley', 'Ed'],
-                featured: 1,
+                featured: 2,
                 gps: {
                     'DSCN2911': [44.3361, -68.2755],
                     // UNKNOWN: DSCN2948, DSCN2812, DSCN2813
@@ -535,7 +541,7 @@ const Data: Database = {
                 name: 'Washington D.C.',
                 id: ['1090', '1016', '1083', '1106', '1019', '1082', '1080', '1026', '1108', '0919', '0971', '0942', '1079', '1028', '1089', '0956', '0954'],
                 people: ['Redacted A', 'Aidan', 'Jordan'],
-                featured: 2,
+                featured: 3,
                 gps: {
                     '1090': [38.8938, -77.0251],
                     '1016': [38.8906482, -77.0259615],
@@ -969,7 +975,7 @@ const Data: Database = {
                 name: 'Weverton Cliffs',
                 people: ['Redacted A', 'Jeremy'],
                 id: [3521, 3523, 3489, 3579, 3475],
-                featured: 3,
+                featured: 4,
                 gps: {
                     3521: [39.3320587, -77.6766005],
                     3523: [39.3320587, -77.6766005],
