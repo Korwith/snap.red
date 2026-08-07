@@ -54,7 +54,7 @@ class PageManager {
     switchUser(user: string): void {
         if (!this.data[user]) throw new Error('Invalid user');
         this.user = user;
-        this.header.user_select.syncToUser(user);
+        this.header.right_holder.user_select.syncToUser(user);
         this.reload();
         this.url_handler?.setState(user);
     }

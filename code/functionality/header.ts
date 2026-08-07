@@ -50,6 +50,7 @@ class LeftHeaderHolder extends HeaderEntryHolder {
     }
 }
 
+// holds the user selector and theme selector
 class RightHeaderHolder extends HeaderEntryHolder {
     user_select: HeaderUserSelect;
 
