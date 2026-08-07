@@ -37,6 +37,11 @@ interface PhotoDatabase {
     [date: string]: PhotoEntry;
 }
 
+interface CustomIconConfig {
+    calender_icon?: string,
+    footer_icon?: string,
+}
+
 interface PhotoEntry {
     name: string;
     id: Array<string | number>;
@@ -45,7 +50,7 @@ interface PhotoEntry {
     caption?: string;
     gps?: Record<string | number, [number, number]>
     hover_color?: HexColor;
-    custom_icon?: string;
+    custom_icons?: CustomIconConfig;
 }
 
 interface VideoDatabase {

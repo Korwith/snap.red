@@ -172,17 +172,17 @@ figure figcaption {
 }
 
 figure .date::before {
-    background-image: url(../icon/day.svg);
+    background-image: var(--custom-icon-calender, url(../icon/day.svg));
     background-size: 75%;
 }
 
 figure figcaption::before {
     background-size: 60%;
-    background-image: var(--custom-icon, url(../icon/location.svg));
+    background-image: var(--custom-icon-footer, url(../icon/location.svg));
 }
 
 figure.featured figcaption::before {
-    background-image: var(--custom-icon, url(../icon/star.svg));
+    background-image: var(--custom-icon-footer, url(../icon/star.svg));
 }
 
 /* mobile */
