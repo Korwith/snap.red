@@ -252,7 +252,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     padding-left: 12px;
     padding-right: 12px;
     background-color: rgba(0, 0, 0, 0);
-    color: rgba(255, 255, 255, 0.8);;
+    color: white;
     font-weight: 700;
     font-size: 1.1rem;
     cursor: pointer;
@@ -291,7 +291,6 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../icon/exit.svg);
-    opacity: 0.8;
     transition: opacity 0.15s;
 }
 
