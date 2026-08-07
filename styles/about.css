@@ -19,7 +19,7 @@
 
 .page.about h1, .page.about span {
     color: white;
-    transition: color 0.3s;
+    transition: color 0.3s, text-shadow 0.3s;
 }
 
 /* light theme */
