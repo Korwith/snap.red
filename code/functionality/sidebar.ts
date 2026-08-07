@@ -3,6 +3,7 @@ class PageSidebar {
     manager: PageManager;
     element: HTMLElement;
     timeline: SidebarTimeline;
+    footer: SidebarFooter;
 
     // builds the sidebar element and fills the timeline
     constructor(manager: PageManager) {
@@ -11,7 +12,7 @@ class PageSidebar {
         this.element.classList.add('sidebar');
         this.element.classList.add('subtle_stripes');
         this.timeline = new SidebarTimeline(this);
-        this.timeline.fill();
+        this.footer = new SidebarFooter(this);
         manager.element.appendChild(this.element);
     }
 
@@ -33,12 +34,13 @@ class SidebarTimeline {
         this.element = document.createElement('div');
         this.element.classList.add('timeline');
         this.date_handler = new DateManager();
+        this.fill();
 
         sidebar.element.appendChild(this.element);
     }
 
     // populates the timeline with year and month entries from the user's photos
-    fill(): void {
+    protected fill(): void {
         const manager: PageManager = this.sidebar.manager;
         const count: number = Object.keys(manager.fetchUserImages(null)).length;
         const sidebar_data: SidebarStructure = manager.fetchSidebarContent();
@@ -52,7 +54,7 @@ class SidebarTimeline {
     }
 
     // clears and refills the timeline
-    reset(): void {
+    public reset(): void {
         this.element.innerHTML = '';
         this.fill();
     }
@@ -145,5 +147,75 @@ class TimelineMonthButton {
             this.holder.timeline.sidebar.manager.toggleSidebar(false);
         }
         el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// holds website stats at the bottom of the sidebar
+class SidebarFooter {
+    sidebar: PageSidebar;
+    stats: WebsiteStats;
+    element: HTMLElement;
+    
+    commits: CommitFooterText;
+    size: SizeFooterText;
+
+    constructor(sidebar: PageSidebar) {
+        this.sidebar = sidebar;
+        this.stats = new WebsiteStats('Korwith', 'snap.red');
+
+        this.element = document.createElement('div');
+        this.element.classList.add('sidebar_footer');
+
+        this.commits = new CommitFooterText(this);
+        this.size = new SizeFooterText(this);
+
+        this.sidebar.element.appendChild(this.element);
+    }
+}
+
+// abstract class for the text which appears
+abstract class SidebarFooterText {
+    footer: SidebarFooter;
+    element: HTMLElement;
+
+    constructor(footer: SidebarFooter) {
+        this.footer = footer;
+        this.element = document.createElement('span');
+        this.footer.element.appendChild(this.element);
+    }
+
+    protected abstract updateText(): Promise<void>;
+}
+
+// displays the commit count
+class CommitFooterText extends SidebarFooterText {
+    constructor(footer: SidebarFooter) {
+        super(footer);
+        this.element.classList.add('commits');
+        this.updateText();
+    }
+
+    // requests commit data from github and displays count
+    protected async updateText(): Promise<void> {
+        const commit_data: CommitData = await this.footer.stats.fetchLastCommit();
+        if (!commit_data) throw new Error('Failed to fetch commit count.');
+        this.element.textContent = `${commit_data.count.toString()} commits`;
+    }
+}
+
+// displays the total website size
+class SizeFooterText extends SidebarFooterText {
+    constructor(footer: SidebarFooter) {
+        super(footer);
+        this.element.classList.add('size');
+        this.updateText();
+    }
+
+    // requests repo size data from github and displays it
+    // automatically formatted via statistics.ts
+    protected async updateText(): Promise<void> {
+        const size: string = await this.footer.stats.fetchRepoSize();
+        if (!size) throw new Error('Failed to fetch website size.');
+        this.element.textContent = size;
     }
 }
