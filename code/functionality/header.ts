@@ -2,42 +2,62 @@
 class PageHeader {
     manager: PageManager;
     element: HTMLElement;
-    entry_holder: HeaderEntryHolder;
-    user_select: HeaderUserSelect;
+    left_holder: LeftHeaderHolder;
+    right_holder: RightHeaderHolder;
 
     // creates the header, its button group, and the user selector
     constructor(manager: PageManager) {
         this.manager = manager;
         this.element = document.createElement('header');
-        this.entry_holder = new HeaderEntryHolder(this);
-        this.user_select = new HeaderUserSelect(this);
+
+        this.left_holder = new LeftHeaderHolder(this);
+        this.right_holder = new RightHeaderHolder(this);
 
         manager.element.appendChild(this.element);
     }
 }
 
-// holds the emblem and all header navigation buttons
-class HeaderEntryHolder {
+// holds the buttons and labels displayed in the header
+abstract class HeaderEntryHolder {
     header: PageHeader;
     element: HTMLElement;
+
+    constructor(header: PageHeader) {
+        this.header = header;
+        this.element = document.createElement('div');
+        this.element.classList.add('header_button_holder');
+        this.header.element.appendChild(this.element);
+    }
+}
+
+// holds the emblem and all header navigation buttons
+class LeftHeaderHolder extends HeaderEntryHolder {
     sidebar_toggle: HeaderButtonSidebar;
     emblem: HeaderEmblem;
     home: HeaderButtonHome;
     map: HeaderButtonMap;
     about: HeaderButtonAbout;
 
-    // creates all header buttons and the emblem
     constructor(header: PageHeader) {
-        this.header = header;
-        this.element = document.createElement('div');
+        super(header);
+        this.element.classList.add('left');
+
         this.sidebar_toggle = new HeaderButtonSidebar(this);
         this.emblem = new HeaderEmblem(this);
         this.home = new HeaderButtonHome(this);
         this.map = new HeaderButtonMap(this);
         this.about = new HeaderButtonAbout(this);
+    }
+}
 
-        this.element.classList.add('header_button_holder');
-        header.element.appendChild(this.element);
+class RightHeaderHolder extends HeaderEntryHolder {
+    user_select: HeaderUserSelect;
+
+    constructor(header: PageHeader) {
+        super(header);
+        this.element.classList.add('right');
+
+        this.user_select = new HeaderUserSelect(this);
     }
 }
 
@@ -132,21 +152,22 @@ class HeaderButtonAbout extends HeaderButton {
 
 // dropdown in the header for switching between users
 class HeaderUserSelect extends Dropdown {
-    header: PageHeader;
+    holder: HeaderEntryHolder;
 
     // creates the user select dropdown and populates it with all users
-    constructor(header: PageHeader) {
+    constructor(holder: HeaderEntryHolder) {
         super(35);
-        this.header = header;
+        this.holder = holder;
+
         this.element.classList.add('user_select');
-        this.header.element.appendChild(this.element);
+        this.holder.element.appendChild(this.element);
 
         this.load();
     }
 
     // populates the dropdown with an option for each user
     load(): void {
-        const manager: PageManager = this.header.manager;
+        const manager: PageManager = this.holder.header.manager;
         const users: string[] = manager.fetchUserList();
 
         for (const user of users) {
@@ -165,6 +186,6 @@ class HeaderUserSelect extends Dropdown {
 
     // switches the active user to the selected option's name
     selected(option: DropdownOption): void {
-        this.header.manager.switchUser(option.getText());
+        this.holder.header.manager.switchUser(option.getText());
     }
 }
