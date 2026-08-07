@@ -1,7 +1,6 @@
 nav.sidebar {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     position: fixed;
     top: 50px;
     left: 0;
