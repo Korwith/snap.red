@@ -276,9 +276,8 @@ class MediaFramePhoto extends MediaFrame {
         this.caption.textContent = info.name;
         this.image.setAttribute('src', `../media/${this.holder.manager.fetchUserName()}/IMG_${info.id[0]}.jpg`);
 
-        if (info.hover_color) {
-            this.element.style.setProperty('--hover-color', info.hover_color);
-        }
+        this.element.style.setProperty('--hover-color', info.hover_color || null)
+        this.element.style.setProperty('--custom-icon', (info.custom_icon ? `url(../icon/${info.custom_icon})`: null) || null )
     }
 
     // opens the full-size photo viewer for this photo

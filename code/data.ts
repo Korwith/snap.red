@@ -92,13 +92,14 @@ const Data: Database = {
                 name: 'Ballenger Creek',
                 id: ['DSCN4425', 'DSCN4426', 'DSCN4430'],
                 people: ['Brittany', 'Leah', 'Ashely', 'Gio', 'Dwayne'],
+                featured: 1,
+                hover_color: '#da70d6',
+                custom_icon: 'heart.svg',
                 gps: {
                     'DSCN4425': [39.3636676, -77.4205292],
                     'DSCN4426': [39.3636676, -77.4205292],
                     'DSCN4430': [39.3636676, -77.4205292],
                 },
-                featured: 1,
-                hover_color: '#da70d6',
             },
             '07/27/26': {
                 name: 'Cunningham Falls',
@@ -120,6 +121,7 @@ const Data: Database = {
                 name: 'Gambrill State Park',
                 id: ['DSCN4268', 'DSCN4241', 'DSCN4267', 'DSCN4295', 'DSCN4244', 'DSCN4259'],
                 people: ['Brittany'],
+                hover_color: '#da70d6',
                 gps: {
                     'DSCN4268': [39.4613433, -77.4951715],
                     'DSCN4241': [39.5156167, -77.4884283],
@@ -128,7 +130,6 @@ const Data: Database = {
                     'DSCN4244': [39.5156167, -77.4884283],
                     'DSCN4259': [39.4698003, -77.4942981]
                 },
-                hover_color: '#da70d6'
             },
             '07/25/26': {
                 name: 'Thurmont, MD',
@@ -191,6 +192,8 @@ const Data: Database = {
                 id: ['DSCN3699', 'DSCN3696', 'DSCN3682', 'DSCN3687', 'DSCN3676', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
                 people: ['Brittany'],
                 featured: 5,
+                hover_color: '#da70d6',
+                custom_icon: 'heart.svg',
                 gps: {
                     'DSCN3699': [39.3320587, -77.6766005],
                     'DSCN3696': [39.3320587, -77.6766005],
@@ -201,7 +204,6 @@ const Data: Database = {
                     'DSCN3691': [39.3320587, -77.6766005],
                     'DSCN3685': [39.3320587, -77.6766005],
                 },
-                hover_color: '#da70d6'
             },
             '07/16/26': {
                 name: 'Washington D.C.',
@@ -231,23 +233,23 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['DSCN3922', '3239'],
                 people: ['Brittany'],
+                hover_color: '#da70d6',
                 gps: {
                     'DSCN3922': [39.414972, -77.4156475],
                     '3239': [39.4145355, -77.4107732],
                 },
-                hover_color: '#da70d6'
             },
             '07/05/26': {
                 name: 'Downtown Frederick',
                 id: ['DSCN3596', 'DSCN3605', 'DSCN3595', 'DSCN3594'],
                 people: ['Brittany'],
+                hover_color: '#da70d6',
                 gps: {
                     'DSCN3596': [39.4150616, -77.4146664],
                     'DSCN3605': [39.4139573, -77.4105908],
                     'DSCN3595': [39.4134368, -77.4138769],
                     'DSCN3594': [39.4130089, -77.409569]
                 },
-                hover_color: '#da70d6'
             },
             '07/03/26': {
                 name: 'Monocacy River',

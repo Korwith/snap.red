@@ -43,6 +43,7 @@ interface PhotoEntry {
     caption?: string;
     gps?: Record<string | number, [number, number]>
     hover_color?: HexColor;
+    custom_icon?: string;
 }
 
 interface VideoDatabase {

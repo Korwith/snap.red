@@ -178,11 +178,11 @@ figure .date::before {
 
 figure figcaption::before {
     background-size: 60%;
-    background-image: url(../icon/location.svg);
+    background-image: var(--custom-icon, url(../icon/location.svg));
 }
 
 figure.featured figcaption::before {
-    background-image: url(../icon/star.svg);
+    background-image: var(--custom-icon, url(../icon/star.svg));
 }
 
 /* mobile */
