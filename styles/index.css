@@ -5,6 +5,11 @@ html, body {
     margin: 0;
     overflow: hidden;
     touch-action: manipulation;
+    transition: background-color 0.3s;
+}
+
+html:has(body.light), body.light {
+    background-color: white;
 }
 
 * {

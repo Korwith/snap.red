@@ -25,7 +25,7 @@ body.shift nav.sidebar {
     flex-direction: column;
     flex: 1;
     min-height: 0;
-    gap: 10px;
+    gap: 5px;
     overflow-y: auto;
 }
 
@@ -47,8 +47,6 @@ body.shift nav.sidebar {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    border-bottom: 1px solid #202020;
-    padding-bottom: 10px;
 }
 
 .year_label {

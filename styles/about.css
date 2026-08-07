@@ -17,8 +17,15 @@
     height: fit-content;
 }
 
-.page.about * {
+.page.about h1, .page.about span {
     color: white;
+    transition: color 0.3s;
+}
+
+/* light theme */
+body.light .page.about h1, body.light .page.about span {
+    color: black;
+    text-shadow: 2px 2px 4px white;
 }
 
 @media screen and (max-width: 767px) {
