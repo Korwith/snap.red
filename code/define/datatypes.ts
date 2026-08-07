@@ -1,6 +1,8 @@
 // used by data.ts
 
 type HexColor = `#${string}`;
+type RGBColor = `rgb(${number}, ${number}, ${number})`;
+type RGBAColor = `rgba(${number}, ${number}, ${number}, ${number})`;
 
 interface Database {
     [name: string]: UserEntry;
