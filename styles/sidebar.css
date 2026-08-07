@@ -65,6 +65,7 @@ body.shift nav.sidebar {
     box-sizing: border-box;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 700;
+    order: -15;
 }
 
 .year_holder button {
