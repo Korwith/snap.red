@@ -53,11 +53,13 @@ class LeftHeaderHolder extends HeaderEntryHolder {
 // holds the user selector and theme selector
 class RightHeaderHolder extends HeaderEntryHolder {
     user_select: HeaderUserSelect;
+    theme_button: HeaderThemeButton;
 
     constructor(header: PageHeader) {
         super(header);
         this.element.classList.add('right');
 
+        this.theme_button = new HeaderThemeButton(this);
         this.user_select = new HeaderUserSelect(this);
     }
 }
@@ -76,6 +78,14 @@ abstract class HeaderButton {
     }
 
     abstract onclick(e: PointerEvent): void;
+}
+
+// same as the above but removes left and right padding
+abstract class HeaderButtonSquare extends HeaderButton {
+    constructor(holder: HeaderEntryHolder) {
+        super(holder);
+        this.element.classList.add('square');
+    }
 }
 
 // displays the site name emblem in the header
@@ -188,5 +198,17 @@ class HeaderUserSelect extends Dropdown {
     // switches the active user to the selected option's name
     selected(option: DropdownOption): void {
         this.holder.header.manager.switchUser(option.getText());
+    }
+}
+
+// toggles between light and dark theme
+class HeaderThemeButton extends HeaderButtonSquare {
+    constructor(holder: HeaderEntryHolder) {
+        super(holder);
+        this.element.classList.add('theme');
+    }
+
+    onclick(): void {
+        this.holder.header.manager.toggleTheme();
     }
 }

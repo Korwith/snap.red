@@ -10,6 +10,7 @@ div.footer {
     background: linear-gradient(to bottom, #050505, #202020);
     border-top: 1px solid #202020;
     z-index: 10;
+    transition: filter 0.3s;
 }
 
 div.footer div.button {
@@ -65,6 +66,11 @@ div.footer div.button.map::before {
 div.footer div.button.about::before {
     background-image: url(../icon/info.svg);
     background-size: 80%;
+}
+
+/* light theme */
+body.light div.footer {
+    filter: invert(1);
 }
 
 @media screen and (max-width: 767px) {

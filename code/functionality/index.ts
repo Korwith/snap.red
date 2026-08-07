@@ -288,6 +288,13 @@ class PageManager {
             page.toggle(name == key);
         }
     }
+
+    // switches the current page theme (light or dark)
+    public toggleTheme(): void {
+        const light: boolean = document.body.classList.toggle('light');
+        const meta_theme: HTMLElement | null = document.head.querySelector('[name="theme-color"]');
+        meta_theme?.setAttribute('content', light ? '#DFDFDF' : '#202020');
+    }
 }
 
 // decides what to do with the given URL

@@ -58,6 +58,7 @@
     color: white;
     font-weight: 700;
     order: -1;
+    transition: filter 0.3s;
 }
 
 .photo_row .internal_scroll {
@@ -113,6 +114,10 @@ figure::after {
 
 figure:hover::after {
     border: 4px solid var(--hover-color, white);
+}
+
+body.light figure:hover::after {
+    border: 4px solid var(--hover-color, black);
 }
 
 /* figure sizing */
