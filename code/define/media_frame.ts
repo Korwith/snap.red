@@ -277,8 +277,8 @@ class MediaFramePhoto extends MediaFrame {
         this.image.setAttribute('src', `../media/${this.holder.manager.fetchUserName()}/IMG_${info.id[0]}.jpg`);
 
         this.element.style.setProperty('--hover-color', info.hover_color || null)
-        this.element.style.setProperty('--custom-icon-calender', info.custom_icons?.calender_icon ? `url(../icon/${info.custom_icons.calender_icon})` : null);
-        this.element.style.setProperty('--custom-icon-footer', info.custom_icons?.footer_icon ? `url(../icon/${info.custom_icons.footer_icon})` : null);
+        this.element.style.setProperty('--custom-icon-calender', info.custom_icons?.calender ? `url(../icon/${info.custom_icons.calender})` : null);
+        this.element.style.setProperty('--custom-icon-footer', info.custom_icons?.footer ? `url(../icon/${info.custom_icons.footer})` : null);
     }
 
     // opens the full-size photo viewer for this photo
