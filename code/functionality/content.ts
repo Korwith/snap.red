@@ -491,7 +491,9 @@ class FilterDropdownLocation extends FilterDropdown {
         const validNames: Set<string> = new Set<string>();
         for (const date in availablePhotos) validNames.add(availablePhotos[date].name);
         for (let i = 1; i < this.options.length; i++) {
-            this.options[i].element.classList.toggle('hidden', !validNames.has(this.options[i].getText()));
+            const text: string | null = this.options[i].getText();
+            if (!text) continue;
+            this.options[i].element.classList.toggle('hidden', !validNames.has(text));
         }
         this.updateHeight();
     }
@@ -538,7 +540,9 @@ class FilterDropdownPerson extends FilterDropdown {
 
         for (const date in photos) {
             const entry: PhotoEntry = photos[date];
-            if (!entry.people?.includes(this.primary.getText())) continue;
+            const person: string | null = this.primary.getText();
+            if (!person) continue;
+            if (!entry.people?.includes(person)) continue;
             match[date] = entry;
         }
 
@@ -551,8 +555,11 @@ class FilterDropdownPerson extends FilterDropdown {
         for (const date in availablePhotos) {
             for (const person of availablePhotos[date].people ?? []) valid_people.add(person);
         }
+
         for (let i = 1; i < this.options.length; i++) {
-            this.options[i].element.classList.toggle('hidden', !valid_people.has(this.options[i].getText()));
+            const person: string | null = this.options[i].getText();
+            if (!person) continue;
+            this.options[i].element.classList.toggle('hidden', !valid_people.has(person));
         }
         this.updateHeight();
     }

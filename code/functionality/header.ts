@@ -195,9 +195,11 @@ class HeaderUserSelect extends Dropdown {
         if (option) this.setPrimaryOption(option, true);
     }
 
-    // switches the active user to the selected option's name
+    // switches the active user to the selected optionion's name
     selected(option: DropdownOption): void {
-        this.holder.header.manager.switchUser(option.getText());
+        const user: string | null = option.getText();
+        if (!user) return;
+        this.holder.header.manager.switchUser(user);
     }
 }
 

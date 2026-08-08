@@ -116,7 +116,7 @@ class DropdownOption {
         this.element.classList.add('highlighted', color)
     } 
 
-    // applies a background image to this option
+    // applies a ::before image to this option
     setImage(url: string): void {
         this.element.classList.add('image');
         this.element.style.setProperty('--image', `url('${url}')`)
@@ -124,12 +124,13 @@ class DropdownOption {
 
     // sets the visible text label of this option
     setText(text: string): void {
+        this.element.setAttribute('content', text);
         this.element.textContent = text;
     }
 
     // returns the visible text label of this option
-    getText(): string {
-        return this.element.textContent;
+    getText(): string | null {
+        return this.element.getAttribute('content');
     }
 
     // selects this option or toggles the dropdown if it is already primary

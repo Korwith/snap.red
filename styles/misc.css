@@ -82,7 +82,7 @@
     padding-left: 8px;
     padding-right: 8px;
     box-sizing: border-box;
-    transition: background-color 0.15s;
+    transition: filter 0.3s, text-shadow 0.3s, background-color 0.15s;
 }
 
 .dropdown .option:hover {
@@ -119,6 +119,15 @@
 
 .dropdown .option.hidden {
     display: none;
+}
+
+body.light .option.highlighted {
+    filter: invert(1);
+    text-shadow: 2px 2px 4px white;
+}
+
+body.light .option.highlighted:hover {
+    background-color: rgba(0, 0, 0, 0.063);
 }
 
 .option.highlighted.pink {
