@@ -78,9 +78,8 @@
     gap: 8px;
     width: 100%;
     height: var(--height);
-    padding: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
     box-sizing: border-box;
     transition: filter 0.3s, text-shadow 0.3s, background-color 0.15s;
 }
@@ -101,7 +100,7 @@
 }
 
 .dropdown .option.image::before {
-    height: 100%;
+    height: calc(100% - 8px);
     border-radius: 50%;
     background-image: var(--image);
 }

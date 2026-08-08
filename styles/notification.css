@@ -43,7 +43,7 @@
 }
 
 .notification::before {
-    background: linear-gradient(to bottom, #050505, #151515);
+    background: linear-gradient(to bottom, #272727, #050505);
     z-index: -1;
 }
 

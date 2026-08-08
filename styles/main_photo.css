@@ -255,6 +255,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     color: white;
     font-weight: 700;
     font-size: 1.1rem;
+    z-index: 1;
     cursor: pointer;
     transition: color 0.15s;
 }
@@ -272,8 +273,13 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 }
 
 .menu aside .header button::before {
-    background: linear-gradient(to bottom, #151515, #050505);
+    background: linear-gradient(to bottom, #272727, #050505);
     z-index: -1;
+    transition: filter 0.15s;
+}
+
+.menu aside .header button:hover::before {
+    filter: brightness(0.8);
 }
 
 .menu aside .header button::after {
