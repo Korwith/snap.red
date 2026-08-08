@@ -181,6 +181,8 @@ class FigureInfoList {
         if (!entry) throw new Error('No image found at date');
 
         this.date.textContent = date;
+        this.date.style.setProperty('--custom-icon', entry.custom_icons?.calender ? `url(../icon/${entry.custom_icons.calender})` : null);
+
         const sanitized_users: string[] = manager.sanitizePeopleList(entry.people || []);
         if (sanitized_users && sanitized_users.length > 0) {
             this.people.classList.remove('hide');

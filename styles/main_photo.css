@@ -100,7 +100,7 @@
 }
 
 .menu figure.main .info span.day::before {
-    background-image: url(../icon/day.svg);
+    background-image: var(--custom-icon, url(../icon/day.svg));
     background-size: 100%;
 }
 
