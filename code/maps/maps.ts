@@ -18,6 +18,14 @@ abstract class GenericMap {
     id: string;
     map: L.Map;
 
+    theme: 'dark' | 'light' = 'dark';
+    tile_layer!: L.TileLayer;
+
+    theme_urls = {
+        dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+    }
+
     constructor(manager: PageManager, element: HTMLElement, id: string) {
         this.manager = manager;
         this.element = element;
@@ -26,7 +34,7 @@ abstract class GenericMap {
         this.element.setAttribute('id', this.id);
         this.map = L.map(this.element).setView([39.4123, -77.4255], 13); // frederick, may update later
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer(this.theme_urls[this.theme], {
             attribution: '<a href="https://snap.red/">snap.red</a>',
             maxZoom: 18,
             minZoom: 4,
@@ -54,6 +62,18 @@ abstract class GenericMap {
     // appends the marker directly to this map instance
     appendImageMarker(marker: L.Marker) {
         marker.addTo(this.map);
+    }
+
+    // changes the theme of the map, currently allows for light and dark
+    setTheme(theme: 'dark' | 'light'): void {
+        this.theme = theme;
+        if (this.tile_layer) this.map.removeLayer(this.tile_layer);
+
+        this.tile_layer = L.tileLayer(this.theme_urls[this.theme], {
+            attribution: '<a href="https://snap.red/">snap.red</a>',
+            maxZoom: 18,
+            minZoom: 4,
+        }).addTo(this.map);
     }
 }
 

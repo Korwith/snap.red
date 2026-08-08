@@ -3,6 +3,10 @@
     background-color: black;
 }
 
+body.light .leaflet-container {
+    background-color: white;
+}
+
 .leaflet-bar a {
     background: linear-gradient(to bottom, #303030, #151515);
     color: rgba(255, 255, 255, 0.7);
