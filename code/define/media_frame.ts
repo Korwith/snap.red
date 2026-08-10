@@ -242,7 +242,7 @@ abstract class MediaFrame {
     }
 
     // appends this frame to the top of the page
-    setFeatured(index: number | null ): void {
+    setFeatured(index: number | null): void {
         if (!index) return;
         this.element.style.setProperty('--importance', index.toString());
         this.element.classList.toggle('featured', true);
@@ -276,9 +276,13 @@ class MediaFramePhoto extends MediaFrame {
         this.caption.textContent = info.name;
         this.image.setAttribute('src', `../media/${this.holder.manager.fetchUserName()}/IMG_${info.id[0]}.jpg`);
 
-        this.element.style.setProperty('--hover-color', info.hover_color || null)
-        this.element.style.setProperty('--custom-icon-calender', info.custom_icons?.calender ? `url(../icon/${info.custom_icons.calender})` : null);
-        this.element.style.setProperty('--custom-icon-footer', info.custom_icons?.footer ? `url(../icon/${info.custom_icons.footer})` : null);
+        this.element.style.setProperty('--hover-color', info.hover_color || null);
+
+        this.element.style.setProperty('--icon-calender', info.custom_icons?.calender ? `url(../icon/${info.custom_icons.calender.icon})` : null);
+        this.element.style.setProperty('--icon-footer', info.custom_icons?.footer ? `url(../icon/${info.custom_icons.footer.icon})` : null);
+
+        this.element.style.setProperty('--icon-calender-size', info.custom_icons?.calender?.size ? info.custom_icons.calender.size : null);
+        this.element.style.setProperty('--icon-footer-size', info.custom_icons?.footer?.size ? info.custom_icons.footer.size : null);
     }
 
     // opens the full-size photo viewer for this photo
@@ -290,7 +294,7 @@ class MediaFramePhoto extends MediaFrame {
 // a media frame placeholder for video entries
 class MediaFrameVideo extends MediaFrame {
     link?: string;
-    
+
     // creates the video frame
     constructor(holder: MediaHolder, date: string) {
         super(holder, date);

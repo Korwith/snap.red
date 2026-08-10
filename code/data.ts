@@ -42,7 +42,7 @@ const Data: Database = {
                 people: ['Brittany'],
                 hover_color: '#da70d6',
                 custom_icons: {
-                    calender: 'heart.svg',
+                    calender: {icon: 'heart.svg', size: '77%'}
                 },
                 gps: {
                     'DSCN5145': [38.898722, -77.0256605],
@@ -162,7 +162,7 @@ const Data: Database = {
                 featured: 1,
                 hover_color: '#da70d6',
                 custom_icons: {
-                    calender: 'heart.svg',
+                    calender: {icon: 'heart.svg', size: '77%'},
                 },
                 gps: {
                     'DSCN4425': [39.3636676, -77.4205292],
@@ -263,7 +263,7 @@ const Data: Database = {
                 featured: 5,
                 hover_color: '#da70d6',
                 custom_icons: {
-                    calender: 'heart.svg',
+                    calender: {icon: 'heart.svg', size: '77%'},
                 },
                 gps: {
                     'DSCN3699': [39.3320587, -77.6766005],

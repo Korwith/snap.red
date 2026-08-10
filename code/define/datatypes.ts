@@ -38,8 +38,8 @@ interface PhotoDatabase {
 }
 
 interface CustomIconConfig {
-    calender?: string,
-    footer?: string,
+    calender?: IconEntry,
+    footer?: IconEntry,
 }
 
 interface PhotoEntry {

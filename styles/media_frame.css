@@ -179,13 +179,13 @@ figure figcaption {
 }
 
 figure .date::before {
-    background-image: var(--custom-icon-calender, url(../icon/day.svg));
-    background-size: 75%;
+    background-image: var(--icon-calender, url(../icon/day.svg));
+    background-size: var(--icon-calender-size, 74%);
 }
 
 figure figcaption::before {
-    background-size: 60%;
     background-image: var(--custom-icon-footer, url(../icon/location.svg));
+    background-size: var(--icon-footer-size, 60%);
 }
 
 figure.featured figcaption::before {
