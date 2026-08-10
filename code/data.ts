@@ -1046,7 +1046,7 @@ const Data: Database = {
             },
             '07/27/24': {
                 name: 'Weverton Cliffs',
-                people: ['Redacted A', 'Jeremy'],
+                people: ['Redacted A', 'Jeremy', 'Jayvan', 'Sam', 'Alex'],
                 id: [3521, 3523, 3489, 3579, 3475],
                 featured: 4,
                 gps: {
