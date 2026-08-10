@@ -25,6 +25,15 @@ const Data: Database = {
         },
 
         images: {
+            '08/09/26': {
+                name: 'Washington D.C.',
+                id: ['DSCN5145', 'DSCN5197', 'DSCN5203', 'DSCN5166', 'DSCN5223', 'DSCN5173'],
+                people: ['Brittany'],
+                hover_color: '#da70d6',
+                custom_icons: {
+                    calender: 'heart.svg',
+                },
+            },
             '08/08/26': {
                 name: 'High Rock',
                 id: ['DSCN5071', 'DSCN5065', 'DSCN5067', 'DSCN5076', 'DSCN5110', 'DSCN5120', 4553],
