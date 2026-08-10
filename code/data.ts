@@ -25,6 +25,10 @@ const Data: Database = {
         },
 
         images: {
+            '08/10/26': {
+                name: 'Gambrill State Park',
+                id: ['DSCN5305', 'DSCN5255', 'DSCN5279', 'DSCN5280', 'DSCN5237'],
+            },
             '08/09/26': {
                 name: 'Washington D.C.',
                 id: ['DSCN5145', 'DSCN5197', 'DSCN5203', 'DSCN5166', 'DSCN5223', 'DSCN5173'],
