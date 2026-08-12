@@ -25,6 +25,16 @@ const Data: Database = {
         },
 
         images: {
+            '08/11/26': {
+                name: 'Fountain Rock Park',
+                id: ['DSCN5378', 'DSCN5373','DSCN5385'],
+                people: ['Riley', 'Ed'],
+                gps: {
+                    'DSCN5373': [39.4752223, -77.3691263],
+                    'DSCN5378': [39.4752223, -77.3691263],
+                    'DSCN5385': [39.4752223, -77.3691263],
+                }
+            },
             '08/10/26': {
                 name: 'Gambrill State Park',
                 id: ['DSCN5305', 'DSCN5255', 'DSCN5279', 'DSCN5280', 'DSCN5237'],
