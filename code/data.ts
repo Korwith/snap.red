@@ -1310,12 +1310,12 @@ const Data: Database = {
                 id: [9480, 9495, 9490, 9497],
             },
             '08/08/23': {
-                name: 'Ocean City',
+                name: 'Ocean City, MD',
                 people: ['Riley'],
                 id: [9385, 9396, 9397, 9343, 9334]
             },
             '08/07/23': {
-                name: 'Ocean City',
+                name: 'Ocean City, MD',
                 people: ['Riley'],
                 id: [9278, 9245, 9301, 143136, 143148]
             },
