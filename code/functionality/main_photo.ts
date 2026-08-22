@@ -267,7 +267,7 @@ class MainPhotoDetails {
         const manager: PageManager = this.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
         if (!entry) throw new Error('No photos found at date');
-        this.header.displayText(entry.name);
+        this.header.displayPhotoDetails(entry);
         this.grid.load(date);
     }
 
@@ -287,26 +287,86 @@ class MainPhotoDetails {
 class PhotoDetailsHeader {
     details: MainPhotoDetails;
     element: HTMLElement;
-    span: HTMLElement;
-    share: PhotoShareButton;
-    close: DetailsCloseButton;
+
+    main_row: MainHeaderRow;
+    camera_row: CameraNameRow;
+    description_row: DescriptionRow;
 
     // creates the header with a text span and close button
     constructor(details: MainPhotoDetails) {
         this.details = details;
         this.element = document.createElement('div');
         this.element.classList.add('header');
-        this.span = document.createElement('span');
-        this.share = new PhotoShareButton(this);
-        this.close = new DetailsCloseButton(this.details.menu.holder, this);
 
-        this.element.appendChild(this.span);
+        this.main_row = new MainHeaderRow(this);
+        this.camera_row = new CameraNameRow(this);
+        this.description_row = new DescriptionRow(this);
+
         this.details.element.appendChild(this.element);
     }
 
     // sets the header text to the given string
-    displayText(text: string): void {
-        this.span.textContent = text;
+    displayPhotoDetails(entry: PhotoEntry): void {
+        this.main_row.setText(entry.name);
+        this.camera_row.setText(entry.camera);
+        console.log(entry.camera)
+    }
+}
+
+// abstract base for info in the photo header
+abstract class PhotoHeaderRow {
+    header: PhotoDetailsHeader;
+    element: HTMLElement;
+
+    constructor(header: PhotoDetailsHeader) {
+        this.header = header;
+        this.element = document.createElement('div');
+        this.element.classList.add('row');
+        this.header.element.appendChild(this.element);
+    }
+
+    public setText(text: string | undefined): void {
+        if (!text) return this.element.classList.add('hide');
+        this.element.classList.remove('hide');
+        this.element.textContent = text;
+    };
+}
+
+// contains location and a few buttons
+class MainHeaderRow extends PhotoHeaderRow {
+    location: HTMLElement;
+    share: PhotoShareButton;
+    close: DetailsCloseButton;
+
+    constructor(header: PhotoDetailsHeader) {
+        super(header);
+        this.location = document.createElement('span');
+
+        this.element.classList.add('main');
+        this.element.appendChild(this.location);
+
+        this.share = new PhotoShareButton(this);
+        this.close = new DetailsCloseButton(header.details.menu.holder, this);
+    }
+
+    public setText(text: string): void {
+        this.location.textContent = text;
+    }
+}
+
+// displays the optional name of the camera the photos were taken with
+class CameraNameRow extends PhotoHeaderRow {
+    constructor(header: PhotoDetailsHeader) {
+        super(header);
+        this.element.classList.add('camera');
+    }
+}
+
+// displays the optional caption in a photo's data
+class DescriptionRow extends PhotoHeaderRow {
+    constructor(header: PhotoDetailsHeader) {
+        super(header);
+        this.element.classList.add('description');
     }
 }
 
@@ -389,28 +449,28 @@ class FigureCloseButton extends HolderCloseButton {
 // close button placed inside the details panel header
 class DetailsCloseButton extends HolderCloseButton {
     // creates the close button inside the details header element
-    constructor(holder: MainPhotoHolder, details_header: PhotoDetailsHeader) {
-        super(holder, details_header.element);
+    constructor(holder: MainPhotoHolder, row: MainHeaderRow) {
+        super(holder, row.element);
     }
 }
 
 // button which copies a sharable link
 class PhotoShareButton {
-    header: PhotoDetailsHeader;
+    row: MainHeaderRow;
     element: HTMLElement;
 
-    constructor(details_header: PhotoDetailsHeader) {
-        this.header = details_header;
+    constructor(row: MainHeaderRow) {
+        this.row = row;
         this.element = document.createElement('button');
         this.element.classList.add('share');
         this.element.textContent = 'Share';
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
-        details_header.element.appendChild(this.element);
+        row.element.appendChild(this.element);
     }
 
     async onclick(e: PointerEvent): Promise<void> {
-        const manager: PageManager = this.header.details.menu.holder.manager;
-        const selected: PhotoEntry | null = this.header.details.menu.holder.selected;
+        const manager: PageManager = this.row.header.details.menu.holder.manager;
+        const selected: PhotoEntry | null = this.row.header.details.menu.holder.selected;
 
         if (!selected) return;
 

@@ -207,9 +207,10 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 
 .menu aside .header {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 4px;
     width: 100%;
-    height: 60px;
+    height: fit-content;
     padding: 10px;
     box-sizing: border-box;
     border-top-right-radius: 12px;
@@ -217,6 +218,49 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     background: linear-gradient(to bottom, #151515, #050505);
     border-bottom: 1px solid #202020;
     transition: filter 0.3s;
+}
+
+.menu aside .header .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    height: fit-content;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+}
+
+.menu aside .header .row::before {
+    content: '';
+    display: block;
+    aspect-ratio: 1/1;
+    height: 100%;
+    min-height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    order: -1;
+}
+
+.menu aside .header .row.main {
+    height: 30px;
+    gap: 6px;
+}
+
+.menu aside .header .row.main::before {
+    background-image: url(../icon/location.svg);
+    background-size: 80%;
+    opacity: 1;
+}
+
+.menu aside .header .row.camera::before {
+    background-image: url(../icon/camera.svg);
+    background-size: 80%;
+}
+
+.menu aside .header .row.hide, .menu aside .header .row:empty {
+    display: none;
 }
 
 .menu aside .header span {
@@ -229,17 +273,6 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     font-size: 1.2rem;
     font-weight: 700;
     order: -1;
-}
-
-.menu aside .header span::before {
-    content: '';
-    display: block;
-    aspect-ratio: 1/1;
-    height: 100%;
-    background-image: url(../icon/location.svg);
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .menu aside .header button {
@@ -391,10 +424,6 @@ body.light .menu aside .photo_row .row_header {
         flex: unset;
         height: fit-content;
         padding-bottom: 10px;
-    }
-
-    .menu aside .header {
-        height: 50px;
     }
 
     .menu aside .grid_holder {
