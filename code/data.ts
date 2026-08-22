@@ -25,6 +25,11 @@ const Data: Database = {
         },
 
         images: {
+            '08/21/26': {
+                name: 'Downtown Frederick',
+                id: ["DSCN5589", "DSCN5585","DSCN5610","DSCN5612"],
+                gps: {}, // later
+            },
             '08/15/26': {
                 name: 'Blue Ridge Summit',
                 id: ['DSCN5520', 'DSCN5506', 'DSCN5491','DSCN5504','DSCN5543','DSCN5544','DSCN5546'],
