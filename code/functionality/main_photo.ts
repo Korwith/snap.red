@@ -407,13 +407,16 @@ class PhotoDetailsGrid {
 
         const month_pane: PhotoRowMonth = new PhotoRowMonth(manager, this.element, month, year, date);
         this.photo_rows.push(month_pane);
+
+        if (entry.camera) {
+            const camera_pane: PhotoRowCamera = new PhotoRowCamera(manager, this.element, entry.camera, date);
+            this.photo_rows.push(camera_pane);
+        }
     }
 
     // removes all photo rows from the grid
     reset(): void {
-        for (const row of this.photo_rows) {
-            row.remove();
-        }
+        for (const row of this.photo_rows) row.remove();
     }
 }
 

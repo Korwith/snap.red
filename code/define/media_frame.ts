@@ -170,7 +170,7 @@ class PhotoRowPerson extends PhotoRow {
     }
 
     // populates the row with all photos featuring this person
-    load(): void {
+    public load(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByPerson(this.person);
         if (Object.keys(matches).length <= 1) return this.remove();
 
@@ -199,10 +199,30 @@ class PhotoRowMonth extends PhotoRow {
     }
 
     // populates the row with photos from this month and year
-    load(): void {
-        const manager: PageManager = this.manager;
-        const matches: PhotoDatabase = manager.fetchUserImagesByMonthAndYear(this.month, this.year);
+    public load(): void {
+        const matches: PhotoDatabase = this.manager.fetchUserImagesByMonthAndYear(this.month, this.year);
         if (Object.keys(matches).length <= 1) return this.remove();
+
+        for (const date in matches) {
+            if (date == this.exclude_date) continue;
+            const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
+        }
+    }
+}
+
+// row for all entries with the same camera listing
+class PhotoRowCamera extends PhotoRow {
+    camera: string;
+
+    constructor(manager: PageManager, parent: HTMLElement, camera: string, exclude_date: string) {
+        super(manager, parent, exclude_date);
+        this.camera = camera;
+        this.setHeaderText('This Camera');
+        this.load();
+    }
+
+    public load(): void {
+        const matches: PhotoDatabase = this.manager.fetchUserImagesByCamera(this.camera);
 
         for (const date in matches) {
             if (date == this.exclude_date) continue;
