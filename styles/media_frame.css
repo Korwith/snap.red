@@ -179,6 +179,7 @@ figure figcaption {
     padding-top: 4px;
     padding-bottom: 0;
     bottom: 0;
+    font-size: 0.95rem;
     transition: padding-bottom 0.15s;
 }
 
