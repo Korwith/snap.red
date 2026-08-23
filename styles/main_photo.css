@@ -189,7 +189,8 @@ figure.main button.nav.right {
     right: 20px;
 }
 
-figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
+figure.main.hide_left button.nav.left,
+figure.main.hide_right button.nav.right {
     opacity: 0;
     pointer-events: none;
 }
@@ -208,10 +209,8 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 .menu aside .header {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     width: 100%;
     height: fit-content;
-    padding: 10px;
     box-sizing: border-box;
     border-top-right-radius: 12px;
     order: -1;
@@ -227,8 +226,18 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     align-items: center;
     gap: 4px;
     height: fit-content;
+    padding: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     font-size: 14px;
     font-weight: 700;
+}
+
+.menu aside .header .row.main {
+    height: 30px;
+    gap: 6px;
+    padding: 8px;
+    border-bottom: 1px solid #202020;
 }
 
 .menu aside .header .row span {
@@ -238,7 +247,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     width: fit-content;
     flex: unset;
     color: rgba(255, 255, 255, 0.6);
-    
+
 }
 
 .menu aside .header .row.main span {
@@ -263,14 +272,9 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     order: -1;
 }
 
-.menu aside .header .row.main {
-    height: 30px;
-    gap: 6px;
-}
-
 .menu aside .header .row.main span::before {
-    height: 30px;
-    width: 30px;
+    height: 26px;
+    width: 26px;
     background-image: url(../icon/location.svg);
     background-size: 80%;
     opacity: 1;
@@ -287,7 +291,8 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     transform: translateX(2px);
 }
 
-.menu aside .header .row.hide, .menu aside .header .row:empty {
+.menu aside .header .row.hide,
+.menu aside .header .row:empty {
     display: none;
 }
 
