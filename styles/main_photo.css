@@ -288,7 +288,6 @@ figure.main.hide_right button.nav.right {
 .menu aside .header .row.camera span.megapixels::before {
     background-image: url(../icon/image.svg);
     background-size: 66%;
-    transform: translateX(2px);
 }
 
 .menu aside .header .row.hide,
