@@ -173,9 +173,17 @@ figure .date {
 
 figure figcaption {
     justify-content: center;
+    align-items: center;
     width: calc(100% - 8px);
-    height: 35px;
+    height: fit-content;
+    padding-top: 4px;
+    padding-bottom: 0;
     bottom: 0;
+    transition: padding-bottom 0.15s;
+}
+
+figure:hover figcaption {
+    padding-bottom: 4px;
 }
 
 figure .date::before {
@@ -186,6 +194,7 @@ figure .date::before {
 figure figcaption::before {
     background-image: var(--custom-icon-footer, url(../icon/location.svg));
     background-size: var(--icon-footer-size, 60%);
+    min-height: 26px;
 }
 
 figure.featured figcaption::before {
@@ -196,6 +205,14 @@ figure.featured figcaption::before {
 @media screen and (max-width: 767px) {
     .photo_grid figure {
         width: calc(50% - 10px);
+    }
+
+    .photo_grid figure .date {
+        font-size: 0.9rem;
+    }
+
+    .photo_grid figure figcaption {
+        font-size: 0.85rem;
     }
 
     .media_holder.video_holder {
