@@ -29,6 +29,7 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['4842', '4829', '4824','4859','4860', '4851'],
                 people: ['Brittany'],
+                featured: 5,
                 camera: {name: 'iPhone 14', mp: 12},
                 hover_color: '#da70d6',
                 custom_icons: {
@@ -338,7 +339,6 @@ const Data: Database = {
                 id: ['DSCN3699', 'DSCN3696', 'DSCN3682', 'DSCN3687', 'DSCN3676', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
                 people: ['Brittany'],
                 camera: {name: 'Nikon Coolpix S7000', mp: 16},
-                featured: 5,
                 hover_color: '#da70d6',
                 custom_icons: {
                     calender: {icon: 'heart.svg', size: '77%'},
