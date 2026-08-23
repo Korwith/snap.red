@@ -25,6 +25,12 @@ const Data: Database = {
         },
 
         images: {
+            '08/23/26': {
+                name: 'Pen Mar',
+                id: ['4878', '4869','4884','DSCN5632','DSCN5639'],
+                camera: {name: 'Nikon Coolpix S7000', mp: 16},
+                gps: {} // later
+            },
             '08/22/26': {
                 name: 'Downtown Frederick',
                 id: ['4842', '4829', '4824','4859','4860', '4851'],
