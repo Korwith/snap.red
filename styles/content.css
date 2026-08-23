@@ -381,6 +381,10 @@ body.light .social_row a:hover::after, body.light .website:hover::after {
 }
 
 @media screen and (max-width: 767px) {
+    .content {
+        transition: background-color 0.3s, transform 0.3s, left 0.3s, opacity 0.3s
+    }
+
     .card_header .name_holder span.bio {
         font-size: 1.1rem;
     }
