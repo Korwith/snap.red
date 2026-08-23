@@ -205,7 +205,8 @@ figure.featured figcaption::before {
 /* mobile */
 @media screen and (max-width: 767px) {
     .photo_grid figure {
-        width: calc(50% - 10px);
+        width: calc(50vw - 10px);
+        height: calc(50vw - 10px);
     }
 
     .photo_grid figure .date {
