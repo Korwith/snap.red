@@ -309,7 +309,6 @@ class PhotoDetailsHeader {
     displayPhotoDetails(entry: PhotoEntry): void {
         this.main_row.setText(entry.name);
         this.camera_row.setText(entry.camera);
-        console.log(entry.camera)
     }
 }
 

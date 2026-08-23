@@ -223,8 +223,9 @@ class PhotoRowCamera extends PhotoRow {
 
     public load(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByCamera(this.camera);
+        const keys: string[] = Object.keys(matches);
 
-        for (const date in matches) {
+        for (const date of keys.reverse()) {
             if (date == this.exclude_date) continue;
             const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
         }
