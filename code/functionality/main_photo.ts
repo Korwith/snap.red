@@ -308,7 +308,12 @@ class PhotoDetailsHeader {
     // sets the header text to the given string
     displayPhotoDetails(entry: PhotoEntry): void {
         this.main_row.setText(entry.name);
-        this.camera_row.setText(entry.camera);
+
+        this.camera_row.toggleVisibility(entry.camera ? true : false);
+        if (entry.camera) {
+            this.camera_row.setName(entry.camera.name);
+            if (entry.camera.mp) this.camera_row.setMegapixels(entry.camera.mp);
+        }
     }
 }
 
@@ -324,11 +329,9 @@ abstract class PhotoHeaderRow {
         this.header.element.appendChild(this.element);
     }
 
-    public setText(text: string | undefined): void {
-        if (!text) return this.element.classList.add('hide');
-        this.element.classList.remove('hide');
-        this.element.textContent = text;
-    };
+    public toggleVisibility(force: boolean) {
+        this.element.classList.toggle('hide', !force);
+    }
 }
 
 // contains location and a few buttons
@@ -355,9 +358,30 @@ class MainHeaderRow extends PhotoHeaderRow {
 
 // displays the optional name of the camera the photos were taken with
 class CameraNameRow extends PhotoHeaderRow {
+    name: HTMLElement;
+    megapixels: HTMLElement;
+
     constructor(header: PhotoDetailsHeader) {
         super(header);
         this.element.classList.add('camera');
+
+        this.name = document.createElement('span');
+        this.megapixels = document.createElement('span');
+
+        this.name.classList.add('name');
+        this.megapixels.classList.add('megapixels');
+
+        this.element.appendChild(this.name);
+        this.element.appendChild(this.megapixels);
+    }
+
+    public setName(text: string): void {
+        this.name.textContent = text;
+    }
+
+    public setMegapixels(text: string | number | undefined): void {
+        if (!text) return this.element.classList.add('hide');
+        this.megapixels.textContent = `${text.toString()} MP`;
     }
 }
 

@@ -208,7 +208,7 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 .menu aside .header {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     width: 100%;
     height: fit-content;
     padding: 10px;
@@ -222,16 +222,36 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
 
 .menu aside .header .row {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
     gap: 4px;
     height: fit-content;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
     font-weight: 700;
 }
 
-.menu aside .header .row::before {
+.menu aside .header .row span {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    width: fit-content;
+    flex: unset;
+    color: rgba(255, 255, 255, 0.6);
+    
+}
+
+.menu aside .header .row.main span {
+    flex: 1;
+    white-space: nowrap;
+    gap: 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    order: -1;
+    color: white;
+}
+
+.menu aside .header .row span::before {
     content: '';
     display: block;
     aspect-ratio: 1/1;
@@ -248,31 +268,27 @@ figure.main.hide_left button.nav.left, figure.main.hide_right button.nav.right {
     gap: 6px;
 }
 
-.menu aside .header .row.main::before {
+.menu aside .header .row.main span::before {
+    height: 30px;
+    width: 30px;
     background-image: url(../icon/location.svg);
     background-size: 80%;
     opacity: 1;
 }
 
-.menu aside .header .row.camera::before {
+.menu aside .header .row.camera span.name::before {
     background-image: url(../icon/camera.svg);
     background-size: 80%;
 }
 
-.menu aside .header .row.hide, .menu aside .header .row:empty {
-    display: none;
+.menu aside .header .row.camera span.megapixels::before {
+    background-image: url(../icon/image.svg);
+    background-size: 66%;
+    transform: translateX(2px);
 }
 
-.menu aside .header span {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    white-space: nowrap;
-    gap: 4px;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    order: -1;
+.menu aside .header .row.hide, .menu aside .header .row:empty {
+    display: none;
 }
 
 .menu aside .header button {

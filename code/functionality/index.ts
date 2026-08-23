@@ -222,7 +222,7 @@ class PageManager {
 
         for (const date in images) {
             const photo: PhotoEntry = images[date];
-            if (!photo.camera || photo.camera != camera) continue;
+            if (!photo.camera || photo.camera.name != camera) continue;
             matches[date] = photo;
         }
 

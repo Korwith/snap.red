@@ -42,12 +42,17 @@ interface CustomIconConfig {
     footer?: IconEntry,
 }
 
+interface CameraInfoConfig {
+    name: string,
+    mp: number
+}
+
 interface PhotoEntry {
     name: string;
     id: Array<string | number>;
     people?: string[];
     featured?: number;
-    camera?: string;
+    camera?: CameraInfoConfig;
     caption?: string;
     gps?: Record<string | number, [number, number]>
     hover_color?: HexColor;

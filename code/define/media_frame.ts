@@ -214,9 +214,9 @@ class PhotoRowMonth extends PhotoRow {
 class PhotoRowCamera extends PhotoRow {
     camera: string;
 
-    constructor(manager: PageManager, parent: HTMLElement, camera: string, exclude_date: string) {
+    constructor(manager: PageManager, parent: HTMLElement, camera: CameraInfoConfig, exclude_date: string) {
         super(manager, parent, exclude_date);
-        this.camera = camera;
+        this.camera = camera.name;
         this.setHeaderText('This Camera');
         this.load();
     }
