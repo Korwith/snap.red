@@ -231,12 +231,21 @@ figure.main.hide_right button.nav.right {
     padding-bottom: 4px;
     font-size: 14px;
     font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .menu aside .header .row.main {
     height: 30px;
     gap: 6px;
     padding: 8px;
+}
+
+.menu aside .header .row.main {
+    height: fit-content;
+    min-width: 30px;
+}
+
+.menu aside .header .row:not(:last-child) {
     border-bottom: 1px solid #202020;
 }
 
@@ -291,7 +300,8 @@ figure.main.hide_right button.nav.right {
 }
 
 .menu aside .header .row.hide,
-.menu aside .header .row:empty {
+.menu aside .header .row:empty,
+.menu aside .header .row span.hide {
     display: none;
 }
 

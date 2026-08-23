@@ -308,12 +308,8 @@ class PhotoDetailsHeader {
     // sets the header text to the given string
     displayPhotoDetails(entry: PhotoEntry): void {
         this.main_row.setText(entry.name);
-
-        this.camera_row.toggleVisibility(entry.camera ? true : false);
-        if (entry.camera) {
-            this.camera_row.setName(entry.camera.name);
-            if (entry.camera.mp) this.camera_row.setMegapixels(entry.camera.mp);
-        }
+        this.camera_row.loadCameraInfo(entry.camera);
+        this.description_row.setText(entry.caption);
     }
 }
 
@@ -375,12 +371,23 @@ class CameraNameRow extends PhotoHeaderRow {
         this.element.appendChild(this.megapixels);
     }
 
-    public setName(text: string): void {
+    public loadCameraInfo(info: CameraInfoConfig | undefined) {
+        if (!info) return this.element.classList.add('hide');
+        this.element.classList.remove('hide');
+        this.setName(info.name);
+        this.setMegapixels(info.mp);
+    }
+
+    private setName(text: string): void {
         this.name.textContent = text;
     }
 
-    public setMegapixels(text: string | number | undefined): void {
-        if (!text) return this.element.classList.add('hide');
+    private setMegapixels(text: string | number | undefined): void {
+        if (!text) {
+            this.megapixels.textContent = '';
+            return this.megapixels.classList.add('hide');
+        }
+        this.megapixels.classList.remove('hide');
         this.megapixels.textContent = `${text.toString()} MP`;
     }
 }
@@ -390,6 +397,12 @@ class DescriptionRow extends PhotoHeaderRow {
     constructor(header: PhotoDetailsHeader) {
         super(header);
         this.element.classList.add('description');
+    }
+
+    public setText(text: string | undefined): void {
+        if (!text) return this.element.classList.add('hide');
+        this.element.classList.remove('hide');
+        this.element.textContent = text;
     }
 }
 

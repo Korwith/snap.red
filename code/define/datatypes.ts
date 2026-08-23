@@ -44,7 +44,7 @@ interface CustomIconConfig {
 
 interface CameraInfoConfig {
     name: string,
-    mp: number
+    mp?: number
 }
 
 interface PhotoEntry {
