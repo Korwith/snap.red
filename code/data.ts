@@ -25,9 +25,20 @@ const Data: Database = {
         },
 
         images: {
+            '08/22/26': {
+                name: 'Downtown Frederick',
+                id: ['4842', '4829', '4824','4859','4860', '4851'],
+                people: ['Brittany'],
+                camera: 'iPhone 14',
+                hover_color: '#da70d6',
+                custom_icons: {
+                    calender: {icon: 'heart.svg'},
+                },
+                gps: {}, // later,
+            },
             '08/21/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN5589", "DSCN5585","DSCN5610","DSCN5612"],
+                id: ['DSCN5589', 'DSCN5585','DSCN5610','DSCN5612'],
                 camera: 'Nikon Coolpix S7000',
                 gps: {}, // later
             },
@@ -36,6 +47,7 @@ const Data: Database = {
                 id: ['DSCN5520', 'DSCN5506', 'DSCN5491','DSCN5504','DSCN5543','DSCN5544','DSCN5546'],
                 people: ['Brittany'],
                 camera: 'Nikon Coolpix S7000',
+                hover_color: '#da70d6',
                 gps: {
                     'DSCN5520': [39.7011939, -77.4854017],
                     'DSCN5506': [39.7012592, -77.4855191],
@@ -54,6 +66,7 @@ const Data: Database = {
                 custom_icons: {
                     'calender': {icon: 'heart.svg'},
                 },
+                hover_color: '#da70d6',
                 gps: {
                     'DSCN5416': [39.4619515, -77.4962949],
                     'DSCN5411': [39.4619515, -77.4962949],
@@ -217,7 +230,6 @@ const Data: Database = {
                 id: ['DSCN4425', 'DSCN4426', 'DSCN4430'],
                 people: ['Brittany', 'Leah', 'Ashely', 'Gio', 'Dwayne'],
                 camera: 'Nikon Coolpix S7000',
-                featured: 1,
                 hover_color: '#da70d6',
                 custom_icons: {
                     calender: {icon: 'heart.svg', size: '77%'},
