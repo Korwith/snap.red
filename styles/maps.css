@@ -22,13 +22,13 @@ body.light .leaflet-container {
 
 .leaflet-bar a {
     background: linear-gradient(to bottom, #303030, #151515);
-    color: rgba(255, 255, 255, 0.7);
+    color: white;
     border-bottom: rgba(255, 255, 255, 0.7);
-    transition: color 0.15s;
+    transition: filter 0.2s;
 }
 
 .leaflet-bar a:hover {
-    color: white;
+    filter: brightness(0.8);
 }
 
 .leaflet-container .leaflet-control-attribution {
@@ -119,6 +119,19 @@ body.light .marker:hover::before {
     background-position: center;
     background-size: 90%;
     background-repeat: no-repeat;
+}
+
+.page.maps button.satellite::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    height: 100%;
+    pointer-events: none;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 .page.maps button:hover {
