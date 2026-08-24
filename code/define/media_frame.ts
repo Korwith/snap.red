@@ -255,6 +255,7 @@ abstract class MediaFrame {
         this.date_label.classList.add('date');
         this.date_label.textContent = date;
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        this.image.onload = () => this.loaded();
 
         this.element.appendChild(this.image);
         this.element.appendChild(this.date_label);
@@ -263,19 +264,24 @@ abstract class MediaFrame {
     }
 
     // appends this frame to the top of the page
-    setFeatured(index: number | null): void {
+    public setFeatured(index: number | null): void {
         if (!index) return;
         this.element.style.setProperty('--importance', index.toString());
         this.element.classList.toggle('featured', true);
     }
 
     // removes this frame from the dom
-    remove(): void {
+    public remove(): void {
         this.element.remove();
     }
 
-    abstract onclick(e: PointerEvent): void;
-    abstract load(): void;
+    // handles class for when the image loads
+    private loaded(): void {
+        this.element.classList.add('loaded');
+    }
+
+    public abstract onclick(e: PointerEvent): void;
+    public abstract load(): void;
 }
 
 // a media frame that displays a photo with its location caption

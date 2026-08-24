@@ -88,6 +88,7 @@ figure.featured {
 }
 
 figure img,
+figure::before,
 figure::after {
     position: absolute;
     left: 0;
@@ -104,6 +105,29 @@ figure * {
 
 figure img {
     z-index: 0;
+}
+
+figure:not(.loaded)::before {
+    content: '';
+    width: 30%;
+    height: 30%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(../icon/spin.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: 1.5s linear 0s infinite normal none running loading_image;
+}
+
+@keyframes loading_image {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 figure::after {
