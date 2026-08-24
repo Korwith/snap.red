@@ -60,6 +60,22 @@
 
 @media screen and (max-width: 767px) {
     .notification_holder {
+        flex-direction: column-reverse;
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+        bottom: 50px;
+    }
+
+    .notification_holder .notification {
+        border-radius: 0;
+    }
+
+    .notification_holder .notification::before, .notification_holder .notification::after {
+        border-radius: 0;
+    }
+
+    .notification_holder {
         bottom: 50px;   
     }
 }

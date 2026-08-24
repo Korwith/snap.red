@@ -9,6 +9,8 @@ class NotificationManager {
         this.element = document.createElement('div');
         this.element.classList.add('notification_holder');
         this.manager.element.appendChild(this.element);
+
+        this.pushNotification('Error', 'New: Added a satellite view on the maps page.');
     }
 
     pushNotification(type: NotificationType, text: string) {
