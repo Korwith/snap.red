@@ -60,7 +60,12 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: ['DSCN5589', 'DSCN5585','DSCN5610','DSCN5612'],
                 camera: {name: 'Nikon Coolpix S7000', mp: 16},
-                gps: {}, // later
+                gps: {
+                    'DSCN5589': [39.4148225, -77.4093096],
+                    'DSCN5585': [39.4149611, -77.409649],
+                    'DSCN5610': [39.414934, -77.415231],
+                    'DSCN5612': [39.4156511, -77.4149637],
+                },
             },
             '08/15/26': {
                 name: 'Blue Ridge Summit',
