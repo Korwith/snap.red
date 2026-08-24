@@ -45,6 +45,7 @@ abstract class GenericMap {
         this.element.setAttribute('id', this.id);
         this.map = L.map(this.element).setView([39.4123, -77.4255], 13);
 
+        window.onresize = () => this.map.invalidateSize();
         this.setTheme(this.theme);
     }
 
