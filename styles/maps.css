@@ -3,14 +3,17 @@
     background-color: black;
 }
 
-.leaflet-container::after {
+.page.maps::after {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    border: 4px solid rgba(255, 255, 255, 0.1)
+    z-index: 500;
+    pointer-events: none;
+    border: 4px solid rgba(0, 0, 0, 0.5);
 }
 
 body.light .leaflet-container {
