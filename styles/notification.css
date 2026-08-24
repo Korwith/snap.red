@@ -65,6 +65,12 @@
         height: fit-content;
         padding: 0;
         bottom: 50px;
+        transition: bottom 0.15s;
+    }
+
+    /* incase the footer is hidden, change the y level */
+    body:has(.main_photo_holder.show) .notification_holder {
+        bottom: 0;
     }
 
     .notification_holder .notification {
@@ -76,6 +82,9 @@
     }
 
     .notification_holder {
-        bottom: 50px;   
+        bottom: 50px;
+        gap: 0; 
+        border-left: 0;
+        border-right: 0;
     }
 }
