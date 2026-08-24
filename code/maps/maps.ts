@@ -46,6 +46,7 @@ abstract class GenericMap {
         this.map = L.map(this.element).setView([39.4123, -77.4255], 13);
 
         window.onresize = () => this.map.invalidateSize();
+        this.manager.sidebar.element.addEventListener('transitionend', () => this.map.invalidateSize());
         this.setTheme(this.theme);
     }
 
