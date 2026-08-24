@@ -1233,14 +1233,14 @@ const Data: Database = {
             '07/27/24': {
                 name: 'Weverton Cliffs',
                 people: ['Redacted A', 'Jeremy', 'Jayvan', 'Sam', 'Alex'],
-                id: [3521, 3523, 3489, 3579, 3475],
+                id: [3521, 3523, 3579, 3475],
                 camera: {name: 'iPhone 14', mp: 12},
                 featured: 4,
                 gps: {
                     3521: [39.3320587, -77.6766005],
                     3523: [39.3320587, -77.6766005],
                     3579: [39.3320587, -77.6766005],
-                    // UNKNOWN LOCATIONS: 3489, 3475
+                    // UNKNOWN LOCATIONS: 3475
                 }
             },
             '07/26/24': {
