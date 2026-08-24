@@ -255,6 +255,7 @@ abstract class MediaFrame {
         this.date_label.classList.add('date');
         this.date_label.textContent = date;
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        this.image.setAttribute('loading', 'lazy');
         this.image.onload = () => this.loaded();
 
         this.element.appendChild(this.image);
