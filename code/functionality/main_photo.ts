@@ -98,7 +98,7 @@ class MainPhotoFigure {
         for (const index in list) {
             const id: string | number = list[index];
             const img: HTMLElement = document.createElement('img');
-            img.setAttribute('loading', 'eager');
+            img.setAttribute('loading', parseInt(index) == 0 ? 'eager' : 'lazy');
             img.setAttribute('id', id.toString());
             img.setAttribute('src', `../media/${user}/IMG_${id}.jpg`);
             img.style.left = `${parseInt(index) * 100}%`;
@@ -114,10 +114,13 @@ class MainPhotoFigure {
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', this.images.length == 1 || index + 1 >= this.images.length);
 
+        const next: HTMLElement | undefined = this.images[index + 1];
+        if (next) next.setAttribute('loading', 'eager');
 
         for (const key in this.images) {
-            const image: HTMLElement = this.images[key];
-            image.style.left = `${(parseInt(key) - index) * 100}%`;
+            const keynum: number = parseInt(key);
+            const image: HTMLElement = this.images[keynum];
+            image.style.left = `${(keynum - index) * 100}%`;
         }
 
         this.selected = index;
