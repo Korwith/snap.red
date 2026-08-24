@@ -32,7 +32,10 @@ body.light .leaflet-container {
 }
 
 .leaflet-container .leaflet-control-attribution {
-    background: linear-gradient(to bottom, #303030, #151515);
+    margin: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    color: white;
 }
 
 .leaflet-container .leaflet-control-attribution a {
