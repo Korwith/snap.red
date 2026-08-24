@@ -35,3 +35,38 @@ body.light .leaflet-container {
     width: 100%;
     height: 100%;
 }
+
+.page.maps button.satellite {
+    position: absolute;
+    display: flex;
+    margin: 10px;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    z-index: 999;
+    border: 0;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #303030, #151515);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    cursor: pointer;
+    transition: filter 0.15s;
+}
+
+.page.maps button.satellite::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../icon/tree.svg);
+    background-position: center;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    filter: brightness(0) saturate(100%) invert(25%) sepia(53%) saturate(1437%) hue-rotate(86deg) brightness(93%) contrast(106%);
+}
+
+.page.maps button:hover {
+    filter: brightness(0.8);
+}

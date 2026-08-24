@@ -309,7 +309,14 @@ class PageManager {
         const light: boolean = document.body.classList.toggle('light');
         const meta_theme: HTMLElement | null = document.head.querySelector('[name="theme-color"]');
         meta_theme?.setAttribute('content', light ? '#DFDFDF' : '#202020');
+        
+        if (this.maps.map.element.classList.contains('satellite')) return;
         this.maps.map.setTheme(light ? 'light' : 'dark');
+    }
+
+    // fetches the current theme
+    public getTheme(): 'light' | 'dark' {
+        return document.body.classList.contains('light') ? 'light' : 'dark';
     }
 }
 

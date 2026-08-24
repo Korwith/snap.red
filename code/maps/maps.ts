@@ -2,29 +2,40 @@
 class PageMaps extends Page {
     manager: PageManager;
     map: MainMap;
+    satellite: SatelliteToggleButton;
 
     constructor(manager: PageManager) {
         super(manager, 'maps');
         this.manager = manager;
         this.element.classList.add('maps');
         this.map = new MainMap(this);
+        this.satellite = new SatelliteToggleButton(this);
+    }
+
+    public toggleSatelliteView() {
+        this.element.classList.toggle('satellite');
+        const val: boolean = this.element.classList.contains('satellite');
+        this.map.toggleSatelliteView(val);
     }
 }
 
 // generic type inherited by the main map and under selected photos
+type MapTheme = 'dark' | 'light' | 'satellite';
 abstract class GenericMap {
     manager: PageManager;
     element: HTMLElement;
     id: string;
     map: L.Map;
 
-    theme: 'dark' | 'light' = 'dark';
+    theme: MapTheme = 'dark';
     tile_layer!: L.TileLayer;
 
-    theme_urls = {
+    theme_urls: Record<MapTheme, string> = {
         dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-        light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-    }
+        light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+        satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+    };
+
 
     constructor(manager: PageManager, element: HTMLElement, id: string) {
         this.manager = manager;
@@ -32,16 +43,12 @@ abstract class GenericMap {
         this.id = id;
 
         this.element.setAttribute('id', this.id);
-        this.map = L.map(this.element).setView([39.4123, -77.4255], 13); // frederick, may update later
+        this.map = L.map(this.element).setView([39.4123, -77.4255], 13);
 
-        L.tileLayer(this.theme_urls[this.theme], {
-            attribution: '<a href="https://snap.red/">snap.red</a>',
-            maxZoom: 18,
-            minZoom: 4,
-        }).addTo(this.map);
+        this.setTheme(this.theme);
     }
 
-    createImageMarker(date: string, id: number | string): L.Marker {
+    public createImageMarker(date: string, id: number | string): L.Marker {
         const user: string = this.manager.fetchUserName();
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
         if (!entry) throw new Error('No images found at date');
@@ -60,20 +67,34 @@ abstract class GenericMap {
     }
 
     // appends the marker directly to this map instance
-    appendImageMarker(marker: L.Marker) {
+    public appendImageMarker(marker: L.Marker) {
         marker.addTo(this.map);
     }
 
     // changes the theme of the map, currently allows for light and dark
-    setTheme(theme: 'dark' | 'light'): void {
+    public setTheme(theme: MapTheme): void {
         this.theme = theme;
-        if (this.tile_layer) this.map.removeLayer(this.tile_layer);
+        if (this.tile_layer) {
+            this.map.removeLayer(this.tile_layer);
+        }
+
+        const attributions: Record<MapTheme, string> = {
+            dark: '&copy; CARTO',
+            light: '&copy; CARTO',
+            satellite: '&copy; Esri'
+        };
 
         this.tile_layer = L.tileLayer(this.theme_urls[this.theme], {
-            attribution: '<a href="https://snap.red/">snap.red</a>',
+            attribution: attributions[this.theme],
             maxZoom: 18,
             minZoom: 4,
         }).addTo(this.map);
+    }
+
+    // handles satellite view (from button press)
+    public toggleSatelliteView(force: boolean) {
+        if (force) return this.setTheme('satellite');
+        this.setTheme(this.manager.getTheme());
     }
 }
 
@@ -115,5 +136,24 @@ class MainMap extends GenericMap {
 
         // add all markers to the cluster group at once
         this.clusters.addLayers(add_markers);
+    }
+}
+
+class SatelliteToggleButton {
+    page: PageMaps;
+    element: HTMLElement;
+
+    constructor(page: PageMaps) {
+        this.page = page;
+        this.element = document.createElement('button');
+        this.element.classList.add('satellite');
+        L.DomEvent.disableClickPropagation(this.element);
+
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        page.element.appendChild(this.element);
+    }
+
+    public onclick(e: PointerEvent): void {
+        this.page.toggleSatelliteView();
     }
 }
