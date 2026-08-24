@@ -25,7 +25,7 @@ body.shift nav.sidebar {
     flex-direction: column;
     flex: 1;
     min-height: 0;
-    gap: 5px;
+    gap: 6px;
     overflow-y: auto;
 }
 
