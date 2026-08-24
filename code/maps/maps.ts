@@ -147,6 +147,7 @@ class SatelliteToggleButton {
         this.page = page;
         this.element = document.createElement('button');
         this.element.classList.add('satellite');
+        this.element.textContent = 'Satellite';
         L.DomEvent.disableClickPropagation(this.element);
 
         this.element.onclick = (e: PointerEvent) => this.onclick(e);

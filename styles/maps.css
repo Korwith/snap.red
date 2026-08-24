@@ -33,7 +33,8 @@ body.light .leaflet-container {
 }
 
 .marker:hover {
-    z-index: 999999999999999 !important; /* this is jank */
+    z-index: 999999999999999 !important;
+    /* this is jank */
 }
 
 .marker::before {
@@ -68,39 +69,43 @@ body.light .marker:hover::before {
     transition: transform 0.15s;
 }
 
-.marker:hover img, .marker:hover::before {
+.marker:hover img,
+.marker:hover::before {
     transform: scale(140%);
 }
 
 .page.maps button.satellite {
     position: absolute;
     display: flex;
+    align-items: center;
+    gap: 7px;
     margin: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
     top: 0;
     right: 0;
-    width: 30px;
+    width: fit-content;
     height: 30px;
     z-index: 999;
     border: 0;
     border-radius: 4px;
     background: linear-gradient(to bottom, #303030, #151515);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
     transition: filter 0.15s;
 }
 
-.page.maps button.satellite::after {
+.page.maps button.satellite::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(../icon/tree.svg);
+    height: 24px;
+    width: 24px;
+    background-image: url(../icon/satellite.svg);
     background-position: center;
     background-size: 90%;
     background-repeat: no-repeat;
-    filter: brightness(0) saturate(100%) invert(25%) sepia(53%) saturate(1437%) hue-rotate(86deg) brightness(93%) contrast(106%);
 }
 
 .page.maps button:hover {
