@@ -302,6 +302,7 @@ class PageManager {
             const page: Page = this.pages[key];
             page.toggle(name == key);
         }
+        if (name == 'maps') this.maps.map.map.invalidateSize(); // ok maybe i should consider changing these names lol
     }
 
     // switches the current page theme (light or dark)
