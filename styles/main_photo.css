@@ -234,14 +234,9 @@ figure.main.hide_right button.nav.right {
 }
 
 .menu aside .header .row.main {
-    height: 30px;
+    height: 32px;
     gap: 6px;
     padding: 8px;
-}
-
-.menu aside .header .row.main {
-    height: fit-content;
-    min-width: 30px;
 }
 
 .menu aside .header .row {
