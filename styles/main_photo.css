@@ -215,7 +215,6 @@ figure.main.hide_right button.nav.right {
     border-top-right-radius: 12px;
     order: -1;
     background: linear-gradient(to bottom, #151515, #050505);
-    border-bottom: 1px solid #202020;
     transition: filter 0.3s;
 }
 
@@ -245,7 +244,7 @@ figure.main.hide_right button.nav.right {
     min-width: 30px;
 }
 
-.menu aside .header .row:not(:last-child) {
+.menu aside .header .row {
     border-bottom: 1px solid #202020;
 }
 
