@@ -90,6 +90,21 @@ body.light .marker:hover::before {
     transform: scale(140%);
 }
 
+/* photo clusters, id like to style this further later on */
+.marker-cluster {
+    color: white;
+}
+
+.marker-cluster div {
+    color: white;
+    font-weight: 700;
+    transition: color 0.15s;
+}
+
+body.light .marker-cluster div {
+    color: black;
+}
+
 .page.maps button.satellite {
     position: absolute;
     display: flex;
