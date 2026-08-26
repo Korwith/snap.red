@@ -39,7 +39,8 @@ const Data: Database = {
             },
             '08/22/26': {
                 name: 'Downtown Frederick',
-                id: ['4842', '4829', '4824','4859','4860', '4851'],
+                id: ['4841', '4829', '4824','4859','4860', '4851'],
+                // 4142 is on here too, 4181 is almost the same photo. both very good
                 people: ['Brittany'],
                 featured: 5,
                 camera: {name: 'iPhone 14', mp: 12},
