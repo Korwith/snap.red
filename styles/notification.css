@@ -60,11 +60,15 @@
 
 @media screen and (max-width: 767px) {
     .notification_holder {
-        flex-direction: column-reverse;
+        flex-direction: column;
+        justify-content: flex-end;
         width: 100%;
         height: fit-content;
         padding: 0;
         bottom: 50px;
+        gap: 0; 
+        border-left: 0;
+        border-right: 0;
         transition: bottom 0.15s;
     }
 
@@ -77,14 +81,13 @@
         border-radius: 0;
     }
 
-    .notification_holder .notification::before, .notification_holder .notification::after {
-        border-radius: 0;
-    }
-
-    .notification_holder {
-        bottom: 50px;
-        gap: 0; 
+    .notification_holder .notification::after {
         border-left: 0;
         border-right: 0;
+    }
+
+    .notification_holder .notification::before, 
+    .notification_holder .notification::after {
+        border-radius: 0;
     }
 }
