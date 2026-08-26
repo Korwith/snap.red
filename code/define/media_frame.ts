@@ -140,6 +140,7 @@ class PhotoRowLocation extends PhotoRow {
     // creates the row and loads photos matching the given location
     constructor(manager: PageManager, parent: HTMLElement, location: string, exclude_date: string) {
         super(manager, parent, exclude_date);
+        this.element.classList.add('location');
         this.location = location;
         this.setHeaderText('This Location');
         this.load();
@@ -164,6 +165,7 @@ class PhotoRowPerson extends PhotoRow {
     // creates the row and loads photos featuring the given person
     constructor(manager: PageManager, parent: HTMLElement, person: string, exclude_date: string) {
         super(manager, parent, exclude_date);
+        this.element.classList.add('person');
         this.person = person;
         this.setHeaderText('With ' + this.person);
         this.load();
@@ -190,6 +192,7 @@ class PhotoRowMonth extends PhotoRow {
     // creates the row and loads photos from the given month and year
     constructor(manager: PageManager, parent: HTMLElement, month: string, year: string, exclude_date: string) {
         super(manager, parent, exclude_date);
+        this.element.classList.add('month');
         this.month = month;
         this.year = year;
         this.date_handler = new DateManager();
@@ -216,8 +219,9 @@ class PhotoRowCamera extends PhotoRow {
 
     constructor(manager: PageManager, parent: HTMLElement, camera: CameraInfoConfig, exclude_date: string) {
         super(manager, parent, exclude_date);
+        this.element.classList.add('camera');
         this.camera = camera.name;
-        this.setHeaderText('This Camera');
+        this.setHeaderText(camera.name);
         this.load();
     }
 

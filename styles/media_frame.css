@@ -61,6 +61,38 @@
     transition: filter 0.3s;
 }
 
+.photo_row .row_header::before {
+    content: '';
+    height: 24px;
+    width: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.photo_row.location .row_header::before {
+    background-image: url(../icon/star.svg);
+    background-size: 72%;
+    margin-right: 2px;
+}
+
+.photo_row.person .row_header::before {
+    background-image: url(../icon/people.svg);
+    background-size: 92%;
+    margin-right: 1px;
+}
+
+.photo_row.month .row_header::before {
+    background-image: url(../icon/day.svg);
+    background-size: 82%;
+    margin-right: 1px;
+}
+
+.photo_row.camera .row_header::before {
+    background-image: url(../icon/camera.svg);
+    background-size: 80%;
+    margin-right: 2px;
+}
+
 .photo_row .internal_scroll {
     display: flex;
     flex-direction: row;
