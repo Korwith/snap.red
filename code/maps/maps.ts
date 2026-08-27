@@ -31,7 +31,7 @@ abstract class GenericMap {
     tile_layer!: L.TileLayer;
 
     theme_urls: Record<MapTheme, string> = {
-        dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+        dark: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         light: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
     };
