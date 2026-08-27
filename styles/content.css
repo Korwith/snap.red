@@ -313,10 +313,12 @@ body.light {
         .card {
             border-bottom: 1px solid #DFDFDF;
 
-            .name_holder {
-                span {
-                    color: black;
-                    text-shadow: 2px 2px 4px white;
+            .card_header {
+                .name_holder {
+                    span {
+                        color: black;
+                        text-shadow: 2px 2px 4px white;
+                    }
                 }
             }
         }
@@ -339,7 +341,7 @@ body.light {
             border: 2px solid rgba(0, 0, 0, 0.5);
         }
 
-        card::before {
+        .card::before {
             filter: invert(1);
         }
 
