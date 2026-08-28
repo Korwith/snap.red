@@ -395,11 +395,13 @@ body.light .menu aside .photo_row .row_header {
         height: calc(100dvh - 50px);
         top: 50px;
         z-index: 30;
+        opacity: 1;
 
         transform: translateY(100%)
     }
 
     .main_photo_holder.show {
+        opacity: 1;
         transform: unset;
     }
 
