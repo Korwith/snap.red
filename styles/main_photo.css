@@ -12,7 +12,7 @@ body {
         z-index: 50;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s, transform 0.5s;
+        transition: opacity 0.3s, transform 0.6s;
 
         .menu {
             position: relative;
@@ -75,11 +75,11 @@ body {
                         background-image: url(../icon/people.svg);
                         background-size: 100%;
                     }
+                }
 
-                    img {
-                        border-radius: 0;
-                        transition: left 0.5s;
-                    }
+                img {
+                    border-radius: 0;
+                    transition: left 0.5s;
                 }
 
                 button.close {
