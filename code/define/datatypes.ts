@@ -30,7 +30,7 @@ interface ProfileWebsiteEntry {
     icon: string;
     name: string;
     blurb: string;
-    gradient: string[];
+    gradient: HexColor[];
 }
 
 interface PhotoDatabase {
