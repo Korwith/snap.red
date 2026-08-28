@@ -43,6 +43,9 @@ body.light .leaflet-container {
 }
 
 /* alters image markers */
+.page.maps:not(.show) .marker {
+    pointer-events: none;
+}
 .marker {
     position: relative;
     transition: filter 0.15s;
