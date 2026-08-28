@@ -33,7 +33,7 @@ const Data: Database = {
                 hover_color: '#da70d6',
                 custom_icons: {
                     calender: { icon: 'heart.svg' }
-                }
+                },
                 gps: {}, // later
             },
             '08/25/26': {
