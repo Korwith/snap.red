@@ -25,6 +25,17 @@ const Data: Database = {
         },
 
         images: {
+            '08/26/26': {
+                name: 'Downtown Frederick',
+                id: [5012, 5002, 5004, 5009, 5013, 5037],
+                people: ['Brittany'],
+                camera: {name: 'iPhone 14', mp: 12},
+                hover_color: '#da70d6',
+                custom_icons: {
+                    calender: { icon: 'heart.svg' }
+                }
+                gps: {}, // later
+            },
             '08/25/26': {
                 name: 'Downtown Frederick',
                 id: [4934, 4951, 4928, 4947, 4958],
