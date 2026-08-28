@@ -11,7 +11,7 @@
     z-index: 50;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.5s;
 }
 
 .main_photo_holder.show {
@@ -395,6 +395,12 @@ body.light .menu aside .photo_row .row_header {
         height: calc(100dvh - 50px);
         top: 50px;
         z-index: 30;
+
+        transform: translateY(100%)
+    }
+
+    .main_photo_holder.show {
+        transform: unset;
     }
 
     .menu {
