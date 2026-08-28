@@ -86,13 +86,15 @@ abstract class PhotoRow extends MediaHolder {
     internal: PhotoRowInternal;
     exclude_date: string;
 
+    queue: string[] = [];
+
     // creates the row element with a header label and internal scroll grid
     constructor(manager: PageManager, parent: HTMLElement, exclude_date: string) {
         super(manager, parent);
         this.exclude_date = exclude_date;
         this.element.classList.add('photo_row');
         this.span = document.createElement('span');
-        this.internal = new PhotoRowInternal(manager, this.element)
+        this.internal = new PhotoRowInternal(manager, this)
 
         this.span.classList.add('row_header');
         this.internal.element.classList.add('internal_scroll');
@@ -111,14 +113,40 @@ abstract class PhotoRow extends MediaHolder {
         this.element.remove();
     }
 
-    abstract load(): void;
+    // loads photos into the internal grid
+    addQueuedEntry(date: string): void {
+        this.queue.push(date);
+
+    }
+
+    loadPhotoBatch(): void {
+        const count: number = this.queue.length >= 5 ? 5 : this.queue.length;
+        for (let i = 0; i < count; i++) {
+            const date: string = this.queue[i];
+            new MediaFramePhoto(this.internal, date);
+        }
+        this.queue.splice(0, count);
+    }
+
+    abstract loadQueue(): void;
 }
 
 // the inner photo grid that sits inside a photo row
 class PhotoRowInternal extends PhotoGrid {
+    row: PhotoRow;
+
     // creates the internal grid element
-    constructor(manager: PageManager, parent: HTMLElement) {
-        super(manager, parent);
+    constructor(manager: PageManager, row: PhotoRow) {
+        super(manager, row.element);
+        this.row = row;
+        this.element.onscroll = () => this.scrolled();
+    }
+
+    scrolled(): void {
+        const distance: number = this.element.scrollWidth - (this.element.scrollLeft + this.element.clientWidth);
+        if (distance <= 100) {
+            this.row.loadPhotoBatch();
+        }
     }
 
     // removes all photos and detaches the grid element
@@ -127,10 +155,6 @@ class PhotoRowInternal extends PhotoGrid {
         this.element.remove();
     }
 
-    // loads photos into the internal grid
-    load(): void {
-
-    }
 }
 
 // a photo row showing all photos taken at a specific location
@@ -143,17 +167,19 @@ class PhotoRowLocation extends PhotoRow {
         this.element.classList.add('location');
         this.location = location;
         this.setHeaderText('This Location');
-        this.load();
+        this.loadQueue();
+        this.loadPhotoBatch();
+
     }
 
     // populates the row with all photos from this location
-    load(): void {
+    loadQueue(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByLocation(this.location);
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
             if (date == this.exclude_date) continue;
-            const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
+            this.addQueuedEntry(date);
         }
     }
 }
@@ -168,17 +194,18 @@ class PhotoRowPerson extends PhotoRow {
         this.element.classList.add('person');
         this.person = person;
         this.setHeaderText('With ' + this.person);
-        this.load();
+        this.loadQueue();
+        this.loadPhotoBatch();
     }
 
     // populates the row with all photos featuring this person
-    public load(): void {
+    public loadQueue(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByPerson(this.person);
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
             if (date == this.exclude_date) continue;
-            const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
+            this.addQueuedEntry(date);
         }
     }
 }
@@ -197,18 +224,19 @@ class PhotoRowMonth extends PhotoRow {
         this.year = year;
         this.date_handler = new DateManager();
 
-        this.load();
         this.setHeaderText(`${this.date_handler.dateIDtoName(month)} 20${this.year}`);
+        this.loadQueue();
+        this.loadPhotoBatch();
     }
 
     // populates the row with photos from this month and year
-    public load(): void {
+    public loadQueue(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByMonthAndYear(this.month, this.year);
         if (Object.keys(matches).length <= 1) return this.remove();
 
         for (const date in matches) {
             if (date == this.exclude_date) continue;
-            const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
+            this.addQueuedEntry(date);
         }
     }
 }
@@ -221,17 +249,19 @@ class PhotoRowCamera extends PhotoRow {
         super(manager, parent, exclude_date);
         this.element.classList.add('camera');
         this.camera = camera.name;
+
         this.setHeaderText(camera.name);
-        this.load();
+        this.loadQueue();
+        this.loadPhotoBatch();
     }
 
-    public load(): void {
+    public loadQueue(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByCamera(this.camera);
         const keys: string[] = Object.keys(matches);
 
         for (const date of keys.reverse()) {
             if (date == this.exclude_date) continue;
-            const figure: MediaFramePhoto = new MediaFramePhoto(this.internal, date);
+            this.addQueuedEntry(date);
         }
     }
 }
