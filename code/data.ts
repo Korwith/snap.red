@@ -8,6 +8,10 @@ const HoverColorPink: HexColor = '#da70d6';
 // Specific Icons
 const EntryIconHeart: CustomIconConfig = {
     calender: { icon: 'heart.svg' }
+}
+
+// Specific Cameras
+const CameraConfigSamsungS20: CameraInfoConfig = {name: 'Samsung Galaxy S20', mp: 50};
 const CameraConfigNikonS7000: CameraInfoConfig = {name: 'Nikon Coolpix S7000', mp: 16}
 const CameraConfigApple14: CameraInfoConfig = { name: 'iPhone 14', mp: 12 };
 const CameraConfigApple13: CameraInfoConfig = {name: 'iPhone 13', mp: 12};
