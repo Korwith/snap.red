@@ -119,6 +119,7 @@ abstract class PhotoRow extends MediaHolder {
 
     }
 
+    // loads a few photos when the user is close to the end of the scrolling frame
     loadPhotoBatch(): void {
         const count: number = this.queue.length >= 5 ? 5 : this.queue.length;
         for (let i = 0; i < count; i++) {

@@ -81,7 +81,7 @@ class TimelineYearHolder {
     }
 
     // adds a month button for each month present in the given year's data
-    addContent(sidebar_data: SidebarStructure): void {
+    public addContent(sidebar_data: SidebarStructure): void {
         const this_year_data: { [month: string]: { [date: string]: PhotoEntry } } = sidebar_data[this.year_id];
 
         for (const month_id in this_year_data) {
@@ -125,13 +125,13 @@ class TimelineMonthButton {
     }
 
     // sets the button label to the month name and photo count
-    setCount(count: number): void {
+    public setCount(count: number): void {
         const month: string = this.holder.timeline.date_handler.dateIDtoName(this.month_id);
         this.element.textContent = `${month} (${count})`
     }
 
     // scrolls the content area to the first photo from this month, loading batches if needed
-    navigate(): void {
+    public navigate(): void {
         const manager: PageManager = this.holder.timeline.sidebar.manager;
         const content: PageContent = manager.content;
         const photos: ContentPhotoGrid = content.photos;
