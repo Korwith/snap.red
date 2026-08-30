@@ -46,7 +46,7 @@ const Data: Database = {
 
         images: {
             '08/30/26': {
-                name: 'Sky Meadows State Park',
+                name: 'Delaplane, VA',
                 id: [5132, 5131, 5125, 5121],
                 people: ['Riley'],
                 camera: CameraConfigApple14,
