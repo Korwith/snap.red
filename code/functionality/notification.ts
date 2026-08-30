@@ -10,7 +10,7 @@ class NotificationManager {
         this.element.classList.add('notification_holder');
         this.manager.element.appendChild(this.element);
 
-        this.pushNotification('Info', 'New: Better maps page styling');
+        // this.pushNotification('Info', 'New: Better maps page styling');
     }
 
     pushNotification(type: NotificationType, text: string) {
