@@ -151,6 +151,10 @@ body {
                 button.nav:hover {
                     background-color: rgba(0, 0, 0, 0.6);
                 }
+
+                figcaption {
+                    display: none;  
+                }
             }
 
             figure.main.hide_left {
@@ -182,8 +186,8 @@ body {
             }
 
             figcaption {
-                display: none;
-                border-bottom-left-radius: 8px;
+                border-bottom-left-radius: 6px;
+                border-bottom-right-radius: 6px;
             }
 
             aside {

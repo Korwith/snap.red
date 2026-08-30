@@ -12,10 +12,11 @@ class PageMaps extends Page {
         this.satellite = new SatelliteToggleButton(this);
     }
 
-    public toggleSatelliteView() {
+    public toggleSatelliteView(): boolean {
         this.element.classList.toggle('satellite');
         const val: boolean = this.element.classList.contains('satellite');
         this.map.toggleSatelliteView(val);
+        return val;
     }
 }
 
@@ -149,7 +150,7 @@ class SatelliteToggleButton {
         this.page = page;
         this.element = document.createElement('button');
         this.element.classList.add('satellite');
-        this.element.textContent = 'Satellite View';
+        this.element.textContent = 'Satellite Map';
         L.DomEvent.disableClickPropagation(this.element);
 
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
@@ -157,6 +158,7 @@ class SatelliteToggleButton {
     }
 
     public onclick(e: PointerEvent): void {
-        this.page.toggleSatelliteView();
+        const sat: boolean = this.page.toggleSatelliteView();
+        this.element.classList.toggle('vector', !sat);
     }
 }
