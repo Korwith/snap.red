@@ -69,7 +69,7 @@ const Data: Database = {
                 camera: CameraConfigApple14,
             },
             '08/23/26': {
-                name: 'Pen Mar',
+                name: 'Pen Mar, MD',
                 id: [4878, 4869, 4884, 'DSCN5632', 'DSCN5639'],
                 camera: CameraConfigNikonS7000,
                 gps: {
