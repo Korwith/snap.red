@@ -68,6 +68,12 @@ div.footer {
     }
 }
 
+div.footer.hidemap {
+    .button.map {
+        display: none;
+    }
+}
+
 /* light theme */
 body.light div.footer {
     filter: invert(1);

@@ -18,6 +18,11 @@ class PageMaps extends Page {
         this.map.toggleSatelliteView(val);
         return val;
     }
+
+    public reload(): void {
+        if (!this.manager.userHasMaps()) this.manager.showPage('content');
+        this.map.reload();
+    }
 }
 
 // generic type inherited by the main map and under selected photos
@@ -97,7 +102,13 @@ abstract class GenericMap {
     // handles satellite view (from button press)
     public toggleSatelliteView(force: boolean) {
         if (force) return this.setTheme('satellite');
-        this.setTheme(this.manager.getTheme());
+        this.setTheme(this.manager.fetchTheme());
+    }
+
+    // reloads map
+    public reload(): void {
+        this.map.invalidateSize();
+        this.setTheme(this.theme);
     }
 }
 
@@ -117,7 +128,7 @@ class MainMap extends GenericMap {
 
     // scans current selected user and plots tagged points on the large map
     // create seperate methods for generic map type later so i can incorporate maps elsewhere
-    addMarkers(): void {
+    public addMarkers(): void {
         const user: string = this.manager.fetchUserName();
         const photo_data: PhotoDatabase = this.manager.fetchUserImages(null);
 
@@ -139,6 +150,13 @@ class MainMap extends GenericMap {
 
         // add all markers to the cluster group at once
         this.clusters.addLayers(add_markers);
+    }
+
+    // reloads and re-adds clusters
+    public override reload(): void {
+        super.reload();
+        this.clusters.clearLayers();
+        this.addMarkers();
     }
 }
 

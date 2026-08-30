@@ -23,6 +23,11 @@ class PageFooter {
 
         this.manager.element.appendChild(this.element);
     }
+
+    // hides or shows the map button if user has gps data available
+    public toggleMapButtonVisibility(show: boolean) {
+        this.element.classList.toggle('hidemap', !show);
+    }
 }
 
 // abstract base for a clickable footer button

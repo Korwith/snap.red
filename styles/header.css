@@ -99,6 +99,14 @@ header {
     }
 }
 
+header.hidemap {
+    .header_button_holder {
+        button.map {
+            display: none;
+        }
+    }
+}
+
 /* light theme */
 body.light {
     header {

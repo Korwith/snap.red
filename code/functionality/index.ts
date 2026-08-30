@@ -1,3 +1,6 @@
+// currently the only 3 pages
+type PageName = 'content' | 'maps' | 'about';
+
 // root controller that manages page state, user switching, and data access
 class PageManager {
     data: Database;
@@ -55,6 +58,11 @@ class PageManager {
         if (!this.data[user]) throw new Error('Invalid user');
         this.user = user;
         this.header.right_holder.user_select.syncToUser(user);
+
+        this.header.toggleMapButtonVisibility(this.userHasMaps());
+        this.footer.toggleMapButtonVisibility(this.userHasMaps());
+        this.maps.reload();
+        
         this.reload();
         this.url_handler?.setState(user);
     }
@@ -290,6 +298,25 @@ class PageManager {
         return batch;
     }
 
+    // fetches the current theme
+    public fetchTheme(): 'light' | 'dark' {
+        return document.body.classList.contains('light') ? 'light' : 'dark';
+    }
+
+    // does the current user have any gps data? if so return true
+    public userHasMaps(user?: string): boolean {
+        user ??= this.user;
+        const images: PhotoDatabase = this.fetchUserImages(null, user);
+
+        for (const date in images) {
+            const entry: PhotoEntry = images[date];
+            if (!entry.gps || Object.keys(entry.gps).length == 0) continue;
+            return true;
+        }
+        
+        return false;
+    }
+
     // pages registering themselves to hide/show systek
     public registerPage(name: string, page: Page): void {
        this.pages[name] = page;
@@ -297,7 +324,7 @@ class PageManager {
     }
 
     // user specified page will show, others will hide
-    public showPage(name: string): void {
+    public showPage(name: PageName): void {
         for (const key in this.pages) {
             const page: Page = this.pages[key];
             page.toggle(name == key);
@@ -313,11 +340,6 @@ class PageManager {
         
         if (this.maps.map.element.classList.contains('satellite')) return;
         this.maps.map.setTheme(light ? 'light' : 'dark');
-    }
-
-    // fetches the current theme
-    public getTheme(): 'light' | 'dark' {
-        return document.body.classList.contains('light') ? 'light' : 'dark';
     }
 }
 

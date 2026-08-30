@@ -87,7 +87,7 @@ const Data: Database = {
             },
             '08/22/26': {
                 name: 'Downtown Frederick',
-                id: ['4841', '4829', '4824', '4859', '4860', '4851'],
+                id: [4841, 4829, 4824, 4859, 4860, 4851],
                 // 4142 is on here too, 4181 is almost the same photo. both very good
                 people: ['Brittany'],
                 featured: 5,
@@ -267,7 +267,7 @@ const Data: Database = {
             },
             '07/30/26': {
                 name: 'Fountain Rock Park',
-                id: ['4127', 'DSCN4651', 'DSCN4653', 'DSCN4661', 'DSCN4667', 'DSCN4633', 'DSCN4626'],
+                id: [4127, 'DSCN4651', 'DSCN4653', 'DSCN4661', 'DSCN4667', 'DSCN4633', 'DSCN4626'],
                 camera: CameraConfigNikonS7000,
                 gps: {
                     '4127': [39.474538, -77.3666547],
