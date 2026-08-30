@@ -21,11 +21,11 @@ class MainPhotoHolder {
     }
 
     // loads the photo and its details for the given date and shows the overlay
-    openImageByDate(date: string): void {
+    openImageByDate(date: string, user?: string, index?: number): void {
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
         this.selected = entry;
 
-        this.menu.figure.load(date);
+        this.menu.figure.load(date, index);
         this.menu.details.load(date);
         this.toggle(true);
     }
@@ -107,10 +107,9 @@ class MainPhotoFigure {
         }
     }
 
-    // slides all images to display the one at the given offset from the current index
-    shiftSelectedPhoto(shift: number): void {
-        const index: number = this.selected + shift;
-        if (index < 0 || index >= this.images.length ) return;
+    // sets the selected photo to a specific index
+    setSelectedPhoto(index: number): void {
+        if (index < 0 || index >= this.images.length) return;
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', this.images.length == 1 || index + 1 >= this.images.length);
 
@@ -124,10 +123,18 @@ class MainPhotoFigure {
         }
 
         this.selected = index;
+
+    }
+
+    // slides all images to display the one at the given offset from the current index
+    shiftSelectedPhoto(shift: number): void {
+        const index = this.selected + shift;
+        if (index < 0 || index >= this.images.length) return;
+        this.setSelectedPhoto(index);
     }
 
     // resets the figure and loads the photo and its image list for the given date
-    load(date: string): void {
+    load(date: string, index?: number): void {
         const manager: PageManager = this.menu.holder.manager;
         const photo: PhotoEntry | null = manager.fetchImageByDate(date);
         if (!photo) throw new Error('No photo found!');
@@ -135,7 +142,7 @@ class MainPhotoFigure {
         this.reset();
         this.loadPhotoDetails(date);
         this.loadPhotoList(photo.id);
-        this.shiftSelectedPhoto(0);
+        this.setSelectedPhoto(index ?? 0);
     }
 
     // clears the current photo images, caption, and info overlay
@@ -522,11 +529,11 @@ class PhotoShareButton {
                 text: `Check out ${selected.name} on Snapshot!`,
                 url: window.location.href,
             })
-        } catch(error) {
+        } catch (error) {
             try {
                 navigator.clipboard.writeText(window.location.href)
                 manager.pushNotification('Info', 'Copied to clipboard!');
-            } catch(error) {
+            } catch (error) {
                 manager.pushNotification('Warn', 'Your device does not support sharing.');
             }
         }

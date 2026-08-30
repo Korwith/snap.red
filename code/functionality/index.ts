@@ -78,9 +78,9 @@ class PageManager {
     }
 
     // opens the full-size photo viewer for the given date
-    public openImageByDate(date: string, user?: string): void {
+    public openImageByDate(date: string, user?: string, index?: number): void {
         user ??= this.user;
-        this.main_photo.openImageByDate(date);
+        this.main_photo.openImageByDate(date, user, index);
         this.url_handler?.setState(this.user, date);
     }
 

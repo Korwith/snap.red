@@ -131,19 +131,29 @@ class MainMap extends GenericMap {
     public addMarkers(): void {
         const user: string = this.manager.fetchUserName();
         const photo_data: PhotoDatabase = this.manager.fetchUserImages(null);
-
         const add_markers: L.Marker[] = [];
 
+        // loops through every date in the user photo data
         for (const date in photo_data) {
             const entry: PhotoEntry = photo_data[date];
+
+            // the entry must have gps data to continue (or else theres no place to put it on the map)
             if (!entry.gps) continue;
 
-            for (const id in entry.gps) {
-                const image_marker: L.Marker = this.createImageMarker(date, id);
+            // loops specifically through photos that are tagged with gps coords
+            for (const this_photo_id in entry.gps) {
+                // creates the leaflet image marker and assigns an onclick event to it
+                const image_marker: L.Marker = this.createImageMarker(date, this_photo_id);
                 image_marker.on('click', (event: L.LeafletMouseEvent) => {
-                    this.manager.openImageByDate(date, user);
+                    // the photo index has to be found in entry.id - a string[] | number[] of ALL photo IDs
+                    let photo_index: number = entry.id.indexOf(this_photo_id);
+                    if (photo_index == -1) photo_index = 0;
+
+                    // sends it over to the manager which then sends it to the main_image
+                    this.manager.openImageByDate(date, user, photo_index);
                 })
 
+                // pushes the object in memory.. added to dom later
                 add_markers.push(image_marker);
             }
         }
