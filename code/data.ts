@@ -7,7 +7,7 @@ const HoverColorPink: HexColor = '#da70d6';
 
 // Specific Icons
 const EntryIconHeart: CustomIconConfig = {
-    calender: { icon: 'heart.svg' }
+    calender: { icon: 'heart.svg', size: '74%' }
 }
 
 // Specific Cameras

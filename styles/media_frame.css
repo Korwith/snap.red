@@ -249,7 +249,7 @@ figure:hover figcaption {
 
 figure .date::before {
     background-image: var(--icon-calender, url(../icon/day.svg));
-    background-size: var(--icon-calender-size, 74%);
+    background-size: var(--icon-calender-size, 72%);
 }
 
 figure figcaption::before {
