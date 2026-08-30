@@ -57,9 +57,7 @@ const Data: Database = {
                 people: ['Brittany'],
                 camera: CameraConfigApple14,
                 hover_color: HoverColorPink,
-                custom_icons: {
-                    calender: { icon: 'heart.svg' }
-                },
+                custom_icons: EntryIconHeart,
                 gps: {}, // later
             },
             '08/25/26': {
@@ -130,9 +128,7 @@ const Data: Database = {
                 id: ['DSCN5411', 'DSCN5416', 'DSCN5443', 'DSCN5405'],
                 people: ['Brittany'],
                 camera: CameraConfigNikonS7000,
-                custom_icons: {
-                    'calender': { icon: 'heart.svg' },
-                },
+                custom_icons: EntryIconHeart,
                 hover_color: HoverColorPink,
                 gps: {
                     'DSCN5416': [39.4619515, -77.4962949],
@@ -170,9 +166,7 @@ const Data: Database = {
                 camera: CameraConfigNikonS7000,
                 people: ['Brittany'],
                 hover_color: HoverColorPink,
-                custom_icons: {
-                    calender: { icon: 'heart.svg', size: '77%' }
-                },
+                custom_icons: EntryIconHeart,
                 gps: {
                     'DSCN5145': [38.898722, -77.0256605],
                     'DSCN5197': [38.8920148, -77.0374862],
@@ -298,9 +292,7 @@ const Data: Database = {
                 people: ['Brittany', 'Leah', 'Ashely', 'Gio', 'Dwayne'],
                 camera: CameraConfigNikonS7000,
                 hover_color: HoverColorPink,
-                custom_icons: {
-                    calender: { icon: 'heart.svg', size: '77%' },
-                },
+                custom_icons: EntryIconHeart,
                 gps: {
                     'DSCN4425': [39.3636676, -77.4205292],
                     'DSCN4426': [39.3636676, -77.4205292],
