@@ -45,6 +45,13 @@ const Data: Database = {
         },
 
         images: {
+            '08/30/26': {
+                name: 'Sky Meadows State Park',
+                id: [5132, 5131, 5125, 5121],
+                people: ['Riley'],
+                camera: CameraConfigApple14,
+                gps: {}, // later
+            },
             '08/29/26': {
                 name: 'Cunningham Falls',
                 id: [5071, 'DSCN5703', 'DSCN5676', 5078, 5088, 'DSCN5722'],
