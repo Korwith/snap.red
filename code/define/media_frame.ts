@@ -288,7 +288,7 @@ abstract class MediaFrame {
         this.caption = document.createElement('figcaption');
 
         this.date_label.classList.add('date');
-        this.date_label.textContent = date;
+        this.date_label.textContent = date.replace(/\b0+/g, '');
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
         this.image.setAttribute('loading', 'lazy');
         this.image.onload = () => this.loaded();
