@@ -183,7 +183,7 @@ class FigureInfoList {
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
         if (!entry) throw new Error('No image found at date');
 
-        this.date.textContent = date;
+        this.date.textContent = date.replace(/\b0+/g, '');
         this.date.style.setProperty('--custom-icon', entry.custom_icons?.calender ? `url(../icon/${entry.custom_icons.calender})` : null);
 
         const sanitized_users: string[] = manager.sanitizePeopleList(entry.people || []);
