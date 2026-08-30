@@ -75,6 +75,10 @@
     margin-right: 2px;
 }
 
+.photo_row.location figcaption {
+    display: none;
+}
+
 .photo_row.person .row_header::before {
     background-image: url(../icon/people.svg);
     background-size: 92%;

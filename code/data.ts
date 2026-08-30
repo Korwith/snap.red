@@ -394,7 +394,7 @@ const Data: Database = {
             },
             '07/19/26': {
                 name: 'Weverton Cliffs',
-                id: ['DSCN3699', 'DSCN3696', 'DSCN3682', 'DSCN3687', 'DSCN3676', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
+                id: ['DSCN3687', 'DSCN3699', 'DSCN3696', 'DSCN3690', 'DSCN3691', 'DSCN3685'],
                 people: ['Brittany'],
                 camera: CameraConfigNikonS7000,
                 hover_color: HoverColorPink,
@@ -402,9 +402,7 @@ const Data: Database = {
                 gps: {
                     'DSCN3699': [39.3320587, -77.6766005],
                     'DSCN3696': [39.3320587, -77.6766005],
-                    'DSCN3682': [39.3320587, -77.6766005],
                     'DSCN3687': [39.3320587, -77.6766005],
-                    'DSCN3676': [39.3320587, -77.6766005],
                     'DSCN3690': [39.3320587, -77.6766005],
                     'DSCN3691': [39.3320587, -77.6766005],
                     'DSCN3685': [39.3320587, -77.6766005],
