@@ -47,10 +47,16 @@ const Data: Database = {
         images: {
             '08/30/26': {
                 name: 'Delaplane, VA',
+                caption: 'Sky Meadows State Park',
                 id: [5132, 5131, 5125, 5121],
                 people: ['Riley'],
                 camera: CameraConfigApple14,
-                gps: {}, // later
+                gps: {
+                    5132: [38.9969503, -77.9728978],
+                    5131: [38.9923612, -77.9683097],
+                    5125: [38.9923612, -77.9683097],
+                    // UNKNOWN 5121
+                },
             },
             '08/29/26': {
                 name: 'Cunningham Falls',
