@@ -82,6 +82,10 @@ class PageManager {
         user ??= this.user;
         this.main_photo.openImageByDate(date, user, index);
         this.url_handler?.setState(this.user, date);
+
+        // sends it over to the footer for the "currently opened" pane
+        this.footer.assignSelectedEntry(date);
+        this.footer.toggleSelectedVisible(false);
     }
 
     // returns an array of all user names in the database

@@ -484,6 +484,7 @@ abstract class HolderCloseButton {
     onclick(e: PointerEvent): void {
         this.holder.toggle(false);
         this.holder.manager.url_handler?.setState(this.holder.manager.user);
+        this.holder.manager.footer.toggleSelectedVisible(true);
     }
 }
 
