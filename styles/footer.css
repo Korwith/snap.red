@@ -36,8 +36,11 @@ div.footer {
         font-weight: 700;
         font-size: 1.1rem;
         opacity: 0;
+        border-top-left-radius: 12px;
         pointer-events: none;
         cursor: pointer;
+        box-shadow: 10px 10px;
+        overflow: unset;
 
         .icon, .arrow {
             aspect-ratio: 1/1;
