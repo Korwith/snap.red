@@ -188,5 +188,6 @@ class SatelliteToggleButton {
     public onclick(e: PointerEvent): void {
         const sat: boolean = this.page.toggleSatelliteView();
         this.element.classList.toggle('vector', !sat);
+        this.element.textContent = sat ? 'Vector Map' : 'Satellite Map';
     }
 }

@@ -20,6 +20,10 @@ body.light .leaflet-container {
     background-color: white;
 }
 
+.leaflet-bar {
+    opacity: 0.9;
+}
+
 .leaflet-bar a {
     background: linear-gradient(to bottom, #303030, #151515);
     color: white;
@@ -121,6 +125,7 @@ body.light .marker-cluster div {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
+    opacity: 0.9;
     transition: filter 0.15s;
 }
 
@@ -128,10 +133,14 @@ body.light .marker-cluster div {
     content: '';
     height: 24px;
     width: 24px;
-    background-image: url(../icon/satellite.svg);
+    background-image: url(../icon/map.svg);
     background-position: center;
     background-size: 90%;
     background-repeat: no-repeat;
+}
+
+.page.maps button.satellite.vector::before {
+    background-image: url(../icon/satellite.svg);
 }
 
 .page.maps button.satellite::after {
