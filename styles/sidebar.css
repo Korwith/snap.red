@@ -14,7 +14,7 @@ body {
         box-sizing: border-box;
         border-right: 1px solid #202020;
         z-index: 20;
-        transition: filter 0.3s, transform 0.3s;
+        transition: filter 0.3s, transform 0.5s;
     }
 
     .timeline {

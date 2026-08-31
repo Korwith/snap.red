@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
-    transition: background-color 0.3s, transform 0.3s, width 0.3s, left 0.3s, opacity 0.3s;
+    transition: background-color 0.3s, transform 0.5s, width 0.5s, left 0.5s, opacity 0.3s;
 
     /* profile card */
     .card {
@@ -416,8 +416,8 @@ body.light {
 @media screen and (max-width: 767px) {
     .content {
         transition: background-color 0.3s,
-            transform 0.3s,
-            left 0.3s,
+            transform 0.5s,
+            left 0.5s,
             opacity 0.3s;
 
         .card {
