@@ -22,6 +22,11 @@ body.light .leaflet-container {
 
 .leaflet-bar {
     opacity: 0.9;
+    transition: opacity 0.15s;
+}
+
+.leaflet-bar:hover {
+    opacity: 1;
 }
 
 .leaflet-bar a {
@@ -126,7 +131,7 @@ body.light .marker-cluster div {
     font-size: 1rem;
     cursor: pointer;
     opacity: 0.9;
-    transition: filter 0.15s;
+    transition: opacity 0.15s;
 }
 
 .page.maps button.satellite::before {
@@ -157,5 +162,5 @@ body.light .marker-cluster div {
 }
 
 .page.maps button:hover {
-    filter: brightness(0.8);
+    opacity: 1;
 }
