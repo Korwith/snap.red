@@ -35,7 +35,7 @@ jobs:
         run: npx tsc
 
       - name: Compile SCSS to flat CSS
-        run: npx sass css:css --style compressed
+        run: npx sass styles:styles --style compressed
 
       - uses: actions/configure-pages@v5
 
