@@ -1,44 +1,35 @@
 .page.about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-
-    h1 {
-        text-align: center;
-    }
-
-    span {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        width: 50%;
-        height: fit-content;
-    }
-
-    h1,
-    span {
-        color: white;
-        transition: color 0.3s, text-shadow 0.3s;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.page.about h1 {
+  text-align: center;
+}
+.page.about span {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+  height: fit-content;
+}
+.page.about h1,
+.page.about span {
+  color: white;
+  transition: color 0.3s, text-shadow 0.3s;
 }
 
-body.light {
-    .page.about {
-
-        h1,
-        span {
-            color: black;
-            text-shadow: 2px 2px 4px white;
-        }
-    }
+body.light .page.about h1,
+body.light .page.about span {
+  color: black;
+  text-shadow: 2px 2px 4px white;
 }
 
 @media screen and (max-width: 767px) {
-    .page.about {
-        span {
-            width: calc(100vw - 20px);
-        }
-    }
-
+  .page.about span {
+    width: calc(100vw - 20px);
+  }
 }
+
+/*# sourceMappingURL=about.css.map */

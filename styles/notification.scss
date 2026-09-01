@@ -1,0 +1,93 @@
+.notification_holder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+    height: fit-content;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 50;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.notification {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    box-sizing: border-box;
+    transition: opacity 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.notification::after, .notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.notification::before {
+    background: linear-gradient(to bottom, #272727, #050505);
+    z-index: -1;
+}
+
+.notification::after {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notification .icon {
+    height: 40px;
+    width: 40px;    
+    background-image: url(/icon/check.svg);
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .notification_holder {
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+        bottom: 50px;
+        gap: 0; 
+        border-left: 0;
+        border-right: 0;
+        transition: bottom 0.15s;
+    }
+
+    /* incase the footer is hidden, change the y level */
+    body:has(.main_photo_holder.show) .notification_holder {
+        bottom: 0;
+    }
+
+    .notification_holder .notification {
+        border-radius: 0;
+    }
+
+    .notification_holder .notification::after {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .notification_holder .notification::before, 
+    .notification_holder .notification::after {
+        border-radius: 0;
+    }
+}

@@ -1,166 +1,169 @@
 /* alters leaflet given css */
 .leaflet-container {
-    background-color: black;
+  background-color: black;
 }
 
 .page.maps::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    z-index: 500;
-    pointer-events: none;
-    border: 4px solid rgba(0, 0, 0, 0.5);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 500;
+  pointer-events: none;
+  border: 4px solid rgba(0, 0, 0, 0.5);
 }
 
 body.light .leaflet-container {
-    background-color: white;
+  background-color: white;
 }
 
 .leaflet-bar {
-    opacity: 0.9;
-    transition: opacity 0.15s;
+  opacity: 0.9;
+  transition: opacity 0.15s;
 }
 
 .leaflet-bar:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .leaflet-bar a {
-    background: linear-gradient(to bottom, #303030, #151515);
-    color: white;
-    border-bottom: rgba(255, 255, 255, 0.7);
-    transition: filter 0.2s;
+  background: linear-gradient(to bottom, #303030, #151515);
+  color: white;
+  border-bottom: rgba(255, 255, 255, 0.7);
+  transition: filter 0.2s;
 }
 
 .leaflet-bar a:hover {
-    filter: brightness(0.8);
+  filter: brightness(0.8);
 }
 
 .leaflet-container .leaflet-control-attribution {
-    margin: 4px;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-weight: 700;
-    color: white;
+  margin: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  color: white;
 }
 
 .leaflet-container .leaflet-control-attribution a {
-    color: white;
+  color: white;
 }
 
 /* alters image markers */
 .page.maps:not(.show) .marker {
-    pointer-events: none;
+  pointer-events: none;
 }
+
 .marker {
-    position: relative;
-    transition: filter 0.15s;
+  position: relative;
+  transition: filter 0.15s;
 }
 
 .marker:hover {
-    z-index: 999999999999999 !important;
-    /* this is jank */
+  z-index: 999999999999999 !important;
+  /* this is jank */
 }
 
 .marker::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
-    z-index: -1;
-    transition: background-color 0.15s, transform 0.15s;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  z-index: -1;
+  transition: background-color 0.15s, transform 0.15s;
 }
 
 .marker:hover::before {
-    background-color: white;
+  background-color: white;
 }
 
 .marker img {
-    width: 100%;
-    height: 100%;
-    border-radius: 2px;
-    transition: transform 0.15s;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  transition: transform 0.15s;
 }
 
 .marker:hover img,
 .marker:hover::before {
-    transform: scale(140%);
+  transform: scale(140%);
 }
 
 /* photo clusters, id like to style this further later on */
 .marker-cluster {
-    color: white;
+  color: white;
 }
 
 .marker-cluster div {
-    color: white;
-    font-weight: 700;
-    transition: color 0.15s;
+  color: white;
+  font-weight: 700;
+  transition: color 0.15s;
 }
 
 body.light .marker-cluster div {
-    color: black;
+  color: black;
 }
 
 .page.maps button.satellite {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin: 10px;
-    padding-left: 6px;
-    padding-right: 6px;
-    top: 0;
-    right: 0;
-    width: fit-content;
-    height: 30px;
-    z-index: 999;
-    border: 0;
-    border-radius: 4px;
-    background: linear-gradient(to bottom, #303030, #151515);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0.9;
-    transition: opacity 0.15s;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  top: 0;
+  right: 0;
+  width: fit-content;
+  height: 30px;
+  z-index: 999;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #303030, #151515);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.15s;
 }
 
 .page.maps button.satellite::before {
-    content: '';
-    height: 24px;
-    width: 24px;
-    background-image: url(../icon/map.svg);
-    background-position: center;
-    background-size: 90%;
-    background-repeat: no-repeat;
+  content: "";
+  height: 24px;
+  width: 24px;
+  background-image: url(../icon/map.svg);
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
 }
 
 .page.maps button.satellite.vector::before {
-    background-image: url(../icon/satellite.svg);
+  background-image: url(../icon/satellite.svg);
 }
 
 .page.maps button.satellite::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;    
-    height: 100%;
-    pointer-events: none;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 .page.maps button:hover {
-    opacity: 1;
+  opacity: 1;
 }
+
+/*# sourceMappingURL=maps.css.map */

@@ -1,207 +1,181 @@
-body {
-    nav.sidebar {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 50px;
-        left: 0;
-        height: calc(100vh - 50px);
-        width: 300px;
-        padding: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: black;
-        box-sizing: border-box;
-        border-right: 1px solid #202020;
-        z-index: 20;
-        transition: filter 0.3s, transform 0.6s;
-    }
-
-    .timeline {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-height: 0;
-        gap: 6px;
-        overflow-y: auto;
-
-        .year_holder {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-
-            .year_label {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 2px;
-                height: fit-content;
-                width: 100%;
-                padding: 6px;
-                padding-top: 1px;
-                padding-bottom: 1px;
-                background-color: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                box-sizing: border-box;
-                color: white;
-                font-weight: 700;
-                order: -15;
-            }
-
-            .year_label::before {
-                background-size: 75%;
-                background-image: url(../icon/day.svg);
-            }
-
-            .year_label::after {
-                background: linear-gradient(to bottom, #333333, black)
-            }
-
-            button {
-                position: relative;
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                width: 100%;
-                height: 40px;
-                background-color: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                color: white;
-                font-weight: 700;
-                font-size: 1.1rem;
-                cursor: pointer;
-                outline: none;
-                order: calc(var(--order) * -1);
-                transition: background-color 0.15s, color 0.15s;
-            }
-
-            button::before,
-            .year_label::before {
-                content: '';
-                aspect-ratio: 1/1;
-                height: 100%;
-                background-position: center;
-                background-repeat: no-repeat;
-                transition: opacity 0.15s;
-            }
-
-            button::after,
-            .year_label::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                border-radius: 8px;
-                opacity: 0.5;
-            }
-
-            button::before {
-                background-size: 60%;
-                background-image: url(../icon/section.svg);
-            }
-
-            button::after {
-                background: linear-gradient(to bottom, #0A0A0A, black);
-            }
-
-            button:hover,
-            button:focus {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: white;
-            }
-
-            button:hover::before {
-                opacity: 1;
-            }
-        }
-    }
-
-    .timeline::before {
-        content: 'Timeline (' attr(data-count) ' entries)';
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: fit-content;
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding-bottom: 4px;
-        border-bottom: 1px solid #202020;
-    }
-
-    .sidebar_footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        height: 25px;
-        padding-top: 5px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-        span {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: fit-content;
-            padding-left: 8px;
-            padding-right: 8px;
-            box-sizing: border-box;
-            border-radius: 8px;
-            background: linear-gradient(to bottom, #272727, #161616);
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-
-        span::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    }
+body nav.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: calc(100vh - 50px);
+  width: 300px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: black;
+  box-sizing: border-box;
+  border-right: 1px solid #202020;
+  z-index: 20;
+  transition: filter 0.3s, transform 0.6s;
+}
+body .timeline {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 6px;
+  overflow-y: auto;
+}
+body .timeline .year_holder {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+body .timeline .year_holder .year_label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: fit-content;
+  width: 100%;
+  padding: 6px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: white;
+  font-weight: 700;
+  order: -15;
+}
+body .timeline .year_holder .year_label::before {
+  background-size: 75%;
+  background-image: url(../icon/day.svg);
+}
+body .timeline .year_holder .year_label::after {
+  background: linear-gradient(to bottom, #333333, black);
+}
+body .timeline .year_holder button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  outline: none;
+  order: calc(var(--order) * -1);
+  transition: background-color 0.15s, color 0.15s;
+}
+body .timeline .year_holder button::before,
+body .timeline .year_holder .year_label::before {
+  content: "";
+  aspect-ratio: 1/1;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.15s;
+}
+body .timeline .year_holder button::after,
+body .timeline .year_holder .year_label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 8px;
+  opacity: 0.5;
+}
+body .timeline .year_holder button::before {
+  background-size: 60%;
+  background-image: url(../icon/section.svg);
+}
+body .timeline .year_holder button::after {
+  background: linear-gradient(to bottom, #0A0A0A, black);
+}
+body .timeline .year_holder button:hover,
+body .timeline .year_holder button:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+body .timeline .year_holder button:hover::before {
+  opacity: 1;
+}
+body .timeline::before {
+  content: "Timeline (" attr(data-count) " entries)";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #202020;
+}
+body .sidebar_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+body .sidebar_footer span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #272727, #161616);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+body .sidebar_footer span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-body.shift {
-    nav.sidebar {
-        transform: translateX(-100%);
-    }
+body.shift nav.sidebar {
+  transform: translateX(-100%);
 }
 
-body.light {
-    nav.sidebar {
-        filter: invert(1);
-    }
+body.light nav.sidebar {
+  filter: invert(1);
 }
-
 
 /* light theme */
 @media screen and (max-width: 767px) {
-    body {
-        nav.sidebar {
-        width: 100vw;
-        height: calc(100dvh - 100px);
-        transform: translateX(-100%);
-        }
-    }
-
-    body.shift {
-        nav.sidebar {
-            transform: translateX(0);
-        }
-    }
+  body nav.sidebar {
+    width: 100vw;
+    height: calc(100dvh - 100px);
+    transform: translateX(-100%);
+  }
+  body.shift nav.sidebar {
+    transform: translateX(0);
+  }
 }
+
+/*# sourceMappingURL=sidebar.css.map */

@@ -29,6 +29,15 @@ jobs:
       - name: Compile TypeScript
         run: npx --yes --package typescript tsc
 
+      - name: Install Dart Sass
+        run: |
+          curl -L https://github.com | tar -xz
+          sudo mv dart-sass/sass /usr/local/bin/
+          rm -rf dart-sass
+
+      - name: Compile SCSS to flat CSS
+        run: sass css:css --style compressed
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
