@@ -78,7 +78,14 @@ const Data: Database = {
                 camera: CameraConfigApple14,
                 hover_color: HoverColorPink,
                 custom_icons: EntryIconHeart,
-                gps: {}, // later
+                gps: {
+                    5012: [39.414934, -77.415231],
+                    5002: [39.4149611, -77.409649],
+                    // 5004 later
+                    // 5009 later
+                    5013: [39.4156511, -77.4149637],
+                    // UNKNOWN: 5037
+                },
             },
             '08/25/26': {
                 name: 'Downtown Frederick',
