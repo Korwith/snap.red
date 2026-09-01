@@ -26,11 +26,9 @@ jobs:
         with:
           node-version: '22'
 
-      # Option 1: Install packages directly if package.json exists
       - name: Install Dependencies
         run: npm ci || npm install -D typescript sass
 
-      # Option 2: Run compilation via npx without manual binary downloads
       - name: Compile TypeScript
         run: npx tsc
 

@@ -1,2 +1,3 @@
-code/**/*.js*
-code/**/*.css*
+code/**/*.js
+styles/**/*.css
+styles/**/*.css.map
