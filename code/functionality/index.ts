@@ -61,6 +61,7 @@ class PageManager {
 
         this.header.toggleMapButtonVisibility(this.userHasMaps());
         this.footer.toggleMapButtonVisibility(this.userHasMaps());
+        this.footer.toggleSelectedVisible(false);
         this.maps.reload();
         
         this.reload();
