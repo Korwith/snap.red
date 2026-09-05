@@ -56,6 +56,8 @@ class PageManager {
     // changes the active user and reloads the page
     public switchUser(user: string): void {
         if (!this.data[user]) throw new Error('Invalid user');
+        if (this.fetchUserName() == user) return; // no need to switch if already selected this user
+        
         this.user = user;
         this.header.right_holder.user_select.syncToUser(user);
 
