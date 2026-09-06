@@ -45,6 +45,12 @@ const Data: Database = {
         },
 
         images: {
+            '09/05/26': {
+                name: 'Gambrill State Park',
+                id: [5268, 5232, 5233, 5236, 5241, 5257, 5261, 'DSCN5789', 'DSCN5801', 5230],
+                camera: CameraConfigApple14,
+                gps: {} // later
+            },
             '08/30/26': {
                 name: 'Delaplane, VA',
                 caption: 'Sky Meadows State Park',
