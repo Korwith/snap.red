@@ -45,6 +45,15 @@ const Data: Database = {
         },
 
         images: {
+            '09/07/26': {
+                name: 'Cunningham Falls',
+                id: [5290, 5315, 5305],
+                people: ['Brittany'],
+                camera: CameraConfigApple14,
+                hover_color: HoverColorPink,
+                custom_icons: EntryIconHeart,
+                gps: {} //later
+            },
             '09/05/26': {
                 name: 'Gambrill State Park',
                 id: [5268, 5232, 5233, 5236, 5241, 5257, 5261, 'DSCN5789', 'DSCN5801', 5230],
