@@ -16,18 +16,40 @@ class MainPhotoHolder {
     }
 
     // shows or hides the overlay
-    toggle(force?: boolean): void {
-        this.element.classList.toggle('show', force);
+    public toggle(force?: boolean): void {
+        const shown: boolean = this.element.classList.toggle('show', force);
+
+        // hooks the keypress function
+        if (shown) document.addEventListener('keydown', this.keypress);
+        else document.removeEventListener('keydown', this.keypress);
     }
 
     // loads the photo and its details for the given date and shows the overlay
-    openImageByDate(date: string, user?: string, index?: number): void {
+    public openImageByDate(date: string, user?: string, index?: number): void {
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
         this.selected = entry;
 
         this.menu.figure.load(date, index);
         this.menu.details.load(date);
         this.toggle(true);
+    }
+
+    // handles keystrokes relating to the main photo holder
+    // uses arrow function because if i refer to (this) in a standard method,
+    // it behaves differently than the whole class (unintended behavior)
+    private keypress = (e: KeyboardEvent): void => {
+        switch(e.key) {
+            case 'Backspace':
+            case 'Escape':
+                this.toggle(false);
+                break;
+            case 'ArrowLeft':
+                this.menu.figure.shiftSelectedPhoto(-1);
+                break;
+            case 'ArrowRight':
+                this.menu.figure.shiftSelectedPhoto(1);
+                break;
+        }
     }
 }
 
