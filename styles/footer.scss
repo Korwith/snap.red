@@ -28,7 +28,7 @@ div.footer {
     }
 
     .bar.selected {
-        height: 45px;
+        height: 35px;
         width: fit-content;
         margin-left: auto;
         background: none;
@@ -181,6 +181,8 @@ body.light {
             display: flex;
         }
 
+        /* i changed the PC height to be the same */
+        /* but still leaving this here for future tweaking */
         .bar.selected {
             height: 35px;
         }
