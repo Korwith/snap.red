@@ -19,9 +19,14 @@ class MainPhotoHolder {
     public toggle(force?: boolean): void {
         const shown: boolean = this.element.classList.toggle('show', force);
 
-        // hooks the keypress function
-        if (shown) document.addEventListener('keydown', this.keypress);
-        else document.removeEventListener('keydown', this.keypress);
+        // hooks the keypress function, url data, and footer button
+        if (shown) {
+            document.addEventListener('keydown', this.keypress);
+        } else {
+            this.manager.url_handler?.setState(this.manager.user);
+            this.manager.footer.toggleSelectedVisible(true);
+            document.removeEventListener('keydown', this.keypress);
+        }
     }
 
     // loads the photo and its details for the given date and shows the overlay
@@ -505,8 +510,6 @@ abstract class HolderCloseButton {
     // hides the main photo overlay and removes the date from the URL
     onclick(e: PointerEvent): void {
         this.holder.toggle(false);
-        this.holder.manager.url_handler?.setState(this.holder.manager.user);
-        this.holder.manager.footer.toggleSelectedVisible(true);
     }
 }
 
