@@ -132,20 +132,22 @@ class TimelineMonthButton {
 
     // scrolls the content area to the first photo from this month, loading batches if needed
     public navigate(): void {
+        // redefining some things because we are far into our class structure here
         const manager: PageManager = this.holder.timeline.sidebar.manager;
         const content: PageContent = manager.content;
         const photos: ContentPhotoGrid = content.photos;
         const selector: string = `[data-date^="${this.month_id}/"][data-date$="${this.holder.year_id}"]`;
 
-        let el: Element | null = content.element.querySelector(selector);
+        // incase the user has another page selected but still clicks in sidebar
+        manager.showPage('content');
+
+        let el: HTMLElement | null = content.element.querySelector(selector);
         while (!el && !photos.complete) {
             photos.loadBatch();
             el = content.element.querySelector(selector);
         }
 
-        if (window.innerWidth < 767) {
-            this.holder.timeline.sidebar.manager.toggleSidebar(false);
-        }
+        if (window.innerWidth < 767) this.holder.timeline.sidebar.manager.toggleSidebar(false);
         el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
