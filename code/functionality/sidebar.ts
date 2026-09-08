@@ -157,7 +157,7 @@ class SidebarFooter {
     sidebar: PageSidebar;
     stats: WebsiteStats;
     element: HTMLElement;
-    
+
     commits: CommitFooterText;
     size: SizeFooterText;
 
@@ -199,9 +199,13 @@ class CommitFooterText extends SidebarFooterText {
 
     // requests commit data from github and displays count
     protected async updateText(): Promise<void> {
-        const commit_data: CommitData = await this.footer.stats.fetchLastCommit();
-        if (!commit_data) throw new Error('Failed to fetch commit count.');
-        this.element.textContent = `${commit_data.count.toString()} commits`;
+        try {
+            const commit_data: CommitData = await this.footer.stats.fetchLastCommit();
+            if (!commit_data) throw new Error('Failed to fetch commit count.');
+            this.element.textContent = `${commit_data.count.toString()} commits`;
+        } catch (error: unknown) {
+            console.warn('Had issues fetching from GitHub API. (Attempting to display web stats).')
+        }
     }
 }
 
@@ -216,8 +220,12 @@ class SizeFooterText extends SidebarFooterText {
     // requests repo size data from github and displays it
     // automatically formatted via statistics.ts
     protected async updateText(): Promise<void> {
-        const size: string = await this.footer.stats.fetchRepoSize();
-        if (!size) throw new Error('Failed to fetch website size.');
-        this.element.textContent = size;
+        try {
+            const size: string = await this.footer.stats.fetchRepoSize();
+            if (!size) throw new Error('Failed to fetch website size.');
+            this.element.textContent = size;
+        } catch(error: unknown) {
+            console.warn('Had issues fetching from GitHub API. (Attempting to display web stats.)');
+        }
     }
 }
