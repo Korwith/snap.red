@@ -1,10 +1,12 @@
+@use 'vars';
+
 /* content layout */
 .content {
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
-    transition: background-color 0.3s, transform 0.6s, width 0.6s, left 0.6s, opacity 0.3s;
+    transition: vars.$default-content-transition;
 
     /* profile card */
     .card {
@@ -17,7 +19,7 @@
         height: fit-content;
         padding: 10px;
         box-sizing: border-box;
-        border-bottom: 1px solid #202020;
+        border-bottom: 1px solid vars.$standard-border-color;
         transition: border 0.3s;
 
         .card_header {
@@ -29,12 +31,11 @@
             gap: 10px;
 
             .icon {
+                @include vars.icon-config(var(--image), 100%);
                 aspect-ratio: 1/1;
                 height: 100%;
                 flex: 0 0 auto;
                 border-radius: 50%;
-                background-size: cover;
-                background-image: var(--image);
             }
 
             .name_holder {
@@ -71,7 +72,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, #050505, black);
+        background: vars.$card-gradient;
         z-index: -1;
         transition: filter 0.3s;
     }
@@ -91,35 +92,32 @@
             height: 100%;
             border-radius: 8px;
             cursor: pointer;
-        }
 
-        a::before,
-        a::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            border-radius: 8px;
-        }
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                border-radius: 8px;
+            }
 
-        a::before {
-            background: var(--gradient);
-        }
+            &::before {
+                background: var(--gradient);
+            }
 
-        a::after {
-            background-image: var(--image);
-            background-size: var(--size);
-            background-position: center;
-            background-repeat: no-repeat;
-            border: 2px solid rgba(0, 0, 0, 0.5);
-            transition: border 0.15s;
-        }
+            &::after {
+                @include vars.icon-config(var(--image), var(--size));
+                border: 2px solid vars.$translucent-dark;
+                transition: border 0.15s;
+            }
 
-        a:hover::after {
-            border: 2px solid white;
+            &:hover::after {
+                border: 2px solid white;
+            }
         }
     }
 
@@ -138,13 +136,12 @@
         cursor: pointer;
 
         .icon {
+            @include vars.icon-config(var(--icon), 100%);
             aspect-ratio: 1/1;
             height: calc(100% - 8px);
             margin: 4px;
             flex: 0 0 auto;
             border-radius: 50%;
-            background-size: cover;
-            background-image: var(--icon);
         }
 
         .text_holder {
@@ -168,38 +165,38 @@
                 color: rgba(255, 255, 255, 0.7);
             }
         }
-    }
 
-    .website.hide {
-        display: none;
-    }
+        &.hide {
+            display: none;
+        }
 
-    .website::before,
-    .website::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 8px;
-        box-sizing: border-box;
-    }
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
 
-    .website::before {
-        background: var(--gradient);
-        z-index: -1;
-    }
+        &::before {
+            background: var(--gradient);
+            z-index: -1;
+        }
 
-    .website::after {
-        border: 2px solid rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        transition: border 0.15s;
-    }
+        &::after {
+            border: 2px solid vars.$translucent-dark;
+            z-index: 1;
+            transition: border 0.15s;
+        }
 
-    .website.focus::after,
-    .website:hover::after {
-        border: 2px solid white;
+        &.focus::after,
+        &:hover::after {
+            border: 2px solid white;
+        }
     }
 
     /* photo filters */
@@ -221,13 +218,12 @@
 
             .option {
                 gap: 6px;
-            }
 
-            .option::before {
-                height: 100%;
-                aspect-ratio: 1/1;
-                background-repeat: no-repeat;
-                background-position: center;
+                &::before {
+                    @include vars.icon-config;
+                    height: 100%;
+                    aspect-ratio: 1/1;
+                }
             }
 
             .option.primary::before {
@@ -236,31 +232,28 @@
         }
 
         .dropdown.empty {
-            background: linear-gradient(to bottom, #151515, #040404);
+            background: vars.$dropdown-gradient;
 
             .option:hover {
-                background: linear-gradient(to bottom, #151515, #040404);
+                background: vars.$dropdown-gradient;
             }
         }
 
         .dropdown.location {
             .option.primary::before {
-                background-image: url(../icon/location.svg);
-                background-size: 80%;
+                @include vars.icon-config(url(../icon/location.svg), 80%);
             }
         }
 
         .dropdown.person {
             .option.primary::before {
-                background-image: url(../icon/people.svg);
-                background-size: 100%;
+                @include vars.icon-config(url(../icon/people.svg), 100%)
             }
         }
 
         .dropdown.time {
             .option.primary::before {
-                background-image: url(../icon/day.svg);
-                background-size: 90%;
+                @include vars.icon-config(url(../icon/day.svg), 100%);
             }
         }
 
@@ -276,7 +269,7 @@
             color: white;
             font-weight: 700;
             opacity: 1;
-            background: linear-gradient(to bottom, #151515, #040404);
+            background: vars.$dropdown-gradient;
             border-radius: 8px;
             box-sizing: border-box;
             color: rgba(255, 255, 255, 0.7);
@@ -324,21 +317,15 @@ body.light {
         }
 
         .social_row {
-            a::after {
-                border: 2px solid rgba(255, 255, 255, 0.5);
+            a {
+                &::after {
+                    border: 2px solid vars.$translucent-light;
+                }
+
+                &:hover::after {
+                    border: 2px solid vars.$translucent-dark;
+                }
             }
-
-            a:hover::after {
-                border: 2px solid rgba(0, 0, 0, 0.5);
-            }
-        }
-
-        .website::after {
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .website:hover::after {
-            border: 2px solid rgba(0, 0, 0, 0.5);
         }
 
         .card::before {
@@ -383,31 +370,31 @@ body.light {
             .dropdown {
                 position: absolute;
                 width: calc(50% - 5px);
-            }
 
-            /* this was a last ditch effort in order to get this to work */
-            .dropdown:nth-child(1) {
-                top: 0;
-                left: 0;
-            }
+                /* this was a last ditch effort in order to get this to work */
+                &:nth-child(1) {
+                    top: 0;
+                    left: 0;
+                }
 
-            .dropdown:nth-child(2) {
-                top: 0;
-                right: 0;
-            }
+                &:nth-child(2) {
+                    top: 0;
+                    right: 0;
+                }
 
-            .dropdown:nth-child(3) {
-                top: 45px;
-                left: 0;
-            }
+                &:nth-child(3) {
+                    top: 45px;
+                    left: 0;
+                }
 
-            .dropdown:nth-child(4) {
-                top: 45px;
-                right: 0;
-            }
+                &:nth-child(4) {
+                    top: 45px;
+                    right: 0;
+                }
 
-            .dropdown.open {
-                z-index: 10;
+                &.open {
+                    z-index: 10;
+                }
             }
         }
     }
@@ -415,10 +402,7 @@ body.light {
 
 @media screen and (max-width: 767px) {
     .content {
-        transition: background-color 0.3s,
-            transform 0.6s,
-            left 0.6s,
-            opacity 0.3s;
+        transition: vars.$mobile-content-transition;
 
         .card {
             .card_header {

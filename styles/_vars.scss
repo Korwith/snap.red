@@ -1,0 +1,25 @@
+/* various theming */
+$dark-solid-color: black;
+$light-solid-color: white;
+
+$translucent-dark: rgba(0, 0, 0, 0.5);
+$translucent-light: rgba(255, 255, 255, 0.5);
+
+$standard-border-color: #202020;
+
+/* content */
+$default-content-transition: background-color 0.3s, transform 0.6s, width 0.6s, left 0.6s, opacity 0.3s;
+$mobile-content-transition: background-color 0.3s, transform 0.6s, left 0.6s, opacity 0.3s;
+
+/* profile card */
+$card-gradient: linear-gradient(to bottom, #050505, black);;
+
+/* dropdowns */
+$dropdown-gradient: linear-gradient(to bottom, #151515, #040404);
+
+@mixin icon-config($icon-url: none, $icon-size: 100%) {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: $icon-url;
+    background-size: $icon-size;
+}
