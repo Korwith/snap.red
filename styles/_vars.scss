@@ -7,6 +7,9 @@ $translucent-light: rgba(255, 255, 255, 0.5);
 
 $standard-border-color: #202020;
 
+/* header/footer */
+$header-gradient: linear-gradient(to bottom, #202020, #050505);
+
 /* content */
 $default-content-transition: background-color 0.3s, transform 0.6s, width 0.6s, left 0.6s, opacity 0.3s;
 $mobile-content-transition: background-color 0.3s, transform 0.6s, left 0.6s, opacity 0.3s;

@@ -1,3 +1,5 @@
+@use 'vars';
+
 header {
     display: flex;
     justify-content: space-between;
@@ -6,7 +8,7 @@ header {
     padding: 8px;
     box-sizing: border-box;
     border-bottom: 1px solid #202020;
-    background: linear-gradient(to bottom, #202020, #050505);
+    background: vars.$header-gradient;
     overflow: visible;
     position: fixed;
     top: 0;
@@ -36,6 +38,15 @@ header {
             cursor: pointer;
             outline: none;
             transition: background-color 0.3s, color 0.3s;
+
+            &::before {
+                content: '';
+                aspect-ratio: 1/1;
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                transition: filter 0.3s;
+            }
         }
 
         .emblem {
@@ -45,56 +56,48 @@ header {
             gap: 6px;
             cursor: unset;
             transition: color 0.3s;
+
+            &::before {
+                background-image: url(../icon/logo.svg);
+                background-size: 100%;
+            }
         }
 
-        button::before,
-        .emblem::before {
-            content: '';
-            aspect-ratio: 1/1;
-            height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: filter 0.3s;
-        }
+        button {
+            &.square {
+                padding: 0;
+            }
 
-        button.square {
-            padding: 0;
-        }
+            &:hover,
+            &:focus {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
 
-        button:hover,
-        button:focus {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+            &.sidebar_toggle::before {
+                background-image: url(../icon/hamburger.svg);
+                background-size: 60%;
+            }
 
-        button.sidebar_toggle::before {
-            background-image: url(../icon/hamburger.svg);
-            background-size: 60%;
-        }
+            &.home::before {
+                background-size: 65%;
+                background-image: url(../icon/home.svg);
+            }
 
-        .emblem::before {
-            background-image: url(../icon/logo.svg);
-            background-size: 100%;
-        }
+            &.map::before {
+                background-size: 85%;
+                background-image: url(../icon/map.svg);
+            }
 
-        button.home::before {
-            background-size: 65%;
-            background-image: url(../icon/home.svg);
-        }
+            &.about::before {
+                background-size: 80%;
+                background-image: url(../icon/info.svg);
+            }
 
-        button.map::before {
-            background-size: 85%;
-            background-image: url(../icon/map.svg);
-        }
-
-        button.about::before {
-            background-size: 80%;
-            background-image: url(../icon/info.svg);
-        }
-
-        button.theme::before {
-            background-size: 80%;
-            background-image: url(../icon/theme.svg);
-            transition: transform 0.3s, filter 0.3s;
+            &.theme::before {
+                background-size: 80%;
+                background-image: url(../icon/theme.svg);
+                transition: transform 0.3s, filter 0.3s;
+            }
         }
     }
 }
@@ -131,11 +134,11 @@ body.light {
         .header_button_holder {
             button {
                 display: none;
-            }
 
-            button.theme {
-                display: flex;
-                min-width: 33px;
+                &.theme {
+                    display: flex;
+                    min-width: 33px;
+                }
             }
         }
     }
