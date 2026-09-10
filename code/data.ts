@@ -4,7 +4,6 @@ const KircicGradientConfig: HexColor[] = ['#0d8000', '#003785'];
 // Specific Colors
 const HoverColorPink: HexColor = '#da70d6';
 
-
 // Specific Icons
 const EntryIconHeart: CustomIconConfig = {
     calender: { icon: 'heart.svg', size: '74%' }

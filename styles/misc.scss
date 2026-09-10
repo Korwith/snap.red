@@ -135,6 +135,15 @@
                 filter: vars.$white-to-purple-filter;
             }
         }
+
+        &.blue {
+            color: #347aeb;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-blue-filter;
+            }
+        }
     }
 
     &:not(.open) {

@@ -77,7 +77,7 @@ interface SidebarStructure {
     }
 }
 
-type HighlightedUserColor = 'pink' | 'purple'
+type HighlightedUserColor = 'pink' | 'purple' | 'blue'
 
 interface HighlightedUserList {
     [key: string]: HighlightedUserColor;
