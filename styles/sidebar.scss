@@ -1,3 +1,5 @@
+@use 'vars';
+
 body {
     nav.sidebar {
         display: flex;
@@ -48,15 +50,14 @@ body {
                 color: white;
                 font-weight: 700;
                 order: -15;
-            }
 
-            .year_label::before {
-                background-size: 75%;
-                background-image: url(../icon/day.svg);
-            }
+                &::before {
+                    @include vars.icon-config(url(../icon/day.svg), 75%);
+                }
 
-            .year_label::after {
-                background: linear-gradient(to bottom, #333333, black)
+                &::after {
+                    background: linear-gradient(to bottom, #333333, black);
+                }
             }
 
             button {
@@ -76,6 +77,25 @@ body {
                 outline: none;
                 order: calc(var(--order) * -1);
                 transition: background-color 0.15s, color 0.15s;
+
+                &::before {
+                    background-size: 60%;
+                    background-image: url(../icon/section.svg);
+                }
+
+                &::after {
+                    background: linear-gradient(to bottom, #0A0A0A, black);
+                }
+
+                &:hover,
+                &:focus {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    color: white;
+                }
+
+                &:hover::before {
+                    opacity: 1;
+                }
             }
 
             button::before,
@@ -100,40 +120,21 @@ body {
                 border-radius: 8px;
                 opacity: 0.5;
             }
-
-            button::before {
-                background-size: 60%;
-                background-image: url(../icon/section.svg);
-            }
-
-            button::after {
-                background: linear-gradient(to bottom, #0A0A0A, black);
-            }
-
-            button:hover,
-            button:focus {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: white;
-            }
-
-            button:hover::before {
-                opacity: 1;
-            }
         }
-    }
 
-    .timeline::before {
-        content: 'Timeline (' attr(data-count) ' entries)';
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: fit-content;
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding-bottom: 4px;
-        border-bottom: 1px solid #202020;
+        &::before {
+            content: 'Timeline (' attr(data-count) ' entries)';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: fit-content;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #202020;
+        }
     }
 
     .sidebar_footer {
@@ -160,48 +161,46 @@ body {
             font-weight: 700;
             color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
         }
+    }
 
-        span::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+    &.shift {
+        nav.sidebar {
+            transform: translateX(-100%);
+        }
+    }
+
+    &.light {
+        nav.sidebar {
+            filter: invert(1);
         }
     }
 }
 
-body.shift {
-    nav.sidebar {
-        transform: translateX(-100%);
-    }
-}
-
-body.light {
-    nav.sidebar {
-        filter: invert(1);
-    }
-}
-
-
-/* light theme */
 @media screen and (max-width: 767px) {
     body {
         nav.sidebar {
-        width: 100vw;
-        height: calc(100dvh - 100px);
-        transform: translateX(-100%);
+            width: 100vw;
+            height: calc(100dvh - 100px);
+            transform: translateX(-100%);
         }
-    }
 
-    body.shift {
-        nav.sidebar {
-            transform: translateX(0);
+        &.shift {
+            nav.sidebar {
+                transform: translateX(0);
+            }
         }
     }
 }
