@@ -351,10 +351,10 @@ body.light {
                 height: 30px;
                 font-size: 0.85rem;
             }
-        }
 
-        .filter_holder.hide_results {
-            padding-bottom: 0;
+            &.hide_results {
+                padding-bottom: 0;
+            }
         }
     }
 }
