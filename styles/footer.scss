@@ -1,3 +1,5 @@
+@use 'vars';
+
 div.footer {
     display: none;
     position: fixed;
@@ -22,7 +24,7 @@ div.footer {
         height: 50px;
         padding: 8px;
         box-sizing: border-box;
-        background: linear-gradient(to bottom, #050505, #202020);
+        background: vars.$footer-gradient;
         overflow: hidden;
         transition: filter 0.3s;
     }
@@ -43,19 +45,15 @@ div.footer {
         overflow: unset;
 
         .icon, .arrow {
+            @include vars.icon-config(url(../icon/location.svg), 80%);
             aspect-ratio: 1/1;
             height: 100%;
-            background-size: 80%;
-            background-image: url(../icon/location.svg);
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
         .arrow {
+            @include vars.icon-config(url(../icon/dropdown.svg), 100%);
             width: 20px;
             height: 20px;
-            background-size: 100%;
-            background-image: url(../icon/dropdown.svg);
             transform: rotate(180deg);
         }
     }
@@ -131,23 +129,19 @@ div.footer {
     }
 
     .button.sidebar_toggle::before {
-        background-image: url(../icon/hamburger.svg);
-        background-size: 60%;
+        @include vars.icon-config(url(../icon/hamburger.svg), 60%);
     }
 
     .button.home::before {
-        background-image: url(../icon/home.svg);
-        background-size: 60%;
+        @include vars.icon-config(url(../icon/home.svg), 60%);
     }
 
     .button.map::before {
-        background-image: url(../icon/map.svg);
-        background-size: 80%;
+        @include vars.icon-config(url(../icon/map.svg), 80%);
     }
 
     .button.about::before {
-        background-image: url(../icon/info.svg);
-        background-size: 80%;
+        @include vars.icon-config(url(../icon/info.svg), 80%);
     }
 }
 
