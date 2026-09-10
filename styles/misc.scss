@@ -118,6 +118,24 @@
             display: none;
         }
 
+        &.red {
+            color: #eb3434;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-red-filter;
+            }
+        }
+
+        &.blue {
+            color: #347aeb;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-blue-filter;
+            }
+        }
+
         &.pink {
             color: #FFC0CB;
 
@@ -133,15 +151,6 @@
             &::before,
             &::after {
                 filter: vars.$white-to-purple-filter;
-            }
-        }
-
-        &.blue {
-            color: #347aeb;
-
-            &::before,
-            &::after {
-                filter: vars.$white-to-blue-filter;
             }
         }
     }
