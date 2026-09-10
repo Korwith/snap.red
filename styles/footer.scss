@@ -70,10 +70,7 @@ div.footer {
             }
 
             &::before {
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-image: var(--image-url);
+                @include vars.icon-config(var(--image-url), 100%);
                 border-top-left-radius: 12px;
                 filter: blur(2px) brightness(0.8);
                 z-index: -1;
