@@ -21,9 +21,24 @@ $card-gradient: linear-gradient(to bottom, #050505, black);
 /* dropdowns */
 $dropdown-gradient: linear-gradient(to bottom, #151515, #040404);
 
+/* mixins */
 @mixin icon-config($icon-url: none, $icon-size: 100%) {
     background-repeat: no-repeat;
     background-position: center;
     background-image: $icon-url;
     background-size: $icon-size;
 }
+
+/* animations */
+@keyframes loading_image {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* media frame animation */
+$loading_image_animation: 1.5s linear 0s infinite normal none running loading_image;
