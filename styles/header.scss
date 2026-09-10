@@ -58,8 +58,7 @@ header {
             transition: color 0.3s;
 
             &::before {
-                background-image: url(../icon/logo.svg);
-                background-size: 100%;
+                @include vars.icon-config(url(../icon/logo.svg), 100%);
             }
         }
 
@@ -74,28 +73,23 @@ header {
             }
 
             &.sidebar_toggle::before {
-                background-image: url(../icon/hamburger.svg);
-                background-size: 60%;
+                @include vars.icon-config(url(../icon/hamburger.svg), 60%);
             }
 
             &.home::before {
-                background-size: 65%;
-                background-image: url(../icon/home.svg);
+                @include vars.icon-config(url(../icon/home.svg), 65%);
             }
 
             &.map::before {
-                background-size: 85%;
-                background-image: url(../icon/map.svg);
+                @include vars.icon-config(url(../icon/map.svg), 85%);
             }
 
             &.about::before {
-                background-size: 80%;
-                background-image: url(../icon/info.svg);
+                @include vars.icon-config(url(../icon/info.svg), 80%);
             }
 
             &.theme::before {
-                background-size: 80%;
-                background-image: url(../icon/theme.svg);
+                @include vars.icon-config(url(../icon/theme.svg), 80%);
                 transition: transform 0.3s, filter 0.3s;
             }
         }
