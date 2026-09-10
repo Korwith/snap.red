@@ -127,6 +127,15 @@
             }
         }
 
+        &.orange {
+            color: #eb6834;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-orange-filter;
+            }
+        }
+
         &.blue {
             color: #347aeb;
 
@@ -136,21 +145,21 @@
             }
         }
 
-        &.pink {
-            color: #FFC0CB;
-
-            &::before,
-            &::after {
-                filter: vars.$white-to-pink-filter;
-            }
-        }
-
         &.purple {
             color: #DA70D6;
 
             &::before,
             &::after {
                 filter: vars.$white-to-purple-filter;
+            }
+        }
+        
+        &.pink {
+            color: #FFC0CB;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-pink-filter;
             }
         }
     }
