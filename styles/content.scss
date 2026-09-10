@@ -49,32 +49,32 @@
                     width: 100%;
                     height: fit-content;
                     transition: color 0.3s, text-shadow 0.3s;
-                }
 
-                span.username {
-                    color: white;
-                    font-weight: 700;
-                    font-size: 1.8rem;
-                }
+                    &.username {
+                        color: white;
+                        font-weight: 700;
+                        font-size: 1.8rem;
+                    }
 
-                span.bio {
-                    color: rgba(255, 255, 255, 0.7);
-                    font-size: 1.4rem;
+                    &.bio {
+                        color: rgba(255, 255, 255, 0.7);
+                        font-size: 1.4rem;
+                    }
                 }
             }
         }
-    }
 
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: vars.$card-gradient;
-        z-index: -1;
-        transition: filter 0.3s;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: vars.$card-gradient;
+            z-index: -1;
+            transition: filter 0.3s;
+        }
     }
 
     /* social row */
@@ -224,36 +224,36 @@
                     height: 100%;
                     aspect-ratio: 1/1;
                 }
+
+                &.primary::before {
+                    content: '';
+                }
             }
 
-            .option.primary::before {
-                content: '';
-            }
-        }
-
-        .dropdown.empty {
-            background: vars.$dropdown-gradient;
-
-            .option:hover {
+            &.empty {
                 background: vars.$dropdown-gradient;
-            }
-        }
 
-        .dropdown.location {
-            .option.primary::before {
-                @include vars.icon-config(url(../icon/location.svg), 80%);
+                .option:hover {
+                    background: vars.$dropdown-gradient;
+                }
             }
-        }
 
-        .dropdown.person {
-            .option.primary::before {
-                @include vars.icon-config(url(../icon/people.svg), 100%)
+            &.location {
+                .option.primary::before {
+                    @include vars.icon-config(url(../icon/location.svg), 80%);
+                }
             }
-        }
 
-        .dropdown.time {
-            .option.primary::before {
-                @include vars.icon-config(url(../icon/day.svg), 100%);
+            &.person {
+                .option.primary::before {
+                    @include vars.icon-config(url(../icon/people.svg), 100%)
+                }
+            }
+
+            &.time {
+                .option.primary::before {
+                    @include vars.icon-config(url(../icon/day.svg), 100%);
+                }
             }
         }
 
