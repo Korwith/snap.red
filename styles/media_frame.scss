@@ -256,17 +256,19 @@ body.light figure:hover::after {
 
 /* mobile */
 @media screen and (max-width: 767px) {
-    .photo_grid {
-        figure {
-            width: calc(50vw - 10px) !important;
-            max-height: calc(50vw - 10px) !important;
+    .media_holder {
+        &.photo_grid {
+            figure {
+                width: calc(50vw - 10px);
+                max-height: calc(50vw - 10px);
 
-            .date {
-                font-size: 0.9rem;
-            }
+                .date {
+                    font-size: 0.9rem;
+                }
 
-            figcaption {
-                font-size: 0.85rem;
+                figcaption {
+                    font-size: 0.85rem;
+                }
             }
         }
     }
