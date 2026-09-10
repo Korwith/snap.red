@@ -136,6 +136,15 @@
             }
         }
 
+        &.yellow {
+            color: #ebe234;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-yellow-filter;
+            }
+        }
+
         &.blue {
             color: #347aeb;
 
@@ -153,7 +162,7 @@
                 filter: vars.$white-to-purple-filter;
             }
         }
-        
+
         &.pink {
             color: #FFC0CB;
 
