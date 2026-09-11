@@ -79,8 +79,7 @@ body {
                 transition: background-color 0.15s, color 0.15s;
 
                 &::before {
-                    background-size: 60%;
-                    background-image: url(../icon/section.svg);
+                    @include vars.icon-config(url(../icon/section.svg), 60%);
                 }
 
                 &::after {
@@ -103,8 +102,6 @@ body {
                 content: '';
                 aspect-ratio: 1/1;
                 height: 100%;
-                background-position: center;
-                background-repeat: no-repeat;
                 transition: opacity 0.15s;
             }
 

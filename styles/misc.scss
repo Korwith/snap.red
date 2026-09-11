@@ -104,9 +104,9 @@
         }
 
         &.primary::after {
+            @include vars.icon-config(url(../icon/dropdown.svg), 100%);
             content: '';
             height: 14px;
-            background-image: url(../icon/dropdown.svg);
             transition: transform 0.15s;
         }
 

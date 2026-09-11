@@ -258,10 +258,9 @@ body {
                                 color: white;
 
                                 &::before {
+                                    @include vars.icon-config(url(../icon/location.svg), 80%);
                                     height: 26px;
                                     width: 26px;
-                                    background-image: url(../icon/location.svg);
-                                    background-size: 80%;
                                     opacity: 1;
                                 }
                             }

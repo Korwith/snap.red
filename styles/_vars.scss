@@ -22,11 +22,14 @@ $card-gradient: linear-gradient(to bottom, #050505, black);
 $dropdown-gradient: linear-gradient(to bottom, #151515, #040404);
 
 /* mixins */
-@mixin icon-config($icon-url: none, $icon-size: 100%) {
+@mixin icon-config($icon-url: default, $icon-size: 100%) {
     background-repeat: no-repeat;
     background-position: center;
-    background-image: $icon-url;
     background-size: $icon-size;
+
+    @if $icon-url != default {
+        background-image: $icon-url;
+    }
 }
 
 /* animations */

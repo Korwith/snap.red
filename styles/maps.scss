@@ -1,3 +1,5 @@
+@use 'vars';
+
 /* alters leaflet given css */
 /* uses standard css as i do not feel like decyphering the entire
 leaflet structure at this time */
@@ -138,13 +140,10 @@ body.light .marker-cluster div {
 }
 
 .page.maps button.satellite::before {
+    @include vars.icon-config(url(../icon/map.svg), 90%);
     content: '';
     height: 24px;
     width: 24px;
-    background-image: url(../icon/map.svg);
-    background-position: center;
-    background-size: 90%;
-    background-repeat: no-repeat;
 }
 
 .page.maps button.satellite.vector::before {
