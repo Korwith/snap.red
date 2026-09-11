@@ -18,7 +18,7 @@ const CameraConfigLumixTZ1: CameraInfoConfig = { name: 'Panasonic Lumix DMC-TZ1'
 
 // Misc
 const HighlightUsers: HighlightedUserList = {
-    'Brittany': 'purple'
+    'Brittany': 'pink'
 }
 
 const Data: Database = {

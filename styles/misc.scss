@@ -145,6 +145,15 @@
             }
         }
 
+        &.green {
+            color: #3aeb34;
+
+            &::before,
+            &::after {
+                filter: vars.$white-to-green-filter;
+            }
+        }
+
         &.blue {
             color: #347aeb;
 
