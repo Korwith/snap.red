@@ -1131,7 +1131,12 @@ const Data: Database = {
                 name: 'Thurmont, MD',
                 id: [8024, 8022, 8039],
                 camera: CameraConfigApple14,
-                people: ['Riley', 'Redacted A']
+                people: ['Riley', 'Redacted A'],
+                gps: {
+                    8024: [39.6124918, -77.4204103],
+                    // UNKNOWN: 8022
+                    // FIND 8039 LATER
+                }
             },
             '03/27/25': {
                 name: 'Rose Hill',
