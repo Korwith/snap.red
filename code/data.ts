@@ -72,7 +72,7 @@ const Data: Database = {
                     'DSCN5789': [39.4619473, -77.4962402],
                     'DSCN5801': [39.4613433, -77.4951715],
                     5230: [39.5156167, -77.4884283]
-                } // later
+                }
             },
             '08/30/26': {
                 name: 'Delaplane, VA',
@@ -1121,7 +1121,11 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: [8077, 8078],
                 camera: CameraConfigApple14,
-                people: ['Redacted A']
+                people: ['Redacted A'],
+                gps: {
+                    8077: [39.4130744, -77.4107736],
+                    8078: [39.4130744, -77.4107736]
+                }
             },
             '03/28/25': {
                 name: 'Thurmont, MD',
