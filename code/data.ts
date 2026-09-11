@@ -51,7 +51,11 @@ const Data: Database = {
                 camera: CameraConfigApple14,
                 hover_color: HoverColorPink,
                 custom_icons: EntryIconHeart,
-                gps: {} //later
+                gps: {
+                    5290: [39.6262884, -77.4562366],
+                    5315: [39.6280053, -77.4624874],
+                    5305: [39.6280053, -77.4624874]
+                }
             },
             '09/05/26': {
                 name: 'Gambrill State Park',
