@@ -170,6 +170,39 @@ class MainMap extends GenericMap {
     }
 }
 
+
+abstract class MapWidget {
+    manager: PageManager;
+    id: string;
+    element: HTMLElement;
+    map: MapWidgetInternal;
+
+    constructor(manager: PageManager, id: string) {
+        this.manager = manager;
+        this.id = id;
+        this.element = document.createElement('div');
+        this.element.classList.add('widget');
+        this.map = new MapWidgetInternal(manager, this.element, id);
+    }
+
+    public toggleVisibility(force?: boolean) {
+        this.element.classList.toggle('hide', !force);
+    }
+}
+
+class MapWidgetInternal extends GenericMap {
+    constructor(manager: PageManager, parent: HTMLElement, id: string) {
+        super(manager, parent, id);
+        //this.toggleSatelliteView(true);
+        this.element.setAttribute('id', id);
+    }
+
+    public setPosition(center: L.LatLngExpression, zoom?: number, options?: L.ZoomPanOptions): void {
+        this.map.invalidateSize();
+        this.map.setView(center, zoom ?? this.map.getZoom(), options);
+    }
+}
+
 class SatelliteToggleButton {
     page: PageMaps;
     element: HTMLElement;

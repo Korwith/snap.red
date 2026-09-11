@@ -43,7 +43,7 @@ class MainPhotoHolder {
     // uses arrow function because if i refer to (this) in a standard method,
     // it behaves differently than the whole class (unintended behavior)
     private keypress = (e: KeyboardEvent): void => {
-        switch(e.key) {
+        switch (e.key) {
             case 'Backspace':
             case 'Escape':
                 this.toggle(false);
@@ -135,10 +135,11 @@ class MainPhotoFigure {
     }
 
     // sets the selected photo to a specific index
-    setSelectedPhoto(index: number): void {
+    public setSelectedPhoto(index: number): void {
         if (index < 0 || index >= this.images.length) return;
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', this.images.length == 1 || index + 1 >= this.images.length);
+        this.menu.details.grid.widget.showImageMarker(index);
 
         const next: HTMLElement | undefined = this.images[index + 1];
         if (next) next.setAttribute('loading', 'eager');
@@ -154,14 +155,14 @@ class MainPhotoFigure {
     }
 
     // slides all images to display the one at the given offset from the current index
-    shiftSelectedPhoto(shift: number): void {
+    public shiftSelectedPhoto(shift: number): void {
         const index = this.selected + shift;
         if (index < 0 || index >= this.images.length) return;
         this.setSelectedPhoto(index);
     }
 
     // resets the figure and loads the photo and its image list for the given date
-    load(date: string, index?: number): void {
+    public load(date: string, index?: number): void {
         const manager: PageManager = this.menu.holder.manager;
         const photo: PhotoEntry | null = manager.fetchImageByDate(date);
         if (!photo) throw new Error('No photo found!');
@@ -173,7 +174,7 @@ class MainPhotoFigure {
     }
 
     // clears the current photo images, caption, and info overlay
-    reset(): void {
+    public reset(): void {
         this.info.reset();
         this.caption.textContent = '';
         this.selected = 0;
@@ -212,7 +213,7 @@ class FigureInfoList {
     }
 
     // populates the date and people text for the photo at the given date
-    load(date: string): void {
+    public load(date: string): void {
         const manager: PageManager = this.figure.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
         if (!entry) throw new Error('No image found at date');
@@ -231,7 +232,7 @@ class FigureInfoList {
     }
 
     // clears the date and people text
-    reset(): void {
+    public reset(): void {
         this.date.textContent = '';
         this.people.textContent = '';
     }
@@ -251,7 +252,7 @@ abstract class FigureNavigation {
         this.figure.element.appendChild(this.element);
     }
 
-    abstract onclick(e: PointerEvent): void;
+    protected abstract onclick(e: PointerEvent): void;
 }
 
 // navigation button that moves to the previous photo
@@ -447,14 +448,18 @@ class DescriptionRow extends PhotoHeaderRow {
 class PhotoDetailsGrid {
     details: MainPhotoDetails;
     photo_rows: PhotoRow[];
+    widget: AsideMapWidget;
     element: HTMLElement;
 
     // creates the grid container element
     constructor(details: MainPhotoDetails) {
         this.details = details;
         this.photo_rows = [];
+        this.widget = new AsideMapWidget(this, 'today');
+
         this.element = document.createElement('div');
         this.element.classList.add('grid_holder');
+        this.element.appendChild(this.widget.element);
         this.details.element.appendChild(this.element);
     }
 
@@ -466,6 +471,7 @@ class PhotoDetailsGrid {
         const year: string = date.slice(-2);
         if (!entry) throw new Error('No entry found at date');
         this.reset();
+        this.widget.specifyEntry(date);
 
         const location_pane: PhotoRowLocation = new PhotoRowLocation(manager, this.element, entry.name, date);
         this.photo_rows.push(location_pane);
@@ -562,6 +568,79 @@ class PhotoShareButton {
             } catch (error) {
                 manager.pushNotification('Warn', 'Your device does not support sharing.');
             }
+        }
+    }
+}
+
+// displays where the current selected photos are on a Leaflet map
+class AsideMapWidget extends MapWidget {
+    date?: string;
+    markers: L.Marker[] = []; // Track active markers to clean up old ones
+
+    constructor(grid: PhotoDetailsGrid, id: string) {
+        super(grid.details.menu.holder.manager, id);
+    }
+
+    public specifyEntry(date: string): void {
+        this.date = date;
+        let entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
+        if (!entry || !entry.gps) {
+            this.reset();
+            return;
+        }
+        this.toggleVisibility(true);
+        this.clearMarkers();
+        this.createImageMarkers(entry);
+
+        if (this.markers.length > 0) {
+            this.showImageMarker(0);
+        } else {
+            this.reset();
+        }
+    }
+
+    public reset(): void {
+        this.clearMarkers();
+        this.toggleVisibility(false);
+    }
+
+    public clearMarkers(): void {
+        for (const marker of this.markers) marker.remove();
+        this.markers = [];
+    }
+
+    public createImageMarkers(entry: PhotoEntry): void {
+        if (!this.date) return;
+
+        for (const id of entry.id) {
+            if (!entry.gps || !entry.gps[id]) continue;
+
+            const marker: L.Marker = this.map.createImageMarker(this.date!, id);
+
+            this.map.appendImageMarker(marker);
+            this.markers.push(marker);
+        }
+    }
+
+    public showImageMarker(index: number) {
+        if (!this.date) return;
+        const entry: PhotoEntry | null = this.manager.fetchImageByDate(this.date);
+        if (!entry || !entry.gps) {
+            this.reset();
+            return;
+        }
+
+        for (let i = 0; i < this.markers.length; i++) {
+            const marker: L.Marker = this.markers[i];
+            marker.getElement()?.classList.toggle('hide', index !== i);
+        }
+
+        const selected: L.Marker = this.markers[index];
+        if (selected) {
+            this.toggleVisibility(true);
+            this.map.setPosition(selected.getLatLng());
+        } else {
+            this.toggleVisibility(false);
         }
     }
 }
