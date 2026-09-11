@@ -455,7 +455,7 @@ class PhotoDetailsGrid {
     constructor(details: MainPhotoDetails) {
         this.details = details;
         this.photo_rows = [];
-        this.widget = new AsideMapWidget(this, 'today');
+        this.widget = new AsideMapWidget(this);
 
         this.element = document.createElement('div');
         this.element.classList.add('grid_holder');
@@ -575,66 +575,71 @@ class PhotoShareButton {
 // displays where the current selected photos are on a Leaflet map
 class AsideMapWidget extends MapWidget {
     date?: string;
-    markers: L.Marker[] = []; // Track active markers to clean up old ones
+    markers: L.Marker[] = []; // tracks the current set of markers
 
-    constructor(grid: PhotoDetailsGrid, id: string) {
-        super(grid.details.menu.holder.manager, id);
+    // creates a new map
+    constructor(grid: PhotoDetailsGrid) {
+        super(grid.details.menu.holder.manager, 'aside_map');
     }
 
+    // propogates the current map with entry data from a given date
     public specifyEntry(date: string): void {
         this.date = date;
         let entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
-        if (!entry || !entry.gps) {
-            this.reset();
-            return;
-        }
+        if (!entry || !entry.gps) return this.reset(); // do not continue if theres no gps data or entry is null
+        
+        // make it visible, clear the previous markers, and create the new ones
         this.toggleVisibility(true);
         this.clearMarkers();
         this.createImageMarkers(entry);
 
-        if (this.markers.length > 0) {
-            this.showImageMarker(0);
-        } else {
-            this.reset();
-        }
+        // if this entry actually has markers then show the first one
+        // otherwise hide pane
+        if (this.markers.length > 0) this.showImageMarker(0);
+        else this.reset();
     }
 
+    // clears the previous stuff and hides the widget (its hidden by default)
     public reset(): void {
         this.clearMarkers();
         this.toggleVisibility(false);
     }
 
+    // clears the previous markers
     public clearMarkers(): void {
         for (const marker of this.markers) marker.remove();
         this.markers = [];
     }
 
+    // loops through the image markers and creates a marker for each
     public createImageMarkers(entry: PhotoEntry): void {
-        if (!this.date) return;
+        // do not continue if there is no date OR there is no gps data
+        if (!this.date || !entry.gps) return;
 
         for (const id of entry.id) {
-            if (!entry.gps || !entry.gps[id]) continue;
+            if (!entry.gps[id]) continue;
 
             const marker: L.Marker = this.map.createImageMarker(this.date!, id);
-
             this.map.appendImageMarker(marker);
             this.markers.push(marker);
         }
     }
 
+    // shows a given image marker (usually called by when the user switches the selected image)
     public showImageMarker(index: number) {
-        if (!this.date) return;
+        // do not continue if we don't have the needed info
+        if (!this.date) return this.reset();
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(this.date);
-        if (!entry || !entry.gps) {
-            this.reset();
-            return;
-        }
+        if (!entry || !entry.gps) return this.reset();
 
+        // loops through all markers and hides if its not the selected one (which will be shown)
         for (let i = 0; i < this.markers.length; i++) {
             const marker: L.Marker = this.markers[i];
             marker.getElement()?.classList.toggle('hide', index !== i);
         }
 
+        // shifts the map to view the gps position of the given marker
+        // shows the map
         const selected: L.Marker = this.markers[index];
         if (selected) {
             this.toggleVisibility(true);
