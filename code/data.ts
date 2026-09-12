@@ -1178,6 +1178,12 @@ const Data: Database = {
                 id: [7883, 7877, 7885, 7906],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    7883: [39.437269, -77.388758],
+                    // UNKNOWN: 7877
+                    7885: [39.437628, -77.391431],
+                    7906: [39.436522, -77.387439],
+                }
             },
             '03/10/25': {
                 name: 'Railroad Tracks',
