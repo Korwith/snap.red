@@ -74,9 +74,10 @@ leaflet structure at this time */
     }
 
     &:not(.show) {
-        &::after {
-            pointer-events: none;
+        &, * {
+            pointer-events: none !important;
         }
+        
     }
 }
 
