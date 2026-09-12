@@ -381,6 +381,11 @@ body {
                             z-index: 999999;
                             pointer-events: none;
                         }
+
+                        .leaflet-control-attribution {
+                            border-top-left-radius: 8px;
+                            border-bottom-right-radius: 8px;
+                        }
                     }
                 }
             }

@@ -210,7 +210,7 @@ class SatelliteToggleButton {
     constructor(page: PageMaps) {
         this.page = page;
         this.element = document.createElement('button');
-        this.element.classList.add('satellite');
+        this.element.classList.add('satellite', 'leaflet-control');
         this.element.textContent = 'Satellite Map';
         L.DomEvent.disableClickPropagation(this.element);
 
