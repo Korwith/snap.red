@@ -1240,12 +1240,20 @@ const Data: Database = {
                 id: [7444, 7438, 7436],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                // i could not relocate photos
             },
             '01/19/25': {
                 name: 'Amber Meadows',
                 id: [7053, 7084, 7061, 7091, 7050],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    7053: [39.445908, -77.410564],
+                    7084: [39.445792, -77.410636],
+                    7061: [39.444681, -77.411056],
+                    7091: [39.446497, -77.410539],
+                    7050: [39.447128, -77.410769]
+                }
             },
             '01/17/25': {
                 name: 'Railroad Tracks',
