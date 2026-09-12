@@ -1216,6 +1216,11 @@ const Data: Database = {
                 id: [7760, 7759, 7757],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    7760: [39.374481, -77.412578],
+                    7759: [39.374008, -77.411972],
+                    7757: [39.374478, -77.412544]
+                }
             },
             '02/26/25': {
                 name: 'Gambrill State Park',
