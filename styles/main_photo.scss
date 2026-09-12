@@ -382,6 +382,11 @@ body {
                             pointer-events: none;
                         }
 
+                        /* this is a temporary fix */
+                        .marker {
+                            margin-top: -37.5px !important;
+                        }
+
                         .leaflet-control-attribution {
                             border-top-left-radius: 8px;
                             border-bottom-right-radius: 8px;
