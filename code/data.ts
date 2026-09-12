@@ -1224,9 +1224,16 @@ const Data: Database = {
             },
             '02/26/25': {
                 name: 'Gambrill State Park',
-                id: [7639, 7643, 7613, 7625, 7617, 7618, 7619],
+                id: [7639, 7643, 7613, 7625, 7617, 7619],
                 people: ['Redacted A', 'Edin'],
                 camera: CameraConfigApple14,
+                gps: {
+                    7639: [39.469792, -77.494289],
+                    7643: [39.469792, -77.494289],
+                    // UNKNOWN: 7613
+                    7625: [39.515014, -77.488842],
+                    // UNKNOWN: 7617, 7619
+                }
             },
             '02/10/25': {
                 name: 'Rose Hill',
