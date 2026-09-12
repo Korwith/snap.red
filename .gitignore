@@ -1,3 +1,4 @@
 code/**/*.js
 styles/**/*.css
 styles/**/*.css.map
+.vscode
