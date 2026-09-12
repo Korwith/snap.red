@@ -44,6 +44,12 @@ const Data: Database = {
         },
 
         images: {
+            '09/10/26': {
+                name: 'Downtown Frederick',
+                id: [5355, 5358, 5362],
+                people: ['Edin', 'Kevin'],
+                camera: CameraConfigApple14,
+            },
             '09/07/26': {
                 name: 'Cunningham Falls',
                 id: [5290, 5315, 5305],
