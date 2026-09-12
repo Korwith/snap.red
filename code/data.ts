@@ -49,6 +49,11 @@ const Data: Database = {
                 id: [5355, 5358, 5362],
                 people: ['Edin', 'Kevin'],
                 camera: CameraConfigApple14,
+                gps: {
+                    5355: [39.4149611, -77.409649],
+                    5358: [39.4156318, -77.4094369],
+                    5362: [39.415156, -77.408642]
+                }
             },
             '09/07/26': {
                 name: 'Cunningham Falls',
