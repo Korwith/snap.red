@@ -617,7 +617,8 @@ class AsideMapWidget extends MapWidget {
         if (!this.date || !entry.gps) return;
 
         for (const id of entry.id) {
-            if (!entry.gps[id]) continue;
+            // make sure the photo exists in gps data
+            if (!entry.gps[Number(id)] && !entry.gps[String(id)]) continue;
 
             const marker: L.Marker = this.map.createImageMarker(this.date!, id);
             this.map.appendImageMarker(marker);
