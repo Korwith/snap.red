@@ -455,7 +455,7 @@ const Data: Database = {
                 }
             },
             '07/20/26': {
-                name: 'Clerestory Park',
+                name: 'Walkersville, MD',
                 id: ['DSCN3812', 'DSCN3806', 'DSCN3796', 'DSCN3887'],
                 people: ['Ed'],
                 camera: CameraConfigNikonS7000,
