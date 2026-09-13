@@ -1,3 +1,5 @@
+@use 'vars';
+
 body {
     .page {
         position: fixed;
@@ -7,7 +9,7 @@ body {
         height: calc(100vh - 50px);
         opacity: 0;
         pointer-events: none;
-        transition: transform 0.3s, width 0.3s, left 0.3s, opacity 0.3s;
+        transition: vars.$default-content-transition;
 
         &.show {
             opacity: 1;
@@ -29,6 +31,7 @@ body {
             left: 0;
             width: 100vw;
             height: calc(100dvh - 100px);
+            transition: vars.$mobile-content-transition;
         }
 
         &.shift {
