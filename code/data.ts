@@ -455,7 +455,7 @@ const Data: Database = {
                 }
             },
             '07/20/26': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: ['DSCN3812', 'DSCN3806', 'DSCN3796', 'DSCN3887'],
                 people: ['Ed'],
                 camera: CameraConfigNikonS7000,
@@ -496,7 +496,7 @@ const Data: Database = {
                 }
             },
             '07/13/26': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: ['3298', '3283', '3289', '3290', '3297', '3310'],
                 camera: CameraConfigApple14,
                 gps: {
@@ -572,7 +572,7 @@ const Data: Database = {
                 }
             },
             '05/31/26': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [2665, 2668, 2673],
                 camera: CameraConfigApple14,
                 gps: {
@@ -724,7 +724,7 @@ const Data: Database = {
                 }
             },
             '03/09/26': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: ['DSCN2512', 'DSCN2530', 'DSCN2524'],
                 camera: CameraConfigNikonS7000,
                 gps: {
@@ -1186,7 +1186,7 @@ const Data: Database = {
                 }
             },
             '03/10/25': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [7838, 7844, 7854, 7839, 7841],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
@@ -1199,7 +1199,7 @@ const Data: Database = {
                 }
             },
             '03/08/25': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [7819, 7784, 7800, 7816, 7795, 7813],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
@@ -1256,7 +1256,7 @@ const Data: Database = {
                 }
             },
             '01/17/25': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [10004, 10005, 10001, 10000, 10002, 10003],
                 people: ['Riley'],
                 camera: CameraConfigApple14,
@@ -1333,7 +1333,7 @@ const Data: Database = {
                 camera: CameraConfigApple14,
             },
             '10/27/24': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [5209, 5219, 5212, 5196],
                 camera: CameraConfigApple14,
             },
@@ -1513,7 +1513,7 @@ const Data: Database = {
                 camera: CameraConfigApple14,
             },
             '06/23/24': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 id: [1850, 1848, 1853, 1840, 1843],
                 camera: CameraConfigApple14,
             },
@@ -1524,7 +1524,7 @@ const Data: Database = {
                 camera: CameraConfigApple14,
             },
             '06/13/24': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 people: ['Riley', 'Redacted A'],
                 id: [1404, 1400],
                 camera: CameraConfigApple14,
@@ -1542,7 +1542,7 @@ const Data: Database = {
                 camera: CameraConfigApple14,
             },
             '06/09/24': {
-                name: 'Railroad Tracks',
+                name: 'Clerestory Park',
                 people: ['Redacted A'],
                 id: [1175, 1186, 1193, 1198, 1199, 1203, 1209],
                 camera: CameraConfigApple14,
