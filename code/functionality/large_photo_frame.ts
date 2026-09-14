@@ -1,32 +1,12 @@
 // overlay container that shows a full-size photo and its detail panel
-class MainPhotoHolder {
-    manager: PageManager;
-    element: HTMLElement;
-    menu: MainPhotoMenu;
-    selected: PhotoEntry | null;
+class LargePhotoHolder extends LargeSelectionFrame {
+    menu: LargePhotoMenu;
 
     // creates the holder element and its photo menu
     constructor(manager: PageManager) {
-        this.manager = manager;
-        this.element = document.createElement('div');
+        super(manager);
         this.element.classList.add('main_photo_holder');
-        this.menu = new MainPhotoMenu(this);
-        this.selected = null;
-        manager.element.appendChild(this.element);
-    }
-
-    // shows or hides the overlay
-    public toggle(force?: boolean): void {
-        const shown: boolean = this.element.classList.toggle('show', force);
-
-        // hooks the keypress function, url data, and footer button
-        if (shown) {
-            document.addEventListener('keydown', this.keypress);
-        } else {
-            this.manager.url_handler?.setState(this.manager.user);
-            this.manager.footer.toggleSelectedVisible(true);
-            document.removeEventListener('keydown', this.keypress);
-        }
+        this.menu = new LargePhotoMenu(this);
     }
 
     // loads the photo and its details for the given date and shows the overlay
@@ -40,9 +20,7 @@ class MainPhotoHolder {
     }
 
     // handles keystrokes relating to the main photo holder
-    // uses arrow function because if i refer to (this) in a standard method,
-    // it behaves differently than the whole class (unintended behavior)
-    private keypress = (e: KeyboardEvent): void => {
+    protected keypress = (e: KeyboardEvent): void => {
         switch (e.key) {
             case 'Backspace':
             case 'Escape':
@@ -59,44 +37,37 @@ class MainPhotoHolder {
 }
 
 // article element containing the main photo figure and its detail sidebar
-class MainPhotoMenu {
-    holder: MainPhotoHolder;
-    element: HTMLElement;
-    figure: MainPhotoFigure;
+class LargePhotoMenu extends LargeSelectionMenu {
+    figure: LargePhotoFigure;
     details: MainPhotoDetails;
 
     // creates the menu article with figure and details panels
-    constructor(holder: MainPhotoHolder) {
-        this.holder = holder;
-        this.element = document.createElement('article');
-        this.element.classList.add('menu');
-        this.figure = new MainPhotoFigure(this);
+    constructor(holder: LargePhotoHolder) {
+        super(holder);
+        this.figure = new LargePhotoFigure(this);
         this.details = new MainPhotoDetails(this);
-        this.holder.element.appendChild(this.element);
     }
 }
 
 // displays the full-size photo with navigation arrows, info, and a close button
-class MainPhotoFigure {
-    menu: MainPhotoMenu;
-    element: HTMLElement;
-    info: FigureInfoList;
+class LargePhotoFigure extends LargeSelectionFigure {
+    declare menu: LargePhotoMenu;
+    declare info: FigureInfoList;
     left: FigureNavigation;
     right: FigureNavigation;
     close: FigureCloseButton;
     caption: HTMLElement;
 
-    images: Array<HTMLElement>
+    images: Array<HTMLElement>;
     selected: number;
 
     // builds the figure with info overlay, navigation buttons, and close button
-    constructor(menu: MainPhotoMenu) {
-        this.menu = menu;
-        this.element = document.createElement('figure');
+    constructor(menu: LargePhotoMenu) {
+        super(menu);
         this.info = new FigureInfoList(this);
         this.left = new FigureNavigationLeft(this);
         this.right = new FigureNavigationRight(this);
-        this.close = new FigureCloseButton(this.menu.holder, this);
+        this.close = new FigureCloseButton(this.menu.holder as LargePhotoHolder, this);
         this.caption = document.createElement('figcaption');
 
         this.images = [];
@@ -125,7 +96,7 @@ class MainPhotoFigure {
         for (const index in list) {
             const id: string | number = list[index];
             const img: HTMLElement = document.createElement('img');
-            img.setAttribute('loading', parseInt(index) == 0 ? 'eager' : 'lazy');
+            img.setAttribute('loading', parseInt(index) === 0 ? 'eager' : 'lazy');
             img.setAttribute('id', id.toString());
             img.setAttribute('src', `../media/${user}/IMG_${id}.jpg`);
             img.style.left = `${parseInt(index) * 100}%`;
@@ -138,7 +109,7 @@ class MainPhotoFigure {
     public setSelectedPhoto(index: number): void {
         if (index < 0 || index >= this.images.length) return;
         this.element.classList.toggle('hide_left', index - 1 < 0);
-        this.element.classList.toggle('hide_right', this.images.length == 1 || index + 1 >= this.images.length);
+        this.element.classList.toggle('hide_right', this.images.length === 1 || index + 1 >= this.images.length);
         this.menu.details.grid.widget.showImageMarker(index);
 
         const next: HTMLElement | undefined = this.images[index + 1];
@@ -151,7 +122,6 @@ class MainPhotoFigure {
         }
 
         this.selected = index;
-
     }
 
     // slides all images to display the one at the given offset from the current index
@@ -190,16 +160,14 @@ class MainPhotoFigure {
 }
 
 // overlay panel showing the date and featured people for the current photo
-class FigureInfoList {
-    figure: MainPhotoFigure;
-    element: HTMLElement;
+class FigureInfoList extends SelectionInfoList {
+    declare figure: LargePhotoFigure;
     date: HTMLElement;
     people: HTMLElement;
 
     // creates the info overlay with date and people spans
-    constructor(figure: MainPhotoFigure) {
-        this.figure = figure;
-        this.element = document.createElement('div');
+    constructor(figure: LargePhotoFigure) {
+        super(figure);
         this.date = document.createElement('span');
         this.people = document.createElement('span');
 
@@ -240,11 +208,11 @@ class FigureInfoList {
 
 // abstract base for a left or right photo navigation button
 abstract class FigureNavigation {
-    figure: MainPhotoFigure;
+    figure: LargePhotoFigure;
     element: HTMLElement;
 
     // creates the navigation button and attaches it to the figure
-    constructor(main_figure: MainPhotoFigure) {
+    constructor(main_figure: LargePhotoFigure) {
         this.figure = main_figure;
         this.element = document.createElement('button');
         this.element.classList.add('nav');
@@ -257,13 +225,11 @@ abstract class FigureNavigation {
 
 // navigation button that moves to the previous photo
 class FigureNavigationLeft extends FigureNavigation {
-    // creates the left navigation button
-    constructor(main_figure: MainPhotoFigure) {
+    constructor(main_figure: LargePhotoFigure) {
         super(main_figure);
         this.element.classList.add('left');
     }
 
-    // shifts the selected photo one step to the left
     onclick(e: PointerEvent) {
         this.figure.shiftSelectedPhoto(-1);
     }
@@ -271,32 +237,25 @@ class FigureNavigationLeft extends FigureNavigation {
 
 // navigation button that moves to the next photo
 class FigureNavigationRight extends FigureNavigation {
-    // creates the right navigation button
-    constructor(main_figure: MainPhotoFigure) {
+    constructor(main_figure: LargePhotoFigure) {
         super(main_figure);
         this.element.classList.add('right');
     }
 
-    // shifts the selected photo one step to the right
     onclick(e: PointerEvent) {
         this.figure.shiftSelectedPhoto(1);
     }
 }
 
 // side panel showing related photo rows for the currently viewed photo
-class MainPhotoDetails {
-    menu: MainPhotoMenu;
-    element: HTMLElement;
-    header: PhotoDetailsHeader;
-    grid: PhotoDetailsGrid;
+class MainPhotoDetails extends LargeSelectionDetails {
+    declare menu: LargePhotoMenu;
 
     // creates the aside panel with a header and photo row grid
-    constructor(menu: MainPhotoMenu) {
-        this.menu = menu;
-        this.element = document.createElement('aside');
+    constructor(menu: LargePhotoMenu) {
+        super(menu);
         this.header = new PhotoDetailsHeader(this);
         this.grid = new PhotoDetailsGrid(this);
-
         this.menu.element.appendChild(this.element);
     }
 
@@ -310,12 +269,12 @@ class MainPhotoDetails {
     }
 
     // delegates to loadPhotoDetails for the given date
-    load(date: string): void {
+    public load(date: string): void {
         this.loadPhotoDetails(date);
     }
 
     // clears the header text and resets the photo row grid
-    reset(): void {
+    public reset(): void {
         this.header.element.textContent = '';
         this.grid.reset();
     }
@@ -382,7 +341,7 @@ class MainHeaderRow extends PhotoHeaderRow {
         this.element.appendChild(this.location);
 
         this.share = new PhotoShareButton(this);
-        this.close = new DetailsCloseButton(header.details.menu.holder, this);
+        this.close = new DetailsCloseButton(header.details.menu.holder as LargePhotoHolder, this);
     }
 
     public setText(text: string): void {
@@ -496,16 +455,17 @@ class PhotoDetailsGrid {
     // removes all photo rows from the grid
     reset(): void {
         for (const row of this.photo_rows) row.remove();
+        this.photo_rows = [];
     }
 }
 
 // abstract base for a button that closes the main photo overlay
 abstract class HolderCloseButton {
-    holder: MainPhotoHolder;
+    holder: LargeSelectionFrame;
     element: HTMLElement;
 
     // creates the close button and appends it to the given parent element
-    constructor(holder: MainPhotoHolder, parent: HTMLElement) {
+    constructor(holder: LargeSelectionFrame, parent: HTMLElement) {
         this.holder = holder;
         this.element = document.createElement('button');
         this.element.classList.add('close');
@@ -521,16 +481,14 @@ abstract class HolderCloseButton {
 
 // close button placed inside the main photo figure
 class FigureCloseButton extends HolderCloseButton {
-    // creates the close button inside the figure element
-    constructor(holder: MainPhotoHolder, figure: MainPhotoFigure) {
+    constructor(holder: LargePhotoHolder, figure: LargePhotoFigure) {
         super(holder, figure.element);
     }
 }
 
 // close button placed inside the details panel header
 class DetailsCloseButton extends HolderCloseButton {
-    // creates the close button inside the details header element
-    constructor(holder: MainPhotoHolder, row: MainHeaderRow) {
+    constructor(holder: LargePhotoHolder, row: MainHeaderRow) {
         super(holder, row.element);
     }
 }
@@ -560,10 +518,10 @@ class PhotoShareButton {
                 title: selected.name,
                 text: `Check out ${selected.name} on Snapshot!`,
                 url: window.location.href,
-            })
+            });
         } catch (error) {
             try {
-                navigator.clipboard.writeText(window.location.href)
+                navigator.clipboard.writeText(window.location.href);
                 manager.pushNotification('Info', 'Copied to clipboard!');
             } catch (error) {
                 manager.pushNotification('Warn', 'Your device does not support sharing.');
@@ -575,49 +533,39 @@ class PhotoShareButton {
 // displays where the current selected photos are on a Leaflet map
 class AsideMapWidget extends MapWidget {
     date?: string;
-    markers: L.Marker[] = []; // tracks the current set of markers
+    markers: L.Marker[] = [];
 
-    // creates a new map
     constructor(grid: PhotoDetailsGrid) {
         super(grid.details.menu.holder.manager, 'aside_map');
     }
 
-    // propogates the current map with entry data from a given date
     public specifyEntry(date: string): void {
         this.date = date;
         let entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
-        if (!entry || !entry.gps) return this.reset(); // do not continue if theres no gps data or entry is null
-        
-        // make it visible, clear the previous markers, and create the new ones
+        if (!entry || !entry.gps) return this.reset();
+
         this.toggleVisibility(true);
         this.clearMarkers();
         this.createImageMarkers(entry);
 
-        // if this entry actually has markers then show the first one
-        // otherwise hide pane
         if (this.markers.length > 0) this.showImageMarker(0);
         else this.reset();
     }
 
-    // clears the previous stuff and hides the widget (its hidden by default)
     public reset(): void {
         this.clearMarkers();
         this.toggleVisibility(false);
     }
 
-    // clears the previous markers
     public clearMarkers(): void {
         for (const marker of this.markers) marker.remove();
         this.markers = [];
     }
 
-    // loops through the image markers and creates a marker for each
     public createImageMarkers(entry: PhotoEntry): void {
-        // do not continue if there is no date OR there is no gps data
         if (!this.date || !entry.gps) return;
 
         for (const id of entry.id) {
-            // make sure the photo exists in gps data
             if (!entry.gps[Number(id)] && !entry.gps[String(id)]) continue;
 
             const marker: L.Marker = this.map.createImageMarker(this.date!, id);
@@ -626,21 +574,16 @@ class AsideMapWidget extends MapWidget {
         }
     }
 
-    // shows a given image marker (usually called by when the user switches the selected image)
     public showImageMarker(index: number) {
-        // do not continue if we don't have the needed info
         if (!this.date) return this.reset();
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(this.date);
         if (!entry || !entry.gps) return this.reset();
 
-        // loops through all markers and hides if its not the selected one (which will be shown)
         for (let i = 0; i < this.markers.length; i++) {
             const marker: L.Marker = this.markers[i];
             marker.getElement()?.classList.toggle('hide', index !== i);
         }
 
-        // shifts the map to view the gps position of the given marker
-        // shows the map
         const selected: L.Marker = this.markers[index];
         if (selected) {
             this.toggleVisibility(true);

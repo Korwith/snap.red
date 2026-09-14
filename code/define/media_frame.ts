@@ -385,6 +385,6 @@ class MediaFrameVideo extends MediaFrame {
     // handles click on the video frame
     onclick(e: PointerEvent): void {
         if (!this.link) return;
-        window.open(this.link, '_blank');
+        // window.open(this.link, '_blank');
     }
 }

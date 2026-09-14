@@ -17,7 +17,8 @@ class PageManager {
     maps: PageMaps;
     about: PageAbout;
 
-    main_photo: MainPhotoHolder;
+    main_photo: LargePhotoHolder;
+    main_video: LargeVideoHolder;
     notifications: NotificationManager;
     url_handler?: URLHandler;
 
@@ -43,7 +44,8 @@ class PageManager {
         this.maps = new PageMaps(this);
         this.about = new PageAbout(this);
 
-        this.main_photo = new MainPhotoHolder(this);
+        this.main_photo = new LargePhotoHolder(this);
+        this.main_video = new LargeVideoHolder(this);
         this.url_handler = new URLHandler(this);
     }
 
@@ -83,12 +85,21 @@ class PageManager {
     // opens the full-size photo viewer for the given date
     public openImageByDate(date: string, user?: string, index?: number): void {
         user ??= this.user;
+        this.main_video.toggle(false);
         this.main_photo.openImageByDate(date, user, index);
         this.url_handler?.setState(this.user, date);
 
         // sends it over to the footer for the "currently opened" pane
         this.footer.assignSelectedEntry(date);
         this.footer.toggleSelectedVisible(false);
+    }
+
+    // opens the video viewer on video frames
+    public openVideoByDate(date: string, user?: string) {
+        user ??= this.user;
+        this.main_video.openVideoByDate(date, user);
+        this.main_photo.toggle(false);
+
     }
 
     // returns an array of all user names in the database
