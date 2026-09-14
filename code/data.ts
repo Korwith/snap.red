@@ -11,9 +11,12 @@ const EntryIconHeart: CustomIconConfig = {
 
 // Specific Cameras
 const CameraConfigSamsungS20: CameraInfoConfig = { name: 'Samsung Galaxy S20', mp: 50 };
-const CameraConfigNikonS7000: CameraInfoConfig = { name: 'Nikon Coolpix S7000', mp: 16 }
+const CameraConfigNikonS9100: CameraInfoConfig = { name: 'Nikon Coolpix S9100', mp: 12.1 };
+const CameraConfigNikonS7000: CameraInfoConfig = { name: 'Nikon Coolpix S7000', mp: 16 };
+const CameraConfigApple17Pro: CameraInfoConfig = { name: 'iPhone 17 Pro', mp: 48 };
 const CameraConfigApple14: CameraInfoConfig = { name: 'iPhone 14', mp: 12 };
 const CameraConfigApple13: CameraInfoConfig = { name: 'iPhone 13', mp: 12 };
+const CameraConfigApple12Pro: CameraInfoConfig = {name: 'iPhone 12 Pro', mp: 12};
 const CameraConfigLumixTZ1: CameraInfoConfig = { name: 'Panasonic Lumix DMC-TZ1', mp: 5 };
 
 // Misc
@@ -621,7 +624,7 @@ const Data: Database = {
                 }
             },
             '05/11/26': {
-                name: 'New York City',
+                name: 'New York City, NY',
                 id: ['DSCN3200', 'DSCN3185', 'DSCN3180', 'DSCN3174', 'DSCN3172', 'DSCN2455'],
                 people: ['Redacted A'],
                 camera: CameraConfigNikonS7000,
@@ -1954,9 +1957,21 @@ const Data: Database = {
         },
 
         images: {
+            '09/06/26': {
+                name: 'Queens, NY',
+                id: [1127, 1308,  "DSCN2230", 1128, 1164, "DSCN2210"],
+                camera: CameraConfigNikonS9100
+            },
+            '09/05/26': {
+                name: 'New York City, NY',
+                id: [1134, 1166, 'DSCN2203'],
+                people: ['German', 'Kayci', 'Kayla'],
+                camera: CameraConfigNikonS9100
+            },
             '06/21/24': {
                 name: 'Downtown Frederick',
-                id: [1020070, 1020063, 1020060, 1020054, 1020051, 1020048, 1020047, 1020103, 1020101]
+                id: [1020070, 1020063, 1020060, 1020054, 1020051, 1020048, 1020047, 1020103, 1020101],
+                camera: CameraConfigApple12Pro
             }
         }
     }

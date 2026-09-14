@@ -16,6 +16,6 @@ class LargeVideoHolder extends LargeSelectionFrame {
             case 'Escape':
                 this.toggle(false);
                 break;
-        } // add more later
+        } // add more latert
     }
 }
