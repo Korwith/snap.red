@@ -16,7 +16,7 @@ const CameraConfigNikonS7000: CameraInfoConfig = { name: 'Nikon Coolpix S7000', 
 const CameraConfigApple17Pro: CameraInfoConfig = { name: 'iPhone 17 Pro', mp: 48 };
 const CameraConfigApple14: CameraInfoConfig = { name: 'iPhone 14', mp: 12 };
 const CameraConfigApple13: CameraInfoConfig = { name: 'iPhone 13', mp: 12 };
-const CameraConfigApple12Pro: CameraInfoConfig = {name: 'iPhone 12 Pro', mp: 12};
+const CameraConfigApple12Pro: CameraInfoConfig = { name: 'iPhone 12 Pro', mp: 12 };
 const CameraConfigLumixTZ1: CameraInfoConfig = { name: 'Panasonic Lumix DMC-TZ1', mp: 5 };
 
 // Misc
@@ -1959,7 +1959,7 @@ const Data: Database = {
         images: {
             '09/06/26': {
                 name: 'Queens, NY',
-                id: [1127, 1308,  "DSCN2230", 1128, 1164, "DSCN2210", "DSCN2229","DSCN2255","DSCN2259","DSCN2262"],
+                id: [1127, 1308, "DSCN2230", 1128, 1164, "DSCN2210", "DSCN2229", "DSCN2255", "DSCN2259", "DSCN2262"],
                 camera: CameraConfigNikonS9100
             },
             '09/05/26': {
