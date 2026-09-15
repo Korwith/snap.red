@@ -1745,7 +1745,7 @@ const Data: Database = {
             '06/26/23': {
                 name: 'Downtown Frederick',
                 people: ['Redacted A'],
-                id: [5935, 5947, 5949, 5976],
+                id: [5935, 5949, 5976],
                 camera: { name: 'iPhone 13', mp: 12 },
             },
             '06/19/23': {

@@ -145,9 +145,7 @@ class PhotoRowInternal extends PhotoGrid {
 
     scrolled(): void {
         const distance: number = this.element.scrollWidth - (this.element.scrollLeft + this.element.clientWidth);
-        if (distance <= 100) {
-            this.row.loadPhotoBatch();
-        }
+        if (distance <= 100) this.row.loadPhotoBatch();
     }
 
     // removes all photos and detaches the grid element
