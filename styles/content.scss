@@ -252,7 +252,7 @@
 
             &.time {
                 .option.primary::before {
-                    @include vars.icon-config(url(../icon/day.svg), 100%);
+                    @include vars.icon-config(url(../icon/day.svg), 80%);
                 }
             }
         }
