@@ -47,6 +47,15 @@ const Data: Database = {
         },
 
         images: {
+            '09/14/26': {
+                name: 'Gambrill State Park',
+                id: [5552, 5611, 5585, 5548, 5555, 5561, 5565, 5568, 5569, 5571],
+                people: ['Brittany'],
+                camera: CameraConfigApple14,
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
+                gps: {} // later
+            },
             '09/10/26': {
                 name: 'Downtown Frederick',
                 id: [5355, 5358, 5362],
