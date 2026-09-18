@@ -66,7 +66,7 @@ interface VideoDatabase {
 interface VideoEntry {
     name: string;
     thumbnail: string;
-    link: string;
+    id: string;
 }
 
 interface SidebarStructure {

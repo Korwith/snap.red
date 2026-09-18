@@ -279,7 +279,7 @@ class ProfileCardWebsite {
     }
 
     // populates and shows the website card if the user has a site entry
-    load(): void {
+    public load(): void {
         const website: ProfileWebsiteEntry | null = this.fetchSite();
 
         if (!website) return this.toggle(false);
@@ -293,13 +293,13 @@ class ProfileCardWebsite {
     }
 
     // shows or hides the website card element
-    toggle(force?: boolean): void {
+    public toggle(force?: boolean): void {
         this.reset();
         this.element.classList.toggle('hide', force != null ? !force : true);
     }
 
     // clears the icon and text content of the website card
-    reset(): void {
+    public reset(): void {
         this.icon.style.removeProperty('--image');
         this.site_name.textContent = '';
         this.site_bio.textContent = '';
@@ -337,7 +337,7 @@ class FilterHolder {
     }
 
     // reloads all filter dropdowns and clears the results count
-    reset(): void {
+    public reset(): void {
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
             dropdown.load();
@@ -347,7 +347,7 @@ class FilterHolder {
     }
 
     // applies all active filters to a photo database and returns the matches
-    fetchFilteredPhotos(photos: PhotoDatabase): PhotoDatabase {
+    public fetchFilteredPhotos(photos: PhotoDatabase): PhotoDatabase {
         let filtered_photos: PhotoDatabase = photos;
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
@@ -368,7 +368,7 @@ class FilterHolder {
     }
 
     // refreshes each dropdown's option visibility based on cross-filter context
-    updateAllVisibility(): void {
+    public updateAllVisibility(): void {
         const allPhotos: PhotoDatabase = this.content.manager.fetchUserImages(null);
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
@@ -378,7 +378,7 @@ class FilterHolder {
     }
 
     // updates the results count text and shows or hides it based on filter activity
-    handleResultsText(): void {
+    public handleResultsText(): void {
         const photos: PhotoDatabase = this.content.manager.fetchUserImages(null);
         const results: PhotoDatabase = this.fetchFilteredPhotos(photos);
         const total: number = Object.keys(results).length;
@@ -388,7 +388,7 @@ class FilterHolder {
     }
 
     // returns true if any filter dropdown has a non-placeholder selection
-    isActive(): boolean {
+    public isActive(): boolean {
         for (const key in this.list) {
             const dropdown: FilterDropdown = this.list[key];
             if (dropdown.isActive()) return true;
@@ -456,7 +456,7 @@ class FilterDropdownLocation extends FilterDropdown {
     }
 
     // populates the dropdown with unique location names from the user's photos
-    load(): void {
+    public load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
         const images: PhotoDatabase = manager.fetchUserImages(null);
@@ -473,7 +473,7 @@ class FilterDropdownLocation extends FilterDropdown {
     }
 
     // returns only photos whose location matches the selected option
-    filter(photos: PhotoDatabase): PhotoDatabase {
+    public filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const match: PhotoDatabase = {};
 
@@ -487,7 +487,7 @@ class FilterDropdownLocation extends FilterDropdown {
     }
 
     // hides location options not present in the available photo set
-    updateVisibility(availablePhotos: PhotoDatabase): void {
+    public updateVisibility(availablePhotos: PhotoDatabase): void {
         const validNames: Set<string> = new Set<string>();
         for (const date in availablePhotos) validNames.add(availablePhotos[date].name);
         for (let i = 1; i < this.options.length; i++) {
@@ -509,7 +509,7 @@ class FilterDropdownPerson extends FilterDropdown {
     }
 
     // populates the dropdown with valid people from the user's photos
-    load(): void {
+    public load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
         const images: PhotoDatabase = manager.fetchUserImages(null);
@@ -534,7 +534,7 @@ class FilterDropdownPerson extends FilterDropdown {
     }
 
     // returns only photos that feature the selected person
-    filter(photos: PhotoDatabase): PhotoDatabase {
+    public filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const match: PhotoDatabase = {};
 
@@ -550,7 +550,7 @@ class FilterDropdownPerson extends FilterDropdown {
     }
 
     // hides person options not present in the available photo set
-    updateVisibility(availablePhotos: PhotoDatabase): void {
+    public updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_people: Set<string> = new Set<string>();
         for (const date in availablePhotos) {
             for (const person of availablePhotos[date].people ?? []) valid_people.add(person);
@@ -587,7 +587,7 @@ class FilterDropdownMonth extends FilterDropdownTime {
     }
 
     // populates the dropdown with all twelve months
-    load(): void {
+    public load(): void {
         this.clear();
         this.addPlaceholder('Month');
 
@@ -599,7 +599,7 @@ class FilterDropdownMonth extends FilterDropdownTime {
     }
 
     // returns only photos taken in the selected month
-    filter(photos: PhotoDatabase): PhotoDatabase {
+    public filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.primary || !this.isActive()) return photos;
         const month: string | null = this.primary.element.getAttribute('month');
         if (!month) return photos;
@@ -616,7 +616,7 @@ class FilterDropdownMonth extends FilterDropdownTime {
     }
 
     // hides month options not represented in the available photo set
-    updateVisibility(availablePhotos: PhotoDatabase): void {
+    public updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_months: Set<string> = new Set<string>();
         for (const date in availablePhotos) valid_months.add(date.slice(0, 2));
         for (let i = 1; i < this.options.length; i++) {
@@ -637,7 +637,7 @@ class FilterDropdownYear extends FilterDropdownTime {
     }
 
     // populates the dropdown with unique years from the user's photos
-    load(): void {
+    public load(): void {
         this.clear();
         const manager: PageManager = this.holder.content.manager;
         this.addPlaceholder('Year');
@@ -656,7 +656,7 @@ class FilterDropdownYear extends FilterDropdownTime {
     }
 
     // returns only photos taken in the selected year
-    filter(photos: PhotoDatabase): PhotoDatabase {
+    public filter(photos: PhotoDatabase): PhotoDatabase {
         if (!this.isActive() || !this.primary) return photos;
         const year: string | null = this.primary.element.getAttribute('year');
         if (!year) return photos;
@@ -673,7 +673,7 @@ class FilterDropdownYear extends FilterDropdownTime {
     }
 
     // hides year options not represented in the available photo set
-    updateVisibility(availablePhotos: PhotoDatabase): void {
+    public updateVisibility(availablePhotos: PhotoDatabase): void {
         const valid_years: Set<string> = new Set<string>();
         for (const date in availablePhotos) valid_years.add(date.slice(-2));
         for (let i = 1; i < this.options.length; i++) {

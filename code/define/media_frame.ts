@@ -355,7 +355,8 @@ class MediaFramePhoto extends MediaFrame {
 
 // a media frame placeholder for video entries
 class MediaFrameVideo extends MediaFrame {
-    link?: string;
+    id?: string;
+    video?: VideoEntry;
 
     // creates the video frame
     constructor(holder: MediaHolder, date: string) {
@@ -370,7 +371,8 @@ class MediaFrameVideo extends MediaFrame {
         if (!user_videos) throw new Error('No videos found for user');
         const entry: VideoEntry | null = user_videos[this.date];
         if (!entry) throw new Error('Video does not exist at date');
-        this.link = entry.link;
+        this.id = entry.id;
+        this.video = entry;
 
         this.element.setAttribute('title', entry.name);
         this.image.setAttribute('loading', 'lazy');
@@ -382,7 +384,8 @@ class MediaFrameVideo extends MediaFrame {
 
     // handles click on the video frame
     onclick(e: PointerEvent): void {
-        if (!this.link) return;
+        if (!this.id || !this.video) return;
+        this.holder.manager.openVideoByName(this.video.name);
         // window.open(this.link, '_blank');
     }
 }

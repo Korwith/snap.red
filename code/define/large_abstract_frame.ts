@@ -57,8 +57,6 @@ abstract class LargeSelectionFigure {
         this.element = document.createElement('figure');
     }
 
-    public abstract shiftSelectedPhoto(shift: number): void;
-    public abstract setSelectedPhoto(index: number): void;
     public abstract load(date: string, index?: number): void;
     public abstract reset(): void;
 }

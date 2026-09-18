@@ -95,9 +95,9 @@ class PageManager {
     }
 
     // opens the video viewer on video frames
-    public openVideoByDate(date: string, user?: string) {
+    public openVideoByName(name: string, user?: string) {
         user ??= this.user;
-        this.main_video.openVideoByDate(date, user);
+        this.main_video.openVideoByName(name, user);
         this.main_photo.toggle(false);
 
     }
@@ -158,6 +158,21 @@ class PageManager {
     public fetchImageByDate(date: string, user?: string): PhotoEntry | null {
         user ??= this.user;
         return this.fetchUserImages(null, user)[date];
+    }
+
+    // returns a single video entry by its title
+    public fetchVideoByName(name: string, user?: string): VideoEntry | null {
+        user ??= this.user;
+        const videos: VideoDatabase | null = this.fetchUserVideos(user);
+        if (!videos) throw new Error('This user has no videos array');
+        
+        for (const date in videos) {
+            const entry: VideoEntry = videos[date];
+            if (entry.name != name) continue;
+            return entry;
+        }
+
+        return null;
     }
 
     // returns all photos taken in the given year

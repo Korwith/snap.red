@@ -1,7 +1,7 @@
 @use 'vars';
 
 body {
-    .main_photo_holder {
+    .large_selection_frame {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -15,6 +15,196 @@ body {
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s, transform 0.6s;
+
+        &.main_video_holder {
+            figure.main {
+                &::after {
+                    content: unset;
+                }
+
+                .video_player_holder {
+                    display: flex;
+                    flex-direction: column;
+                    height: fit-content;
+                    min-height: 100%;
+                    min-width: unset;
+                    background: linear-gradient(to bottom, #151515, #040404);
+
+                    iframe {
+                        aspect-ratio: 16/9;
+                        width: 100%;
+                        outline: none;
+                        border: 0;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    > span {
+                        width: 100%;
+                        height: 45px;
+                        min-height: fit-content;
+                        padding: 0;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        margin: 0;
+                        box-sizing: border-box;
+                        border-bottom: 1px solid #303030;
+
+                        button {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            height: 28px;
+                            border: 0;
+                            border-radius: 6px;
+                            padding-left: 12px;
+                            padding-right: 12px;
+                            background-color: rgba(0, 0, 0, 0);
+                            color: white;
+                            font-weight: 700;
+                            font-size: 1.1rem;
+                            z-index: 1;
+                            cursor: pointer;
+                            transition: color 0.15s;
+
+                            &.square {
+                                justify-content: center;
+                                width: 28px;
+                                padding: 0;
+                            }
+
+                            &::before, &::after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 6px;
+                            }
+
+                            &::before {
+                                background: linear-gradient(to bottom, #272727, #050505);
+                                z-index: -1;
+                            }
+
+                            &::after {
+                                border: 1px solid rgba(255, 255, 255, 0.1);
+                            }
+                        }
+
+                        &.title {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-weight: 700;
+                            font-size: 1.05rem;
+
+                            button {
+                                &.video_close::after {
+                                    @include vars.icon-config(url(../icon/exit.svg), 70%);
+                                }
+                            }
+                        }
+
+                        &.description {
+                            flex: 1;
+                            padding: 8px;
+
+                            &:empty::after {
+                                content: 'No description has been added to this video.';
+                                font-style: italic;
+                                color: rgba(255, 255, 255, 0.8);
+                            }
+                        }
+
+                        &.uploader {
+                            display: flex;
+                            justify-content: space-bw;
+                            align-items: center;
+                            gap: 8px;
+
+                            &::before {
+                                content: '';
+                                @include vars.icon-config(var(--icon-url), 100%);
+                                aspect-ratio: 1/1;
+                                height: calc(100% - 10px);
+                                margin: 5px;
+                                border-radius: 50%;
+                            }
+
+                            span.text_node {
+                                flex: 1;
+                                display: flex;
+                                align-items: center;
+                                padding: 0;
+                                font-weight: 700;
+                            }
+
+                            a {
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+                                gap: 6px;
+                                width: fit-content;
+                                border: 0;
+                                border-radius: 6px;
+                                padding: 4px;
+                                padding-left: 6px;
+                                padding-right: 6px;
+                                font-weight: 700;
+                                font-size: 0.85rem;
+                                text-decoration: none;
+                                text-wrap: nowrap;
+                                color: white;
+                                cursor: pointer;
+                                transition: filter 0.15s;
+
+                                &::before {
+                                    content: '';
+                                    display: flex;
+                                    height: 22px;
+                                    width: 22px;
+                                }
+
+                                &.external {
+                                    background: linear-gradient(to bottom left, #303030, #151515);
+
+                                    &::before {
+                                        @include vars.icon-config(url(../icon/external.svg), 100%);
+                                    }
+                                }
+
+                                &.subscribe {
+                                    background: linear-gradient(to top left, #ff2222, #9c0000);
+
+                                    &::before {
+                                        @include vars.icon-config(url(../icon/youtube.svg), 100%);
+                                    }
+                                }
+
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    box-sizing: border-box;
+                                    border-radius: 6px;
+                                    border: 2px solid rgba(0, 0, 0, 0.5);
+                                }
+
+                                &:hover {
+                                    filter: brightness(0.75);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
 
         .menu {
             position: relative;
