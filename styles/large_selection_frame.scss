@@ -109,8 +109,12 @@ body {
                         }
 
                         &.description {
-                            flex: 1;
+                            height: fit-content;
+                            min-height: unset;
+                            max-height: 200px !important;
                             padding: 8px;
+                            white-space: pre-line;
+                            overflow-y: auto;
 
                             &:empty::after {
                                 content: 'No description has been added to this video.';
@@ -642,6 +646,19 @@ body {
             opacity: 1;
             transform: translateY(100%);
 
+            &.main_photo_holder {
+                figure.main {
+                    height: 100vw;
+                }
+            }
+
+            &.main_video_holder {
+                figure.main {
+                    aspect-ratio: unset;
+                    height: fit-content;
+                }
+            }
+
             .menu {
                 display: block;
                 overflow-y: auto;
@@ -651,9 +668,8 @@ body {
                 border-radius: 0;
 
                 figure.main {
-                    width: 100vw;
-                    height: 100vw;
                     border-radius: 0;
+                    width: 100vw;
 
                     img {
                         border-radius: 0;

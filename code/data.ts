@@ -1897,6 +1897,7 @@ const Data: Database = {
                 thumbnail: 'homiestape8.jpg',
                 id: 'KymvNC8jtIU',
                 series: 'Homies Tape',
+                description: 'SO MUCH YOVE.'
             },
             '06/03/23': {
                 name: 'Homies Tape 7',
@@ -1909,36 +1910,788 @@ const Data: Database = {
                 thumbnail: 'homiestape6.jpg',
                 id: '92msqUVUNAA',
                 series: 'Homies Tape',
+                description: `Homies in order of appearance:
+Riley S.
+Thaddeus M.
+Aidan F.
+Liam W.
+Sam A.
+Sophia B.
+Kaitlyn F.
+Michael M.
+Kenyan S.
+Matt S.
+Kelvin A.
+Max L.
+Evan O.
+Smoke Y.
+Mikhael W.
+Jayvan T.
+Xavier
+Paul
+Alejandro
+Luz
+
+Homies Tape Sources:
+Cooltext.com
+TTsMP3.com
+LGK20 V
+iPhone 13
+iPhone 12
+Google Pixel 2
+
+"Yung Lean - 'Agony' (Official Audio)"
+   • Yung Lean - 'Agony' (Official Audio)  
+
+"Lucki - Poker Face"
+   • Video  
+
+"Sematary & Elusin - 9 Scarecrows"
+   • Sematary & Elusin - 9 Scarecrows  
+
+"Lil B - Thank You BasedGod(BLACK KEN MIXTAPE)DIRECTED BY LIL B"
+
+
+   • Lil B - Thank You BasedGod(BLACK KEN MIXTA...  
+
+"Escape From the City (City Escape) - Sonic Adventure 2 [OST]"
+   • Escape From the City (City Escape) - Sonic...  
+
+"earthbound "WOW!" soundeffect"
+   • earthbound "WOW!" soundeffect  
+
+Spiffy Beat
+
+"Legalize Nuclear Bombs ☢️ Swag Messiah 💦 Bees Make Honey 🐝"
+   • Legalize Nuclear Bombs ☢️ Swag Messiah 💦 B...  
+
+"GTA: San Andreas - Mission Passed Theme (2 versions)"
+   • Video  
+
+"Playboi Carti - Backroom (Instrumental) (BEST ON YOUTUBE)"
+   • Playboi Carti - Backroom (Prod. Pierre Bou...  
+
+"Sematary Haunted Mound Rainbow Bridge Howl Sound Effect Silent Hill"
+   • Sematary - Haunted Mound - Rainbow Bridge ...  
+
+"Ding Sound Effect"
+   • Ding Sound Effect  
+
+"Baby Keem x Playboi Carti Type Beat (BEAT SWITCH AT 1:21) | "Huey" (prod. kazimu)"
+   • Baby Keem x Playboi Carti Type Beat (BEAT ...  `
             },
             '08/16/22': {
                 name: 'Homies Tape 5',
                 thumbnail: 'homiestape5.jpg',
                 id: 't8-SiBabwAo',
                 series: 'Homies Tape',
+                description: `Homies Tape Playlist
+   • homies tapes  
+
+Matt’s Pal Cards
+https://drive.google.com/drive/folder...
+
+HOMIES IN ORDER OF APPEARANCE:
+
+Riley S.
+Thaddeus M.
+Kaitlyn F.
+Slurpee Men
+Max L.
+Sam A.
+Woman with Dog
+Guitar Man
+Phillip
+Cane
+The Church Women
+Matt S.
+Cameron from Hershey Park
+Kenyan S.
+Mikhael W.
+
+HOMIES TAPE SOURCES
+
+GoPro Hero 7 Black
+LG K20 V
+IPhone 13
+Pixel 5a
+cooltext.com 
+
+“Guy plays bladee - decay on piano’
+   • guy plays bladee - decay on piano  
+
+“Kodak Black Ft NBA Youngboy - water (FAST)
+   • Kodak Black Ft NBA Youngboy - water  (FAST)  
+
+“Double gulp cup (full video)”
+   • double gulp cup (full video)  
+
+“Lil B - B.O.R.(Birth Of Rap) BASED MUSIC VIDEO DIRECTED BY LIL B!!!!! ANSWER TO "D.O.R."”
+   • Lil B - B.O.R.(Birth Of Rap) BASED MUSIC V...  
+
+“Xxxtentacion - Vice City”
+   • Xxxtentacion - Vice City  
+
+“SEMATARY & GHOST MOUNTAIN - GOODBYE HORSES [HUNDRED ACRE WRIST}”
+   • SEMATARY & GHOST MOUNTAIN - GOODBYE HORSES...  
+
+“Bladee - Let’s Ride (Official Audio) 
+   • bladee - Let's Ride (Official Audio)  
+
+“Mii News (News Flash) - Tomodachi Life OST”
+   • Video  
+
+“Cash Carti - GOKU”
+   • Video  
+
+“Donkey Kong Country - Aquatic Ambience [Restored] OLD MIX”
+   • Donkey Kong Country - Aquatic Ambience [Re...  
+
+“TV Color Bars - Distorted with Static and Timecode”
+   • TV Color Bars - Distorted with Static and ...  
+
+“Impossible quiz theme song ( we are gonna fly now by Bill conti)”
+   • Impossible quiz theme song (Gonna fly now ...  
+
+“PSA Shield a”
+   • PSI Shield a  
+
+“One of Us - Caravelli - Kmart Radio”
+   • One of Us - Caravelli - Kmart Radio  
+
+“Ding Sound Effect”
+   • Ding Sound Effect  
+
+“SEMATARY & GHOST MOUNTAIN - BUNNY SUIT **OFFICIAL VIDEO**”
+   • Video  
+
+“Don’t ever buy no weed from the gas station”
+   • Don’t ever buy no weed from the gas station  
+
+“ZillaKami - YELLOW PISS (Official Audio)”
+   • ZillaKami - YELLOW PISS (Official Audio)  
+
+“Bike Horn Sound Effect”
+   • Bike Horn Sound Effect  
+
+Kanye West - Through The Wire
+   • Kanye West - Through The Wire  
+
+Freshie - Double Back
+   • Freshie - Double Back  
+
+KISS (SOUND EFFECT)
+   • KISS (SOUND EFFECT)  
+
+Cartoon Running - Sound Effect (HD)
+   • Cartoon Running - Sound Effect (HD)  
+
+Joey Bada$$ - Zipcodes (Official Video)
+   • Joey Bada$$ - Zipcodes (Official Video)  
+
+“Freshie - "midnightCLUB!” (feat. Trippie Redd) Official Lyric Visualizer”
+   • Freshie - "midnightCLUB!” (feat. Trippie R...  
+
+“Cha - Ching Money | Sound Effect”
+   • Video  `
             },
             '06/07/22': {
                 name: 'Homies Tape 4',
                 thumbnail: 'homiestape4.jpg',
                 id: '0zBHh7WyCrI',
                 series: 'Homies Tape',
+                description: `"HOMIES TAPE VOLUME 4" By Riley Sullivan
+
+thank you for watching homies tape volume 4, look forward to homies tape volume 5 !!
+shoutout 3xg spitz u know what it is
+thanks to all the homies for making this project possible 🙏
+godspeed
+riley
+
+bit.ly/homiestape4
+
+Homies in order of appearance:
+
+“Fat Man” Via Cameo
+Thaddeus’s Mother + Friends
+Riley S.
+Kaitlyn F.
+Max L.
+Thaddeus M.
+Logan, Cody, Paul, Alex and Matt
+Mikhael and Brandon
+Jason Derulo
+Courage W.
+Mr. Haughwout
+Mall Man
+Grant R.
+Mr. O’Hara
+Edin “Sam” A.
+Kenyan S.
+Steve
+Jayvan T.
+
+Sources Used:
+
+cooltext.com
+ttsmp3.com
+GoPro Hero 7 Black
+LG K20 V
+Iphone 13
+Google Pixel 5a
+
+“HAUNTAHOLICS 🎃 REAL HAUNTED MOUND 🎃 VOICE TAG”
+   • HAUNTAHOLICS 🎃 REAL HAUNTED MOUND 🎃 VOICE TAG  
+
+“SEMATARY SOUND EFFECTS (PART 1) (HAUGH, HOWLING, CRYING, DJ SORROW TAGS)”
+   • SEMATARY SOUND EFFECTS (PART 1) (HAUGH, HO...  
+
+“sematary dj sorrow sound effect”
+   • sematary dj sorrow sound effect  
+
+Cameo Via Fat Man
+https://www.cameo.com/recipient/6255f...
+
+“YEAT - Ya Ya [Dir. by @DotComNirvan]”
+   • YEAT - Ya Ya [Dir. by  @DotComNirvan]  
+
+“03 Greedo Sweet Lady Produced by 03 Greedo”
+   • 03 Greedo   Sweet Lady Produced by 03 Greedo  
+
+“Vine Boom Sound Effect”
+   • Vine Boom Sound Effect  
+
+“2010” (“Yessirr”)
+   • 2010  
+
+“Happy Birthday Zach!”
+   • Happy Birthday Zach!  
+
+“Kanye West - God's Test (feat. KayCyy & Playboi Carti)”
+   • Video  
+
+“Slide Whistle 3 - Sound Effect”
+   • Slide Whistle 3 - Sound Effect  
+
+“Governor Cuomo Wishes Rev. Al Sharpton a Happy Birthday”
+   • Governor Cuomo Wishes Rev. Al Sharpton a H...  
+
+“Scatmans World (Official Video) HD -Scatman John”
+   • Scatmans World (Official Video) HD -Scatma...  
+
+“Minecraft Eating - Sound Effect (HD)”
+   • Minecraft Eating - Sound Effect (HD)  
+
+“Donald Trump says Homer Simpson”
+   • Donald Trump says Homer Simpson  
+
+“bladee - Be Nice To Me”
+   • bladee - Be Nice To Me  
+
+“(ORIGINAL) Change Da World My Final Message Goodbye”
+   • Video  
+
+“Water Droplet - Sound Effect (HD)“
+   • Water Plop - Sound Effect (HD)  
+
+“Ding Sound Effect”
+   • Ding Sound Effect  
+
+“Botswana Milk (Dairy) Processing”
+   • Botswana Milk (Dairy) Processing  
+
+“lil baby has lost it 🤣🤣🤣🤣🤣🤣”
+   • lil baby has lost it 🤣🤣🤣🤣🤣🤣  
+
+“Playboi Carti - Vamp Anthem (Official Audio)”
+   • Playboi Carti - Vamp Anthem (Official Audio)  
+
+“Knock Knock”
+   • Knock Knock  
+
+“”HOMIES TAPE VOLUME 1”" By Riley Sullivan”
+   • "HOMIES TAPE VOLUME 1" By Riley Sullivan  
+
+“60 Minutes Intro w: Meredith Veira (1990's)”
+   • 60 Minutes Intro w: Meredith Veira (1990's)  
+
+“DUCKWORTH”
+   • DUCKWORTH.  
+
+“Sound Effect - Camera shutter”
+   • Sound Effect - Camera shutter  
+
+“Fortnite Shield Potion (Fortnite Battle Royale) - Gaming Sound Effect (HD) | Sound Effects”
+   • Fortnite Shield Potion (Fortnite Battle Ro...  
+
+“ROBLOX "Bloxy Cola Drink" Sound Effect”
+   • ROBLOX "Bloxy Cola Drink" Sound Effect  
+
+“Minecraft Drinking Sound Effect”
+   • Minecraft Drinking Sound Effect  
+
+“$NOT - GOSHA (Official Music Video)”
+   • $NOT - GOSHA (Official Music Video)  
+
+“Rapp Snitch Knishes (feat. Mr. Fantastik)”
+   • Rapp Snitch Knishes  
+
+thanks for watching and have yourself a damn good one`
             },
             '03/31/22': {
                 name: 'Homies Tape 3',
                 thumbnail: 'homiestape3.jpg',
                 id: 'sNjinZgbw98',
                 series: 'Homies Tape',
+                description: `"HOMIES TAPE VOLUME 3" By Riley Sullivan
+Additional recordings provided by Thaddeus, Edin "Sam", and other homies.
+Thanks for making homies tape volume 3 possible.
+
+HOMIES IN ORDER OF APPEARENCE
+
+Riley S.
+Thaddeus M.
+Edin “Sam” A.
+Omare B.
+Kenyan S.
+Kelvin A.
+Grant R.
+Max L.
+Matt S.
+Teddy H.
+Mini Kelvin
+Larry O’hara
+Maryland Man
+Aaron H.
+Michael M.
+Wink and Dink
+Childish Gambino
+Fiddy Middle
+Money Man
+Josh A.
+Gillian G.
+Miranda G.
+Kaitlyn F.
+Thaddeus’ Mom
+Lounging Larry
+3XG Spitz
+Alex R.
+Daniel F.
+Katie L.
+Patrick
+Grandma
+Roger Rich
+
+SOURCES USED -
+
+cooltext.com
+
+ttsmp3.com
+
+imgflip.com
+
+LGK20V
+
+iPhone 13 Pro
+
+GoPro Hero 7 Black
+
+“Bladee - Noblest Strive Vocals + I Think Instrumental”
+   • Bladee - Noblest Strive Vocals + I Think I...  
+
+“Vine Boom Sound Effect (Longer Verison For Real)”
+   • Vine Boom  
+
+“It’s all completely hopeless” from “Top Gear Become Local Radio DJs | Top Gear”
+   • Top Gear Become Local Radio DJs | Top Gear  
+
+“TopGear "Stephen Hawking has arrived"”
+   • TopGear "Stephen Hawking has arrived"  
+
+“Life Of The Party”
+   • Life Of The Party  
+
+“Trippie Redd - Forever Young (Hate is Dead Mixtape) (Official Audio)”
+   • Video  
+
+“Playboi Carti - Rockstar Made (Official Audio)”
+   • Playboi Carti - Rockstar Made (Official Au...  
+
+“nice to meet u prod skys”
+   • 3 hours of ripsquad beats  
+
+“I came home from work at 5 o’clock / absolutely dreadful” from“Top Gear Become Local Radio DJs | Top Gear”
+   • Top Gear Become Local Radio DJs | Top Gear  
+
+“Welcome to Bank of America, this is a notice from the Chinese voice department”
+   • Welcome to Bank of America, this is a noti...  
+“You can get Mario smoking a joint in here” from “JerMall of America”
+   • JerMall of America  
+
+“Damn I Messed Up We Gotta Go Bald - Alive Again Meme”
+   • Damn I Messed Up We Gotta Go Bald - Alive ...  
+
+
+“Clash of C…”
+
+“Please watch very important”
+   • Video  
+
+
+"Whatever" - The Bold and the Beautiful (2019)”
+   • "Whatever" - The Bold and the Beautiful (2...  
+
+“bladee laughing (isolated)”
+   • bladee laughing (isolated)  
+
+“Super Mario 64 - Water Theme / Dire Dire Docks - HD”
+   • Video  
+
+“What up Ye? This is Larry Hoover Jr.” From “Kanye West - Jesus Lord pt 2 (Audio)”
+   • Kanye West - Jesus Lord pt 2 (Audio)  
+
+“Oh hey Jimmy, I just wanted to tell you” from “House Flipper - PrankHouseTV”
+   • House Flipper - PrankHouseTV  
+
+“TM88 x Pi'erre Bourne - POP OUT (Official Video)”
+   • TM88 x Pi'erre Bourne - POP OUT (Official ...  
+
+“NEW PLAYBOI CARTI NARCISSIST INSTRUMENTAL|KP BEATS SHOWS NEW PLAYBOI CARTI BEAT ON NARCISSIST”
+   • Video  
+
+“3XG Spitz - Still I Rise”
+   • Video  
+
+Send love to 3xg spitz: 
+   / @3xgspitz  
+
+  / 3xgspitz  
+
+“Scatmans World (Official Video) HD -Scatman John”
+   • Scatmans World (Official Video) HD -Scatma...  
+
+“Wassup Diggity Dogs”
+   • Wassup Diggity Dogs  
+
+“BlackMayo - Jus Know (Official Music Video) [Dir. stitch.films]”
+   • BlackMayo - Jus Know (Official Music Video...  
+
+“Super Mario 64 Soundtrack - Slider”
+   • Super Mario 64 Soundtrack - Slider  
+
+“No Lie” by Playboi Carti
+Can’t find it on Youtube idk go look it up
+
+“j. cole ~ no role modelz ﾉ slowed + reverb ﾉ”
+   • j. cole ~ no role modelz ﾉ slowed + reverb ﾉ  
+
+“Childish Gambino - This Is America (Official Video)”
+   • Childish Gambino - This Is America (Offici...  
+
+Narcissist beat edit by Thaddeus
+
+“There is a ghost in the house” From “zillakami x sosmula - nitro cell (official music video” I can’t find the original sound for the life of me
+   • zillakami x sosmula - nitro cell (official...   
+
+“Playboi Carti - Moving Different”
+   • Video  
+
+“Dave Chappelle - Ja rule”
+   • Dave Chappelle - Ja rule  
+
+“Fetty Wap - Trap Queen (Official Video) Prod. By Tony Fadd”
+   • Fetty Wap  - Trap Queen (Official Video) P...  
+
+“Spongebob Patrick's Mouth on TV”
+   • Spongebob Patrick's Mouth on TV  
+
+
+“COCHISE - BREAKFAST”
+   • COCHISE - BREAKFAST  
+
+“Five Nights at Freddy's Soundtrack - Music Box (Freddy's Music)”
+   • Five Nights at Freddy's Soundtrack - Music...  
+
+Beats Produced by Spiffy
+
+“Kanye West - No Child Left Behind (Audio)”
+   • Kanye West - No Child Left Behind (Audio)`
             },
             '02/14/22': {
                 name: 'Homies Tape 2',
                 thumbnail: 'homiestape2.jpg',
                 id: 'MPtJjS6f-4s',
                 series: 'Homies Tape',
+                description: `"HOMIES TAPE VOLUME 2" By Riley Sullivan
+Homies Tape Volume 2 is Dedicated to Jonathan Day.
+Rest in peace Mr. Day.
+Thank you Mr. Day.
+
+Thumbnail created by Thaddeus M.
+
+FEATURING (in order of appearance):
+
+Allison V.
+Max L.
+Peter C.
+Courage W.
+Riley S.
+Grant R.
+Matt S.
+Kaitlyn F.
+Sam “Peter 2” F.
+Thaddeus M.
+Edin “Sam” A.
+Kelvin A.
+Bruno D.
+Steve
+Aaron H.
+Jax M.
+Omare B.
+“Pops”
+“Mr. Haughwout 2”
+“Yeat”
+“Relaxed David”
+David H.
+Jonathan D. “Mr. Day”
+
+SOURCES USED:
+
+cooltext.com
+
+ttsmp3.com
+
+320ytmp3.com
+
+KGK20V
+
+GoPro Hero 7 Black
+
+“[FREE DOWNLOAD] Playboi Carti x Pierre Bourne Drum Kit 2020 - "FAME" (RARE SOUNDS!)“
+   • [FREE DOWNLOAD] Playboi Carti x Pierre Bou...  
+
+“Vine Boom Sound Effect (Longer Version For Real)”
+   • Vine Boom  
+
+“TRIPPIE REDD ft. 6IX9INE - POLES1469 (official music video)”
+   • TRIPPIE REDD ft. 6IX9INE - POLES1469 (OFFI...  
+
+“LUMBERJACK (Audio)” (“OK” at 0:24)
+   • LUMBERJACK (Audio)  
+
+“Beep Me 911”
+   • Beep Me 911  
+
+“Ecco2K - Peroxide (Official Video)” (“True friend” at 3:29)
+   • Ecco2k - Peroxide (Official Video)  
+
+“Kanye West - Slave Name”
+Bit.ly/yyeeezy
+
+“Kitchen”
+   • Kitchen  
+
+“My dad sayin some funny ish. A must see video.”
+   • My dad sayin some funny ish. A must see vi...  
+
+“Freshie - Double Back”
+   • Freshie - Double Back  
+
+“The Courier Walks Softly - Fallout: New Vegas”
+   • The Courier Walks Softly - Fallout: New Vegas  
+
+“Topgear”
+
+Spiffy beat 3 (prod. Spiffy)
+
+“bladee - Be Nice To Me”
+   • bladee - Be Nice To Me  
+
+“Reborn”
+   • Reborn  
+
+“OMOCAT - OMORI OST - 153 Do You Remember?”
+   • OMORI OST - 153 Do You Remember?  
+
+“Young Thug - Day Before (with Mac Miller) [Official Audio]”
+   • Young Thug - Day Before (with Mac Miller) ...`
             },
             '01/01/22': {
                 name: 'Homies Tape 1',
                 thumbnail: 'homiestape1.jpg',
                 id: 'j1FrkuC4lPk',
                 series: 'Homies Tape',
+                description: `"HOMIES TAPE VOLUME 1" By Riley Sullivan
+Thumbnail created by Thaddeus M.
+
+FEATURING (in order of appearance):
+
+Michael M.
+Edin “Sam” A.
+Jayvan T.
+Thaddeus M.
+Alex R.
+Riley S.
+Matt S.
+Shepard B.
+Trey G.
+Paige S.
+Teddy H.
+Kelvin A.
+Melanie H.
+Allison V.
+Larry O.
+Max L.
+Daniela C.
+Courage W.
+Lonnie D.
+Kaitlyn F.
+Sebastian D.
+
+SOURCES USED:
+
+cooltext.com
+
+ttsmp3.com
+
+imgflip.com
+
+bit.ly/crimes3 - brothers / violent crimes
+
+bit.ly/homiesone - homies tape volume 1 trailer
+
+GoPro Hero 7 Black
+
+LG K20V
+
+“Athletic Theme - Yoshi’s Island”
+   • Video  
+
+Lil Uzi Vert - Baby Pluto [Official Audio]
+   • Lil Uzi Vert - Baby Pluto [Official Audio]  
+
+“Home run bat sound clip”
+   • Home run bat sound clip  
+
+“Scatmans World (Official Video) HD -Scatman John”
+   • Scatmans World (Official Video) HD -Scatma...  
+
+Beat created by Spiffy
+
+“Pierre Bourne- UHH sound effect”
+   • Pierre Bourne- UHH sound effect  
+
+“Pi'erre Bourne - Switching Lanes (Audio) ft. Playboi Carti”
+   • Pi'erre Bourne - Switching Lanes (Audio) f...  
+
+“Check Mii Out Channel - Posting Plaza (Wii Rip)”
+   • Video  
+
+(Peter Griffin) “This Disney DVD (Extra Low Quality)”
+   • Video  
+
+“Vine Boom Sound Effect (Longer Version For Real) (Read Description Please)”
+   • Vine Boom  
+
+“Streets Of Rage 2 Soundtrack - Stage 1-1 (Go Straight)"
+   • Streets Of Rage 2 Soundtrack - Stage 1-1 (...  
+
+“Rapp Snitch Knishes (feat. Mr. Fantastik)”
+   • Rapp Snitch Knishes  
+
+“Playboi Carti - Over (Official Audio)”
+   • Playboi Carti - Over (Official Audio)  
+
+“Ke$ha - Die Young (Official)”
+   • Ke$ha - Die Young (Official Video)  
+
+“Guy drinking water while shaking meme”
+   • Guy drinking water while shaking meme  
+
+“Pi'erre Bourne - HULU (Audio)”
+   • Pi'erre Bourne - HULU (Audio)  
+
+“Mike Tomlin ‘We do not care’”
+   • Mike Tomlin “We do not care”  
+
+“Round 1 FIGHT!”
+   • Round 1 FIGHT!  
+
+“Father Stretch My Hands Pt. 1”
+   • Father Stretch My Hands Pt. 1  
+
+“2018 Frederick County Spelling Bee”
+   • 2018 Frederick County Spelling Bee  
+
+“Cochise - Tell Em (feat. $NOT) (Official Visualizer)”
+   • Cochise - Tell Em (feat. $NOT) (Official V...  
+
+“Playboi Carti - Location (Official Audio)”
+   • Playboi Carti - Location (Audio)  
+
+“Baby Keem, Kendrick Lamar - family ties (Official Video)”
+   • Baby Keem, Kendrick Lamar - family ties (O...  
+
+“Playboi Carti - ILoveUIHateU (Official Audio)”
+   • Playboi Carti - ILoveUIHateU (Official Audio)  
+
+“Playboi Carti - Vamp Anthem (Official Audio)”
+   • Playboi Carti - Vamp Anthem (Official Audio)  
+
+“Lil Uzi Vert - New Patek [Official Audio]”
+   • Lil Uzi Vert - New Patek [Official Audio]  
+
+“Cochise - CAUTIOUS (Official Video)”
+   • Cochise - CAUTIOUS (Official Video)  
+
+“LIL DARKIE - RAP MUSIC (PROD. WENDIGO) (MUSIC VIDEO)”
+   • LIL DARKIE - RAP MUSIC (PROD. WENDIGO) (MU...  
+
+“bladee - Be Nice To Me”
+   • bladee - Be Nice To Me  
+
+“Pi'erre Bourne - Racer (Official Audio)”
+   • Pi'erre Bourne - Racer (Official Audio)  
+
+"Whatever" - The Bold and the Beautiful (2019)”
+   • "Whatever" - The Bold and the Beautiful (2...  
+
+(Man walking into pond) “summer vibes”
+   • summer vibes  
+
+“Uncle Kracker - Drift Away (Official Video)”
+   • Uncle Kracker - Drift Away (Official Video)  
+
+“Cartoon Chomp Sound Effect”
+   • Cartoon Chomp Sound Effect  
+
+“Trippie Redd – Miss The Rage ft. Playboi Carti (Official Visualizer)”
+   • Trippie Redd – Miss The Rage ft. Playboi C...  
+
+“Yume Utsutsu”
+   • Yume Utsutsu  
+
+“Ginseng Strip 2002 *Sample*”
+   • Ginseng Strip 2002 *Sample*  
+
+“playboi carti - talk 2 me (prod. racki)”
+   • Video  
+
+“Juice WRLD - Want To ft. Playboi Carti (eris remix)”
+   • Video  
+
+“My Chemical Romance - Welcome To The Black Parade [Official Music Video] [HD]”
+   • My Chemical Romance - Welcome To The Black...  
+
+“Kanye West - Brothers / Violent Crimes”
+Best version can be found at:
+Bit.ly/crimes3
+
+“Kanye West - Through The Wire”
+   • Kanye West - Through The Wire  
+
+“Moe Train”
+https://www.cameo.com/moetrain?nodeId...`
             },
         },
 
