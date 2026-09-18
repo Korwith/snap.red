@@ -275,14 +275,15 @@ body.light figure:hover::after {
 
     .media_holder {
         &.video_holder {
-            width: calc(100vw - 20px);
+            width: calc(100vw - 10px);
             min-height: 140px;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
 
             figure {
                 height: 140px;
                 max-width: 249px;
+                min-width: 249px;
             }
         }
     }
