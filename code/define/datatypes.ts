@@ -67,6 +67,8 @@ interface VideoEntry {
     name: string;
     thumbnail: string;
     id: string;
+    series?: string;
+    description?: string;
 }
 
 interface SidebarStructure {

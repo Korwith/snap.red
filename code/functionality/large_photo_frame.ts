@@ -1,6 +1,7 @@
 // overlay container that shows a full-size photo and its detail panel
 class LargePhotoHolder extends LargeSelectionFrame {
-    menu: LargePhotoMenu;
+    declare menu: LargePhotoMenu;
+    declare selected: PhotoEntry | null;
 
     // creates the holder element and its photo menu
     constructor(manager: PageManager) {
@@ -38,6 +39,7 @@ class LargePhotoHolder extends LargeSelectionFrame {
 
 // article element containing the main photo figure and its detail sidebar
 class LargePhotoMenu extends LargeSelectionMenu {
+    declare holder: LargePhotoHolder;
     figure: LargePhotoFigure;
     details: MainPhotoDetails;
 

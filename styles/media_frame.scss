@@ -107,6 +107,30 @@
             }
         }
 
+        &.video_row {
+            .internal_scroll {
+                figure {
+                    width: 213px;
+                    height: 120px;
+                    aspect-ratio: 16/9;
+                }
+            }
+
+            &.user {
+                .row_header::before {
+                    @include vars.icon-config(url(../icon/people.svg), 92%);
+                    margin-right: 1px;
+                }
+            }
+
+            &.series {
+                .row_header::before {
+                    @include vars.icon-config(url(../icon/video.svg), 85%);
+                    margin-right: 2px;
+                }
+            }
+        }
+
         .internal_scroll {
             display: flex;
             flex-direction: row;

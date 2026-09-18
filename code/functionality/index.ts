@@ -175,6 +175,40 @@ class PageManager {
         return null;
     }
 
+    // returns the date key for a video by its title
+    public fetchVideoDateByName(name: string, user?: string): string | null {
+        user ??= this.user;
+        const videos: VideoDatabase | null = this.fetchUserVideos(user);
+        if (!videos) return null;
+
+        for (const date in videos) {
+            const entry: VideoEntry = videos[date];
+            if (entry.name == name) return date;
+        }
+
+        return null;
+    }
+
+    // returns all videos from a user in a specific series
+    public fetchUserVideosBySeries(series: string, user?: string): VideoDatabase {
+        user ??= this.user;
+        const videos: VideoDatabase | null = this.fetchUserVideos(user);
+        const matches: VideoDatabase = {};
+        if (!videos) return matches;
+
+        for (const date in videos) {
+            const entry: VideoEntry = videos[date];
+            if (entry.series == series) matches[date] = entry;
+        }
+
+        return matches;
+    }
+
+    // returns all videos matching a series
+    public fetchVideosBySeries(series: string, user?: string): VideoDatabase {
+        return this.fetchUserVideosBySeries(series, user);
+    }
+
     // returns all photos taken in the given year
     public fetchUserImagesByYear(year: string, user?: string): PhotoDatabase {
         user ??= this.user;

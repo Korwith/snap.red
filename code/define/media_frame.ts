@@ -357,17 +357,19 @@ class MediaFramePhoto extends MediaFrame {
 class MediaFrameVideo extends MediaFrame {
     id?: string;
     video?: VideoEntry;
+    user?: string;
 
     // creates the video frame
-    constructor(holder: MediaHolder, date: string) {
+    constructor(holder: MediaHolder, date: string, user?: string) {
         super(holder, date);
+        this.user = user;
         this.load();
     }
 
     // loads video data into the frame
     load(): void {
         const manager: PageManager = this.holder.manager;
-        const user_videos: VideoDatabase | null = manager.fetchUserVideos();
+        const user_videos: VideoDatabase | null = manager.fetchUserVideos(this.user);
         if (!user_videos) throw new Error('No videos found for user');
         const entry: VideoEntry | null = user_videos[this.date];
         if (!entry) throw new Error('Video does not exist at date');
@@ -385,7 +387,131 @@ class MediaFrameVideo extends MediaFrame {
     // handles click on the video frame
     onclick(e: PointerEvent): void {
         if (!this.id || !this.video) return;
-        this.holder.manager.openVideoByName(this.video.name);
+        this.holder.manager.openVideoByName(this.video.name, this.user);
         // window.open(this.link, '_blank');
+    }
+}
+
+// abstract base for a horizontally scrollable labeled row of videos
+abstract class VideoRow extends MediaHolder {
+    span: HTMLElement;
+    internal: VideoRowInternal;
+    exclude_date: string;
+    user: string;
+
+    queue: string[] = [];
+
+    // creates the row element with a header label and internal scroll grid
+    constructor(manager: PageManager, parent: HTMLElement, exclude_date: string, user?: string) {
+        super(manager, parent);
+        this.exclude_date = exclude_date;
+        this.user = user ?? manager.fetchUserName();
+        this.element.classList.add('photo_row', 'video_row');
+        this.span = document.createElement('span');
+        this.internal = new VideoRowInternal(manager, this);
+
+        this.span.classList.add('row_header');
+        this.internal.element.classList.add('internal_scroll');
+
+        this.element.appendChild(this.span);
+    }
+
+    // sets the text of the row's header label
+    setHeaderText(text: string): void {
+        this.span.textContent = text;
+    }
+
+    // removes the internal grid and the row element from the dom
+    remove(): void {
+        this.internal.remove();
+        this.element.remove();
+    }
+
+    // loads videos into the queue
+    addQueuedEntry(date: string): void {
+        this.queue.push(date);
+    }
+
+    // loads a few videos when the user is close to the end of the scrolling frame
+    loadVideoBatch(): void {
+        const count: number = this.queue.length >= 5 ? 5 : this.queue.length;
+        for (let i = 0; i < count; i++) {
+            const date: string = this.queue[i];
+            new MediaFrameVideo(this.internal, date, this.user);
+        }
+        this.queue.splice(0, count);
+    }
+
+    abstract loadQueue(): void;
+}
+
+// the inner video grid that sits inside a video row
+class VideoRowInternal extends MediaHolder {
+    row: VideoRow;
+
+    constructor(manager: PageManager, row: VideoRow) {
+        super(manager, row.element);
+        this.row = row;
+        this.element.classList.add('video_grid');
+        this.element.onscroll = () => this.scrolled();
+    }
+
+    scrolled(): void {
+        const distance: number = this.element.scrollWidth - (this.element.scrollLeft + this.element.clientWidth);
+        if (distance <= 100) this.row.loadVideoBatch();
+    }
+
+    remove(): void {
+        this.clear();
+        this.element.remove();
+    }
+}
+
+// a video row showing all other videos from the given user
+class VideoRowUser extends VideoRow {
+    constructor(manager: PageManager, parent: HTMLElement, exclude_date: string, user?: string) {
+        super(manager, parent, exclude_date, user);
+        this.element.classList.add('user');
+        this.setHeaderText(`More from ${this.user}`);
+        this.loadQueue();
+        this.loadVideoBatch();
+    }
+
+    public loadQueue(): void {
+        const matches: VideoDatabase | null = this.manager.fetchUserVideos(this.user);
+        if (!matches || Object.keys(matches).length <= 1) return this.remove();
+
+        for (const date in matches) {
+            if (date == this.exclude_date) continue;
+            this.addQueuedEntry(date);
+        }
+
+        if (this.queue.length === 0) this.remove();
+    }
+}
+
+// a video row showing all other videos from the same series
+class VideoRowSeries extends VideoRow {
+    series: string;
+
+    constructor(manager: PageManager, parent: HTMLElement, series: string, exclude_date: string, user?: string) {
+        super(manager, parent, exclude_date, user);
+        this.element.classList.add('series');
+        this.series = series;
+        this.setHeaderText(this.series);
+        this.loadQueue();
+        this.loadVideoBatch();
+    }
+
+    public loadQueue(): void {
+        const matches: VideoDatabase = this.manager.fetchUserVideosBySeries(this.series, this.user);
+        if (Object.keys(matches).length <= 1) return this.remove();
+
+        for (const date in matches) {
+            if (date == this.exclude_date) continue;
+            this.addQueuedEntry(date);
+        }
+
+        if (this.queue.length === 0) this.remove();
     }
 }

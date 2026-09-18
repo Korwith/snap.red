@@ -1,5 +1,5 @@
 class LargeVideoHolder extends LargeSelectionFrame {
-    menu: LargeVideoMenu;
+    declare menu: LargeVideoMenu;
 
     constructor(manager: PageManager) {
         super(manager);
@@ -9,8 +9,21 @@ class LargeVideoHolder extends LargeSelectionFrame {
     }
 
     public openVideoByName(name: string, user?: string): void {
+        user ??= this.manager.fetchUserName();
+        const video: VideoEntry | null = this.manager.fetchVideoByName(name, user);
+        this.selected = video;
+
+        this.menu.figure.load(name, user);
+        this.menu.details.load(name, user);
         this.toggle(true);
-        this.menu.figure.player.setVideoInfo(name, user);
+    }
+
+    public override toggle(force?: boolean): void {
+        super.toggle(force);
+        if (!this.element.classList.contains('show')) {
+            this.menu.figure.reset();
+            this.menu.details.reset();
+        }
     }
 
     protected keypress = (e: KeyboardEvent): void => {
@@ -25,6 +38,7 @@ class LargeVideoHolder extends LargeSelectionFrame {
 
 class LargeVideoMenu extends LargeSelectionMenu {
     declare figure: LargeVideoFigure;
+    declare details: LargeVideoDetails;
 
     constructor(holder: LargeVideoHolder) {
         super(holder);
@@ -34,7 +48,8 @@ class LargeVideoMenu extends LargeSelectionMenu {
 }
 
 class LargeVideoFigure extends LargeSelectionFigure {
-    info: VideoInfoList;
+    declare menu: LargeVideoMenu;
+    declare info: VideoInfoList;
     player: EmbeddedVideoPlayer;
 
     constructor(menu: LargeVideoMenu) {
@@ -45,12 +60,15 @@ class LargeVideoFigure extends LargeSelectionFigure {
         this.menu.element.appendChild(this.element);
     }
 
-    public load(): void {
-
+    public load(name: string, user?: string): void {
+        this.reset();
+        this.player.setVideoInfo(name, user);
+        this.info.load(name, user);
     }
 
     public reset(): void {
-
+        this.player.reset();
+        this.info.reset();
     }
 }
 
@@ -82,13 +100,21 @@ class EmbeddedVideoPlayer {
     }
 
     public setVideoInfo(name: string, user?: string): void {
-        this.title.setText(name);
-        this.uploader.setUser(user);
-
         const video: VideoEntry | null = this.figure.menu.holder.manager.fetchVideoByName(name, user);
         this.video = video || undefined;
         if (!video) throw new Error('This video does not exist');
+
+        this.title.setText(name);
+        this.uploader.setUser(user);
+        this.description.setText(video.description || '');
         this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}`);
+    }
+
+    public reset(): void {
+        this.iframe.removeAttribute('src');
+        this.title.setText('');
+        this.description.setText('');
+        this.video = undefined;
     }
 }
 
@@ -248,12 +274,14 @@ class VideoDescriptionBox extends VideoInformationBox {
 }
 
 class VideoInfoList extends SelectionInfoList {
+    declare figure: LargeVideoFigure;
+
     constructor(figure: LargeVideoFigure) {
         super(figure);
         figure.element.appendChild(this.element);
     }
 
-    public load(): void {
+    public load(name?: string, user?: string): void {
 
     }
 
@@ -263,15 +291,60 @@ class VideoInfoList extends SelectionInfoList {
 }
 
 class LargeVideoDetails extends LargeSelectionDetails {
+    declare menu: LargeVideoMenu;
+    grid: VideoDetailsGrid;
+
     constructor(menu: LargeVideoMenu) {
         super(menu);
+        this.grid = new VideoDetailsGrid(this);
+        this.menu.element.appendChild(this.element);
     }
 
-    public load(): void {
-
+    public load(name: string, user?: string): void {
+        this.grid.load(name, user);
     }
 
     public reset(): void {
+        this.grid.reset();
+    }
+}
 
+class VideoDetailsGrid {
+    details: LargeVideoDetails;
+    video_rows: VideoRow[];
+    element: HTMLElement;
+
+    constructor(details: LargeVideoDetails) {
+        this.details = details;
+        this.video_rows = [];
+        this.element = document.createElement('div');
+        this.element.classList.add('grid_holder');
+        this.details.element.appendChild(this.element);
+    }
+
+    public load(name: string, user?: string): void {
+        const manager: PageManager = this.details.menu.holder.manager;
+        user ??= manager.fetchUserName();
+        const video: VideoEntry | null = manager.fetchVideoByName(name, user);
+        if (!video) throw new Error('No video found with that name');
+        const date: string | null = manager.fetchVideoDateByName(name, user);
+        const exclude_date: string = date ?? '';
+
+        this.reset();
+
+        // 1. VideoRow for videos from the same series (if entry has series)
+        if (video.series) {
+            const series_row: VideoRowSeries = new VideoRowSeries(manager, this.element, video.series, exclude_date, user);
+            this.video_rows.push(series_row);
+        }
+
+        // 2. VideoRow for videos from that user
+        const user_row: VideoRowUser = new VideoRowUser(manager, this.element, exclude_date, user);
+        this.video_rows.push(user_row);
+    }
+
+    public reset(): void {
+        for (const row of this.video_rows) row.remove();
+        this.video_rows = [];
     }
 }

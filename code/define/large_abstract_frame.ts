@@ -4,7 +4,7 @@ abstract class LargeSelectionFrame {
     element: HTMLElement;
 
     menu!: LargeSelectionMenu;
-    selected: PhotoEntry | null;
+    selected: PhotoEntry | VideoEntry | null;
 
     // creates the holder element (selection menu created in extended classes)
     constructor(manager: PageManager) {
@@ -57,7 +57,7 @@ abstract class LargeSelectionFigure {
         this.element = document.createElement('figure');
     }
 
-    public abstract load(date: string, index?: number): void;
+    public abstract load(identifier: string, param?: any): void;
     public abstract reset(): void;
 }
 
@@ -65,15 +65,15 @@ abstract class LargeSelectionDetails {
     menu: LargeSelectionMenu;
     element: HTMLElement;
 
-    header!: PhotoDetailsHeader;
-    grid!: PhotoDetailsGrid;
+    header?: any;
+    grid!: any;
 
     constructor(menu: LargeSelectionMenu) {
         this.menu = menu;
         this.element = document.createElement('aside');
     }
 
-    public abstract load(date: string): void;
+    public abstract load(identifier: string, param?: any): void;
     public abstract reset(): void;
 }
 
@@ -86,6 +86,6 @@ abstract class SelectionInfoList {
         this.element = document.createElement('div');
     }
 
-    public abstract load(date: string): void;
+    public abstract load(identifier?: string, param?: any): void;
     public abstract reset(): void;
 }
