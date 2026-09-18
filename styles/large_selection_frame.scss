@@ -31,12 +31,17 @@ body {
                     background: linear-gradient(to bottom, #151515, #040404);
 
                     iframe {
+                        position: relative;
                         aspect-ratio: 16/9;
                         width: 100%;
                         outline: none;
                         border: 0;
                         margin: 0;
                         padding: 0;
+
+                        &:not(.loaded) {
+                            visibility: hidden;
+                        }
                     }
 
                     >span {

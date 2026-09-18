@@ -90,6 +90,7 @@ class EmbeddedVideoPlayer {
 
         this.iframe = document.createElement('iframe');
         this.iframe.classList.add('video_player');
+        this.iframe.onload = () => this.loaded();
 
         this.element.appendChild(this.iframe);
         this.title = new VideoTitleBox(this);
@@ -112,9 +113,14 @@ class EmbeddedVideoPlayer {
 
     public reset(): void {
         this.iframe.removeAttribute('src');
+        this.iframe.classList.remove('loaded');
         this.title.setText('');
         this.description.setText('');
         this.video = undefined;
+    }
+
+    private loaded(): void {
+        this.iframe.classList.add('loaded');
     }
 }
 
