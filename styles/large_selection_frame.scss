@@ -82,6 +82,7 @@ body {
                                 width: 100%;
                                 height: 100%;
                                 border-radius: 6px;
+                                box-sizing: border-box;
                             }
 
                             &::before {
@@ -98,8 +99,20 @@ body {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
+                            gap: 6px;
                             font-weight: 700;
                             font-size: 1.05rem;
+
+                            &::before {
+                                content: '';
+                                aspect-ratio: 1/1;
+                                height: 60%;
+                                @include vars.icon-config(url(../icon/video.svg), 100%);
+                            }
+
+                            .text_node {
+                                flex: 1;
+                            }
 
                             button {
                                 &.video_close::after {
@@ -111,7 +124,7 @@ body {
                         &.description {
                             height: fit-content;
                             min-height: unset;
-                            max-height: 200px !important;
+                            max-height: 150px;
                             padding: 8px;
                             white-space: pre-line;
                             overflow-y: auto;
@@ -184,7 +197,7 @@ body {
                                     background: linear-gradient(to top left, #ff2222, #9c0000);
 
                                     &::before {
-                                        @include vars.icon-config(url(../icon/youtube.svg), 100%);
+                                        @include vars.icon-config(url(../icon/youtube.svg), 90%);
                                     }
                                 }
 
