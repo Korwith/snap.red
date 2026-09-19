@@ -125,8 +125,7 @@ class EmbeddedVideoPlayer {
         this.iframe.contentWindow?.postMessage(JSON.stringify({
             event: 'command',
             func: event,
-            args: args || ''
-        }))
+            args: args || []
         }), '*');
     }
 
