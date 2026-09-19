@@ -10,10 +10,10 @@ class NotificationManager {
         this.element.classList.add('notification_holder');
         this.manager.element.appendChild(this.element);
 
-        // this.pushNotification('Info', 'New: Better maps page styling');
+        // this.pushNotification('Info', 'New: Videos are now given a dedicated UI');
     }
 
-    pushNotification(type: NotificationType, text: string) {
+    public pushNotification(type: NotificationType, text: string) {
         const notification: PageNotification = new PageNotification(this);
         notification.setText(type, text);
     }
@@ -40,11 +40,11 @@ class PageNotification {
         });
     }
 
-    setText(type: NotificationType, text: string): void {
+    public setText(type: NotificationType, text: string): void {
         this.element.textContent = text;
     }
 
-    remove(seconds: number): void {
+    public remove(seconds: number): void {
         setTimeout(() => {
             this.element.classList.remove('show');
 

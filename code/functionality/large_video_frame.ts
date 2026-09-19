@@ -62,7 +62,7 @@ class LargeVideoFigure extends LargeSelectionFigure {
 
     public load(name: string, user?: string): void {
         this.reset();
-        this.player.setVideoInfo(name, user);
+        this.player.setNewVideo(name, user);
         this.info.load(name, user);
     }
 
@@ -72,25 +72,31 @@ class LargeVideoFigure extends LargeSelectionFigure {
     }
 }
 
+interface VideoInformation {
+    time: number,
+}
+
 class EmbeddedVideoPlayer {
     figure: LargeVideoFigure;
 
     element: HTMLElement;
-    iframe: HTMLElement;
+    iframe: HTMLIFrameElement;
     title: VideoTitleBox;
     uploader: VideoUploaderBox;
     description: VideoDescriptionBox;
 
     video?: VideoEntry
+    video_info: VideoInformation;
 
     constructor(figure: LargeVideoFigure) {
         this.figure = figure;
+        this.video_info = { time: 0 };
         this.element = document.createElement('div');
         this.element.classList.add('video_player_holder');
 
         this.iframe = document.createElement('iframe');
         this.iframe.classList.add('video_player');
-        this.iframe.onload = () => this.loaded();
+        window.addEventListener('message', (e: MessageEvent) => this.captureYouTubeData(e));
 
         this.element.appendChild(this.iframe);
         this.title = new VideoTitleBox(this);
@@ -100,7 +106,7 @@ class EmbeddedVideoPlayer {
         this.figure.element.appendChild(this.element);
     }
 
-    public setVideoInfo(name: string, user?: string): void {
+    public setNewVideo(name: string, user?: string): void {
         const video: VideoEntry | null = this.figure.menu.holder.manager.fetchVideoByName(name, user);
         this.video = video || undefined;
         if (!video) throw new Error('This video does not exist');
@@ -108,7 +114,26 @@ class EmbeddedVideoPlayer {
         this.title.setText(name);
         this.uploader.setUser(user);
         this.description.setText(video.description || '');
-        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}`);
+        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}?enablejsapi=1`);
+    }
+
+    // controls the youtube player
+    private sendIFrameCommand(event: string, args?: any[]): void {
+        this.iframe.contentWindow?.postMessage(JSON.stringify({
+            event: 'command',
+            func: event,
+            args: args || ''
+        }))
+    }
+
+    public toggleVideoPlayback(playing: boolean) {
+        if (playing) this.sendIFrameCommand('playVideo')
+        else this.sendIFrameCommand('pauseVideo')
+    }
+
+    public seekVideoTime(direction: boolean) {
+        const set_time = this.video_info.time += (direction ? 10 : -10);
+        this.sendIFrameCommand('seekTo', [set_time, true]);
     }
 
     public reset(): void {
@@ -121,6 +146,15 @@ class EmbeddedVideoPlayer {
 
     private loaded(): void {
         this.iframe.classList.add('loaded');
+    }
+
+    private captureYouTubeData(event: MessageEvent): void {
+        if (!event.origin.includes('youtube.com')) return; // has to be tube
+        const parsed = JSON.parse(event.data);
+        if (parsed.event === 'infoDelivery' && parsed.info) {
+            this.video_info.time = 0;
+            console.log(this.video_info.time)
+        }
     }
 }
 
@@ -223,7 +257,7 @@ abstract class UploaderLink {
     uploader: VideoUploaderBox;
     user?: string;
     element: HTMLElement;
-    
+
     constructor(uploader: VideoUploaderBox, user?: string) {
         this.uploader = uploader;
         this.user = user;
