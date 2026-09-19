@@ -96,6 +96,9 @@ class EmbeddedVideoPlayer {
 
         this.iframe = document.createElement('iframe');
         this.iframe.classList.add('video_player');
+        this.iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        this.iframe.setAttribute('allowfullscreen', 'true');
+        this.iframe.addEventListener('load', () => this.loaded());
         window.addEventListener('message', (e: MessageEvent) => this.captureYouTubeData(e));
 
         this.element.appendChild(this.iframe);
@@ -114,7 +117,7 @@ class EmbeddedVideoPlayer {
         this.title.setText(name);
         this.uploader.setUser(user);
         this.description.setText(video.description || '');
-        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}?enablejsapi=1`);
+        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}?enablejsapi=1&autoplay=1`);
     }
 
     // controls the youtube player
@@ -124,11 +127,12 @@ class EmbeddedVideoPlayer {
             func: event,
             args: args || ''
         }))
+        }), '*');
     }
 
     public toggleVideoPlayback(playing: boolean) {
-        if (playing) this.sendIFrameCommand('playVideo')
-        else this.sendIFrameCommand('pauseVideo')
+        if (playing) this.sendIFrameCommand('playVideo');
+        else this.sendIFrameCommand('pauseVideo');
     }
 
     public seekVideoTime(direction: boolean) {
@@ -150,10 +154,17 @@ class EmbeddedVideoPlayer {
 
     private captureYouTubeData(event: MessageEvent): void {
         if (!event.origin.includes('youtube.com')) return; // has to be tube
-        const parsed = JSON.parse(event.data);
-        if (parsed.event === 'infoDelivery' && parsed.info) {
-            this.video_info.time = 0;
-            console.log(this.video_info.time)
+        try {
+            const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+            if (parsed?.event === 'onReady') {
+                this.loaded();
+            }
+            if (parsed?.event === 'infoDelivery' && parsed?.info) {
+                this.video_info.time = 0;
+                console.log(this.video_info.time);
+            }
+        } catch {
+            // Ignore non-JSON or invalid messages
         }
     }
 }
