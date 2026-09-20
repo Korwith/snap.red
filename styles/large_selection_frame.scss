@@ -126,7 +126,7 @@ body {
 
                                 &.time {
                                     &::after {
-                                        @include vars.icon-config(url(../icon/skip.svg), 80%);
+                                        @include vars.icon-config(url(../icon/skip.svg), 65%);
                                     }
 
                                     &.backward::after {
