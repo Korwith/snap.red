@@ -153,24 +153,18 @@ class EmbeddedVideoPlayer {
     }
 
     private loaded(): void {
-        this.sendIFrameCommand('listening');
+        this.registerYoutubeListener();
         this.iframe.classList.add('loaded');
 
         // make sure the youtube iframe understands our listening request
         // incase its not caught immediately
-        setTimeout(() => this.sendIFrameCommand('listening'), 500);
+        setTimeout(() => this.registerYoutubeListener(), 500);
     }
 
-    captureYouTubeData(event: MessageEvent) {
-        if (!event.origin.includes('youtube.com'))
-            return;
+    private captureYouTubeData(event: MessageEvent) {
+        if (!event.origin.includes('youtube.com')) return;
         try {
             const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-
-            if (parsed?.event === 'onReady') {
-                this.sendIFrameCommand('listening');
-                this.loaded();
-            }
 
             if (parsed?.event === 'infoDelivery' && parsed?.info) {
                 // updating player state status
@@ -187,6 +181,14 @@ class EmbeddedVideoPlayer {
         catch {
             // Suppress unparseable YouTube API messages
         }
+    }
+
+    private registerYoutubeListener(): void {
+        this.iframe.contentWindow?.postMessage(JSON.stringify({
+            event: 'listening',
+            id: crypto.randomUUID() || 'widget1'
+        }), '*');
+        this.sendIFrameCommand('addEventListener', ['onStateChange']);
     }
 }
 
