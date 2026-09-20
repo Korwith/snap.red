@@ -1,7 +1,6 @@
 // overlay container that shows a full-size photo and its detail panel
-class LargePhotoHolder extends LargeSelectionFrame {
+class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
     declare menu: LargePhotoMenu;
-    declare selected: PhotoEntry | null;
 
     // creates the holder element and its photo menu
     constructor(manager: PageManager) {
@@ -17,7 +16,7 @@ class LargePhotoHolder extends LargeSelectionFrame {
 
         this.menu.figure.load(date, index);
         this.menu.details.load(date);
-        this.toggle(true);
+        super.toggle(true);
     }
 
     // handles keystrokes relating to the main photo holder
@@ -283,29 +282,21 @@ class MainPhotoDetails extends LargeSelectionDetails {
 }
 
 // header bar at the top of the details panel showing the location name
-class PhotoDetailsHeader {
-    details: MainPhotoDetails;
-    element: HTMLElement;
-
+class PhotoDetailsHeader extends MediaDetailsHeader<PhotoEntry> {
     main_row: MainHeaderRow;
     camera_row: CameraNameRow;
     description_row: DescriptionRow;
 
-    // creates the header with a text span and close button
     constructor(details: MainPhotoDetails) {
-        this.details = details;
-        this.element = document.createElement('div');
-        this.element.classList.add('header');
+        super(details);
 
         this.main_row = new MainHeaderRow(this);
         this.camera_row = new CameraNameRow(this);
         this.description_row = new DescriptionRow(this);
-
-        this.details.element.appendChild(this.element);
     }
 
     // sets the header text to the given string
-    displayPhotoDetails(entry: PhotoEntry): void {
+    public displayPhotoDetails(entry: PhotoEntry): void {
         this.main_row.setText(entry.name);
         this.camera_row.loadCameraInfo(entry.camera);
         this.description_row.setText(entry.caption);
@@ -461,52 +452,10 @@ class PhotoDetailsGrid {
     }
 }
 
-// abstract base for a button that closes the main photo overlay
-abstract class HolderCloseButton {
-    holder: LargeSelectionFrame;
-    element: HTMLElement;
-
-    // creates the close button and appends it to the given parent element
-    constructor(holder: LargeSelectionFrame, parent: HTMLElement) {
-        this.holder = holder;
-        this.element = document.createElement('button');
-        this.element.classList.add('close');
-        this.element.onclick = (e: PointerEvent) => this.onclick(e);
-        parent.appendChild(this.element);
-    }
-
-    // hides the main photo overlay and removes the date from the URL
-    onclick(e: PointerEvent): void {
-        this.holder.toggle(false);
-    }
-}
-
-// close button placed inside the main photo figure
-class FigureCloseButton extends HolderCloseButton {
-    constructor(holder: LargePhotoHolder, figure: LargePhotoFigure) {
-        super(holder, figure.element);
-    }
-}
-
-// close button placed inside the details panel header
-class DetailsCloseButton extends HolderCloseButton {
-    constructor(holder: LargePhotoHolder, row: MainHeaderRow) {
-        super(holder, row.element);
-    }
-}
-
 // button which copies a sharable link
-class PhotoShareButton {
-    row: MainHeaderRow;
-    element: HTMLElement;
-
+class PhotoShareButton extends MediaShareButton {
     constructor(row: MainHeaderRow) {
-        this.row = row;
-        this.element = document.createElement('button');
-        this.element.classList.add('share');
-        this.element.textContent = 'Share';
-        this.element.onclick = (e: PointerEvent) => this.onclick(e);
-        row.element.appendChild(this.element);
+        super(row);
     }
 
     async onclick(e: PointerEvent): Promise<void> {

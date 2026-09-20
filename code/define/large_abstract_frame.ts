@@ -1,12 +1,12 @@
+
 // overlay container that shows full-size media
-abstract class LargeSelectionFrame {
+abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
     manager: PageManager;
     element: HTMLElement;
 
-    menu!: LargeSelectionMenu;
-    selected: PhotoEntry | VideoEntry | null;
+    menu!: LargeSelectionMenu<T>;
+    selected: T | null;
 
-    // creates the holder element (selection menu created in extended classes)
     constructor(manager: PageManager) {
         this.manager = manager;
         this.element = document.createElement('div');
@@ -15,11 +15,9 @@ abstract class LargeSelectionFrame {
         manager.element.appendChild(this.element);
     }
 
-    // shows or hides the overlay
     public toggle(force?: boolean): void {
         const shown: boolean = this.element.classList.toggle('show', force);
 
-        // hooks the keypress function, url data, and footer button
         if (shown) {
             document.addEventListener('keydown', this.keypress);
         } else {
@@ -32,13 +30,13 @@ abstract class LargeSelectionFrame {
     protected abstract keypress(e: KeyboardEvent): void;
 }
 
-abstract class LargeSelectionMenu {
-    holder: LargeSelectionFrame;
-    figure!: LargeSelectionFigure;
-    details!: LargeSelectionDetails;
+abstract class LargeSelectionMenu<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    holder: LargeSelectionFrame<T>;
+    figure!: LargeSelectionFigure<T>;
+    details!: LargeSelectionDetails<T>;
     element: HTMLElement;
 
-    constructor(holder: LargeSelectionFrame) {
+    constructor(holder: LargeSelectionFrame<T>) {
         this.holder = holder;
         this.element = document.createElement('article');
         this.element.classList.add('menu');
@@ -46,13 +44,13 @@ abstract class LargeSelectionMenu {
     }
 }
 
-abstract class LargeSelectionFigure {
-    menu: LargeSelectionMenu;
+abstract class LargeSelectionFigure<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    menu: LargeSelectionMenu<T>;
     element: HTMLElement;
 
-    info!: SelectionInfoList;
+    info!: SelectionInfoList<T>;
 
-    constructor(menu: LargeSelectionMenu) {
+    constructor(menu: LargeSelectionMenu<T>) {
         this.menu = menu;
         this.element = document.createElement('figure');
     }
@@ -61,14 +59,14 @@ abstract class LargeSelectionFigure {
     public abstract reset(): void;
 }
 
-abstract class LargeSelectionDetails {
-    menu: LargeSelectionMenu;
+abstract class LargeSelectionDetails<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    menu: LargeSelectionMenu<T>;
     element: HTMLElement;
 
     header?: any;
     grid!: any;
 
-    constructor(menu: LargeSelectionMenu) {
+    constructor(menu: LargeSelectionMenu<T>) {
         this.menu = menu;
         this.element = document.createElement('aside');
     }
@@ -77,15 +75,78 @@ abstract class LargeSelectionDetails {
     public abstract reset(): void;
 }
 
-abstract class SelectionInfoList {
-    figure: LargeSelectionFigure;
+abstract class SelectionInfoList<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    figure: LargeSelectionFigure<T>;
     element: HTMLElement;
 
-    constructor(figure: LargeSelectionFigure) {
+    constructor(figure: LargeSelectionFigure<T>) {
         this.figure = figure;
         this.element = document.createElement('div');
     }
 
     public abstract load(identifier?: string, param?: any): void;
     public abstract reset(): void;
+}
+
+// aside header stuff
+abstract class MediaDetailsHeader<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    details: LargeSelectionDetails<T>;
+    element: HTMLElement;
+
+    constructor(details: LargeSelectionDetails<T>) {
+        this.details = details;
+        this.element = document.createElement('div');
+        this.element.classList.add('header');
+
+        this.details.element.appendChild(this.element);
+    }
+}
+
+// handles various buttons on the page
+// abstract base for a button that closes the main photo overlay
+abstract class HolderCloseButton<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    holder: LargeSelectionFrame<T>;
+    element: HTMLElement;
+
+    constructor(holder: LargeSelectionFrame<T>, parent: HTMLElement) {
+        this.holder = holder;
+        this.element = document.createElement('button');
+        this.element.classList.add('close');
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        parent.appendChild(this.element);
+    }
+
+    public onclick(e: PointerEvent): void {
+        this.holder.toggle(false);
+    }
+}
+
+// close button placed inside the main photo figure
+class FigureCloseButton extends HolderCloseButton {
+    constructor(holder: LargePhotoHolder, figure: LargePhotoFigure) {
+        super(holder, figure.element);
+    }
+}
+
+// close button placed inside the details panel header
+class DetailsCloseButton extends HolderCloseButton {
+    constructor(holder: LargePhotoHolder, row: MainHeaderRow) {
+        super(holder, row.element);
+    }
+}
+
+abstract class MediaShareButton {
+    row: MainHeaderRow;
+    element: HTMLElement;
+
+    constructor(row: MainHeaderRow) {
+        this.row = row;
+        this.element = document.createElement('button');
+        this.element.classList.add('share');
+        this.element.textContent = 'Share';
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
+        row.element.appendChild(this.element);
+    }
+
+    abstract onclick(e: PointerEvent): void;
 }
