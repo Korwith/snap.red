@@ -160,8 +160,9 @@ class EmbeddedVideoPlayer {
                 this.loaded();
             }
             if (parsed?.event === 'infoDelivery' && parsed?.info) {
-                this.video_info.time = 0;
-                console.log(this.video_info.time);
+                if (typeof parsed.info.currentTime === 'number') {
+                    this.video_info.time = parsed.info.currentTime;
+                }
             }
         } catch {
             // Ignore non-JSON or invalid messages
