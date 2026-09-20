@@ -159,6 +159,8 @@ figure {
     margin: 0;
     overflow: hidden;
 
+    box-shadow: 2px 2px 8px 0 black;
+
     &.featured {
         order: calc(var(--importance) * -1);
     }
