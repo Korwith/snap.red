@@ -152,6 +152,7 @@ class EmbeddedVideoPlayer {
     }
 
     private loaded(): void {
+        this.sendIFrameCommand('listening');
         this.iframe.classList.add('loaded');
     }
 
@@ -220,17 +221,17 @@ abstract class VideoNavigationButton {
         this.box = box;
         this.element = document.createElement('button');
         this.element.classList.add('control');
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
         this.box.element.appendChild(this.element);
     }
 
-    protected abstract onclick(): void;
+    protected abstract onclick(e: PointerEvent): void;
 }
 
 class VideoCloseButton extends VideoNavigationButton {
     constructor(box: VideoTitleBox) {
         super(box);
         this.element.classList.add('video_close', 'square');
-        this.element.onclick = () => this.onclick();
     }
 
     protected onclick(): void {
