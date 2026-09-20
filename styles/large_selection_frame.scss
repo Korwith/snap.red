@@ -120,13 +120,15 @@ body {
                             }
 
                             button {
+                                transition: filter 0.15s;
+
                                 &.playback {
                                     &::after {
-                                        @include vars.icon-config(url(../icon/play.svg), 58%);
+                                        @include vars.icon-config(url(../icon/play.svg), 60.5%);
                                     }
-                                    
+
                                     &.playing::after {
-                                        @include vars.icon-config(url(../icon/pause.svg), 69%);
+                                        @include vars.icon-config(url(../icon/pause.svg), 68%);
                                     }
                                 }
 
@@ -142,6 +144,10 @@ body {
 
                                 &.video_close::after {
                                     @include vars.icon-config(url(../icon/exit.svg), 70%);
+                                }
+
+                                &:hover {
+                                    filter: brightness(0.8);
                                 }
                             }
                         }
