@@ -290,7 +290,6 @@ class VideoPlaybackButton extends VideoNavigationButton {
     }
 
     protected onclick(): void {
-        this.updatePlaybackStatus(!this.playing);
         this.box.player.toggleVideoPlayback();
     }
 }
