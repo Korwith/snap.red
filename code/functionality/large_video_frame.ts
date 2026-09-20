@@ -135,8 +135,8 @@ class EmbeddedVideoPlayer {
         else this.sendIFrameCommand('pauseVideo');
     }
 
-    public seekVideoTime(direction: boolean) {
-        const set_time = this.video_info.time += (direction ? 10 : -10);
+    public seekVideoTime(direction: 'forward' | 'backward') {
+        const set_time = this.video_info.time += (direction == 'forward' ? 10 : -10);
         this.sendIFrameCommand('seekTo', [set_time, true]);
     }
 
@@ -186,6 +186,8 @@ abstract class VideoInformationBox {
 
 class VideoTitleBox extends VideoInformationBox {
     text_node: HTMLElement;
+    skip_backward: VideoTimeControlButton;
+    skip_forward: VideoTimeControlButton;
     close: VideoCloseButton;
 
     constructor(player: EmbeddedVideoPlayer) {
@@ -196,6 +198,8 @@ class VideoTitleBox extends VideoInformationBox {
         this.text_node.classList.add('text_node');
 
         this.element.appendChild(this.text_node);
+        this.skip_backward = new VideoTimeControlButton(this, 'backward');
+        this.skip_forward = new VideoTimeControlButton(this, 'forward')
         this.close = new VideoCloseButton(this);
     }
 
@@ -227,6 +231,24 @@ class VideoCloseButton extends VideoNavigationButton {
 
     protected onclick(): void {
         this.box.player.figure.menu.holder.toggle(false);
+    }
+}
+
+class VideoTimeControlButton extends VideoNavigationButton {
+    box: VideoInformationBox;
+    direction: 'forward' | 'backward';
+
+    constructor(box: VideoInformationBox, direction: 'forward' | 'backward') {
+        super(box);
+        this.box = box;
+        this.direction = direction;
+
+        // this.element.textContent = direction == 'forward' ? '+10s' : '-10s';
+        this.element.classList.add('time', 'square', direction);
+    }
+
+    protected onclick(): void {
+        this.box.player.seekVideoTime(this.direction);
     }
 }
 

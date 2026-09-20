@@ -123,6 +123,16 @@ body {
                                 &.video_close::after {
                                     @include vars.icon-config(url(../icon/exit.svg), 70%);
                                 }
+
+                                &.time {
+                                    &::after {
+                                        @include vars.icon-config(url(../icon/skip.svg), 80%);
+                                    }
+
+                                    &.backward::after {
+                                        transform: scaleX(-1);
+                                    }
+                                }
                             }
                         }
 
@@ -325,12 +335,6 @@ body {
 
                         &::after {
                             @include vars.icon-config(url(../icon/exit.svg), 60%);
-                            content: '';
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
                         }
                     }
 
@@ -374,6 +378,15 @@ body {
                             width: 85%;
                             height: 85%;
                         }
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
                     }
                 }
 
