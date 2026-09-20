@@ -126,7 +126,7 @@ body {
                                     }
                                     
                                     &.playing::after {
-                                        @include vars.icon-config(url(../icon/pause.svg));
+                                        @include vars.icon-config(url(../icon/pause.svg), 69%);
                                     }
                                 }
 
