@@ -120,8 +120,14 @@ body {
                             }
 
                             button {
-                                &.video_close::after {
-                                    @include vars.icon-config(url(../icon/exit.svg), 70%);
+                                &.playback {
+                                    &::after {
+                                        @include vars.icon-config(url(../icon/play.svg), 58%);
+                                    }
+                                    
+                                    &.playing::after {
+                                        @include vars.icon-config(url(../icon/pause.svg));
+                                    }
                                 }
 
                                 &.time {
@@ -132,6 +138,10 @@ body {
                                     &.backward::after {
                                         transform: scaleX(-1);
                                     }
+                                }
+
+                                &.video_close::after {
+                                    @include vars.icon-config(url(../icon/exit.svg), 70%);
                                 }
                             }
                         }

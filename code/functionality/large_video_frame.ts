@@ -74,6 +74,7 @@ class LargeVideoFigure extends LargeSelectionFigure<VideoEntry> {
 }
 
 interface VideoInformation {
+    playing: boolean;
     time: number;
 }
 
@@ -91,7 +92,7 @@ class EmbeddedVideoPlayer {
 
     constructor(figure: LargeVideoFigure) {
         this.figure = figure;
-        this.video_info = { time: 0 };
+        this.video_info = { time: 0, playing: false };
         this.element = document.createElement('div');
         this.element.classList.add('video_player_holder');
 
@@ -130,8 +131,8 @@ class EmbeddedVideoPlayer {
         }), '*');
     }
 
-    public toggleVideoPlayback(playing: boolean) {
-        if (playing) this.sendIFrameCommand('playVideo');
+    public toggleVideoPlayback(): void {
+        if (!this.video_info.playing) this.sendIFrameCommand('playVideo');
         else this.sendIFrameCommand('pauseVideo');
     }
 
@@ -158,18 +159,26 @@ class EmbeddedVideoPlayer {
 
     private captureYouTubeData(event: MessageEvent): void {
         if (!event.origin.includes('youtube.com')) return;
+
         try {
             const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+
             if (parsed?.event === 'onReady') {
+                // enables listeners
+                this.sendIFrameCommand('listening');
                 this.loaded();
             }
-            // adds video time to our data object [see the interface]
-            if (parsed?.event === 'infoDelivery' && parsed?.info?.currentTime !== undefined) {
-                this.video_info.time = parsed.info.currentTime;
+
+            if (parsed?.event === 'infoDelivery' && parsed?.info) {
+                // collects the info
+                if (parsed.info.playerState !== undefined) this.video_info.playing = parsed.info.playerState === 1;
+                if (parsed.info.currentTime !== undefined) this.video_info.time = parsed.info.currentTime;
+
+                // updates various buttons
+                this.title.playback_control.updatePlaybackStatus(this.video_info.playing);
             }
         } catch {
-            // this should all work unless video just doesnt load
-            // in which case.. do nothing
+            // incase youtube api returns a strange response, do nothing
         }
     }
 }
@@ -191,6 +200,7 @@ abstract class VideoInformationBox {
 
 class VideoTitleBox extends VideoInformationBox {
     text_node: HTMLElement;
+    playback_control: VideoPlaybackButton;
     skip_backward: VideoTimeControlButton;
     skip_forward: VideoTimeControlButton;
     close: VideoCloseButton;
@@ -203,6 +213,7 @@ class VideoTitleBox extends VideoInformationBox {
         this.text_node.classList.add('text_node');
 
         this.element.appendChild(this.text_node);
+        this.playback_control = new VideoPlaybackButton(this);
         this.skip_backward = new VideoTimeControlButton(this, 'backward');
         this.skip_forward = new VideoTimeControlButton(this, 'forward')
         this.close = new VideoCloseButton(this);
@@ -240,12 +251,10 @@ class VideoCloseButton extends VideoNavigationButton {
 }
 
 class VideoTimeControlButton extends VideoNavigationButton {
-    box: VideoInformationBox;
     direction: 'forward' | 'backward';
 
     constructor(box: VideoInformationBox, direction: 'forward' | 'backward') {
         super(box);
-        this.box = box;
         this.direction = direction;
 
         // this.element.textContent = direction == 'forward' ? '+10s' : '-10s';
@@ -254,6 +263,21 @@ class VideoTimeControlButton extends VideoNavigationButton {
 
     protected onclick(): void {
         this.box.player.seekVideoTime(this.direction);
+    }
+}
+
+class VideoPlaybackButton extends VideoNavigationButton {
+    constructor(box: VideoInformationBox) {
+        super(box);
+        this.element.classList.add('square', 'playback');
+    }
+
+    public updatePlaybackStatus(playing: boolean): void {
+        this.element.classList.toggle('playing', playing);
+    }
+
+    protected onclick(): void {
+        this.box.player.toggleVideoPlayback();
     }
 }
 
