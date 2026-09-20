@@ -119,7 +119,7 @@ class EmbeddedVideoPlayer {
         this.title.setText(name);
         this.uploader.setUser(user);
         this.description.setText(video.description || '');
-        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}?enablejsapi=1&autoplay=1`);
+        this.iframe.setAttribute('src', `https://www.youtube.com/embed/${video.id}?enablejsapi=1&autoplay=1&origin=${encodeURIComponent(window.location.origin)}`);
     }
 
     // controls the youtube player
@@ -155,30 +155,37 @@ class EmbeddedVideoPlayer {
     private loaded(): void {
         this.sendIFrameCommand('listening');
         this.iframe.classList.add('loaded');
+
+        // make sure the youtube iframe understands our listening request
+        // incase its not caught immediately
+        setTimeout(() => this.sendIFrameCommand('listening'), 500);
     }
 
-    private captureYouTubeData(event: MessageEvent): void {
-        if (!event.origin.includes('youtube.com')) return;
-
+    captureYouTubeData(event: MessageEvent) {
+        if (!event.origin.includes('youtube.com'))
+            return;
         try {
             const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
 
             if (parsed?.event === 'onReady') {
-                // enables listeners
                 this.sendIFrameCommand('listening');
                 this.loaded();
             }
 
             if (parsed?.event === 'infoDelivery' && parsed?.info) {
-                // collects the info
-                if (parsed.info.playerState !== undefined) this.video_info.playing = parsed.info.playerState === 1;
-                if (parsed.info.currentTime !== undefined) this.video_info.time = parsed.info.currentTime;
+                // updating player state status
+                if (parsed.info.playerState !== undefined) {
+                    this.video_info.playing = parsed.info.playerState === 1;
 
-                // updates various buttons
-                this.title.playback_control.updatePlaybackStatus(this.video_info.playing);
+                    // updates various player elements
+                    this.title.playback_control.updatePlaybackStatus(this.video_info.playing);
+                }
+
+                if (parsed.info.currentTime !== undefined) this.video_info.time = parsed.info.currentTime;
             }
-        } catch {
-            // incase youtube api returns a strange response, do nothing
+        }
+        catch {
+            // Suppress unparseable YouTube API messages
         }
     }
 }
