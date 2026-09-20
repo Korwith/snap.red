@@ -136,7 +136,10 @@ class EmbeddedVideoPlayer {
     }
 
     public seekVideoTime(direction: 'forward' | 'backward') {
-        const set_time = this.video_info.time += (direction == 'forward' ? 10 : -10);
+        const change = direction === 'forward' ? 10 : -10;
+        const set_time = Math.max(0, (this.video_info.time || 0) + change);
+
+        this.video_info.time = set_time;
         this.sendIFrameCommand('seekTo', [set_time, true]);
     }
 
@@ -153,19 +156,19 @@ class EmbeddedVideoPlayer {
     }
 
     private captureYouTubeData(event: MessageEvent): void {
-        if (!event.origin.includes('youtube.com')) return; // has to be tube
+        if (!event.origin.includes('youtube.com')) return;
         try {
             const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
             if (parsed?.event === 'onReady') {
                 this.loaded();
             }
-            if (parsed?.event === 'infoDelivery' && parsed?.info) {
-                if (typeof parsed.info.currentTime === 'number') {
-                    this.video_info.time = parsed.info.currentTime;
-                }
+            // adds video time to our data object [see the interface]
+            if (parsed?.event === 'infoDelivery' && parsed?.info?.currentTime !== undefined) {
+                this.video_info.time = parsed.info.currentTime;
             }
         } catch {
-            // Ignore non-JSON or invalid messages
+            // this should all work unless video just doesnt load
+            // in which case.. do nothing
         }
     }
 }
