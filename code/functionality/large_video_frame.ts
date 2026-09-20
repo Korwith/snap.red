@@ -1,4 +1,4 @@
-class LargeVideoHolder extends LargeSelectionFrame {
+class LargeVideoHolder extends LargeSelectionFrame<VideoEntry> {
     declare menu: LargeVideoMenu;
 
     constructor(manager: PageManager) {
@@ -36,7 +36,8 @@ class LargeVideoHolder extends LargeSelectionFrame {
     }
 }
 
-class LargeVideoMenu extends LargeSelectionMenu {
+class LargeVideoMenu extends LargeSelectionMenu<VideoEntry> {
+    declare holder: LargeVideoHolder;
     declare figure: LargeVideoFigure;
     declare details: LargeVideoDetails;
 
@@ -47,7 +48,7 @@ class LargeVideoMenu extends LargeSelectionMenu {
     }
 }
 
-class LargeVideoFigure extends LargeSelectionFigure {
+class LargeVideoFigure extends LargeSelectionFigure<VideoEntry> {
     declare menu: LargeVideoMenu;
     declare info: VideoInfoList;
     player: EmbeddedVideoPlayer;
@@ -73,7 +74,7 @@ class LargeVideoFigure extends LargeSelectionFigure {
 }
 
 interface VideoInformation {
-    time: number,
+    time: number;
 }
 
 class EmbeddedVideoPlayer {
@@ -85,7 +86,7 @@ class EmbeddedVideoPlayer {
     uploader: VideoUploaderBox;
     description: VideoDescriptionBox;
 
-    video?: VideoEntry
+    video?: VideoEntry;
     video_info: VideoInformation;
 
     constructor(figure: LargeVideoFigure) {
@@ -211,7 +212,7 @@ abstract class VideoNavigationButton {
         this.box = box;
         this.element = document.createElement('button');
         this.element.classList.add('control');
-        this.box.element.appendChild(this.element)
+        this.box.element.appendChild(this.element);
     }
 
     protected abstract onclick(): void;
@@ -258,6 +259,7 @@ class VideoUploaderBox extends VideoInformationBox {
 
         this.element.style.setProperty('--icon-url', `url('../icon/user/${profile.icon}')`);
     }
+
     public override setText(text: string): void {
         this.text_node.textContent = text;
     }
@@ -323,7 +325,7 @@ class VideoDescriptionBox extends VideoInformationBox {
     }
 }
 
-class VideoInfoList extends SelectionInfoList {
+class VideoInfoList extends SelectionInfoList<VideoEntry> {
     declare figure: LargeVideoFigure;
 
     constructor(figure: LargeVideoFigure) {
@@ -340,7 +342,7 @@ class VideoInfoList extends SelectionInfoList {
     }
 }
 
-class LargeVideoDetails extends LargeSelectionDetails {
+class LargeVideoDetails extends LargeSelectionDetails<VideoEntry> {
     declare menu: LargeVideoMenu;
     grid: VideoDetailsGrid;
 
