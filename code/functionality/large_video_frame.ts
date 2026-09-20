@@ -384,13 +384,11 @@ class VideoDetailsGrid {
 
         this.reset();
 
-        // 1. VideoRow for videos from the same series (if entry has series)
         if (video.series) {
             const series_row: VideoRowSeries = new VideoRowSeries(manager, this.element, video.series, exclude_date, user);
             this.video_rows.push(series_row);
         }
 
-        // 2. VideoRow for videos from that user
         const user_row: VideoRowUser = new VideoRowUser(manager, this.element, exclude_date, user);
         this.video_rows.push(user_row);
     }

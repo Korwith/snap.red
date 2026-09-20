@@ -231,6 +231,16 @@ body {
             aside .grid_holder {
                 height: 100%;
             }
+
+            &:not(.show) {
+                figure.main {
+                    .video_player_holder {
+                        iframe {
+                            visibility: hidden;
+                        }
+                    }
+                }
+            }
         }
 
         .menu {
