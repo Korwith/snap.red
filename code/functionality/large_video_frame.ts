@@ -276,16 +276,21 @@ class VideoTimeControlButton extends VideoNavigationButton {
 }
 
 class VideoPlaybackButton extends VideoNavigationButton {
+    playing: boolean;
+
     constructor(box: VideoInformationBox) {
         super(box);
+        this.playing = false;
         this.element.classList.add('square', 'playback');
     }
 
     public updatePlaybackStatus(playing: boolean): void {
+        this.playing = playing;
         this.element.classList.toggle('playing', playing);
     }
 
     protected onclick(): void {
+        this.updatePlaybackStatus(!this.playing);
         this.box.player.toggleVideoPlayback();
     }
 }
