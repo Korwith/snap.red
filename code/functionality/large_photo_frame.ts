@@ -37,6 +37,9 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
             case 'ArrowRight':
                 this.menu.figure.shiftSelectedPhoto(1);
                 break;
+            case 'F':
+                this.toggleFullscreen();
+                break;
         }
     }
 }
