@@ -32,6 +32,10 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
         }
     }
 
+    public toggleFullscreen(force?: boolean): void {
+        this.element.classList.toggle('fullscreen', force);
+    }
+
     protected abstract keypress(e: KeyboardEvent): void;
 }
 
@@ -107,21 +111,30 @@ abstract class MediaDetailsHeader<T extends PhotoEntry | VideoEntry = PhotoEntry
     }
 }
 
-// handles various buttons on the page
-// abstract base for a button that closes the main photo overlay
-abstract class HolderCloseButton<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+// abstract button base
+abstract class HolderButton<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
     holder: LargeSelectionFrame<T>;
     element: HTMLElement;
 
     constructor(holder: LargeSelectionFrame<T>, parent: HTMLElement) {
         this.holder = holder;
         this.element = document.createElement('button');
-        this.element.classList.add('close');
         this.element.onclick = (e: PointerEvent) => this.onclick(e);
         parent.appendChild(this.element);
     }
 
-    public onclick(e: PointerEvent): void {
+    protected abstract onclick(e: PointerEvent): void;
+}
+
+// handles various buttons on the page
+// abstract base for a button that closes the main photo overlay
+abstract class HolderCloseButton<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> extends HolderButton {
+    constructor(holder: LargeSelectionFrame<T>, parent: HTMLElement) {
+        super(holder, parent);
+        this.element.classList.add('close');
+    }
+
+    protected onclick(e: PointerEvent): void {
         this.holder.toggle(false);
     }
 }
@@ -137,6 +150,19 @@ class FigureCloseButton extends HolderCloseButton {
 class DetailsCloseButton extends HolderCloseButton {
     constructor(holder: LargePhotoHolder, row: MainHeaderRow) {
         super(holder, row.element);
+        this.element.classList.add('square');
+    }
+}
+
+// allows the user to fullscreen a main media page
+class DetailsFullscreenButton extends HolderButton {
+    constructor(row: MainHeaderRow) {
+        super(row.header.details.menu.holder, row.element);
+        this.element.classList.add('square', 'fullscreen');
+    }
+
+    protected onclick(): void {
+        this.holder.toggleFullscreen();
     }
 }
 

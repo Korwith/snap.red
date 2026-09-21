@@ -338,6 +338,7 @@ abstract class PhotoHeaderRow {
 class MainHeaderRow extends PhotoHeaderRow {
     location: HTMLElement;
     share: PhotoShareButton;
+    fullscreen: DetailsFullscreenButton;
     close: DetailsCloseButton;
 
     constructor(header: PhotoDetailsHeader) {
@@ -348,6 +349,7 @@ class MainHeaderRow extends PhotoHeaderRow {
         this.element.appendChild(this.location);
 
         this.share = new PhotoShareButton(this);
+        this.fullscreen = new DetailsFullscreenButton(this);
         this.close = new DetailsCloseButton(header.details.menu.holder as LargePhotoHolder, this);
     }
 
