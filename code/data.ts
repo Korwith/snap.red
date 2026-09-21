@@ -1318,6 +1318,11 @@ const Data: Database = {
                 id: [6714, 6718, 6711],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    6714: [39.445858, -77.411278],
+                    6718: [39.442378, -77.410422],
+                    // SKIPPED: 6711
+                }
             },
             '12/28/24': {
                 name: 'Downtown Frederick',
