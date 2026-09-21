@@ -37,7 +37,16 @@ class LargeVideoHolder extends LargeSelectionFrame<VideoEntry> {
             case 'Escape':
                 this.toggle(false);
                 break;
-        } // add more later
+            case 'ArrowLeft':
+                this.menu.figure.player.seekVideoTime('backward');
+                break;
+            case 'ArrowRight':
+                this.menu.figure.player.seekVideoTime('forward');
+                break;
+            case 'Space':
+                this.menu.figure.player.toggleVideoPlayback();
+                break;
+        }
     }
 }
 
