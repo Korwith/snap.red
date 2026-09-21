@@ -33,6 +33,7 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
     }
 
     public toggleFullscreen(force?: boolean): void {
+        if (window.matchMedia("(max-width: 767px)").matches) return;
         this.element.classList.toggle('fullscreen', force);
     }
 

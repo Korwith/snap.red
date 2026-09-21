@@ -43,7 +43,7 @@ class LargeVideoHolder extends LargeSelectionFrame<VideoEntry> {
             case 'ArrowRight':
                 this.menu.figure.player.seekVideoTime('forward');
                 break;
-            case 'K':
+            case 'k':
             case ' ':
                 e.preventDefault();
                 this.menu.figure.player.toggleVideoPlayback();
