@@ -100,7 +100,10 @@ class CurrentlySelectedEntry extends PageFooterBar {
         if (!entry) throw new Error('not good');
         this.selected_date = date;
         this.location_text.textContent = entry.name;
-        this.element.style.setProperty('--image-url', `url(../media/${this.footer.manager.fetchUserName()}/IMG_${entry.id[0]}.jpg)`)
+
+        const path: string | null = this.footer.manager.fetchPhotoPathByDate(date, entry.id[0]);
+        if (path) this.element.style.setProperty('--image-url', `url(${path})`)
+            else this.element.style.removeProperty('--image-url');
     }
 
     private onclick(): void {
