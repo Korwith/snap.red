@@ -2728,10 +2728,15 @@ https://www.cameo.com/moetrain?nodeId...`
         },
 
         images: {
+            '09/19/26': {
+                name: 'Frederick, MD',
+                id: ['0275'],
+                people: ['Maya']
+            },
             '04/29/25': {
                 name: 'Monocacy River',
                 id: [9894, 9897, 9909, 9892],
-                people: ['Thaddeus', 'Unknown']
+                people: ['Thaddeus']
             },
             '11/18/24': {
                 name: 'Mountaindale',
@@ -2739,7 +2744,7 @@ https://www.cameo.com/moetrain?nodeId...`
                 people: ['Thaddeus', 'Matt']
             },
             '07/03/24': {
-                name: 'Bikeride',
+                name: 'Frederick, MD',
                 id: [5156, 5157, 5158]
             },
             '06/01/24': {
