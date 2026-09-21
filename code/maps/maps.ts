@@ -195,6 +195,10 @@ abstract class MapWidget {
     public toggleVisibility(force?: boolean) {
         this.element.classList.toggle('hide', !force);
     }
+
+    public refreshSize(): void {
+        this.map.map.invalidateSize();
+    }
 }
 
 class MapWidgetInternal extends GenericMap {

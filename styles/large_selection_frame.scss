@@ -46,10 +46,6 @@ body {
 
         }
 
-        article {
-            transition: width 0.6s, height 0.6s;
-        }
-
         &.main_video_holder {
             figure.main {
                 &::after {

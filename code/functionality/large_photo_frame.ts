@@ -24,6 +24,11 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
         super.toggle(true);
     }
 
+    public toggleFullscreen(): void {
+        super.toggleFullscreen();
+        this.menu.details.grid.widget.refreshSize();
+    }
+
     // handles keystrokes relating to the main photo holder
     protected keypress = (e: KeyboardEvent): void => {
         switch (e.key) {
@@ -525,6 +530,7 @@ class AsideMapWidget extends MapWidget {
     public reset(): void {
         this.clearMarkers();
         this.toggleVisibility(false);
+        this.refreshSize();
     }
 
     public clearMarkers(): void {

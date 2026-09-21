@@ -152,7 +152,7 @@ class TimelineMonthButton {
             el = content.element.querySelector(selector);
         }
 
-        if (window.innerWidth < 767) this.holder.timeline.sidebar.manager.toggleSidebar(false);
+        if (window.matchMedia("(max-width: 767px)").matches) this.holder.timeline.sidebar.manager.toggleSidebar(false);
         el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
