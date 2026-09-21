@@ -87,6 +87,7 @@ class EmbeddedVideoPlayer {
     figure: LargeVideoFigure;
 
     element: HTMLElement;
+    placeholder: HTMLElement;
     iframe: HTMLIFrameElement;
     title: VideoTitleBox;
     uploader: VideoUploaderBox;
@@ -101,13 +102,18 @@ class EmbeddedVideoPlayer {
         this.element = document.createElement('div');
         this.element.classList.add('video_player_holder');
 
+        this.placeholder = document.createElement('div');
+        this.placeholder.classList.add('placeholder');
+
         this.iframe = document.createElement('iframe');
         this.iframe.classList.add('video_player');
         this.iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         this.iframe.setAttribute('allowfullscreen', 'true');
         this.iframe.addEventListener('load', () => this.loaded());
+        this.iframe.addEventListener('error', () => this.error());
         window.addEventListener('message', (e: MessageEvent) => this.captureYouTubeData(e));
 
+        this.element.appendChild(this.placeholder);
         this.element.appendChild(this.iframe);
         this.title = new VideoTitleBox(this);
         this.uploader = new VideoUploaderBox(this);
@@ -164,6 +170,11 @@ class EmbeddedVideoPlayer {
         // make sure the youtube iframe understands our listening request
         // incase its not caught immediately
         setTimeout(() => this.registerYoutubeListener(), 500);
+    }
+
+    // handles css mainly
+    private error(): void {
+        this.iframe.classList.add('error');
     }
 
     private captureYouTubeData(event: MessageEvent) {

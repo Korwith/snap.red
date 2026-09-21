@@ -34,10 +34,50 @@ body {
                     min-height: 100%;
                     min-width: unset;
 
+                    .placeholder,
                     iframe {
-                        position: relative;
                         aspect-ratio: 16/9;
                         width: 100%;
+                    }
+
+                    .placeholder {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        pointer-events: none;
+
+                        &::after {
+                            @include vars.icon-config(url(../icon/spin.svg), 100%);
+                            content: unset;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 60px;
+                            height: 60px;
+                            transform: translate(-50%, -50%);
+                            animation: vars.$loading_image_animation;
+                        }
+                    }
+
+                    &:has(iframe.error) {
+                        .placeholder {
+                            &::after {
+                                @include vars.icon-config(url(../icon/error.svg), 100%);
+                                animation: unset;
+                            }
+                        }
+                    }
+
+                    &:not(:has(iframe.loaded)) {
+                        .placeholder {
+                            &::after {
+                                content: '';
+                            }
+                        }
+                    }
+
+                    iframe {
+                        position: relative;
                         outline: none;
                         border: 0;
                         margin: 0;
@@ -165,7 +205,7 @@ body {
                             white-space: pre-line;
                             overflow-y: auto;
                             border-bottom: 0;
-                            
+
                             &::after {
                                 transition: color 0.15s, text-shadow 0.15s;
                             }
