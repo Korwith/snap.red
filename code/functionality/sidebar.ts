@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // manages the navigation sidebar and its timeline component
 class PageSidebar {
     manager: PageManager;

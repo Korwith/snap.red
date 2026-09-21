@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // dedicated mapping page
 class PageMaps extends Page {
     manager: PageManager;
@@ -63,10 +68,12 @@ abstract class GenericMap {
         if (!entry.gps) throw new Error('No GPS coordinates found');
 
         const coordinates: L.LatLngTuple = entry.gps[id] as L.LatLngTuple;
+        const path: string | null = this.manager.fetchPhotoPathByDate(date, id);
+
         const url: string = `../media/${user}/IMG_${id}.jpg`;
         const icon: L.DivIcon = L.divIcon({
             className: 'marker',
-            html: `<img src="${url}"></img>`,
+            html: `<img src="${path}"></img>`,
             iconSize: [75, 75],
             iconAnchor: [75 / 2, 75],
         });

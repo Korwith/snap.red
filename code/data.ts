@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // Website Gradients
 const KircicGradientConfig: HexColor[] = ['#0d8000', '#003785'];
 

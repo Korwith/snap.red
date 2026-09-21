@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // overlay container that shows a full-size photo and its detail panel
 class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
     declare menu: LargePhotoMenu;
@@ -59,6 +64,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
     close: FigureCloseButton;
     caption: HTMLElement;
 
+    date?: string;
     images: Array<HTMLElement>;
     selected: number;
 
@@ -99,7 +105,13 @@ class LargePhotoFigure extends LargeSelectionFigure {
             const img: HTMLElement = document.createElement('img');
             img.setAttribute('loading', parseInt(index) === 0 ? 'eager' : 'lazy');
             img.setAttribute('id', id.toString());
-            img.setAttribute('src', `../media/${user}/IMG_${id}.jpg`);
+
+            if (this.date) {
+                const path: string | null = manager.fetchPhotoPathByDate(this.date, id);
+                if (path) img.setAttribute('src', path);
+                else img.removeAttribute('src');
+            }
+            
             img.style.left = `${parseInt(index) * 100}%`;
             this.images.push(img);
             this.element.appendChild(img);
@@ -139,6 +151,8 @@ class LargePhotoFigure extends LargeSelectionFigure {
         if (!photo) throw new Error('No photo found!');
 
         this.reset();
+
+        this.date = date;
         this.loadPhotoDetails(date);
         this.loadPhotoList(photo.id);
         this.setSelectedPhoto(index ?? 0);

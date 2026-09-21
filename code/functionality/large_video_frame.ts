@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 class LargeVideoHolder extends LargeSelectionFrame<VideoEntry> {
     declare menu: LargeVideoMenu;
 

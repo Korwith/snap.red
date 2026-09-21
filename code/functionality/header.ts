@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // builds and holds the page header element
 class PageHeader {
     manager: PageManager;

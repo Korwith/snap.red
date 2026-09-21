@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // page navigation for mobile
 
 // mobile footer navigation bar with page and sidebar controls

@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 
 // overlay container that shows full-size media
 abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {

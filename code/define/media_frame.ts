@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // abstract base container for a collection of media frame elements
 abstract class MediaHolder {
     manager: PageManager;
@@ -336,7 +341,10 @@ class MediaFramePhoto extends MediaFrame {
         if (!info) throw new Error(`Error: No photo found at ${this.date}`);
 
         this.caption.textContent = info.name;
-        this.image.setAttribute('src', `../media/${this.holder.manager.fetchUserName()}/IMG_${info.id[0]}.jpg`);
+        
+        const path: string | null = this.holder.manager.fetchPhotoPathByDate(this.date, info.id[0]);
+        if (path) this.image.setAttribute('src', path);
+        else this.image.removeAttribute('src');
 
         this.element.style.setProperty('--hover-color', info.hover_color || null);
 

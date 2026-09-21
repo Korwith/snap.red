@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // what is the website about? page
 class PageAbout extends Page {
     title: HTMLElement;

@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // currently the only 3 pages
 type PageName = 'content' | 'maps' | 'about';
 
@@ -80,6 +85,31 @@ class PageManager {
     // sends a notification (handled by notification manager)
     public pushNotification(type: NotificationType, text: string): void {
         this.notifications.pushNotification(type, text);
+    }
+
+    // get month id from date
+    // maybe i should consider making this actually reject strings
+    public fetchMonthIdByDate(date: string, user?: string): string {
+        user ??= this.user;
+        return date.slice(0, 2);
+    }
+
+    public fetchYearIdByDate(date: string, user?: string): string {
+        user ??= this.user;
+        return date.slice(-2);
+    }
+
+    // gets photo path by id
+    public fetchPhotoPathByDate(date: string, id: string | number, user?: string): string | null {
+        user ??= this.user;
+
+        const entry: PhotoEntry | null = this.fetchImageByDate(date);
+        if (!entry) return null;
+
+        const month: string = this.fetchMonthIdByDate(date);
+        const year: string = this.fetchYearIdByDate(date);
+
+        return `../media/${user}/20${year}/${month}/IMG_${id}.jpg`;
     }
 
     // opens the full-size photo viewer for the given date

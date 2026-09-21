@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 type NotificationType = 'Error' | 'Warn' | 'Info';
 
 class NotificationManager {

@@ -1,3 +1,8 @@
+/*
+ *   Copyright (c) 2026 Thaddeus MW.
+ *   
+ */
+
 // manages the main content area including the profile card, filters, and photo grid
 class PageContent extends Page {
     card: ProfileCard;
