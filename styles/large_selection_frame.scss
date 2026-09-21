@@ -33,7 +33,6 @@ body {
                     height: fit-content;
                     min-height: 100%;
                     min-width: unset;
-                    background: linear-gradient(to bottom, #151515, #040404);
 
                     iframe {
                         position: relative;
@@ -59,6 +58,7 @@ body {
                         margin: 0;
                         box-sizing: border-box;
                         border-bottom: 1px solid #303030;
+                        background: linear-gradient(to bottom, #151515, #040404);
 
                         button {
                             position: relative;
@@ -182,7 +182,6 @@ body {
                                 @include vars.icon-config(var(--icon-url), 100%);
                                 aspect-ratio: 1/1;
                                 height: calc(100% - 10px);
-                                margin: 5px;
                                 border-radius: 50%;
                                 order: -1;
                             }
@@ -692,6 +691,30 @@ body {
 
                 &::before {
                     filter: invert(1);
+                }
+            }
+
+            &.main_video_holder {
+                figure.main {
+                    .video_player_holder {
+                        >span {
+                            background: linear-gradient(to bottom, #EAEAEA, #FBFBFB);
+                            color: black;
+                            border-bottom: 1px solid #CFCFCF;
+
+                            .text_node {
+                                text-shadow: 2px 2px 4px #fff;
+                            }
+
+                            &.title::before {
+                                filter: invert(1);
+                            }
+
+                            &.description::after {
+                                color: rgba(0, 0, 0, 0.8);
+                            }
+                        }
+                    }
                 }
             }
         }
