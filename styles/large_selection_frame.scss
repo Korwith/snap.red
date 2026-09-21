@@ -57,7 +57,7 @@ body {
                         padding-right: 5px;
                         margin: 0;
                         box-sizing: border-box;
-                        border-bottom: 1px solid #303030;
+                        border-bottom: 1px solid vars.$standard-border-color;
                         background: linear-gradient(to bottom, #151515, #040404);
 
                         button {
@@ -158,13 +158,14 @@ body {
                         }
 
                         &.description {
+                            flex: 1;
                             height: fit-content;
                             min-height: unset;
-                            max-height: 150px;
                             padding: 8px;
                             white-space: pre-line;
                             overflow-y: auto;
-
+                            border-bottom: 0;
+                            
                             &::after {
                                 transition: color 0.15s, text-shadow 0.15s;
                             }
@@ -479,7 +480,7 @@ body {
                         padding-bottom: 4px;
                         font-size: 14px;
                         font-weight: 700;
-                        border-bottom: 1px solid #202020;
+                        border-bottom: 1px solid vars.$standard-border-color;
                         color: rgba(255, 255, 255, 0.6);
 
                         span {
@@ -705,7 +706,7 @@ body {
                         >span {
                             background: linear-gradient(to bottom, #EAEAEA, #FBFBFB);
                             color: black;
-                            border-bottom: 1px solid #CFCFCF;
+                            border-bottom: 1px solid #DFDFDF !important;
 
                             .text_node {
                                 text-shadow: 2px 2px 4px #fff;
@@ -747,6 +748,17 @@ body {
                 figure.main {
                     aspect-ratio: unset;
                     height: fit-content;
+
+                    .video_player_holder {
+
+                        >span {
+                            &.description {
+                                flex: unset;
+                                max-height: 150px;
+                                border-bottom: 1px solid vars.$standard-border-color;
+                            }
+                        }
+                    }
                 }
             }
 
