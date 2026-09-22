@@ -848,7 +848,6 @@ body {
                     height: fit-content;
 
                     .video_player_holder {
-
                         >span {
                             &.description {
                                 flex: unset;
@@ -856,6 +855,12 @@ body {
                                 border-bottom: 1px solid vars.$standard-border-color;
                             }
                         }
+                    }
+                }
+
+                aside {
+                    .header {
+                        display: none;
                     }
                 }
             }
