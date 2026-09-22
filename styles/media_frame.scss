@@ -42,7 +42,7 @@
 
         figure {
             aspect-ratio: 1/1;
-            width: 25%;
+            flex-basis: 25%;
         }
     }
 
@@ -163,6 +163,8 @@ figure {
     cursor: pointer;
     margin: 0;
     overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     &.featured {
         order: calc(var(--importance) * -1);
@@ -288,8 +290,7 @@ body.light figure:hover::after {
     .media_holder {
         &.photo_grid {
             figure {
-                width: calc(50vw - 10px);
-                max-height: calc(50vw - 10px);
+                flex-basis: calc(50vw - 10px);
 
                 .date {
                     font-size: 0.9rem;
