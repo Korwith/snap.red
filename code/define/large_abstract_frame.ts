@@ -112,6 +112,24 @@ abstract class MediaDetailsHeader<T extends PhotoEntry | VideoEntry = PhotoEntry
     }
 }
 
+
+// abstract base for info in the figure header
+abstract class MediaHeaderRow<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
+    header: MediaDetailsHeader<T>;
+    element: HTMLElement;
+
+    constructor(header: MediaDetailsHeader<T>) {
+        this.header = header;
+        this.element = document.createElement('div');
+        this.element.classList.add('row');
+        this.header.element.appendChild(this.element);
+    }
+
+    public toggleVisibility(force: boolean) {
+        this.element.classList.toggle('hide', !force);
+    }
+}
+
 // abstract button base
 abstract class HolderButton<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
     holder: LargeSelectionFrame<T>;
@@ -142,14 +160,14 @@ abstract class HolderCloseButton<T extends PhotoEntry | VideoEntry = PhotoEntry 
 
 // close button placed inside the main photo figure
 class FigureCloseButton extends HolderCloseButton {
-    constructor(holder: LargePhotoHolder, figure: LargePhotoFigure) {
+    constructor(holder: LargeSelectionFrame<PhotoEntry | VideoEntry>, figure: LargeSelectionFigure) {
         super(holder, figure.element);
     }
 }
 
 // close button placed inside the details panel header
 class DetailsCloseButton extends HolderCloseButton {
-    constructor(holder: LargePhotoHolder, row: MainHeaderRow) {
+    constructor(holder: LargeSelectionFrame<PhotoEntry | VideoEntry>, row: MediaHeaderRow<PhotoEntry | VideoEntry>) {
         super(holder, row.element);
         this.element.classList.add('square');
     }
@@ -157,7 +175,7 @@ class DetailsCloseButton extends HolderCloseButton {
 
 // allows the user to fullscreen a main media page
 class DetailsFullscreenButton extends HolderButton {
-    constructor(row: MainHeaderRow) {
+    constructor(row: MediaHeaderRow<PhotoEntry | VideoEntry>) {
         super(row.header.details.menu.holder, row.element);
         this.element.classList.add('square', 'fullscreen');
     }
@@ -168,10 +186,10 @@ class DetailsFullscreenButton extends HolderButton {
 }
 
 abstract class MediaShareButton {
-    row: MainHeaderRow;
+    row: MediaHeaderRow<PhotoEntry | VideoEntry>;
     element: HTMLElement;
 
-    constructor(row: MainHeaderRow) {
+    constructor(row: MediaHeaderRow<PhotoEntry | VideoEntry>) {
         this.row = row;
         this.element = document.createElement('button');
         this.element.classList.add('share');

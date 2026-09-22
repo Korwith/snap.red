@@ -329,6 +329,20 @@ body {
                 }
             }
 
+            aside {
+                .header {
+                    .main {
+                        span {
+                            visibility: hidden;
+                        }
+                    }
+                }
+
+                .grid_holder {
+                    height: 100%;
+                }
+            }
+
             aside .grid_holder {
                 height: 100%;
             }

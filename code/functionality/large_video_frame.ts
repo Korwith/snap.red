@@ -435,10 +435,12 @@ class VideoInfoList extends SelectionInfoList<VideoEntry> {
 
 class LargeVideoDetails extends LargeSelectionDetails<VideoEntry> {
     declare menu: LargeVideoMenu;
+    header: VideoDetailsHeader;
     grid: VideoDetailsGrid;
 
     constructor(menu: LargeVideoMenu) {
         super(menu);
+        this.header = new VideoDetailsHeader(this);
         this.grid = new VideoDetailsGrid(this);
         this.menu.element.appendChild(this.element);
     }
@@ -449,6 +451,30 @@ class LargeVideoDetails extends LargeSelectionDetails<VideoEntry> {
 
     public reset(): void {
         this.grid.reset();
+    }
+}
+
+class VideoDetailsHeader extends MediaDetailsHeader<VideoEntry> {
+    main: VideoMainHeaderRow;
+    
+    constructor(details: LargeSelectionDetails<VideoEntry>) {
+        super(details);
+        this.main = new VideoMainHeaderRow(this);
+    }
+}
+
+class VideoMainHeaderRow extends MediaHeaderRow<VideoEntry> {
+    span: HTMLElement;
+    close: HolderCloseButton<VideoEntry>
+
+    constructor(header: VideoDetailsHeader) {
+        super(header);
+        this.element.classList.add('main');
+
+        this.span = document.createElement('span');
+        this.element.appendChild(this.span);
+
+        this.close = new DetailsCloseButton(this.header.details.menu.holder, this);
     }
 }
 

@@ -325,25 +325,8 @@ class PhotoDetailsHeader extends MediaDetailsHeader<PhotoEntry> {
     }
 }
 
-// abstract base for info in the photo header
-abstract class PhotoHeaderRow {
-    header: PhotoDetailsHeader;
-    element: HTMLElement;
-
-    constructor(header: PhotoDetailsHeader) {
-        this.header = header;
-        this.element = document.createElement('div');
-        this.element.classList.add('row');
-        this.header.element.appendChild(this.element);
-    }
-
-    public toggleVisibility(force: boolean) {
-        this.element.classList.toggle('hide', !force);
-    }
-}
-
 // contains location and a few buttons
-class MainHeaderRow extends PhotoHeaderRow {
+class MainHeaderRow extends MediaHeaderRow<PhotoEntry> {
     location: HTMLElement;
     share: PhotoShareButton;
     fullscreen: DetailsFullscreenButton;
@@ -367,7 +350,7 @@ class MainHeaderRow extends PhotoHeaderRow {
 }
 
 // displays the optional name of the camera the photos were taken with
-class CameraNameRow extends PhotoHeaderRow {
+class CameraNameRow extends MediaHeaderRow<PhotoEntry> {
     name: HTMLElement;
     megapixels: HTMLElement;
 
@@ -407,7 +390,7 @@ class CameraNameRow extends PhotoHeaderRow {
 }
 
 // displays the optional caption in a photo's data
-class DescriptionRow extends PhotoHeaderRow {
+class DescriptionRow extends MediaHeaderRow<PhotoEntry> {
     constructor(header: PhotoDetailsHeader) {
         super(header);
         this.element.classList.add('description');
@@ -484,7 +467,7 @@ class PhotoShareButton extends MediaShareButton {
 
     async onclick(e: PointerEvent): Promise<void> {
         const manager: PageManager = this.row.header.details.menu.holder.manager;
-        const selected: PhotoEntry | null = this.row.header.details.menu.holder.selected;
+        const selected: PhotoEntry | null = (this.row.header as MediaDetailsHeader<PhotoEntry>).details.menu.holder.selected;
 
         if (!selected) return;
 
