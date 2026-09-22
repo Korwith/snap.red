@@ -291,6 +291,10 @@ body.light figure:hover::after {
         &.photo_grid {
             figure {
                 flex-basis: calc(50vw - 10px);
+                min-width: calc(50vw - 10px);
+                min-height: calc(50vw - 10px);
+                max-width: calc(50vw - 10px);
+                max-height: calc(50vw - 10px);
 
                 .date {
                     font-size: 0.9rem;
