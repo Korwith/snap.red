@@ -31,6 +31,8 @@ header {
         .emblem {
             display: flex;
             flex-shrink: 0;
+            align-self: flex-start;
+
             gap: 4px;
             align-items: center;
             padding-right: 8px;
