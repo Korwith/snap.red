@@ -30,8 +30,11 @@ header {
         button,
         .emblem {
             display: flex;
+
+            /* attempted ios 26 fix */
             flex-shrink: 0;
-            align-self: flex-start;
+            min-width: 0;
+            min-height: 0;
 
             gap: 4px;
             align-items: center;
