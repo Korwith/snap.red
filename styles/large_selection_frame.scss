@@ -769,6 +769,7 @@ body {
                     z-index: math.$max-number;
                     opacity: 0;
                     pointer-events: none;
+                    transition: opacity 0.5s;
 
                     i {
                         display: none;

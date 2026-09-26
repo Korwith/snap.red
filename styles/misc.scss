@@ -220,13 +220,12 @@ body.light {
 .blurred_media_frame {
     display: flex;
     align-items: center;
-
     color: white;
     font-weight: 700;
     font-size: 1.1rem;
-    overflow: unset;
     border: 0;
     cursor: pointer;
+    overflow: hidden;
 
     i,
     .arrow {
@@ -253,7 +252,6 @@ body.light {
         height: 100%;
         overflow: hidden;
         box-sizing: border-box;
-        overflow: none;
     }
 
     &::before {
