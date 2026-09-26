@@ -26,6 +26,7 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
 
     public toggleFullscreen(): void {
         super.toggleFullscreen();
+        this.menu.details.grid.updateRowElements();
         this.menu.details.grid.widget.refreshSize();
     }
 
@@ -429,7 +430,7 @@ class PhotoDetailsGrid {
     }
 
     // loads location, person, and month photo rows for the given date
-    load(date: string): void {
+    public load(date: string): void {
         const manager: PageManager = this.details.menu.holder.manager;
         const entry: PhotoEntry | null = manager.fetchImageByDate(date);
         const month: string = date.slice(0, 2);
@@ -459,9 +460,14 @@ class PhotoDetailsGrid {
     }
 
     // removes all photo rows from the grid
-    reset(): void {
+    public reset(): void {
         for (const row of this.photo_rows) row.remove();
         this.photo_rows = [];
+    }
+
+    // make sure row elements have all their children updated
+    public updateRowElements(): void {
+        for (const row of this.photo_rows) row.updateElements();
     }
 }
 

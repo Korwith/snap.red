@@ -108,24 +108,29 @@ abstract class PhotoRow extends MediaHolder {
     }
 
     // sets the text of the row's header label
-    setHeaderText(text: string): void {
+    public setHeaderText(text: string): void {
         this.span.textContent = text;
     }
 
     // removes the internal grid and the row element from the dom
-    remove(): void {
+    public remove(): void {
         this.internal.remove();
         this.element.remove();
     }
 
     // loads photos into the internal grid
-    addQueuedEntry(date: string): void {
+    public addQueuedEntry(date: string): void {
         this.queue.push(date);
 
     }
 
+    public updateElements(): void {
+        const distance: number = this.element.scrollWidth - (this.element.scrollLeft + this.element.clientWidth);
+        if (distance <= 100) this.loadPhotoBatch();
+    }
+
     // loads a few photos when the user is close to the end of the scrolling frame
-    loadPhotoBatch(): void {
+    public loadPhotoBatch(): void {
         const count: number = this.queue.length >= 5 ? 5 : this.queue.length;
         for (let i = 0; i < count; i++) {
             const date: string = this.queue[i];
@@ -134,7 +139,7 @@ abstract class PhotoRow extends MediaHolder {
         this.queue.splice(0, count);
     }
 
-    abstract loadQueue(): void;
+    public abstract loadQueue(): void;
 }
 
 // the inner photo grid that sits inside a photo row
@@ -148,13 +153,12 @@ class PhotoRowInternal extends PhotoGrid {
         this.element.onscroll = () => this.scrolled();
     }
 
-    scrolled(): void {
-        const distance: number = this.element.scrollWidth - (this.element.scrollLeft + this.element.clientWidth);
-        if (distance <= 100) this.row.loadPhotoBatch();
+    protected scrolled(): void {
+        this.row.updateElements();
     }
 
     // removes all photos and detaches the grid element
-    remove(): void {
+    public remove(): void {
         this.clear();
         this.element.remove();
     }
@@ -177,7 +181,7 @@ class PhotoRowLocation extends PhotoRow {
     }
 
     // populates the row with all photos from this location
-    loadQueue(): void {
+    public loadQueue(): void {
         const matches: PhotoDatabase = this.manager.fetchUserImagesByLocation(this.location);
         if (Object.keys(matches).length <= 1) return this.remove();
 
