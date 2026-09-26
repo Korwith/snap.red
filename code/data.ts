@@ -1367,6 +1367,11 @@ const Data: Database = {
                 name: 'Heather Ridge',
                 id: [6461, 6473, 6449],
                 camera: CameraConfigApple14,
+                gps: {
+                    6461: [39.43753957, -77.41466463],
+                    6473: [39.43972132, -77.41174368],
+                    6449: [39.446144, -77.410722]
+                }
             },
             '12/17/24': {
                 name: 'Rosemont',
