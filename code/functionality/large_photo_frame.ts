@@ -457,6 +457,8 @@ class PhotoDetailsGrid {
             const camera_pane: PhotoRowCamera = new PhotoRowCamera(manager, this.element, entry.camera, date);
             this.photo_rows.push(camera_pane);
         }
+
+        this.updateRowElements();
     }
 
     // removes all photo rows from the grid
