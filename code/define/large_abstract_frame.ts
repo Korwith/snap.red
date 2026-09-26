@@ -17,6 +17,7 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
 
         this.element = document.createElement('div');
         this.element.classList.add('large_selection_frame', 'figure_visible');
+        this.element.onclick = (e: PointerEvent) => this.onclick(e);
         window.onresize = () => this.updateFigureVisibility();
         this.updateFigureVisibility();
 
@@ -61,6 +62,12 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
         const how_visible: number = Math.min(header_bottom - figure_rect.bottom, 50);
         this.element.classList.toggle('figure_visible', visible);
         this.element.style.setProperty('--top-offset', `${how_visible < 0 ? 0 : how_visible}px`);
+    }
+
+    // incase the user wants to navigate out of the frame
+    protected onclick(e: PointerEvent): void {
+        // must not be a subchild
+        if (e.target == this.element) this.toggle(false);
     }
 
     protected abstract keypress(e: KeyboardEvent): void;
