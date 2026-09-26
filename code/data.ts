@@ -1356,6 +1356,12 @@ const Data: Database = {
                 id: [6578, 6573, 6594, 6632, 6608],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    6578: [39.41295, -77.410642],
+                    6573: [39.412858, -77.410189],
+                    6594: [39.414217, -77.410856],
+                    // UNKNOWN: 6632, 6608
+                }
             },
             '12/23/24': {
                 name: 'Heather Ridge',
