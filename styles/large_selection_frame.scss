@@ -36,6 +36,17 @@ body {
                 aspect-ratio: unset;
                 width: 100vw;
                 height: 100vh;
+                border-radius: 0;
+
+                figure.main {
+                    &, img, &::after {
+                        border-radius: 0;
+                    }
+
+                    .info {
+                        border-top-left-radius: 0;
+                    }
+                }
             }
 
             aside {
