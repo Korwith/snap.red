@@ -60,6 +60,9 @@ const Data: Database = {
             '09/21/26': {
                 name: 'Frederick Fair',
                 id: [5916, 5866, 5973, 5978],
+                people: ['Brittany'],
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
                 camera: CameraConfigApple14,
             },
             '09/16/26': {
