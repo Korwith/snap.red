@@ -14,9 +14,14 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
 
     constructor(manager: PageManager) {
         this.manager = manager;
+
         this.element = document.createElement('div');
-        this.element.classList.add('large_selection_frame');
+        this.element.classList.add('large_selection_frame', 'figure_visible');
+        window.onresize = () => this.updateFigureVisibility();
+        this.updateFigureVisibility();
+
         this.selected = null;
+
         manager.element.appendChild(this.element);
     }
 
@@ -37,6 +42,27 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
         this.element.classList.toggle('fullscreen', force);
     }
 
+    public updateFigureVisibility(): void {
+        if (!this.menu?.figure?.element) return;
+
+        // if on desktop, the figure is visible
+        if (!window.matchMedia("(max-width: 767px)").matches) return this.element.classList.add('figure_visible');
+
+        // if on mobile
+        const header_element: HTMLElement = this.manager.header.element;
+        const menu_element: HTMLElement | null = this.menu.element;
+        const figure_element: HTMLElement | null = this.menu?.figure?.element;
+        if (!menu_element || !figure_element) return;
+
+        const header_bottom: number = header_element.getBoundingClientRect().bottom;
+        const figure_rect: DOMRect = figure_element.getBoundingClientRect();
+
+        const visible: boolean = figure_rect.bottom > header_bottom && figure_rect.top < window.innerHeight;
+        const how_visible: number = Math.min(header_bottom - figure_rect.bottom, 50);
+        this.element.classList.toggle('figure_visible', visible);
+        this.element.style.setProperty('--top-offset', `${how_visible < 0 ? 0 : how_visible}px`);
+    }
+
     protected abstract keypress(e: KeyboardEvent): void;
 }
 
@@ -50,6 +76,10 @@ abstract class LargeSelectionMenu<T extends PhotoEntry | VideoEntry = PhotoEntry
         this.holder = holder;
         this.element = document.createElement('article');
         this.element.classList.add('menu');
+
+        // this is scrollable on mobile - not pc
+        this.element.onscroll = () => this.holder.updateFigureVisibility();
+
         this.holder.element.appendChild(this.element);
     }
 }

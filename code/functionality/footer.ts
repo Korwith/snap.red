@@ -4,7 +4,6 @@
  */
 
 // page navigation for mobile
-
 // mobile footer navigation bar with page and sidebar controls
 class PageFooter {
     manager: PageManager;
@@ -33,7 +32,7 @@ class PageFooter {
 
     // propogates and makes visibile the "currently selected entry" frame
     public assignSelectedEntry(date: string): void {
-        this.last_selected.load(date);
+        this.last_selected.loadByDate(date);
     }
 
     // changes if the selected pane is visibile
@@ -70,44 +69,17 @@ class PageFooterPageControl extends PageFooterBar {
     }
 }
 
-class CurrentlySelectedEntry extends PageFooterBar {
-    icon: HTMLElement;
-    location_text: HTMLElement;
-    arrow: HTMLElement;
-
-    selected_date?: string;
+class CurrentlySelectedEntry extends BlurredMediaButton {
+    footer: PageFooter;
 
     constructor(footer: PageFooter) {
-        super(footer);
-        this.element.classList.add('selected');
-        this.element.onclick = () => this.onclick();
-
-        this.icon = document.createElement('div');
-        this.icon.classList.add('icon');
-        this.element.appendChild(this.icon);
-
-        this.location_text = document.createElement('span');
-        this.location_text.classList.add('location');
-        this.element.appendChild(this.location_text)
-
-        this.arrow = document.createElement('div');
-        this.arrow.classList.add('arrow');
-        this.element.appendChild(this.arrow);
+        super(footer.manager, footer.element);
+        this.footer = footer;
+        this.element.classList.add('selected', 'bar');
     }
 
-    public load(date: string) {
-        const entry: PhotoEntry | null = this.footer.manager.fetchImageByDate(date);
-        if (!entry) throw new Error('not good');
-        this.selected_date = date;
-        this.location_text.textContent = entry.name;
-
-        const path: string | null = this.footer.manager.fetchPhotoPathByDate(date, entry.id[0]);
-        if (path) this.element.style.setProperty('--image-url', `url(${path})`)
-            else this.element.style.removeProperty('--image-url');
-    }
-
-    private onclick(): void {
-        if (this.selected_date) this.footer.manager.openImageByDate(this.selected_date);
+    protected onclick(e: PointerEvent): void {
+        if (this.date) this.footer.manager.openImageByDate(this.date);
     }
 }
 

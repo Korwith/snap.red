@@ -16,7 +16,7 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
 
     // loads the photo and its details for the given date and shows the overlay
     public openImageByDate(date: string, user?: string, index?: number): void {
-        const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
+        const entry: PhotoEntry | null = this.manager.fetchImageByDate(date, user);
         this.selected = entry;
 
         this.menu.figure.load(date, index);
@@ -119,7 +119,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
                 if (path) img.setAttribute('src', path);
                 else img.removeAttribute('src');
             }
-            
+
             img.style.left = `${parseInt(index) * 100}%`;
             this.images.push(img);
             this.element.appendChild(img);
@@ -273,12 +273,14 @@ class FigureNavigationRight extends FigureNavigation {
 // side panel showing related photo rows for the currently viewed photo
 class MainPhotoDetails extends LargeSelectionDetails {
     declare menu: LargePhotoMenu;
+    scroll_top_button: PhotoScrollTop;
 
     // creates the aside panel with a header and photo row grid
     constructor(menu: LargePhotoMenu) {
         super(menu);
         this.header = new PhotoDetailsHeader(this);
         this.grid = new PhotoDetailsGrid(this);
+        this.scroll_top_button = new PhotoScrollTop(this);
         this.menu.element.appendChild(this.element);
     }
 
@@ -289,6 +291,7 @@ class MainPhotoDetails extends LargeSelectionDetails {
         if (!entry) throw new Error('No photos found at date');
         this.header.displayPhotoDetails(entry);
         this.grid.load(date);
+        this.scroll_top_button.loadByDate(date);
     }
 
     // delegates to loadPhotoDetails for the given date
@@ -420,6 +423,9 @@ class PhotoDetailsGrid {
         this.element.classList.add('grid_holder');
         this.element.appendChild(this.widget.element);
         this.details.element.appendChild(this.element);
+
+        // this aside element is scrollable on desktop - not mobile
+        this.element.onscroll = () => this.details.menu.holder.updateFigureVisibility()
     }
 
     // loads location, person, and month photo rows for the given date
@@ -550,5 +556,24 @@ class AsideMapWidget extends MapWidget {
         } else {
             this.toggleVisibility(false);
         }
+    }
+}
+
+class PhotoScrollTop extends BlurredMediaButton {
+    details: MainPhotoDetails;
+
+    constructor(details: MainPhotoDetails) {
+        super(details.menu.holder.manager, details.element);
+        this.element.classList.add('photo_scroll_top');
+        this.details = details;
+    }
+
+    public loadByDate(date: string): void {
+        super.loadByDate(date);
+        this.location.textContent = 'Back to Top';
+    }
+
+    protected onclick(e: PointerEvent) {
+        this.details.menu?.figure?.element.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
 }

@@ -4,6 +4,7 @@
  */
 
 @use 'vars';
+@use 'sass:math';
 
 body {
     .large_selection_frame {
@@ -20,6 +21,15 @@ body {
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s;
+
+        &:not(.figure_visible) {
+            .menu {
+                .photo_scroll_top {
+                    opacity: 1;
+                    pointer-events: unset;
+                }
+            }
+        }
 
         &.fullscreen {
             article {
@@ -746,6 +756,36 @@ body {
                         }
                     }
                 }
+
+                .photo_scroll_top {
+                    width: 100vw;
+                    height: 45px;
+                    position: fixed;
+                    top: var(--top-offset, 0);
+                    left: 0;
+                    padding: 5px;
+                    gap: 6px;
+                    /* lol */
+                    z-index: math.$max-number;
+                    opacity: 0;
+                    pointer-events: none;
+
+                    i {
+                        display: none;
+                        height: calc(100% - 5px);
+                    }
+
+                    &,
+                    &::before,
+                    &::after {
+                        border-bottom-left-radius: 12px;
+                        border-bottom-right-radius: 12px;
+                    }
+
+                    .arrow {
+                        order: -1;
+                    }
+                }
             }
 
             &::before {
@@ -803,7 +843,8 @@ body {
                                 filter: invert(1);
                             }
 
-                            &.description, &.description::after {
+                            &.description,
+                            &.description::after {
                                 color: rgba(0, 0, 0, 0.8);
                                 text-shadow: 2px 2px 4px #fff;
                             }
