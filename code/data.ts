@@ -54,8 +54,16 @@ const Data: Database = {
         images: {
             '09/25/26': {
                 name: 'Gambrill State Park',
-                id: [6008, 6019, 6024, 6036, 6038, 6050],
-                camera: CameraConfigApple14
+                id: [6019, 6008, 6024, 6036, 6038, 6050],
+                camera: CameraConfigApple14,
+                gps: {
+                    6019: [39.469753, -77.494208],
+                    6008: [39.514753, -77.488681],
+                    6024: [39.461472, -77.495164],
+                    6036: [39.461472, -77.495164],
+                    6038: [39.461928, -77.496117],
+                    // UNSPECIFIED: 6050
+                }
             },
             '09/21/26': {
                 name: 'Frederick Fair',
