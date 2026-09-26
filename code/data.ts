@@ -57,6 +57,11 @@ const Data: Database = {
                 id: [6008, 6019, 6024, 6036, 6038, 6050],
                 camera: CameraConfigApple14
             },
+            '09/21/26': {
+                name: 'Frederick Fair',
+                id: [5916, 5866, 5973, 5978],
+                camera: CameraConfigApple14,
+            },
             '09/16/26': {
                 name: 'Gambrill State Park',
                 id: [5691, 5685, 5645, 5688, 5671, 5696],
