@@ -857,6 +857,19 @@ body {
     }
 }
 
+@media screen and (max-width: 1127px) {
+    body {
+        .large_selection_frame {
+            .menu {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100dvh;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 767px) {
     body {
         .large_selection_frame {
