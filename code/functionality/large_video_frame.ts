@@ -465,6 +465,7 @@ class VideoDetailsHeader extends MediaDetailsHeader<VideoEntry> {
 
 class VideoMainHeaderRow extends MediaHeaderRow<VideoEntry> {
     span: HTMLElement;
+    fullscreen: DetailsFullscreenButton;
     close: HolderCloseButton<VideoEntry>
 
     constructor(header: VideoDetailsHeader) {
@@ -474,6 +475,7 @@ class VideoMainHeaderRow extends MediaHeaderRow<VideoEntry> {
         this.span = document.createElement('span');
         this.element.appendChild(this.span);
 
+        this.fullscreen = new DetailsFullscreenButton(this);
         this.close = new DetailsCloseButton(this.header.details.menu.holder, this);
     }
 }
