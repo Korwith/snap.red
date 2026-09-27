@@ -240,6 +240,10 @@ body {
                                     @include vars.icon-config(url(../icon/exit.svg), 70%);
                                 }
 
+                                &.fullscreen::after {
+                                    @include vars.icon-config(url(../icon/fullscreen_video.svg), 68%);
+                                }
+
                                 &:hover {
                                     filter: brightness(0.8);
                                 }

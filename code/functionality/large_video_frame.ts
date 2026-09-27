@@ -166,6 +166,10 @@ class EmbeddedVideoPlayer {
         this.sendIFrameCommand('seekTo', [set_time, true]);
     }
 
+    public requestFullscreen(): void {
+        this.iframe.requestFullscreen();
+    }
+
     public reset(): void {
         this.iframe.removeAttribute('src');
         this.iframe.classList.remove('loaded');
@@ -206,7 +210,7 @@ class EmbeddedVideoPlayer {
             }
         }
         catch {
-            // Suppress unparseable YouTube API messages
+            // ignore strange event
         }
     }
 
@@ -239,6 +243,7 @@ class VideoTitleBox extends VideoInformationBox {
     playback_control: VideoPlaybackButton;
     skip_backward: VideoTimeControlButton;
     skip_forward: VideoTimeControlButton;
+    fullscreen: VideoFullscreenButton;
     close: VideoCloseButton;
 
     constructor(player: EmbeddedVideoPlayer) {
@@ -252,6 +257,7 @@ class VideoTitleBox extends VideoInformationBox {
         this.playback_control = new VideoPlaybackButton(this);
         this.skip_backward = new VideoTimeControlButton(this, 'backward');
         this.skip_forward = new VideoTimeControlButton(this, 'forward')
+        this.fullscreen = new VideoFullscreenButton(this);
         this.close = new VideoCloseButton(this);
     }
 
@@ -292,8 +298,6 @@ class VideoTimeControlButton extends VideoNavigationButton {
     constructor(box: VideoInformationBox, direction: 'forward' | 'backward') {
         super(box);
         this.direction = direction;
-
-        // this.element.textContent = direction == 'forward' ? '+10s' : '-10s';
         this.element.classList.add('time', 'square', direction);
     }
 
@@ -318,6 +322,17 @@ class VideoPlaybackButton extends VideoNavigationButton {
 
     protected onclick(): void {
         this.box.player.toggleVideoPlayback();
+    }
+}
+
+class VideoFullscreenButton extends VideoNavigationButton {
+    constructor(box: VideoInformationBox) {
+        super(box);
+        this.element.classList.add('square', 'fullscreen');
+    }
+
+    protected onclick(): void {
+        this.box.player.requestFullscreen();
     }
 }
 
@@ -395,8 +410,6 @@ class UploaderSubscribeLink extends UploaderLink {
 
     public setLink(new_user?: string): void {
         const manager: PageManager = this.uploader.player.figure.menu.holder.manager;
-
-        // Update the stored user if a new one was provided, otherwise fallback to fetch
         this.user = new_user ?? this.user ?? manager.fetchUserName();
 
         const socials: ProfileSocialDatabase = manager.fetchUserSocialDatabase(this.user);
