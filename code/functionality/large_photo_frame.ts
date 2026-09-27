@@ -146,6 +146,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
     public setSelectedPhoto(index: number): void {
         if (index < 0 || index >= this.images.length) return;
         this.element.setAttribute('selected', index.toString());
+        this.element.setAttribute('total', this.images.length.toString());
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', this.images.length === 1 || index + 1 >= this.images.length);
         this.menu.details.grid.widget.showImageMarker(index);
@@ -246,7 +247,24 @@ class LargePhotoFigure extends LargeSelectionFigure {
             return;
         }
 
-        const offset = this.touch_drag_now - this.touch_drag_start;
+        const selected: number = Number(this.menu.figure.element.getAttribute('selected'));
+        const total: number = Number(this.menu.figure.element.getAttribute('total'));
+        let offset = this.touch_drag_now - this.touch_drag_start;
+        const threshold: number = window.innerWidth / 12;
+
+        const applyResistance = (pull_distance: number, threshold_distance: number, resistance = 0.35): number => {
+            if (pull_distance <= threshold_distance) return pull_distance;
+            const excess = pull_distance - threshold_distance;
+            const clamped_excess = threshold_distance * Math.log1p((excess * resistance) / threshold_distance);
+            return threshold_distance + clamped_excess;
+        };
+
+        if (selected === 0 && offset > threshold) offset = applyResistance(offset, threshold);
+        else if (selected === total - 1 && offset < -threshold) {
+            const clamped_distance: number = applyResistance(Math.abs(offset), threshold);
+            offset = -clamped_distance;
+        }
+
         this.element.style.setProperty('--img-offset', `${Math.abs(offset) > 20 ? offset : 0}px`);
     }
 }
