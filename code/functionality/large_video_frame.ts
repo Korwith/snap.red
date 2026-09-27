@@ -167,7 +167,16 @@ class EmbeddedVideoPlayer {
     }
 
     public requestFullscreen(): void {
-        this.iframe.requestFullscreen();
+        const iframe = this.iframe as HTMLIFrameElement & {
+            webkitRequestFullscreen?: () => Promise<void>;
+            mozRequestFullScreen?: () => Promise<void>;
+            msRequestFullscreen?: () => Promise<void>;
+        };
+
+        if (iframe.requestFullscreen) iframe.requestFullscreen();
+        else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+        else if (iframe.mozRequestFullScreen) iframe.mozRequestFullScreen();
+        else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
     }
 
     public reset(): void {
@@ -469,7 +478,7 @@ class LargeVideoDetails extends LargeSelectionDetails<VideoEntry> {
 
 class VideoDetailsHeader extends MediaDetailsHeader<VideoEntry> {
     main: VideoMainHeaderRow;
-    
+
     constructor(details: LargeSelectionDetails<VideoEntry>) {
         super(details);
         this.main = new VideoMainHeaderRow(this);
