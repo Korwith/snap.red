@@ -39,7 +39,10 @@ body {
                 border-radius: 0;
 
                 figure.main {
-                    &, img, &::after {
+
+                    &,
+                    img,
+                    &::after {
                         border-radius: 0;
                     }
 
@@ -379,6 +382,25 @@ body {
             }
         }
 
+        &.main_photo_holder {
+            figure.main {
+                img {
+                    transform: translateX(calc(var(--left-percentage, 0%) + var(--img-offset, 0px)));
+                    transition: transform 0.3s ease-out;
+
+                    &:not(.show) {
+                        visibility: hidden;
+                    }
+                }
+
+                &.animating {
+                    img {
+                        transition: none;
+                    }
+                }
+            }
+        }
+
         .menu {
             position: relative;
             display: flex;
@@ -442,7 +464,6 @@ body {
 
                 img {
                     border-radius: 0;
-                    transition: left 0.5s;
                 }
 
                 button {
@@ -878,6 +899,20 @@ body {
                 left: 0;
                 width: 100vw;
                 height: 100dvh;
+                border-radius: 0;
+
+                figure.main {
+
+                    &,
+                    &::after,
+                    img {
+                        border-radius: 0;
+                    }
+
+                    .info {
+                        border-top-left-radius: 0;
+                    }
+                }
             }
         }
     }
@@ -939,7 +974,10 @@ body {
                 scrollbar-width: none;
                 width: 100%;
                 height: 100%;
-                border-radius: 0;
+
+                &:has(figure[style*="--img-offset"]:not([style*="--img-offset: 0px"]):not([style*="--img-offset:0px"]):not([style*="--img-offset: 0"]):not([style*="--img-offset:0"])) {
+                    overflow-y: hidden;
+                }
 
                 figure.main {
                     border-radius: 0;

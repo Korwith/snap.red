@@ -48,6 +48,12 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
                 break;
         }
     }
+
+    // incase the user clicks out
+    protected onclick(e: PointerEvent): void {
+        const swipe_property: string = this.menu.figure.element.style.getPropertyValue('--img-offset');
+        if (swipe_property == '0px') super.onclick(e);
+    }
 }
 
 // article element containing the main photo figure and its detail sidebar
@@ -77,6 +83,9 @@ class LargePhotoFigure extends LargeSelectionFigure {
     images: Array<HTMLElement>;
     selected: number;
 
+    touch_drag_start?: number;
+    touch_drag_now?: number;
+
     // builds the figure with info overlay, navigation buttons, and close button
     constructor(menu: LargePhotoMenu) {
         super(menu);
@@ -88,6 +97,11 @@ class LargePhotoFigure extends LargeSelectionFigure {
 
         this.images = [];
         this.selected = 0;
+
+        this.element.addEventListener('touchstart', (e: TouchEvent) => this.touchStart(e));
+        this.element.addEventListener('touchend', (e: TouchEvent) => this.touchEnd(e));
+        this.element.addEventListener('mousedown', (e: MouseEvent) => this.touchStart(e));
+        this.element.addEventListener('mouseup', (e: MouseEvent) => this.touchEnd(e));
 
         this.element.classList.add('main');
         this.element.appendChild(this.caption);
@@ -114,6 +128,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
             const img: HTMLElement = document.createElement('img');
             img.setAttribute('loading', parseInt(index) === 0 ? 'eager' : 'lazy');
             img.setAttribute('id', id.toString());
+            img.setAttribute('draggable', 'false');
 
             if (this.date) {
                 const path: string | null = manager.fetchPhotoPathByDate(this.date, id);
@@ -121,7 +136,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
                 else img.removeAttribute('src');
             }
 
-            img.style.left = `${parseInt(index) * 100}%`;
+            img.style.setProperty('--left-percentage', `${parseInt(index) * 100}%`);
             this.images.push(img);
             this.element.appendChild(img);
         }
@@ -130,6 +145,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
     // sets the selected photo to a specific index
     public setSelectedPhoto(index: number): void {
         if (index < 0 || index >= this.images.length) return;
+        this.element.setAttribute('selected', index.toString());
         this.element.classList.toggle('hide_left', index - 1 < 0);
         this.element.classList.toggle('hide_right', this.images.length === 1 || index + 1 >= this.images.length);
         this.menu.details.grid.widget.showImageMarker(index);
@@ -140,7 +156,8 @@ class LargePhotoFigure extends LargeSelectionFigure {
         for (const key in this.images) {
             const keynum: number = parseInt(key);
             const image: HTMLElement = this.images[keynum];
-            image.style.left = `${(keynum - index) * 100}%`;
+            image.style.setProperty('--left-percentage', `${(keynum - index) * 100}%`);
+            image.classList.toggle('show', Math.abs(keynum - index) <= 1);
         }
 
         this.selected = index;
@@ -180,6 +197,57 @@ class LargePhotoFigure extends LargeSelectionFigure {
             image.remove();
         }
         this.images = [];
+    }
+
+    private onTouchMove = (e: TouchEvent | MouseEvent) => this.touchDrag(e);
+    private onTouchEnd = (e: TouchEvent | MouseEvent) => this.touchEnd(e);
+
+    private touchStart(e: TouchEvent | MouseEvent): void {
+        this.element.classList.add('animating');
+
+        const clientX = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
+        this.touch_drag_start = clientX;
+        this.touch_drag_now = clientX;
+
+        window.addEventListener('touchmove', this.onTouchMove);
+        window.addEventListener('mousemove', this.onTouchMove);
+        window.addEventListener('touchend', this.onTouchEnd);
+        window.addEventListener('mouseup', this.onTouchEnd);
+    }
+
+    private touchEnd(e: TouchEvent | MouseEvent): void {
+        this.element.classList.remove('animating');
+
+        if (this.touch_drag_start && this.touch_drag_now) {
+            const offset = this.touch_drag_now - this.touch_drag_start;
+            const threshold = this.element.clientWidth * 0.3;
+
+            if (offset <= -threshold) this.shiftSelectedPhoto(1);
+            else if (offset >= threshold) this.shiftSelectedPhoto(-1);
+        }
+
+        this.touch_drag_start = undefined;
+        this.touch_drag_now = undefined;
+        requestAnimationFrame(() => {
+            this.element.style.setProperty('--img-offset', '0px');
+        });
+
+        window.removeEventListener('touchmove', this.onTouchMove);
+        window.removeEventListener('mousemove', this.onTouchMove);
+        window.removeEventListener('touchend', this.onTouchEnd);
+        window.removeEventListener('mouseup', this.onTouchEnd);
+    }
+
+    private touchDrag(e: TouchEvent | MouseEvent): void {
+        this.touch_drag_now = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
+
+        if (this.touch_drag_start === undefined || this.touch_drag_now === undefined) {
+            this.element.style.removeProperty('--img-offset');
+            return;
+        }
+
+        const offset = this.touch_drag_now - this.touch_drag_start;
+        this.element.style.setProperty('--img-offset', `${offset}px`);
     }
 }
 
