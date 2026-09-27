@@ -247,7 +247,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
         }
 
         const offset = this.touch_drag_now - this.touch_drag_start;
-        this.element.style.setProperty('--img-offset', `${offset}px`);
+        this.element.style.setProperty('--img-offset', `${Math.abs(offset) > 20 ? offset : 0}px`);
     }
 }
 
