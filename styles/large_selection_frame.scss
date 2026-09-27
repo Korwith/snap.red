@@ -956,6 +956,12 @@ body {
 
                     .video_player_holder {
                         >span {
+                            &.title {
+                                button.fullscreen {
+                                    display: none;
+                                }
+                            }
+
                             &.description {
                                 flex: unset;
                                 max-height: 150px;
