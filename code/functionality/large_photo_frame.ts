@@ -11,6 +11,7 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
     constructor(manager: PageManager) {
         super(manager);
         this.element.classList.add('main_photo_holder');
+        this.element.style.setProperty('--img-offset', '0px');
         this.menu = new LargePhotoMenu(this);
     }
 
