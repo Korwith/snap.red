@@ -1446,11 +1446,17 @@ const Data: Database = {
                 id: [5629, 5653, 5635, 5636, 5644, 5648, 5657, 5673, 5682],
                 people: ['Riley', 'Matt'],
                 camera: CameraConfigApple14,
+                // GPS LATER
             },
             '11/12/24': {
                 name: 'Amber Meadows',
                 id: [5494, 5490, 5498],
                 camera: CameraConfigApple14,
+                gps: {
+                    5494: [39.429839, -77.412781],
+                    5490: [39.429839, -77.412781],
+                    5498: [39.450153, -77.412214]
+                }
             },
             '10/27/24': {
                 name: 'Clerestory Park',
