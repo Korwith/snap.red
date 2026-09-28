@@ -11,7 +11,6 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
     constructor(manager: PageManager) {
         super(manager);
         this.element.classList.add('main_photo_holder');
-        this.element.style.setProperty('--img-offset', '0px');
         this.menu = new LargePhotoMenu(this);
     }
 
@@ -53,7 +52,7 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
     // incase the user clicks out
     protected onclick(e: PointerEvent): void {
         const swipe_property: string = this.menu.figure.element.style.getPropertyValue('--img-offset');
-        if (swipe_property == '0px') super.onclick(e);
+        if (swipe_property == '0px' || swipe_property.length == 0) super.onclick(e);
     }
 }
 
