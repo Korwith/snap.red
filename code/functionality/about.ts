@@ -24,6 +24,8 @@ class PageAbout extends Page {
         this.addDescription('The purpose of this project is a personal replacement to large social media services for the purposes of photo sharing. The project is entirely written in TypeScript, HTML, and CSS. Forever a work in progress.');
         this.addDescription('This project was written entirely by Thaddeus M.');
         this.addDescription('This project utilizes the open source JavaScript mapping library, Leaflet.');
+        this.addDescription('This project is open source.');
+        this.addDescription('&copy; snap.red');
         this.addDescription('&copy; kircic.org');
     }
 
