@@ -1427,12 +1427,19 @@ const Data: Database = {
                 id: [5858, 5845, 5851, 5854, 5863, 5869, 5881, 5900],
                 people: ['Riley'],
                 camera: CameraConfigApple14,
+                // GPS LATER
             },
             '11/23/24': {
                 name: 'Downtown Frederick',
                 id: [5798, 5779, 5769, 5780],
                 people: ['Redacted A'],
                 camera: CameraConfigApple14,
+                gps: {
+                    5798: [39.412872, -77.409681],
+                    // UNKNOWN: 5779
+                    5769: [39.411911, -77.405597],
+                    5780: [39.414103, -77.410906]
+                }
             },
             '11/19/24': {
                 name: 'White Rock',
