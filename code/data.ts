@@ -1404,6 +1404,11 @@ const Data: Database = {
                 name: 'Amber Meadows',
                 id: [6030, 6029, 6018],
                 camera: CameraConfigApple14,
+                gps: {
+                    6030: [39.448925, -77.410664],
+                    // UNKNOWN: 6029
+                    6018: [39.448925, -77.410664],
+                }
             },
             '11/30/24': {
                 name: 'Downtown Frederick',
