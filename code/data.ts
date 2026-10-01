@@ -52,6 +52,11 @@ const Data: Database = {
         },
 
         images: {
+            '09/30/26': {
+                name: 'Gambrill State Park',
+                id: [6097, 6123, 6109, 6111, 6113],
+                camera: CameraConfigApple14,
+            },
             '09/26/26': {
                 name: 'Fountain Rock Park',
                 id: [6060, 6069, 6067],
