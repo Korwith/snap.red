@@ -1485,6 +1485,12 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: [5176, 5190, 5191, 5187],
                 camera: CameraConfigApple14,
+                gps: {
+                    5176: [39.417081, -77.414456],
+                    5190: [39.414028, -77.414822],
+                    5191: [39.416808, -77.413911],
+                    5187: [39.415214, -77.414811]
+                }
             },
             '10/23/24': {
                 name: 'Patomac Commons',
