@@ -390,7 +390,7 @@ body {
             figure.main {
                 img {
                     transform: translateX(calc(var(--left-percentage, 0%) + var(--img-offset, 0px)));
-                    transition: transform 0.3s ease-out;
+                    transition: transform 0.4s ease-out;
 
                     &:not(.show) {
                         visibility: hidden;
