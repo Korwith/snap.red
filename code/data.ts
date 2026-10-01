@@ -1474,6 +1474,12 @@ const Data: Database = {
                 name: 'Clerestory Park',
                 id: [5209, 5219, 5212, 5196],
                 camera: CameraConfigApple14,
+                gps: {
+                    5209: [39.465128, -77.392772],
+                    5219: [39.465128, -77.392772],
+                    5212: [39.465128, -77.392772],
+                    5196: [39.458183, -77.4084],
+                }
             },
             '10/26/24': {
                 name: 'Downtown Frederick',
