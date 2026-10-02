@@ -204,6 +204,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
     private onTouchEnd = (e: TouchEvent | MouseEvent) => this.touchEnd(e);
 
     private touchStart(e: TouchEvent | MouseEvent): void {
+        if (e instanceof TouchEvent && !e.cancelable) return;
         this.element.classList.add('animating');
 
         const clientX = e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
