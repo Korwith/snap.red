@@ -52,6 +52,15 @@ const Data: Database = {
         },
 
         images: {
+            '10/10/26': {
+                name: 'Columbia, MD',
+                id: [6515, 6537, 6467, 6526],
+                people: ['Brittany'],
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
+                camera: CameraConfigApple14
+                // gps later
+            },
             '10/05/26': {
                 name: 'Gambrill State Park',
                 id: [6332, 6336, 6311],
