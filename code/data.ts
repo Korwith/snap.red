@@ -52,6 +52,19 @@ const Data: Database = {
         },
 
         images: {
+            '10/12/26': {
+                name: 'Downtown Frederick',
+                id: [6613, 6642, 6676],
+                people: ['Brittany'],
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
+                camera: CameraConfigApple14
+            },
+            '10/11/26': {
+                name: 'Gambrill State Park',
+                id: [6594, 6587, 6590, 6592, 6593, 6596],
+                camera: CameraConfigApple14,
+            },
             '10/10/26': {
                 name: 'Columbia, MD',
                 id: [6515, 6537, 6467, 6526],
