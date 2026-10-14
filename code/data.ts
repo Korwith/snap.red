@@ -63,9 +63,9 @@ const Data: Database = {
             },
             '10/08/26': {
                 name: 'Downtown Frederick',
-                id: [6405, 6410, 6413, 6431, 6443],
+                id: ["DSCN5824", 6405, 6410, 6413, 6431, 6443],
                 people: ['Edin'],
-                camera: CameraConfigApple14
+                camera: CameraConfigNikonS7000,
                 // gps later
             },
             '10/05/26': {
