@@ -71,8 +71,13 @@ const Data: Database = {
                 people: ['Brittany'],
                 custom_icons: EntryIconHeart,
                 hover_color: HoverColorPink,
-                camera: CameraConfigApple14
-                // gps later
+                camera: CameraConfigApple14,
+                gps: {
+                    6515: [39.209053, -76.862389],
+                    6537: [39.208817, -76.862550],
+                    6467: [39.224136, -76.860833],
+                    6526: [39.208972, -76.862419]
+                }
             },
             '10/08/26': {
                 name: 'Downtown Frederick',
