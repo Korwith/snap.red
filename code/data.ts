@@ -100,8 +100,15 @@ const Data: Database = {
                 name: 'Downtown Frederick',
                 id: [6202, 6186, 6191, 6196, 6165, 6152],
                 people: ['Brittany', 'Edin'],
-                camera: CameraConfigApple14
-                // gps later
+                camera: CameraConfigApple14,
+                gps: {
+                    6202: [39.415092, -77.414847],
+                    6186: [39.412747, -77.410181],
+                    6191: [39.412664, -77.407072],
+                    6196: [39.414614, -77.414794],
+                    6165: [39.414239, -77.411047],
+                    6152: [39.415614, -77.412514]
+                }
             },
             '09/30/26': {
                 name: 'Gambrill State Park',
