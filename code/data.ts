@@ -58,7 +58,12 @@ const Data: Database = {
                 people: ['Brittany'],
                 custom_icons: EntryIconHeart,
                 hover_color: HoverColorPink,
-                camera: CameraConfigApple14
+                camera: CameraConfigApple14,
+                gps: {
+                    6613: [39.414597, -77.414811],
+                    6642: [39.415447, -77.411383],
+                    6676: [39.415744, -77.416192]
+                }
             },
             '10/11/26': {
                 name: 'Gambrill State Park',
