@@ -63,7 +63,7 @@ const Data: Database = {
                     6613: [39.414597, -77.414811],
                     6642: [39.415447, -77.411383],
                     6676: [39.415744, -77.416192]
-                } //
+                }
             },
             '10/11/26': {
                 name: 'Gambrill State Park',
@@ -383,6 +383,7 @@ const Data: Database = {
                     'DSCN5546': [39.7120455, -77.5239494]
                 }
             },
+            /*
             '08/13/26': {
                 name: 'Gambrill State Park',
                 id: ['DSCN5411', 'DSCN5416', 'DSCN5443', 'DSCN5405'],
@@ -396,7 +397,7 @@ const Data: Database = {
                     'DSCN5443': [39.4156511, -77.4149637],
                     'DSCN5405': [39.4619515, -77.4962949],
                 }
-            },
+            },*/
             '08/11/26': {
                 name: 'Fountain Rock Park',
                 id: ['DSCN5378', 'DSCN5373', 'DSCN5385'],
