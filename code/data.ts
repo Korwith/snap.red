@@ -52,6 +52,15 @@ const Data: Database = {
         },
 
         images: {
+            '10/18/26': {
+                name: 'Thurmont, MD',
+                id: ["DSCN5864", "DSCN5871", "DSCN5879", "DSCN5884"],
+                people: ['Brittany'],
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
+                camera: CameraConfigNikonS7000,
+                // gps later
+            },
             '10/12/26': {
                 name: 'Downtown Frederick',
                 id: [6613, 6642, 6676],
@@ -121,12 +130,12 @@ const Data: Database = {
             },
             '10/02/26': {
                 name: 'Gambrill State Park',
-                id: [6239, 6248, 6255, 6260, 6261],
+                id: [6255, 6239, 6248, 6260, 6261],
                 camera: CameraConfigApple14,
                 gps: {
+                    6255: [39.461917, -77.496281],
                     6239: [39.514769, -77.488694],
                     6248: [39.469789, -77.494242],
-                    6255: [39.461917, -77.496281],
                     6260: [39.461472, -77.4951],
                     6261: [39.461472, -77.4951],
                 }
