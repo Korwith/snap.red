@@ -70,7 +70,7 @@ const Data: Database = {
             },
             '10/16/26': {
                 name: 'Downtown Frederick',
-                id: [6759, 6763, 6767, 6768, 6773],
+                id: [6773, 6759, 6763, 6767, 6768],
                 people: ['Edin'],
                 camera: CameraConfigApple14,
                 gps: {
