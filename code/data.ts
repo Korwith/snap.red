@@ -61,6 +61,19 @@ const Data: Database = {
                 camera: CameraConfigNikonS7000,
                 // gps later
             },
+            '10/16/26': {
+                name: 'Downtown Frederick',
+                id: [6759, 6763, 6767, 6768, 6773],
+                people: ['Edin'],
+                camera: CameraConfigApple14,
+                gps: {
+                    6759: [39.4172277777778, -77.4187916666667],
+                    6763: [39.417225, -77.4189306],
+                    6767: [39.4172167, -77.4187917],
+                    6768: [39.41695, -77.4163444],
+                    6773: [39.41525, -77.4097667],
+                },
+            },
             '10/12/26': {
                 name: 'Downtown Frederick',
                 id: [6613, 6642, 6676],
