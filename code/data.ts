@@ -52,6 +52,13 @@ const Data: Database = {
         },
 
         images: {
+            '10/21/26': {
+                name: 'Washington D.C.',
+                id: [6887, 6877],
+                people: ['Riley', 'Xay'],
+                camera: CameraConfigApple14,
+                // gps later
+            },
             '10/18/26': {
                 name: 'Thurmont, MD',
                 id: ["DSCN5884", "DSCN5864", "DSCN5871", "DSCN5879"],
