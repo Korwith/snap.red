@@ -266,7 +266,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
             offset = -clamped_distance;
         }
 
-        this.element.style.setProperty('--img-offset', `${Math.abs(offset) > 20 ? offset : 0}px`);
+        this.element.style.setProperty('--img-offset', `${Math.abs(offset) > 50 ? offset : 0}px`);
     }
 }
 
