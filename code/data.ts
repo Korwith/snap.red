@@ -52,6 +52,12 @@ const Data: Database = {
         },
 
         images: {
+            '10/27/26': {
+                name: 'Downtown Frederick',
+                id: [7002, 7044, 7052, 7066, 7030],
+                camera: CameraConfigApple14
+                // gps later
+            },
             '10/26/26': {
                 name: 'Gambrill State Park',
                 id: [6950, 6964, 6965, 6969, 6973],
