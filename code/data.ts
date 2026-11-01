@@ -54,7 +54,7 @@ const Data: Database = {
         images: {
             '10/31/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN6088","DSCN6095", 7169],
+                id: ["DSCN6088", "DSCN6086", "DSCN6095", 7169],
                 people: ['Brittany'],
                 camera: CameraConfigNikonS7000,
                 // gps later
