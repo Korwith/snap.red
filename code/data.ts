@@ -52,9 +52,16 @@ const Data: Database = {
         },
 
         images: {
+            '11/03/26': {
+                name: 'Gathersburg, MD',
+                id: ['DSCN6121', 'DSCN6122', 'DSCN6161',"DSCN6118", 'DSCN6110',"DSCN6129","DSCN6132","DSCN6140","DSCN6146","DSCN6149","DSCN6151","DSCN6153","DSCN6154","DSCN6156","DSCN6160", 'DSCN6123', 'DSCN6098'],
+                people: ['Brittany', 'Kimberly', 'Joel', 'Jorgy'],
+                camera: CameraConfigNikonS7000,
+                // gps later
+            },
             '10/31/26': {
                 name: 'Downtown Frederick',
-                id: ["DSCN6088", "DSCN6086", "DSCN6095", 7169],
+                id: ['DSCN6086', "DSCN6088", "DSCN6095", 7169],
                 people: ['Brittany'],
                 camera: CameraConfigNikonS7000,
                 // gps later
