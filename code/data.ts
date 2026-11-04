@@ -53,7 +53,7 @@ const Data: Database = {
 
         images: {
             '11/03/26': {
-                name: 'Gathersburg, MD',
+                name: 'Gaithersburg, MD',
                 id: ['DSCN6121', 'DSCN6122', 'DSCN6161',"DSCN6118", 'DSCN6110',"DSCN6129","DSCN6132","DSCN6140","DSCN6146","DSCN6149","DSCN6151","DSCN6153","DSCN6154","DSCN6156","DSCN6160", 'DSCN6123', 'DSCN6098'],
                 people: ['Brittany', 'Kimberly', 'Joel', 'Jorgy'],
                 camera: CameraConfigNikonS7000,
