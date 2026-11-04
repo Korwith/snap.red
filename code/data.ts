@@ -54,10 +54,21 @@ const Data: Database = {
         images: {
             '11/03/26': {
                 name: 'Gaithersburg, MD',
-                id: ['DSCN6121', 'DSCN6122', 'DSCN6161',"DSCN6118", 'DSCN6110',"DSCN6129","DSCN6132","DSCN6140","DSCN6146","DSCN6149","DSCN6151","DSCN6153","DSCN6154","DSCN6156","DSCN6160", 'DSCN6123', 'DSCN6098'],
+                id: ['DSCN6121', 'DSCN6122', 'DSCN6161', "DSCN6118", 'DSCN6110', "DSCN6129", "DSCN6132", "DSCN6140", "DSCN6146", "DSCN6149", "DSCN6151", "DSCN6153", "DSCN6154", "DSCN6156", "DSCN6160", 'DSCN6123', 'DSCN6098'],
                 people: ['Brittany', 'Kimberly', 'Joel', 'Jorgy'],
                 camera: CameraConfigNikonS7000,
                 // gps later
+            },
+            '11/02/26': {
+                name: 'Gambrill State Park',
+                id: [7210, 7207, 7208, 7216, 7221],
+                people: ['Brittany'],
+                camera: CameraConfigApple14
+            },
+            '11/01/26': {
+                name: 'Gambrill State Park',
+                id: [7234, 7238, 7250, 7252, 7260, 7270],
+                camera: CameraConfigApple14
             },
             '10/31/26': {
                 name: 'Downtown Frederick',
