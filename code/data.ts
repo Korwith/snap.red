@@ -57,6 +57,7 @@ const Data: Database = {
                 id: ['DSCN6121', 'DSCN6122', 'DSCN6161', "DSCN6118", 'DSCN6110', "DSCN6129", "DSCN6132", "DSCN6140", "DSCN6146", "DSCN6149", "DSCN6151", "DSCN6153", "DSCN6154", "DSCN6156", "DSCN6160", 'DSCN6123', 'DSCN6098'],
                 people: ['Brittany', 'Kimberly', 'Joel', 'Jorgy'],
                 camera: CameraConfigNikonS7000,
+                featured: 5
                 // gps later
             },
             '11/02/26': {
@@ -416,7 +417,6 @@ const Data: Database = {
                 id: [4841, 4829, 4824, 4859, 4860, 4851],
                 // 4142 is on here too, 4181 is almost the same photo. both very good
                 people: ['Brittany'],
-                featured: 5,
                 camera: CameraConfigApple14,
                 hover_color: HoverColorPink,
                 custom_icons: EntryIconHeart,
