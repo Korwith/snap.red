@@ -65,9 +65,9 @@ abstract class GenericMap {
         const user: string = this.manager.fetchUserName();
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
         if (!entry) throw new Error('No images found at date');
-        if (!entry.gps) throw new Error('No GPS coordinates found');
 
-        const coordinates: L.LatLngTuple = entry.gps[id] as L.LatLngTuple;
+        const coordinates: L.LatLngTuple | null = PhotoIDManager.coords(entry, id);
+        if (!coordinates) throw new Error('No GPS coordinates found');
         const path: string | null = this.manager.fetchPhotoPathByDate(date, id);
 
         const url: string = `../media/${user}/IMG_${id}.jpg`;
@@ -144,16 +144,15 @@ class MainMap extends GenericMap {
         for (const date in photo_data) {
             const entry: PhotoEntry = photo_data[date];
 
-            // the entry must have gps data to continue (or else theres no place to put it on the map)
-            if (!entry.gps) continue;
+            const photo_ids: (string | number)[] = PhotoIDManager.list(entry);
 
             // loops specifically through photos that are tagged with gps coords
-            for (const this_photo_id in entry.gps) {
+            for (const this_photo_id of PhotoIDManager.withCoords(entry)) {
                 // creates the leaflet image marker and assigns an onclick event to it
                 const image_marker: L.Marker = this.createImageMarker(date, this_photo_id);
                 image_marker.on('click', (event: L.LeafletMouseEvent) => {
-                    // the photo index has to be found in entry.id - a string[] | number[] of ALL photo IDs
-                    let photo_index: number = entry.id.indexOf(this_photo_id);
+                    // the photo index has to be found in the list of ALL photo IDs
+                    let photo_index: number = photo_ids.indexOf(this_photo_id);
                     if (photo_index == -1) photo_index = 0;
 
                     // sends it over to the manager which then sends it to the main_image

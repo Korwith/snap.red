@@ -346,7 +346,7 @@ class MediaFramePhoto extends MediaFrame {
 
         this.caption.textContent = info.name;
         
-        const path: string | null = this.holder.manager.fetchPhotoPathByDate(this.date, info.id[0]);
+        const path: string | null = this.holder.manager.fetchPhotoPathByDate(this.date, PhotoIDManager.list(info)[0]);
         if (path) this.image.setAttribute('src', path);
         else this.image.removeAttribute('src');
 

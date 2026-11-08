@@ -407,7 +407,7 @@ class PageManager {
 
         for (const date in images) {
             const entry: PhotoEntry = images[date];
-            if (!entry.gps || Object.keys(entry.gps).length == 0) continue;
+            if (PhotoIDManager.withCoords(entry).length == 0) continue;
             return true;
         }
         

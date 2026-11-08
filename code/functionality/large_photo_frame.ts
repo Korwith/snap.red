@@ -181,7 +181,7 @@ class LargePhotoFigure extends LargeSelectionFigure {
 
         this.date = date;
         this.loadPhotoDetails(date);
-        this.loadPhotoList(photo.id);
+        this.loadPhotoList(PhotoIDManager.list(photo));
         this.setSelectedPhoto(index ?? 0);
     }
 
@@ -601,7 +601,7 @@ class AsideMapWidget extends MapWidget {
     public specifyEntry(date: string): void {
         this.date = date;
         let entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
-        if (!entry || !entry.gps) return this.reset();
+        if (!entry || PhotoIDManager.withCoords(entry).length == 0) return this.reset();
 
         this.toggleVisibility(true);
         this.clearMarkers();
@@ -623,11 +623,9 @@ class AsideMapWidget extends MapWidget {
     }
 
     public createImageMarkers(entry: PhotoEntry): void {
-        if (!this.date || !entry.gps) return;
+        if (!this.date) return;
 
-        for (const id of entry.id) {
-            if (!entry.gps[Number(id)] && !entry.gps[String(id)]) continue;
-
+        for (const id of PhotoIDManager.withCoords(entry)) {
             const marker: L.Marker = this.map.createImageMarker(this.date!, id);
             this.map.appendImageMarker(marker);
             this.markers.push(marker);
@@ -637,7 +635,7 @@ class AsideMapWidget extends MapWidget {
     public showImageMarker(index: number) {
         if (!this.date) return this.reset();
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(this.date);
-        if (!entry || !entry.gps) return this.reset();
+        if (!entry || PhotoIDManager.withCoords(entry).length == 0) return this.reset();
 
         for (let i = 0; i < this.markers.length; i++) {
             const marker: L.Marker = this.markers[i];

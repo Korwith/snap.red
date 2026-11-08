@@ -35,7 +35,7 @@ abstract class BlurredMediaFrame {
         const entry: PhotoEntry | null = this.manager.fetchImageByDate(date);
         if (!entry) throw new Error('No image exists at this date.');
 
-        const path: string | null = this.manager.fetchPhotoPathByDate(date, entry.id[0]);
+        const path: string | null = this.manager.fetchPhotoPathByDate(date, PhotoIDManager.list(entry)[0]);
         if (!path) throw new Error('No photo path was found.');
 
         this.date = date;

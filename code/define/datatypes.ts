@@ -52,14 +52,21 @@ interface CameraInfoConfig {
     mp?: number
 }
 
+// a photo id listed bare, or given extra attributes
+// keep one id for each object, since objects alter key order
+type PhotoIDEntry = string | number | Record<string | number, PhotoAttributes>;
+
+interface PhotoAttributes {
+    coords?: [number, number];
+}
+
 interface PhotoEntry {
     name: string;
-    id: Array<string | number>;
+    id: PhotoIDEntry[];
     people?: string[];
     featured?: number;
     camera?: CameraInfoConfig;
     caption?: string;
-    gps?: Record<string | number, [number, number]>
     hover_color?: HexColor;
     custom_icons?: CustomIconConfig;
 }
