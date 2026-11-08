@@ -52,6 +52,12 @@ const Data: Database = {
         },
 
         images: {
+            '11/07/26': {
+                name: 'New York City, NY',
+                id: ["DSCN6311", "DSCN6302", "7542", "DSCN6224", "DSCN6257", "DSCN6180", "DSCN6241", "DSCN6243", "DSCN6263", "DSCN6265", "DSCN6287", "DSCN6179", "DSCN6171", "DSCN6177"],
+                people: ['Melvin', 'Greeshma', 'Katie', 'Toshan', 'Tilly', 'Jonas', 'Caleigh'],
+                camera: CameraConfigNikonS7000,
+            },
             '11/03/26': {
                 name: 'Gaithersburg, MD',
                 id: ['DSCN6121', 'DSCN6122', 'DSCN6161', "DSCN6118", 'DSCN6110', "DSCN6129", "DSCN6132", "DSCN6140", "DSCN6146", "DSCN6149", "DSCN6151", "DSCN6153", "DSCN6154", "DSCN6156", "DSCN6160", 'DSCN6123', 'DSCN6098'],
