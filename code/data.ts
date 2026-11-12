@@ -57,6 +57,7 @@ const Data: Database = {
                 id: ["DSCN6311", 7472, 7519, 7542, "DSCN6224", "DSCN6257", "DSCN6180", "DSCN6241", "DSCN6246", "DSCN6263", "DSCN6265", "DSCN6287", "DSCN6179", "DSCN6171", "DSCN6177"],
                 people: ['Melvin', 'Greeshma', 'Kati', 'Toshan', 'Domitille', 'Jonas', 'Calleigh'],
                 camera: CameraConfigNikonS7000,
+                featured: 1;
             },
             '11/03/26': {
                 name: 'Gaithersburg, MD',
