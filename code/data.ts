@@ -60,6 +60,12 @@ const Data: Database = {
                 hover_color: HoverColorPink,
                 camera: CameraConfigApple14
             },
+            '11/09/26': {
+                name: 'Gambrill State Park',
+                id: ["0003","0005","0008","0020"],
+                people: ['Brittany'],
+                camera: CameraConfigApple14
+            },
             '11/07/26': {
                 name: 'New York City, NY',
                 id: ["DSCN6311", 7472, 7519, 7542, "DSCN6224", "DSCN6257", "DSCN6180", "DSCN6241", "DSCN6246", "DSCN6265", "DSCN6287", "DSCN6179", "DSCN6171", "DSCN6177"],
