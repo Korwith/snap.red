@@ -52,6 +52,14 @@ const Data: Database = {
         },
 
         images: {
+            '11/15/26': {
+                name: 'Downtown Frederick',
+                id: ['0138', '0123', "DSCN6319"],
+                people: ['Brittany'],
+                custom_icons: EntryIconHeart,
+                hover_color: HoverColorPink,
+                camera: CameraConfigApple14
+            },
             '11/07/26': {
                 name: 'New York City, NY',
                 id: ["DSCN6311", 7472, 7519, 7542, "DSCN6224", "DSCN6257", "DSCN6180", "DSCN6241", "DSCN6246", "DSCN6265", "DSCN6287", "DSCN6179", "DSCN6171", "DSCN6177"],

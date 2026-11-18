@@ -5,12 +5,16 @@
 
 @use 'vars';
 
+$header-height: 50px;
+$header-padding: 8px;
+$header-entry-height: $header-height - $header-padding * 2;
+
 header {
     display: flex;
     justify-content: space-between;
     width: 100vw;
-    height: 50px;
-    padding: 8px;
+    height: $header-height;
+    padding: $header-padding;
     box-sizing: border-box;
     border-bottom: 1px solid #202020;
     background: vars.$header-gradient;
@@ -48,11 +52,13 @@ header {
             cursor: pointer;
             outline: none;
             transition: background-color 0.3s, color 0.3s;
+            --icon-size: #{$header-entry-height - 2px};
 
             &::before {
                 content: '';
-                aspect-ratio: 1/1;
-                height: 100%;
+                width: var(--icon-size);
+                height: var(--icon-size);
+                flex-shrink: 0;
                 background-position: center;
                 background-repeat: no-repeat;
                 transition: filter 0.3s;
@@ -60,6 +66,7 @@ header {
         }
 
         .emblem {
+            --icon-size: #{$header-entry-height};
             border: 0;
             background-color: rgba(0, 0, 0, 0);
             font-size: 1.2rem;
