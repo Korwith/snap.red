@@ -53,7 +53,7 @@ const Data: Database = {
 
         images: {
             '11/15/26': {
-                name: 'Downtown Frederick',
+                name: 'Gaithersburg, MD',
                 id: ['0138', '0123', "DSCN6319"],
                 people: ['Brittany'],
                 custom_icons: EntryIconHeart,
