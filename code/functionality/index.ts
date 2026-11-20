@@ -117,7 +117,6 @@ class PageManager {
         user ??= this.user;
         this.main_video.toggle(false);
         this.main_photo.openImageByDate(date, user, index);
-        this.url_handler?.setState(this.user, date);
 
         // sends it over to the footer for the "currently opened" pane
         this.footer.assignSelectedEntry(date);
@@ -127,8 +126,8 @@ class PageManager {
     // opens the video viewer on video frames
     public openVideoByName(name: string, user?: string) {
         user ??= this.user;
-        this.main_video.openVideoByName(name, user);
         this.main_photo.toggle(false);
+        this.main_video.openVideoByName(name, user);
 
     }
 
@@ -452,9 +451,9 @@ class URLHandler {
     }
 
     // sets given url state
-    setState(user: string, date?: string): void {
+    setState(user: string, date?: string, param: string = 'date'): void {
         let hash = `user=${user}`;
-        if (date) hash += `&date=${date.replace(/\//g, '')}`;
+        if (date) hash += `&${param}=${date.replace(/\//g, '')}`;
         window.history.replaceState(null, document.title, `#${hash}`);
     }
 
@@ -470,7 +469,6 @@ class URLHandler {
 
         const params: URLSearchParams = new URLSearchParams(hash);
         const user: string | null = params.get('user');
-        const date_raw: string | null = params.get('date');
 
         if (user) {
             try {
@@ -480,10 +478,9 @@ class URLHandler {
             }
         }
 
-        if (date_raw) {
-            const date: string | null = this.constructDate(date_raw);
-            if (!date) return;
-            this.manager.openImageByDate(date);
+        for (const frame of [this.manager.main_photo, this.manager.main_video]) {
+            const date: string | null = this.constructDate(params.get(frame.url_param) ?? '');
+            if (date) return frame.openFromURL(date);
         }
     }
 

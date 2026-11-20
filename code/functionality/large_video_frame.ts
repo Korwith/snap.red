@@ -21,6 +21,13 @@ class LargeVideoHolder extends LargeSelectionFrame<VideoEntry> {
         this.menu.figure.load(name, user);
         this.menu.details.load(name, user);
         this.toggle(true);
+        this.setURLState(this.manager.fetchVideoDateByName(name, user));
+    }
+
+    public readonly url_param = 'video';
+    public openFromURL(date: string): void {
+        const video: VideoEntry | undefined = this.manager.fetchUserVideos()?.[date];
+        if (video) this.manager.openVideoByName(video.name);
     }
 
     public override toggle(force?: boolean): void {

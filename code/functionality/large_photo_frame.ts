@@ -22,6 +22,12 @@ class LargePhotoHolder extends LargeSelectionFrame<PhotoEntry> {
         this.menu.figure.load(date, index);
         this.menu.details.load(date);
         super.toggle(true);
+        this.setURLState(date);
+    }
+
+    public readonly url_param = 'date';
+    public openFromURL(date: string): void {
+        this.manager.openImageByDate(date);
     }
 
     public toggleFullscreen(): void {

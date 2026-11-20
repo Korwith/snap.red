@@ -71,6 +71,13 @@ abstract class LargeSelectionFrame<T extends PhotoEntry | VideoEntry> {
     }
 
     protected abstract keypress(e: KeyboardEvent): void;
+
+    // shareable link support: each frame stores its selection under its own url key
+    public abstract readonly url_param: string;
+    public abstract openFromURL(date: string): void;
+    protected setURLState(date: string | null): void {
+        if (date) this.manager.url_handler?.setState(this.manager.user, date, this.url_param);
+    }
 }
 
 abstract class LargeSelectionMenu<T extends PhotoEntry | VideoEntry = PhotoEntry | VideoEntry> {
