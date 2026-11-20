@@ -52,6 +52,11 @@ const Data: Database = {
         },
 
         images: {
+            '11/16/26': {
+                name: 'Gambrill State Park',
+                id: ["0159", "0163", "0173", "0175", "0189", "0190", "0194"],
+                camera: CameraConfigApple14,
+            },
             '11/15/26': {
                 name: 'Gaithersburg, MD',
                 id: ['0138', '0123', "DSCN6319"],
@@ -62,7 +67,7 @@ const Data: Database = {
             },
             '11/09/26': {
                 name: 'Gambrill State Park',
-                id: ["0020", "0003","0005","0008"],
+                id: ["0020", "0003", "0005", "0008"],
                 people: ['Brittany'],
                 camera: CameraConfigApple14
             },
