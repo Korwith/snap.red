@@ -52,6 +52,11 @@ const Data: Database = {
         },
 
         images: {
+            '11/20/26': {
+                name: 'Gambrill State Park',
+                id: ["0232", "0222","0226","0251","DSCN6385","DSCN6397","DSCN6403","DSCN6411","DSCN6414","DSCN6416","DSCN6420"],
+                camera: CameraConfigNikonS7000,
+            },
             '11/16/26': {
                 name: 'Gambrill State Park',
                 id: ["0159", "0163", "0173", "0175", "0189", "0190", "0194"],
